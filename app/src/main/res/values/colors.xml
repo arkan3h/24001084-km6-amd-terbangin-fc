@@ -143,4 +143,7 @@
     <color name="md_theme_surfaceContainer_highContrast">#E9EFF0</color>
     <color name="md_theme_surfaceContainerHigh_highContrast">#E3E9EA</color>
     <color name="md_theme_surfaceContainerHighest_highContrast">#DEE3E5</color>
+    <color name="transparent">#00000000</color>
+    <color name="gray_spacer">#20000000</color>
+    <color name="bg_outline">#60000000</color>
 </resources>
