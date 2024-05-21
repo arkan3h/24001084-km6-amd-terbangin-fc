@@ -4,4 +4,26 @@
     <string name="title_tab_history">Riwayat</string>
     <string name="title_tab_notification">Notifikasi</string>
     <string name="title_tab_profile">Akun</string>
+    <string name="text_masuk">Masuk</string>
+    <string name="text_email_nomor_telepon">Email / Nomor Telepon</string>
+    <string name="text_contoh_johdoe_gmail_com_in_login">Contoh: johdoe@gmail.com</string>
+    <string name="text_password">Password</string>
+    <string name="text_masukkan_password">Masukkan Password</string>
+    <string name="text_lupa_kata_sandi">Lupa Kata Sandi?</string>
+    <string name="text_belum_punya_akun_daftar_di_sini">Belum punya Akun? Daftar di sini</string>
+    <string name="text_daftar_di_sini">Daftar di sini</string>
+    <string name="text_daftar">Daftar</string>
+    <string name="text_nama">Nama</string>
+    <string name="text_nama_lengkap">Nama Lengkap</string>
+    <string name="text_email">Email</string>
+    <string name="text_format_id_phoneNumber">+62</string>
+    <string name="text_nomor_telepon">Nomor Telepon</string>
+    <string name="text_buat_password">Buat Password</string>
+    <string name="text_sudah_punya_akun_masuk_di_sini">Sudah punya akun? Masuk di sini</string>
+    <string name="text_back_button_for_previous_page">Back button for previous page</string>
+    <string name="text_reset_password">Reset Password</string>
+    <string name="text_masukkan_password_baru">Masukkan Password Baru</string>
+    <string name="text_ulangi_password_baru">Ulangi Password Baru</string>
+    <string name="text_simpan">Simpan</string>
+    <string name="text_ulangi_masukkan_password_baru">Ulangi Masukkan Password Baru</string>
 </resources>
