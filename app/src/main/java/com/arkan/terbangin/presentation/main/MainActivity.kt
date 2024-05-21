@@ -5,6 +5,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivityMainBinding
 
@@ -22,5 +24,11 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
             insets
         }
+        setupBottomNav()
+    }
+
+    private fun setupBottomNav() {
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        binding.navView.setupWithNavController(navController)
     }
 }
