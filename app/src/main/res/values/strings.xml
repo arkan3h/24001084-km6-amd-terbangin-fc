@@ -4,6 +4,9 @@
     <string name="title_tab_history">Riwayat</string>
     <string name="title_tab_notification">Notifikasi</string>
     <string name="title_tab_profile">Akun</string>
+    <string name="txt_greeting_one">Hello!</string>
+    <string name="txt_greeting_two">Welcome To TerbangIn!</string>
+    <string name="txt_desc_next_button">next_button</string>
     <string name="text_masuk">Masuk</string>
     <string name="text_email_nomor_telepon">Email / Nomor Telepon</string>
     <string name="text_contoh_johdoe_gmail_com_in_login">Contoh: johdoe@gmail.com</string>
