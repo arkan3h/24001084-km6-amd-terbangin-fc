@@ -14,10 +14,11 @@
     <string name="text_daftar_di_sini">Daftar di sini</string>
     <string name="text_daftar">Daftar</string>
     <string name="text_nama">Nama</string>
-    <string name="text_nama_lengkap">Nama Lengkap</string>
+    <string name="text_masukkan_nama_lengkap">Masukkan Nama Lengkap</string>
     <string name="text_email">Email</string>
     <string name="text_format_id_phoneNumber">+62</string>
     <string name="text_nomor_telepon">Nomor Telepon</string>
+    <string name="text_masukkan_nomor_telepon">Masukkan Nomor Telepon</string>
     <string name="text_buat_password">Buat Password</string>
     <string name="text_sudah_punya_akun_masuk_di_sini">Sudah punya akun? Masuk di sini</string>
     <string name="text_back_button_for_previous_page">Back button for previous page</string>
