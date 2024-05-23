@@ -20,6 +20,13 @@ class OTPActivity : AppCompatActivity() {
 
         // phoneNumber = intent.getStringExtra("phoneNumber")!!
         addTextChangeListener()
+        setClickListener()
+    }
+
+    private fun setClickListener() {
+        binding.ibBtnBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     private fun addTextChangeListener() {
