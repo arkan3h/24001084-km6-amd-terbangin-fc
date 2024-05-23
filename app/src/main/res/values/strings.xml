@@ -30,4 +30,8 @@
     <string name="text_ulangi_password_baru">Ulangi Password Baru</string>
     <string name="text_simpan">Simpan</string>
     <string name="text_ulangi_masukkan_password_baru">Ulangi Masukkan Password Baru</string>
+    <string name="title_otp_page">Masukkan OTP</string>
+    <string name="placeholder_ketik_6_digit">Ketik 6 digit kode yang dikirimkan ke +6212121212121</string>
+    <string name="btn_resend_otp">Kirim Ulang OTP Dalam 60 Detik</string>
+    <string name="btn_request_new_code">Minta kode baru via Email</string>
 </resources>
