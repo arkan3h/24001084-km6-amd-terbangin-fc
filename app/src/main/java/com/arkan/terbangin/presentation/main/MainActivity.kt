@@ -9,11 +9,14 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivityMainBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
+
+    private val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +27,13 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
             insets
         }
+        window.statusBarColor = this.resources.getColor(R.color.md_theme_inversePrimary_highContrast, theme)
         setupBottomNav()
+        setOnBoardingState()
+    }
+
+    private fun setOnBoardingState() {
+        viewModel.setOnBoarding(true)
     }
 
     private fun setupBottomNav() {
