@@ -24,10 +24,10 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
-            android:id="@+id/tv_title_daftar"
+            android:id="@+id/tv_title_edit_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/title_change_profile"
+            android:text="@string/title_edit_profile"
             android:textSize="32sp"
             android:textStyle="bold"
             android:layout_marginTop="56dp"
@@ -42,7 +42,7 @@
             android:text="@string/text_nama"
             android:textSize="14sp"
             android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_title_daftar"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_edit_profile"
             app:layout_constraintStart_toStartOf="parent"/>
 
         <com.google.android.material.textfield.TextInputLayout

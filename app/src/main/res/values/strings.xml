@@ -55,8 +55,8 @@
     <string name="text_enter_without_login">Lanjutkan sebagai pengunjung</string>
     <string name="text_button_register_now">Daftar Sekarang</string>
     <string name="maaf_anda_harus_login_terlebih_dahulu">Maaf, Anda harus login terlebih dahulu!</string>
-    <string name="title_change_profile">Ubah Profil</string>
-    <string name="menu_change_profile">Ubah Profil</string>
+    <string name="title_edit_profile">Ubah Profil</string>
+    <string name="menu_edit_profile">Ubah Profil</string>
     <string name="menu_profile_settings">Pengaturan Akun</string>
     <string name="app_version">Version 1.1.0</string>
     <string name="menu_logout_profile">Keluar</string>
