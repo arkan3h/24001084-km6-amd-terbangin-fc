@@ -1,4 +1,4 @@
-package com.arkan.aresto.utils
+package com.arkan.terbangin.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

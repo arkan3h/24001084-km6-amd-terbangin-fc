@@ -1,4 +1,4 @@
-package com.arkan.aresto.utils
+package com.arkan.terbangin.utils
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
