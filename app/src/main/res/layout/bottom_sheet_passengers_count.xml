@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/passengers_count"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.passengerscount.PassengersCountBottomSheet">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="@string/text_title_passengers_count"/>
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        android:src="@drawable/ic_clear"
+        android:layout_gravity="end"
+        app:tint="@color/md_theme_onSurfaceVariant" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="64dp"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_spacer"
+            android:layout_marginBottom="16dp"/>
+
+        <include
+            android:id="@+id/l_adult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/item_passenger_adult"/>
+
+        <include
+            android:id="@+id/l_children"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/item_passenger_children"/>
+
+        <include
+            android:id="@+id/l_baby"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/item_passenger_baby"/>
+
+        <Button
+            android:id="@+id/b_save_passengers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/text_save"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            style="@style/Widget.Material3.Button"/>
+
+    </LinearLayout>
+
+</FrameLayout>
