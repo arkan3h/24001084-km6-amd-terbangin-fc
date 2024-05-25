@@ -76,4 +76,12 @@
     <string name="text_passenger_baby">Bayi</string>
     <string name="text_description_baby">(Di bawah 2 tahun)</string>
     <string name="text_save">Simpan</string>
+    <string name="text_riwayat_pesanan">Riwayat Pesanan</string>
+    <string name="text_button_search">Button Search</string>
+    <string name="text_button_filter">Button Filter</string>
+    <string name="text_booking_code">Booking Code:</string>
+    <string name="text_class">Class:</string>
+    <string name="text_logo_maps_departure">Logo Maps Departure</string>
+    <string name="text_logo_maps_landing">Logo Maps Landing</string>
+    <string name="text_arrows_showing_departure_location_and_flight_time">arrows showing departure location and flight time</string>
 </resources>
