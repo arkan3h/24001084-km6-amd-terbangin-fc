@@ -76,6 +76,9 @@
     <string name="text_passenger_baby">Bayi</string>
     <string name="text_description_baby">(Di bawah 2 tahun)</string>
     <string name="text_save">Simpan</string>
+    <string name="placeholder_appbar_title">AppBar Title</string>
+    <string name="text_pilih">Pilih</string>
+    <string name="text_lanjut_pembayaran">Lanjut Pembayaran</string>
     <string name="text_riwayat_pesanan">Riwayat Pesanan</string>
     <string name="text_button_search">Button Search</string>
     <string name="text_button_filter">Button Filter</string>
