@@ -34,6 +34,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -105,6 +106,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.5.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("com.kizitonwose.calendar:view:2.5.1")
     implementation(libs.paging.runtime)
     implementation(libs.shimmer)
     testImplementation(libs.junit)
@@ -116,4 +118,5 @@ dependencies {
     androidTestImplementation(libs.mockk.android)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 }

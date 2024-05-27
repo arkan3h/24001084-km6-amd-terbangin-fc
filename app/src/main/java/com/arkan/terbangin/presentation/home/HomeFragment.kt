@@ -1,5 +1,6 @@
 package com.arkan.terbangin.presentation.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.arkan.terbangin.databinding.FragmentHomeBinding
+import com.arkan.terbangin.presentation.flightsearch.FlightSearchActivity
 import com.arkan.terbangin.presentation.passengerscount.PassengersCountBottomSheet
 import com.arkan.terbangin.presentation.terminalsearch.TerminalSearchBottomSheet
 
@@ -41,6 +43,9 @@ class HomeFragment : Fragment() {
         binding.layoutSearchHome.layoutPassengersSearch.layoutPassengersSearch.setOnClickListener {
             selectPassengers()
         }
+        binding.layoutSearchHome.btnSearchFlight.setOnClickListener {
+            navigateToFlightSearch()
+        }
     }
 
     private fun setRoundTrip() {
@@ -55,5 +60,13 @@ class HomeFragment : Fragment() {
 
     private fun selectPassengers() {
         PassengersCountBottomSheet().show(childFragmentManager, null)
+    }
+
+    private fun navigateToFlightSearch() {
+        startActivity(
+            Intent(activity, FlightSearchActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            },
+        )
     }
 }
