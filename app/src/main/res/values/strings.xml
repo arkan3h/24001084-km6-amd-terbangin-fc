@@ -76,6 +76,15 @@
     <string name="text_passenger_baby">Bayi</string>
     <string name="text_description_baby">(Di bawah 2 tahun)</string>
     <string name="text_save">Simpan</string>
+    <string name="text_error_email_empty">Email tidak boleh kosong</string>
+    <string name="text_error_email_invalid">Email tidak valid</string>
+    <string name="text_error_pw_empty">Password tidak boleh kosong</string>
+    <string name="text_error_pw_lower">Password harus berisi 8 karakter atau lebih</string>
+    <string name="text_error_name_empty">Nama tidak boleh kosong</string>
+    <string name="text_error_number_empty">Nomor Telepon tidak boleh kosong</string>
+    <string name="text_error_number_invalid">Nomor Telepon tidak valid</string>
+    <string name="text_close">Tutup</string>
+    <string name="text_dialog_reset_password">Link untuk mereset password dan membuat password baru telah dikirimkan ke email anda</string>
     <string name="placeholder_appbar_title">AppBar Title</string>
     <string name="text_pilih">Pilih</string>
     <string name="text_lanjut_pembayaran">Lanjut Pembayaran</string>
