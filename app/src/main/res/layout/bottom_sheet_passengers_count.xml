@@ -42,19 +42,19 @@
             android:id="@+id/l_adult"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/item_passenger_adult"/>
+            layout="@layout/layout_passenger_adult"/>
 
         <include
             android:id="@+id/l_children"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/item_passenger_children"/>
+            layout="@layout/layout_passenger_children"/>
 
         <include
             android:id="@+id/l_baby"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/item_passenger_baby"/>
+            layout="@layout/layout_passenger_baby"/>
 
         <Button
             android:id="@+id/b_save_passengers"
