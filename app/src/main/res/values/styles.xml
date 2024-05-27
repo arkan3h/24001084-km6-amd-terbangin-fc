@@ -6,4 +6,16 @@
     <style name="image_rounded_medium">
         <item name="cornerSize">8dp</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+
+    <style name="Example4ToolbarTheme" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="colorControlNormal">@color/md_theme_outline</item>
+    </style>
+
+    <style name="Example4ButtonTheme" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="colorPrimary">@color/md_theme_primary</item>
+    </style>
 </resources>

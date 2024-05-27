@@ -84,4 +84,8 @@
     <string name="text_logo_maps_departure">Logo Maps Departure</string>
     <string name="text_logo_maps_landing">Logo Maps Landing</string>
     <string name="text_arrows_showing_departure_location_and_flight_time">arrows showing departure location and flight time</string>
+    <string name="text_start_date">Start Date</string>
+    <string name="text_end_date">End Date</string>
+    <string name="text_hapus">Hapus</string>
+    <string name="text_calender_title_view">Calender View Filter</string>
 </resources>
