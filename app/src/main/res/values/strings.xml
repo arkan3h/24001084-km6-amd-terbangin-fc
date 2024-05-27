@@ -4,6 +4,9 @@
     <string name="title_tab_history">Riwayat</string>
     <string name="title_tab_notification">Notifikasi</string>
     <string name="title_tab_profile">Akun</string>
+    <string name="btn_save">Simpan</string>
+    <string name="txt_class_title">Class Title</string>
+    <string name="txt_price_class">IDR 0.000.000,00</string>
     <string name="txt_title_notificaton">Notifkasi / Promo</string>
     <string name="txt_notification">terdapat perubahan jadwal pesawat</string>
     <string name="txt_date_notification">20/05/2024,17.00</string>
