@@ -1,13 +1,12 @@
 package com.arkan.terbangin.presentation.history
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.arkan.terbangin.databinding.FragmentHistoryBinding
-import com.arkan.terbangin.presentation.calenderfilterhistory.Example4Fragment
+import com.arkan.terbangin.presentation.calenderfilterhistory.CalenderFilterHistoryBottomSheet
 import com.arkan.terbangin.presentation.historysearch.HistorySearchBottomSheet
 
 class HistoryFragment : Fragment() {
@@ -35,8 +34,7 @@ class HistoryFragment : Fragment() {
             gotoSearchFlightNumber()
         }
         binding.ibBtnFilter.setOnClickListener {
-//            val intent = Intent(requireContext(), Example4Fragment::class.java)
-//            startActivity(intent)
+            CalenderFilterHistoryBottomSheet().show(childFragmentManager, null)
         }
     }
 
