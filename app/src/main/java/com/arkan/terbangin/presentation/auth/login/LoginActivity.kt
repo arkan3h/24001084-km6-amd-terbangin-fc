@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.login
+package com.arkan.terbangin.presentation.auth.login
 
 import android.app.Dialog
 import android.content.Intent
@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivityLoginBinding
 import com.arkan.terbangin.presentation.main.MainActivity
-import com.arkan.terbangin.presentation.register.RegisterActivity
+import com.arkan.terbangin.presentation.auth.register.RegisterActivity
 import com.google.android.material.textfield.TextInputLayout
 
 class LoginActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.register
+package com.arkan.terbangin.presentation.auth.register
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivityRegisterBinding
-import com.arkan.terbangin.presentation.login.LoginActivity
+import com.arkan.terbangin.presentation.auth.login.LoginActivity
 import com.arkan.terbangin.presentation.main.MainActivity
 import com.google.android.material.textfield.TextInputLayout
 

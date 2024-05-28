@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.arkan.terbangin.databinding.FragmentProfileBinding
-import com.arkan.terbangin.presentation.login.LoginActivity
+import com.arkan.terbangin.presentation.auth.login.LoginActivity
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
