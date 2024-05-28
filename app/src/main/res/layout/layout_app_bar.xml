@@ -17,6 +17,7 @@
         app:tint="@color/md_theme_onPrimary" />
 
     <TextView
+        android:id="@+id/tv_appbar_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
