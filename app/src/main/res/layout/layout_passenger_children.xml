@@ -10,6 +10,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:src="@drawable/ic_passenger_children"
+        app:tint="@color/md_theme_onBackground"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="8dp"/>
