@@ -8,7 +8,7 @@ import com.arkan.terbangin.data.repository.UserRepositoryImpl
 import com.arkan.terbangin.data.source.pref.UserPreference
 import com.arkan.terbangin.data.source.pref.UserPreferenceImpl
 import com.arkan.terbangin.presentation.main.MainViewModel
-import com.arkan.terbangin.presentation.passengerscount.PassengersCountViewModel
+import com.arkan.terbangin.presentation.passengers_count.PassengersCountViewModel
 import com.arkan.terbangin.presentation.splash_screen.SplashViewModel
 import com.arkan.terbangin.utils.SharedPreferenceUtils
 import org.koin.android.ext.koin.androidContext

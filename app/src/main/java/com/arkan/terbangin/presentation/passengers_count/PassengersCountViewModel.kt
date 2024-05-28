@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.passengerscount
+package com.arkan.terbangin.presentation.passengers_count
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

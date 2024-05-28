@@ -1,10 +1,9 @@
-package com.arkan.terbangin.presentation.flightsearch
+package com.arkan.terbangin.presentation.flight_search
 
 import android.app.UiModeManager
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -29,7 +28,6 @@ class FlightSearchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.flight_search)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -100,7 +98,7 @@ class FlightSearchActivity : AppCompatActivity() {
     }
 
     private fun setClickListener() {
-        binding.ibBtnBack.setOnClickListener {
+        binding.layoutAppBar.ibBtnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
     }

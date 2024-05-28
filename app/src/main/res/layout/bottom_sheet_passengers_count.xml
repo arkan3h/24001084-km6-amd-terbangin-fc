@@ -5,7 +5,7 @@
     android:id="@+id/passengers_count"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.passengerscount.PassengersCountBottomSheet">
+    tools:context=".presentation.passengers_count.PassengersCountBottomSheet">
 
     <TextView
         android:layout_width="match_parent"

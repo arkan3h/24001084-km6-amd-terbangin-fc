@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.terminalsearch
+package com.arkan.terbangin.presentation.terminal_search
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.arkan.terbangin.databinding.FragmentHomeBinding
-import com.arkan.terbangin.presentation.flightsearch.FlightSearchActivity
-import com.arkan.terbangin.presentation.passengerscount.PassengersCountBottomSheet
-import com.arkan.terbangin.presentation.terminalsearch.TerminalSearchBottomSheet
+import com.arkan.terbangin.presentation.flight_search.FlightSearchActivity
+import com.arkan.terbangin.presentation.passengers_count.PassengersCountBottomSheet
+import com.arkan.terbangin.presentation.terminal_search.TerminalSearchBottomSheet
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
