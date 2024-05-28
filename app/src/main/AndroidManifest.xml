@@ -17,25 +17,31 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.flightsearch.FlightSearchActivity"
+            android:name=".presentation.checkout.detail.CheckoutDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.detail_penerbangan.DetailPenerbanganActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.flight_search.FlightSearchActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.edit_profile.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.otp.OTPActivity"
+            android:name=".presentation.auth.otp.OTPActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.splash_screen.SplashActivity"
             android:exported="false"/>
         <activity
-            android:name=".presentation.resetpassword.ResetPasswordActivity"
+            android:name=".presentation.auth.reset_password.ResetPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.register.RegisterActivity"
+            android:name=".presentation.auth.register.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.login.LoginActivity"
+            android:name=".presentation.auth.login.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.main.MainActivity"

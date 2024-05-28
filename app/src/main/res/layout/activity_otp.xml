@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="32dp"
-    tools:context=".presentation.otp.OTPActivity">
+    tools:context=".presentation.auth.otp.OTPActivity">
 
     <ImageButton
         android:id="@+id/ib_btn_back"

@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.otp
+package com.arkan.terbangin.presentation.auth.otp
 
 import android.os.Bundle
 import android.text.Editable

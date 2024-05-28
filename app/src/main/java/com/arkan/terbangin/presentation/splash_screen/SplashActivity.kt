@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivitySplashBinding
 import com.arkan.terbangin.presentation.main.MainActivity
-import com.arkan.terbangin.presentation.register.RegisterActivity
+import com.arkan.terbangin.presentation.auth.register.RegisterActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashActivity : AppCompatActivity() {

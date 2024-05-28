@@ -5,36 +5,14 @@
     android:id="@+id/flight_search"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.flightsearch.FlightSearchActivity">
+    tools:context=".presentation.flight_search.FlightSearchActivity">
 
-    <View
+    <include
+        android:id="@+id/layout_app_bar"
+        layout="@layout/layout_app_bar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/md_theme_primary"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <ImageButton
-        android:id="@+id/ib_btn_back"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/ic_back"
-        android:background="@color/transparent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:tint="@color/md_theme_onPrimary"/>
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:text="JKT > MLB - 2 Penumpang - Ekonomi"
-        android:textColor="@color/md_theme_onPrimary"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@id/ib_btn_back"
-        app:layout_constraintTop_toTopOf="@id/ib_btn_back"
-        app:layout_constraintBottom_toBottomOf="@id/ib_btn_back"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.kizitonwose.calendar.view.WeekCalendarView
         android:id="@+id/cv_day_slider"
@@ -44,7 +22,7 @@
         app:cv_daySize="freeForm"
         app:cv_orientation="horizontal"
         app:cv_dayViewResource="@layout/layout_calendar_day_slider"
-        app:layout_constraintTop_toBottomOf="@id/ib_btn_back"/>
+        app:layout_constraintTop_toBottomOf="@id/layout_app_bar"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_destination"
