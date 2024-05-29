@@ -6,6 +6,10 @@ interface UserRepository {
     fun onBoardingState(): Boolean
 
     fun setOnBoarding(state: Boolean)
+
+    fun isUsingDarkMode(): Boolean
+
+    fun setUsingDarkMode(isUsingDarkMode: Boolean)
 }
 
 class UserRepositoryImpl(private val userDataSource: UserDataSource) : UserRepository {
@@ -15,5 +19,13 @@ class UserRepositoryImpl(private val userDataSource: UserDataSource) : UserRepos
 
     override fun setOnBoarding(state: Boolean) {
         userDataSource.setOnBoarding(state)
+    }
+
+    override fun isUsingDarkMode(): Boolean {
+        return userDataSource.isUsingDarkMode()
+    }
+
+    override fun setUsingDarkMode(isUsingDarkMode: Boolean) {
+        userDataSource.setUsingDarkMode(isUsingDarkMode)
     }
 }
