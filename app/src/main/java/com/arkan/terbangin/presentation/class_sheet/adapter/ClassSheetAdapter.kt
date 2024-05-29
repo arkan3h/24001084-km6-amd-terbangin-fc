@@ -4,52 +4,55 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arkan.terbangin.data.model.TicketClass
+import com.arkan.terbangin.databinding.ItemListClassSheetBinding
 
-class ClassSheetAdapter {
-
-    /*private val ticketClasses: List<TicketClass>,
-    private val onItemClickListener: OnClassItemClickListener
+class ClassSheetAdapter(
+    private val ticketClasses: List<TicketClass>,
+    private val listener: OnClassItemClickListener,
 ) : RecyclerView.Adapter<ClassSheetAdapter.ClassSheetViewHolder>() {
+    private var selectedPosition = -1
 
-    private var selectedItemPosition: Int = RecyclerView.NO_POSITION
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassSheetViewHolder {
-        val binding = ItemClassSheetBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ClassSheetViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: ClassSheetViewHolder, position: Int) {
-        val ticketClass = ticketClasses[position]
-        holder.bind(ticketClass, position == selectedItemPosition)
-    }
-
-    override fun getItemCount(): Int {
-        return ticketClasses.size
-    }
-
-    inner class ClassSheetViewHolder(private val binding: ItemClassSheetBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(ticketClass: TicketClass, isSelected: Boolean) {
-            binding.apply {
-                tvClassName.text = ticketClass.name
-                tvClassPrice.text = ticketClass.price
-                root.isSelected = isSelected
-                root.setOnClickListener {
-                    val previousPosition = selectedItemPosition
-                    selectedItemPosition = adapterPosition
-                    notifyItemChanged(previousPosition)
-                    notifyItemChanged(selectedItemPosition)
-                    onItemClickListener.onItemClick(ticketClass)
-                }
+    inner class ClassSheetViewHolder(private val binding: ItemListClassSheetBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(
+            ticketClass: TicketClass,
+            isSelected: Boolean,
+        ) {
+            binding.rbItemClass.text = ticketClass.name
+            binding.tvItemClassPrice.text = ticketClass.price
+            binding.rbItemClass.isChecked = isSelected
+            binding.root.setOnClickListener {
+                listener.onItemClick(ticketClass)
+                notifyItemChanged(selectedPosition)
+                selectedPosition = adapterPosition
+                notifyItemChanged(selectedPosition)
             }
         }
     }
 
-    fun getSelectedTicketClass(): TicketClass? {
-        return if (selectedItemPosition != RecyclerView.NO_POSITION) {
-            ticketClasses[selectedItemPosition]
-        } else {
-            null
-        }
-    }*/
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ClassSheetViewHolder {
+        val binding =
+            ItemListClassSheetBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false,
+            )
+        return ClassSheetViewHolder(binding)
+    }
 
+    override fun onBindViewHolder(
+        holder: ClassSheetViewHolder,
+        position: Int,
+    ) {
+        holder.bind(ticketClasses[position], position == selectedPosition)
+    }
+
+    override fun getItemCount(): Int = ticketClasses.size
+}
+
+interface OnClassItemClickListener {
+    fun onItemClick(ticketClass: TicketClass)
 }

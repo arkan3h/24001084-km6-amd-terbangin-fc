@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,7 +8,12 @@
         android:id="@+id/menu_tab_home"
         android:name="com.arkan.terbangin.presentation.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_menu_tab_home_to_classSheetFragment"
+            app:destination="@id/classSheetFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/menu_tab_history"
         android:name="com.arkan.terbangin.presentation.history.HistoryFragment"
@@ -25,4 +29,10 @@
         android:name="com.arkan.terbangin.presentation.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/classSheetFragment"
+        android:name="com.arkan.terbangin.presentation.class_sheet.ClassSheetFragment"
+        android:label="Class Sheet"
+        tools:layout="@layout/fragment_class_sheet" />
 </navigation>
