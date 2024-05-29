@@ -4,16 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.FrameLayout
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arkan.terbangin.data.model.TicketClass
 import com.arkan.terbangin.databinding.FragmentClassSheetBinding
 import com.arkan.terbangin.presentation.class_sheet.adapter.ClassSheetAdapter
 import com.arkan.terbangin.presentation.class_sheet.adapter.OnClassItemClickListener
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class ClassSheetFragment : Fragment() {
+class ClassSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentClassSheetBinding
     private lateinit var classSheetAdapter: ClassSheetAdapter
     private val classSheetViewModel: ClassSheetViewModel by viewModels()
@@ -31,10 +32,34 @@ class ClassSheetFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?,
     ) {
+        setFullScreen()
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupSaveButton()
         setupCloseButton()
+    }
+
+    private fun setFullScreen() {
+        val bottomSheet: FrameLayout = dialog?.findViewById(com.google.android.material.R.id.design_bottom_sheet)!!
+        bottomSheet.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+        val behavior = BottomSheetBehavior.from(bottomSheet)
+        behavior.apply {
+            state = BottomSheetBehavior.STATE_EXPANDED
+            isDraggable = false
+            addBottomSheetCallback(
+                object : BottomSheetBehavior.BottomSheetCallback() {
+                    override fun onStateChanged(
+                        bottomSheet: View,
+                        newState: Int,
+                    ) {}
+
+                    override fun onSlide(
+                        bottomSheet: View,
+                        slideOffset: Float,
+                    ) {}
+                },
+            )
+        }
     }
 
     private fun setupRecyclerView() {
@@ -70,7 +95,7 @@ class ClassSheetFragment : Fragment() {
 
     private fun setupCloseButton() {
         binding.ivCloseTab.setOnClickListener {
-            findNavController().navigateUp()
+            dialog?.cancel()
         }
     }
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.arkan.terbangin.databinding.FragmentHomeBinding
+import com.arkan.terbangin.presentation.class_sheet.ClassSheetFragment
 import com.arkan.terbangin.presentation.flight_search.FlightSearchActivity
 import com.arkan.terbangin.presentation.passengers_count.PassengersCountBottomSheet
 import com.arkan.terbangin.presentation.terminal_search.TerminalSearchBottomSheet
@@ -43,6 +44,9 @@ class HomeFragment : Fragment() {
         binding.layoutSearchHome.layoutPassengersSearch.layoutPassengersSearch.setOnClickListener {
             selectPassengers()
         }
+        binding.layoutSearchHome.layoutSeatClassSearch.layoutSeatClassSearch.setOnClickListener {
+            selectSeatClass()
+        }
         binding.layoutSearchHome.btnSearchFlight.setOnClickListener {
             navigateToFlightSearch()
         }
@@ -60,6 +64,10 @@ class HomeFragment : Fragment() {
 
     private fun selectPassengers() {
         PassengersCountBottomSheet().show(childFragmentManager, null)
+    }
+
+    private fun selectSeatClass() {
+        ClassSheetFragment().show(childFragmentManager, null)
     }
 
     private fun navigateToFlightSearch() {
