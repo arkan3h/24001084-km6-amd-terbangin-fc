@@ -28,7 +28,6 @@ class UserPreferenceImpl(
         pref[KEY_IS_USING_DARK_MODE] = isUsingDarkMode
     }
 
-
     companion object {
         const val PREF_NAME = "terbangin-pref"
         const val KEY_ON_BOARDING_STATE = "KEY_ON_BOARDING_STATE"
