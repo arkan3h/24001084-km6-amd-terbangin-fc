@@ -8,17 +8,28 @@
     android:paddingHorizontal="32dp"
     tools:context=".presentation.profile.ProfileFragment">
 
+    <ImageButton
+        android:id="@+id/ib_btn_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/ic_back"
+        android:backgroundTint="@color/md_theme_onBackground"
+        android:contentDescription="@string/text_back_button_for_previous_page"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <TextView
         android:id="@+id/tv_title_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="56dp"
         android:text="@string/title_tab_pengaturan_akun"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/ib_btn_back"/>
 
     <LinearLayout
         android:id="@+id/ll_dark_mode"

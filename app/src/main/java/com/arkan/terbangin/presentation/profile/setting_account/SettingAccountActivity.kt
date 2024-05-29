@@ -18,6 +18,13 @@ class SettingAccountActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSwitchListener()
+        setClickListener()
+    }
+
+    private fun setClickListener() {
+        binding.ibBtnBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     private fun applyUiMode() {
