@@ -50,14 +50,14 @@ android {
             buildConfigField(
                 type = "String",
                 name = "BASE_URL",
-                value = "\"...\"",
+                value = "\"ipaddress\"",
             )
         }
         create("integration") {
             buildConfigField(
                 type = "String",
                 name = "BASE_URL",
-                value = "\"...\"",
+                value = "\"ipaddress\"",
             )
         }
     }

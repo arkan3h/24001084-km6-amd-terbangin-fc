@@ -103,4 +103,6 @@
     <string name="text_calender_title_view">Calender View Filter</string>
     <string name="text_mulai_dari">Mulai Dari</string>
     <string name="text_sampai">Sampai</string>
+    <string name="text_input_email">Masukkan Email</string>
+    <string name="text_error_number_invalid2">Hapus 0 diawal nomor</string>
 </resources>
