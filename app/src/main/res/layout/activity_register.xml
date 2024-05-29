@@ -90,7 +90,7 @@
                 android:id="@+id/ti_et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/placeholder_hint_input_email"
+                android:hint="@string/text_input_email"
                 android:textSize="16sp"
                 android:inputType="text"
                 android:digits="0123456789@abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ._-+() "/>

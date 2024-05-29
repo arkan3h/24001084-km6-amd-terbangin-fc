@@ -6,10 +6,10 @@ import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivityCheckoutDetailBinding
 
 class CheckoutDetailActivity : AppCompatActivity() {
-
     private val binding: ActivityCheckoutDetailBinding by lazy {
         ActivityCheckoutDetailBinding.inflate(layoutInflater)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)

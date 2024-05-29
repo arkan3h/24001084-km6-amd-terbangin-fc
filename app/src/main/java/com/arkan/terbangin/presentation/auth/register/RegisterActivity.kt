@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -11,12 +12,16 @@ import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivityRegisterBinding
 import com.arkan.terbangin.presentation.auth.login.LoginActivity
 import com.arkan.terbangin.presentation.main.MainActivity
+import com.arkan.terbangin.utils.proceedWhen
 import com.google.android.material.textfield.TextInputLayout
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegisterActivity : AppCompatActivity() {
     private val binding: ActivityRegisterBinding by lazy {
         ActivityRegisterBinding.inflate(layoutInflater)
     }
+
+    private val viewModel: RegisterViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,15 +49,13 @@ class RegisterActivity : AppCompatActivity() {
             val email = binding.tiEtEmail.text.toString().trim()
             val password = binding.tiEtMakePassword.text.toString().trim()
             val fullName = binding.tiEtName.text.toString().trim()
-            val number = binding.tiPhoneNumber.text.toString().trim()
-//            proceedRegister(email, password, fullName)
-            navigateToMain()
+            val number = "0${binding.tiPhoneNumber.text.toString().trim()}"
+            proceedRegister(fullName, email, number, password)
         }
     }
 
     private fun isFormValid(): Boolean {
         val password = binding.tiEtMakePassword.text.toString().trim()
-//        val confirmPassword = binding.etConfirmPassword.text.toString().trim()
         val fullName = binding.tiEtName.text.toString().trim()
         val email = binding.tiEtEmail.text.toString().trim()
         val number = binding.tiPhoneNumber.text.toString().trim()
@@ -60,8 +63,6 @@ class RegisterActivity : AppCompatActivity() {
         return checkNameValidation(fullName) && checkEmailValidation(email) &&
             checkNumberValidation(number) &&
             checkPasswordValidation(password, binding.tilMakePassword)
-//                && checkPasswordValidation(confirmPassword, binding.tilConfirmPassword)
-//                && checkPwdAndConfirmPwd(password, confirmPassword)
     }
 
     private fun checkNameValidation(fullName: String): Boolean {
@@ -84,10 +85,19 @@ class RegisterActivity : AppCompatActivity() {
             binding.tilPhoneNumber.isErrorEnabled = true
             binding.tilPhoneNumber.error = getString(R.string.text_error_number_invalid)
             false
+        } else if (!isNumberFormatValid(number)) {
+            binding.tilPhoneNumber.isErrorEnabled = true
+            binding.tilPhoneNumber.error = getString(R.string.text_error_number_invalid2)
+            false
         } else {
             binding.tilPhoneNumber.isErrorEnabled = false
             true
         }
+    }
+
+    private fun isNumberFormatValid(number: String): Boolean {
+        val reg = Regex("^[1-9]\\d{3,}\$")
+        return reg.matches(number)
     }
 
     private fun checkEmailValidation(email: String): Boolean {
@@ -125,24 +135,33 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-//    private fun checkPwdAndConfirmPwd(
-//        password: String,
-//        confirmPassword: String,
-//    ): Boolean {
-//        return if (password != confirmPassword) {
-//            binding.tilPassword.isErrorEnabled = true
-//            binding.tilPassword.error =
-//                getString(R.string.text_pw_nomatch)
-//            binding.tilConfirmPassword.isErrorEnabled = true
-//            binding.tilConfirmPassword.error =
-//                getString(R.string.text_pw_nomatch)
-//            false
-//        } else {
-//            binding.tilPassword.isErrorEnabled = false
-//            binding.tilConfirmPassword.isErrorEnabled = false
-//            true
-//        }
-//    }
+    private fun proceedRegister(
+        fullName: String,
+        email: String,
+        phoneNumber: String,
+        password: String,
+    ) {
+        viewModel.doRegister(fullName, email, phoneNumber, password).observe(this) { it ->
+            it.proceedWhen(
+                doOnSuccess = {
+                    navigateToMain()
+                },
+                doOnError = {
+                    showAlertDialog(it.exception?.message.orEmpty())
+                },
+            )
+        }
+    }
+
+    private fun showAlertDialog(it: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage(it)
+        builder.setNegativeButton("Close") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
 
     private fun navigateToLogin() {
         startActivity(
