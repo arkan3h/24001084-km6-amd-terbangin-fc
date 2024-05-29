@@ -105,4 +105,7 @@
     <string name="text_sampai">Sampai</string>
     <string name="text_input_email">Masukkan Email</string>
     <string name="text_error_number_invalid2">Hapus 0 diawal nomor</string>
+    <string name="title_tab_pengaturan_akun">Pengaturan Akun</string>
+    <string name="menu_pengaturan_akun_tema_gelap">Tema Gelap</string>
+    <string name="menu_pengaturan_akun_hapus_akun">Hapus Akun</string>
 </resources>

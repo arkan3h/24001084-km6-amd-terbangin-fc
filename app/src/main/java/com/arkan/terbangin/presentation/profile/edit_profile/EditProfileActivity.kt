@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.edit_profile
+package com.arkan.terbangin.presentation.profile.edit_profile
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -17,6 +17,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.profile.setting_account.SettingAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.checkout.detail.CheckoutDetailActivity"
             android:exported="false" />
         <activity
@@ -26,14 +29,14 @@
             android:name=".presentation.flight_search.FlightSearchActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.edit_profile.EditProfileActivity"
+            android:name=".presentation.profile.edit_profile.EditProfileActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.auth.otp.OTPActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.splash_screen.SplashActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".presentation.auth.reset_password.ResetPasswordActivity"
             android:exported="false" />
@@ -45,7 +48,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.main.MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

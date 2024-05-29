@@ -6,6 +6,10 @@ interface UserDataSource {
     fun onBoardingState(): Boolean
 
     fun setOnBoarding(state: Boolean)
+
+    fun isUsingDarkMode(): Boolean
+
+    fun setUsingDarkMode(isUsingDarkMode: Boolean)
 }
 
 class UserPreferenceDataSource(private val userPreference: UserPreference) : UserDataSource {
@@ -15,5 +19,13 @@ class UserPreferenceDataSource(private val userPreference: UserPreference) : Use
 
     override fun setOnBoarding(state: Boolean) {
         return userPreference.setOnBoarding(state)
+    }
+
+    override fun isUsingDarkMode(): Boolean {
+        return userPreference.isUsingDarkMode()
+    }
+
+    override fun setUsingDarkMode(isUsingDarkMode: Boolean) {
+        userPreference.setUsingDarkMode(isUsingDarkMode)
     }
 }
