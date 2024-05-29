@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.FragmentHomeBinding
 import com.arkan.terbangin.presentation.flightsearch.FlightSearchActivity
 import com.arkan.terbangin.presentation.passengerscount.PassengersCountBottomSheet
@@ -20,8 +22,20 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Set click listener for the button
+        binding.btnOpenClassSheet.setOnClickListener {
+            findNavController().navigate(R.id.action_menu_tab_home_to_classSheetFragment)
+        }
     }
 
     override fun onViewCreated(
