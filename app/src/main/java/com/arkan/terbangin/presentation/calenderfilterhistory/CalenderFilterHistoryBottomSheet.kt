@@ -103,6 +103,9 @@ class CalenderFilterHistoryBottomSheet : BottomSheetDialogFragment() {
             if (selection.startDate != null) {
                 text = headerDateFormatter.format(selection.startDate)
                 setTextColorRes(R.color.md_theme_onBackground)
+            } else {
+                text = getString(R.string.text_pilih_tanggal_mulai)
+                setTextColorRes(R.color.md_theme_outlineVariant)
             }
         }
 
@@ -110,6 +113,9 @@ class CalenderFilterHistoryBottomSheet : BottomSheetDialogFragment() {
             if (selection.endDate != null) {
                 text = headerDateFormatter.format(selection.endDate)
                 setTextColorRes(R.color.md_theme_onBackground)
+            } else {
+                text = getString(R.string.text_pilih_tanggal_sampai)
+                setTextColorRes(R.color.md_theme_outlineVariant)
             }
         }
 
@@ -262,7 +268,7 @@ class CalenderFilterHistoryBottomSheet : BottomSheetDialogFragment() {
 
     private fun setFullScreen() {
         val bottomSheet: FrameLayout = dialog?.findViewById(com.google.android.material.R.id.design_bottom_sheet)!!
-        bottomSheet.layoutParams.height = 2000
+        bottomSheet.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
         val behavior = BottomSheetBehavior.from(bottomSheet)
         behavior.apply {
             peekHeight = resources.displayMetrics.heightPixels

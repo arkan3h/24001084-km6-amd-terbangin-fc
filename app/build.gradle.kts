@@ -50,14 +50,14 @@ android {
             buildConfigField(
                 type = "String",
                 name = "BASE_URL",
-                value = "\"ipaddress\"",
+                value = "\"http://ipaddresslaptop/\"",
             )
         }
         create("integration") {
             buildConfigField(
                 type = "String",
                 name = "BASE_URL",
-                value = "\"ipaddress\"",
+                value = "\"http://ipaddresslaptop/\"",
             )
         }
     }
@@ -96,7 +96,6 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.room.ktx)
     implementation(libs.firebase.crashlytics)
-    implementation(libs.androidx.recyclerview)
     ksp(libs.room.compiler)
     implementation(libs.coroutine.core)
     implementation(libs.coroutine.android)
