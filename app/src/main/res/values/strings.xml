@@ -95,8 +95,8 @@
     <string name="text_riwayat_pesanan">Riwayat Pesanan</string>
     <string name="text_button_search">Button Search</string>
     <string name="text_button_filter">Button Filter</string>
-    <string name="text_booking_code">Booking Code:</string>
-    <string name="text_class">Class:</string>
+    <string name="text_booking_code">Kode Booking:</string>
+    <string name="text_class">Kelas:</string>
     <string name="text_logo_maps_departure">Logo Maps Departure</string>
     <string name="text_logo_maps_landing">Logo Maps Landing</string>
     <string name="text_arrows_showing_departure_location_and_flight_time">arrows showing departure location and flight time</string>
@@ -116,4 +116,5 @@
     <string name="menu_pengaturan_akun_tema_gelap">Tema Gelap</string>
     <string name="menu_pengaturan_akun_hapus_akun">Hapus Akun</string>
     <string name="text_title_seat_class_select">Pilih Kelas Kursi Penumpang</string>
+    <string name="text_cari_riwayat_pesanan">Cari Riwayat Pesanan</string>
 </resources>
