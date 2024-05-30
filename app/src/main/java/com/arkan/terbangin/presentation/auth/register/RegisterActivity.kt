@@ -12,6 +12,7 @@ import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivityRegisterBinding
 import com.arkan.terbangin.presentation.auth.login.LoginActivity
 import com.arkan.terbangin.presentation.main.MainActivity
+import com.arkan.terbangin.utils.highLightWord
 import com.arkan.terbangin.utils.proceedWhen
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,7 +40,7 @@ class RegisterActivity : AppCompatActivity() {
         binding.btnRegister.setOnClickListener {
             doRegister()
         }
-        binding.tvNavToLogin.setOnClickListener {
+        binding.tvNavToLogin.highLightWord("Masuk di sini") {
             navigateToLogin()
         }
     }
