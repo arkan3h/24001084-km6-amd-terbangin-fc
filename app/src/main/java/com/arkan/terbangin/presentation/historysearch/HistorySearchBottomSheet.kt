@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.BottomSheetHistorySearchBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -33,7 +32,7 @@ class HistorySearchBottomSheet : BottomSheetDialogFragment() {
 
     private fun setFullScreen() {
         val bottomSheet: FrameLayout = dialog?.findViewById(com.google.android.material.R.id.design_bottom_sheet)!!
-        bottomSheet.layoutParams.height = 2000
+        bottomSheet.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
         val behavior = BottomSheetBehavior.from(bottomSheet)
         behavior.apply {
             peekHeight = resources.displayMetrics.heightPixels

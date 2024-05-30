@@ -106,6 +106,10 @@
     <string name="text_calender_title_view">Calender View Filter</string>
     <string name="text_mulai_dari">Mulai Dari</string>
     <string name="text_sampai">Sampai</string>
+    <string name="text_pilih_tanggal_mulai">Pilih Tanggal Mulai</string>
+    <string name="text_pilih_tanggal_sampai">Pilih Tanggal Sampai</string>
+    <string name="text_filter_riwayat_pesanan">Filter Riwayat Pesanan</string>
+    <string name="text_masukkan_nomor_penerbangan">Masukkan Nomor Penerbangan</string>
     <string name="text_input_email">Masukkan Email</string>
     <string name="text_error_number_invalid2">Hapus 0 diawal nomor</string>
     <string name="title_tab_pengaturan_akun">Pengaturan Akun</string>
