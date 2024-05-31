@@ -44,7 +44,7 @@
     <string name="text_selector_round_trip">Pulang - Pergi ?</string>
     <string name="text_search_flight">Cari Penerbangan</string>
     <string name="title_otp_page">Masukkan OTP</string>
-    <string name="placeholder_ketik_6_digit">Ketik 6 digit kode yang dikirimkan ke youremail@gmail.com</string>
+    <string name="placeholder_ketik_6_digit">Ketik 6 digit kode yang dikirimkan ke email anda</string>
     <string name="btn_resend_otp">Kirim Ulang OTP Dalam 60 Detik</string>
     <string name="btn_request_new_code">Minta kode baru via SMS</string>
     <string name="text_title_home_fav">Destinasi Favorit</string>
@@ -120,4 +120,5 @@
     <string name="text_filter">Filter</string>
     <string name="text_send">Kirim</string>
     <string name="text_input_your_email">Masukkan Email Anda</string>
+    <string name="text_restart_otp">Kirim Ulang OTP Dalam %1$s Detik</string>
 </resources>
