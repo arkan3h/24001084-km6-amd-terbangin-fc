@@ -61,6 +61,11 @@ android {
             )
         }
     }
+    packaging {
+        resources {
+            excludes.add("META-INF/*")
+        }
+    }
 }
 
 tasks.getByPath("preBuild").dependsOn("ktlintFormat")

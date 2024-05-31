@@ -2,8 +2,9 @@ package com.arkan.terbangin.data.source.network.services
 
 import com.arkan.terbangin.BuildConfig
 import com.arkan.terbangin.data.source.network.model.login.LoginResponse
+import com.arkan.terbangin.data.source.network.model.otp.request_otp.RequestOTPResponse
+import com.arkan.terbangin.data.source.network.model.otp.verify_otp.VerifyOTPResponse
 import com.arkan.terbangin.data.source.network.model.register.RegisterResponse
-import com.arkan.terbangin.data.source.network.model.requestotp.RequestOTPResponse
 import com.arkan.terbangin.data.source.network.model.resetpassword.ResetPasswordResponse
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
@@ -43,6 +44,12 @@ interface TerbanginApiServices {
     suspend fun requestOTP(
         @Part("email") email: RequestBody,
     ): RequestOTPResponse
+
+    @POST("api/v1/verification/verify-otp")
+    suspend fun verifyOTP(
+        @Part("email") email: RequestBody,
+        @Part("code") otp: RequestBody,
+    ): VerifyOTPResponse
 
     companion object {
         @JvmStatic
