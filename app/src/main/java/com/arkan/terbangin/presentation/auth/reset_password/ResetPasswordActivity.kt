@@ -7,22 +7,28 @@ import android.os.Bundle
 import android.util.Patterns
 import android.view.Window
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivityResetPasswordBinding
+import com.arkan.terbangin.utils.proceedWhen
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ResetPasswordActivity : AppCompatActivity() {
     private val binding: ActivityResetPasswordBinding by lazy {
         ActivityResetPasswordBinding.inflate(layoutInflater)
     }
 
+    private val viewModel: ResetPasswordViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_reset_password)
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -68,6 +74,28 @@ class ResetPasswordActivity : AppCompatActivity() {
     }
 
     private fun proceedSendEmail(email: String) {
+        viewModel.doResetPassword(email).observe(this) { it ->
+            it.proceedWhen(
+                doOnSuccess = {
+                    binding.pbLoading.isVisible = false
+                    binding.btnSendEmail.isVisible = true
+                    resetPasswordDialog()
+                },
+                doOnError = {
+                    binding.pbLoading.isVisible = false
+                    binding.btnSendEmail.isVisible = true
+                    Toast.makeText(
+                        this,
+                        "Login Failed : ${it.exception?.message.orEmpty()}",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                },
+                doOnLoading = {
+                    binding.pbLoading.isVisible = true
+                    binding.btnSendEmail.isVisible = false
+                },
+            )
+        }
     }
 
     private fun resetPasswordDialog() {
@@ -79,6 +107,7 @@ class ResetPasswordActivity : AppCompatActivity() {
         val backBtn: Button = dialog.findViewById(R.id.btn_back_reset_password_dialog)
         backBtn.setOnClickListener {
             dialog.dismiss()
+            onBackPressedDispatcher.onBackPressed()
         }
         dialog.show()
     }
