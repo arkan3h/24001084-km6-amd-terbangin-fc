@@ -2,6 +2,7 @@ package com.arkan.terbangin.data.repository.auth
 
 import android.util.Log
 import com.arkan.terbangin.data.datasource.auth.login.LoginDataSource
+import com.arkan.terbangin.data.datasource.user.UserDataSource
 import com.arkan.terbangin.data.source.network.model.login.LoginResponse
 import com.arkan.terbangin.utils.ResultWrapper
 import com.arkan.terbangin.utils.proceedFlow
@@ -18,6 +19,7 @@ interface LoginRepository {
 
 class LoginRepositoryImpl(
     private val dataSource: LoginDataSource,
+    private val userDataSource: UserDataSource,
 ) : LoginRepository {
     override fun doLogin(
         email: String,
@@ -27,7 +29,9 @@ class LoginRepositoryImpl(
         return proceedFlow {
             val emailBody = email.toRequestBody("text/plain".toMediaTypeOrNull())
             val passwordBody = password.toRequestBody("text/plain".toMediaTypeOrNull())
-
+            dataSource.doLogin(emailBody, passwordBody).data?.token?.let {
+                userDataSource.saveToken(it)
+            }
             dataSource.doLogin(emailBody, passwordBody)
         }
     }

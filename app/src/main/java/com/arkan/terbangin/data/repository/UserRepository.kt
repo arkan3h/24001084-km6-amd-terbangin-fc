@@ -10,6 +10,12 @@ interface UserRepository {
     fun isUsingDarkMode(): Boolean
 
     fun setUsingDarkMode(isUsingDarkMode: Boolean)
+
+    fun saveToken(token: String)
+
+    fun getToken(): String?
+
+    fun clearToken()
 }
 
 class UserRepositoryImpl(private val userDataSource: UserDataSource) : UserRepository {
@@ -27,5 +33,17 @@ class UserRepositoryImpl(private val userDataSource: UserDataSource) : UserRepos
 
     override fun setUsingDarkMode(isUsingDarkMode: Boolean) {
         userDataSource.setUsingDarkMode(isUsingDarkMode)
+    }
+
+    override fun saveToken(token: String) {
+        userDataSource.saveToken(token)
+    }
+
+    override fun getToken(): String? {
+        return userDataSource.getToken()
+    }
+
+    override fun clearToken() {
+        userDataSource.clearToken()
     }
 }

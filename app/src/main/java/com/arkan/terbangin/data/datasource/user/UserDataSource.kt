@@ -10,6 +10,12 @@ interface UserDataSource {
     fun isUsingDarkMode(): Boolean
 
     fun setUsingDarkMode(isUsingDarkMode: Boolean)
+
+    fun saveToken(token: String)
+
+    fun getToken(): String?
+
+    fun clearToken()
 }
 
 class UserPreferenceDataSource(private val userPreference: UserPreference) : UserDataSource {
@@ -27,5 +33,17 @@ class UserPreferenceDataSource(private val userPreference: UserPreference) : Use
 
     override fun setUsingDarkMode(isUsingDarkMode: Boolean) {
         userPreference.setUsingDarkMode(isUsingDarkMode)
+    }
+
+    override fun saveToken(token: String) {
+        userPreference.saveToken(token)
+    }
+
+    override fun getToken(): String? {
+        return userPreference.getToken()
+    }
+
+    override fun clearToken() {
+        userPreference.clearToken()
     }
 }

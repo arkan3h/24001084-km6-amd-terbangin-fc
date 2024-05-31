@@ -80,6 +80,7 @@ object AppModules {
             viewModelOf(::LoginViewModel)
             viewModelOf(::ResetPasswordViewModel)
             viewModelOf(::OTPViewModel)
+            viewModelOf(::HomeViewModel)
         }
 
     val modules =
