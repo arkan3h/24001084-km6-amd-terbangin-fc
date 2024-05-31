@@ -12,7 +12,7 @@ import androidx.core.view.isVisible
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivityRegisterBinding
 import com.arkan.terbangin.presentation.auth.login.LoginActivity
-import com.arkan.terbangin.presentation.main.MainActivity
+import com.arkan.terbangin.presentation.auth.otp.OTPActivity
 import com.arkan.terbangin.utils.highLightWord
 import com.arkan.terbangin.utils.proceedWhen
 import com.google.android.material.textfield.TextInputLayout
@@ -52,7 +52,7 @@ class RegisterActivity : AppCompatActivity() {
             val password = binding.tiEtMakePassword.text.toString().trim()
             val fullName = binding.tiEtName.text.toString().trim()
             val number = "0${binding.tiPhoneNumber.text.toString().trim()}"
-            proceedRegister(fullName, email, number, password)
+            requestOTP(fullName, email, number, password)
         }
     }
 
@@ -137,18 +137,18 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun proceedRegister(
+    private fun requestOTP(
         fullName: String,
         email: String,
         phoneNumber: String,
         password: String,
     ) {
-        viewModel.doRegister(fullName, email, phoneNumber, password).observe(this) { it ->
+        viewModel.requestOTP(email).observe(this) { it ->
             it.proceedWhen(
                 doOnSuccess = {
                     binding.pbLoading.isVisible = false
                     binding.btnRegister.isVisible = true
-                    navigateToMain()
+                    navigateToOtp(fullName, email, phoneNumber, password)
                 },
                 doOnError = {
                     binding.pbLoading.isVisible = false
@@ -161,6 +161,15 @@ class RegisterActivity : AppCompatActivity() {
                 },
             )
         }
+    }
+
+    private fun navigateToOtp(
+        fullName: String,
+        email: String,
+        phoneNumber: String,
+        password: String,
+    ) {
+        OTPActivity.startActivity(this, fullName, email, phoneNumber, password)
     }
 
     private fun showAlertDialog(it: String) {
@@ -177,14 +186,6 @@ class RegisterActivity : AppCompatActivity() {
         startActivity(
             Intent(this, LoginActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            },
-        )
-    }
-
-    private fun navigateToMain() {
-        startActivity(
-            Intent(this, MainActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             },
         )
     }
