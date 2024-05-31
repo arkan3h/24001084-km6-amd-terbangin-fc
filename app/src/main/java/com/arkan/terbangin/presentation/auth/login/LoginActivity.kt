@@ -1,27 +1,30 @@
 package com.arkan.terbangin.presentation.auth.login
 
-import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Patterns
-import android.view.Window
-import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivityLoginBinding
 import com.arkan.terbangin.presentation.auth.register.RegisterActivity
+import com.arkan.terbangin.presentation.auth.reset_password.ResetPasswordActivity
 import com.arkan.terbangin.presentation.main.MainActivity
+import com.arkan.terbangin.utils.highLightWord
+import com.arkan.terbangin.utils.proceedWhen
 import com.google.android.material.textfield.TextInputLayout
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
     private val binding: ActivityLoginBinding by lazy {
         ActivityLoginBinding.inflate(layoutInflater)
     }
+
+    private val viewModel: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,11 +42,11 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             doLogin()
         }
-        binding.tvNavToRegister.setOnClickListener {
+        binding.tvNavToRegister.highLightWord("Daftar di sini") {
             navigateToRegister()
         }
         binding.tvForgotPassword.setOnClickListener {
-            resetPasswordDialog()
+            navigateToResetPassword()
         }
     }
 
@@ -51,8 +54,7 @@ class LoginActivity : AppCompatActivity() {
         if (isFormValid()) {
             val email = binding.tiEtEmailPhoneNumber.text.toString().trim()
             val password = binding.tiEtPassword.text.toString().trim()
-//            loginViewModel.doLogin(email, password)
-            navigateToMain()
+            proceedLogin(email, password)
         }
     }
 
@@ -99,17 +101,32 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun resetPasswordDialog() {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(true)
-        dialog.setContentView(R.layout.dialog_reset_password)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        val backBtn: Button = dialog.findViewById(R.id.btn_back_reset_password_dialog)
-        backBtn.setOnClickListener {
-            dialog.dismiss()
+    private fun proceedLogin(
+        email: String,
+        password: String,
+    ) {
+        viewModel.doLogin(email, password).observe(this) { it ->
+            it.proceedWhen(
+                doOnSuccess = {
+                    binding.pbLoading.isVisible = false
+                    binding.btnLogin.isVisible = true
+                    navigateToMain()
+                },
+                doOnError = {
+                    binding.pbLoading.isVisible = false
+                    binding.btnLogin.isVisible = true
+                    Toast.makeText(
+                        this,
+                        "Login Failed : ${it.exception?.message.orEmpty()}",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                },
+                doOnLoading = {
+                    binding.pbLoading.isVisible = true
+                    binding.btnLogin.isVisible = false
+                },
+            )
         }
-        dialog.show()
     }
 
     private fun navigateToRegister() {
@@ -124,6 +141,14 @@ class LoginActivity : AppCompatActivity() {
         startActivity(
             Intent(this, MainActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            },
+        )
+    }
+
+    private fun navigateToResetPassword() {
+        startActivity(
+            Intent(this, ResetPasswordActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
             },
         )
     }

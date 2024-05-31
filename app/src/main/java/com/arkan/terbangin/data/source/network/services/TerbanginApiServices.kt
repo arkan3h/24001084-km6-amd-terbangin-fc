@@ -1,6 +1,7 @@
 package com.arkan.terbangin.data.source.network.services
 
 import com.arkan.terbangin.BuildConfig
+import com.arkan.terbangin.data.source.network.model.login.LoginResponse
 import com.arkan.terbangin.data.source.network.model.register.RegisterResponse
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
@@ -21,6 +22,13 @@ interface TerbanginApiServices {
         @Part("phoneNumber") phoneNumber: RequestBody,
         @Part("password") password: RequestBody,
     ): RegisterResponse
+
+    @Multipart
+    @POST("/api/v1/auth/login")
+    suspend fun doLogin(
+        @Part("email") email: RequestBody,
+        @Part("password") password: RequestBody,
+    ): LoginResponse
 
     companion object {
         @JvmStatic
