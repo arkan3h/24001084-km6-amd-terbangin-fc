@@ -1,12 +1,12 @@
-package com.arkan.terbangin.data.source.network.model.requestotp
+package com.arkan.terbangin.data.source.network.model.otp.verify_otp
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class RequestOTPResponse(
+data class VerifyOTPResponse(
     @SerializedName("data")
-    val data: RequestOTPData?,
+    val data: VerifyOTPData?,
     @SerializedName("message")
     val message: String?,
 )
