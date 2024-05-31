@@ -1,14 +1,21 @@
 package com.arkan.terbangin.presentation.auth.otp
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.arkan.terbangin.databinding.ActivityOtpBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class OTPActivity : AppCompatActivity() {
-    private lateinit var phoneNumber: String
+    private val viewModel: OTPViewModel by viewModel {
+        parametersOf(intent.extras)
+    }
 
     private val binding: ActivityOtpBinding by lazy {
         ActivityOtpBinding.inflate(layoutInflater)
@@ -21,6 +28,11 @@ class OTPActivity : AppCompatActivity() {
         // phoneNumber = intent.getStringExtra("phoneNumber")!!
         addTextChangeListener()
         setClickListener()
+        Toast.makeText(
+            this,
+            "${viewModel.fullName}\n${viewModel.email}\n${viewModel.phoneNumber}\n${viewModel.password}",
+            Toast.LENGTH_SHORT,
+        ).show()
     }
 
     private fun setClickListener() {
@@ -85,6 +97,28 @@ class OTPActivity : AppCompatActivity() {
                     }
                 binding.otpEditText6 -> if (text.isEmpty()) binding.otpEditText5.requestFocus()
             }
+        }
+    }
+
+    companion object {
+        const val EXTRA_NAME = "EXTRA_NAME"
+        const val EXTRA_EMAIL = "EXTRA_EMAIL"
+        const val EXTRA_PHONE = "EXTRA_PHONE"
+        const val EXTRA_PASSWORD = "EXTRA_PASSWORD"
+
+        fun startActivity(
+            context: Context,
+            fullName: String,
+            email: String,
+            phoneNumber: String,
+            password: String,
+        ) {
+            val intent = Intent(context, OTPActivity::class.java)
+            intent.putExtra(EXTRA_NAME, fullName)
+            intent.putExtra(EXTRA_EMAIL, email)
+            intent.putExtra(EXTRA_PHONE, phoneNumber)
+            intent.putExtra(EXTRA_PASSWORD, password)
+            context.startActivity(intent)
         }
     }
 }

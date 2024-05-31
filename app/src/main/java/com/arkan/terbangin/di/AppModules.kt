@@ -5,6 +5,8 @@ import com.arkan.terbangin.data.datasource.auth.login.LoginApiDataSource
 import com.arkan.terbangin.data.datasource.auth.login.LoginDataSource
 import com.arkan.terbangin.data.datasource.auth.register.RegisterApiDataSource
 import com.arkan.terbangin.data.datasource.auth.register.RegisterDataSource
+import com.arkan.terbangin.data.datasource.auth.requestotp.RequestOTPApiDataSource
+import com.arkan.terbangin.data.datasource.auth.requestotp.RequestOTPDataSource
 import com.arkan.terbangin.data.datasource.auth.resetpassword.ResetPasswordApiDataSource
 import com.arkan.terbangin.data.datasource.auth.resetpassword.ResetPasswordDataSource
 import com.arkan.terbangin.data.datasource.user.UserDataSource
@@ -15,12 +17,15 @@ import com.arkan.terbangin.data.repository.auth.LoginRepository
 import com.arkan.terbangin.data.repository.auth.LoginRepositoryImpl
 import com.arkan.terbangin.data.repository.auth.RegisterRepository
 import com.arkan.terbangin.data.repository.auth.RegisterRepositoryImpl
+import com.arkan.terbangin.data.repository.auth.RequestOTPRepository
+import com.arkan.terbangin.data.repository.auth.RequestOTPRepositoryImpl
 import com.arkan.terbangin.data.repository.auth.ResetPasswordRepository
 import com.arkan.terbangin.data.repository.auth.ResetPasswordRepositoryImpl
 import com.arkan.terbangin.data.source.network.services.TerbanginApiServices
 import com.arkan.terbangin.data.source.pref.UserPreference
 import com.arkan.terbangin.data.source.pref.UserPreferenceImpl
 import com.arkan.terbangin.presentation.auth.login.LoginViewModel
+import com.arkan.terbangin.presentation.auth.otp.OTPViewModel
 import com.arkan.terbangin.presentation.auth.register.RegisterViewModel
 import com.arkan.terbangin.presentation.auth.reset_password.ResetPasswordViewModel
 import com.arkan.terbangin.presentation.main.MainViewModel
@@ -54,6 +59,7 @@ object AppModules {
             single<RegisterDataSource> { RegisterApiDataSource(get()) }
             single<LoginDataSource> { LoginApiDataSource(get()) }
             single<ResetPasswordDataSource> { ResetPasswordApiDataSource(get()) }
+            single<RequestOTPDataSource> { RequestOTPApiDataSource(get()) }
         }
 
     private val repository =
@@ -62,6 +68,7 @@ object AppModules {
             single<RegisterRepository> { RegisterRepositoryImpl(get()) }
             single<LoginRepository> { LoginRepositoryImpl(get()) }
             single<ResetPasswordRepository> { ResetPasswordRepositoryImpl(get()) }
+            single<RequestOTPRepository> { RequestOTPRepositoryImpl(get()) }
         }
 
     private val viewModelModule =
@@ -72,6 +79,7 @@ object AppModules {
             viewModelOf(::RegisterViewModel)
             viewModelOf(::LoginViewModel)
             viewModelOf(::ResetPasswordViewModel)
+            viewModelOf(::OTPViewModel)
         }
 
     val modules =
