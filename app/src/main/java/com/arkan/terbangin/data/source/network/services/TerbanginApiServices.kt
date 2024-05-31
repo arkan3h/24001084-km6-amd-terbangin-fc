@@ -3,6 +3,7 @@ package com.arkan.terbangin.data.source.network.services
 import com.arkan.terbangin.BuildConfig
 import com.arkan.terbangin.data.source.network.model.login.LoginResponse
 import com.arkan.terbangin.data.source.network.model.register.RegisterResponse
+import com.arkan.terbangin.data.source.network.model.resetpassword.ResetPasswordResponse
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
@@ -29,6 +30,12 @@ interface TerbanginApiServices {
         @Part("email") email: RequestBody,
         @Part("password") password: RequestBody,
     ): LoginResponse
+
+    @Multipart
+    @POST("/api/v1/verification/generate-link")
+    suspend fun doResetPassword(
+        @Part("email") email: RequestBody,
+    ): ResetPasswordResponse
 
     companion object {
         @JvmStatic

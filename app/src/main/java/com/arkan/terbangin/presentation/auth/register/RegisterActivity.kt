@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivityRegisterBinding
 import com.arkan.terbangin.presentation.auth.login.LoginActivity
@@ -145,10 +146,18 @@ class RegisterActivity : AppCompatActivity() {
         viewModel.doRegister(fullName, email, phoneNumber, password).observe(this) { it ->
             it.proceedWhen(
                 doOnSuccess = {
+                    binding.pbLoading.isVisible = false
+                    binding.btnRegister.isVisible = true
                     navigateToMain()
                 },
                 doOnError = {
+                    binding.pbLoading.isVisible = false
+                    binding.btnRegister.isVisible = true
                     showAlertDialog(it.exception?.message.orEmpty())
+                },
+                doOnLoading = {
+                    binding.pbLoading.isVisible = true
+                    binding.btnRegister.isVisible = false
                 },
             )
         }

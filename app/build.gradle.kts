@@ -50,14 +50,14 @@ android {
             buildConfigField(
                 type = "String",
                 name = "BASE_URL",
-                value = "\"http://ipaddresslaptop/\"",
+                value = "\"https://terbangin-staging-dot-sylvan-mesh-420712.et.r.appspot.com/\"",
             )
         }
         create("integration") {
             buildConfigField(
                 type = "String",
                 name = "BASE_URL",
-                value = "\"http://ipaddresslaptop/\"",
+                value = "\"https://terbangin-staging-dot-sylvan-mesh-420712.et.r.appspot.com/\"",
             )
         }
     }
