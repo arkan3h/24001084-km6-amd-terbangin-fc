@@ -45,10 +45,11 @@ interface TerbanginApiServices {
         @Part("email") email: RequestBody,
     ): RequestOTPResponse
 
+    @Multipart
     @POST("api/v1/verification/verify-otp")
     suspend fun verifyOTP(
         @Part("email") email: RequestBody,
-        @Part("code") otp: RequestBody,
+        @Part("otp") otp: RequestBody,
     ): VerifyOTPResponse
 
     companion object {

@@ -11,6 +11,12 @@ interface UserPreference {
     fun isUsingDarkMode(): Boolean
 
     fun setUsingDarkMode(isUsingDarkMode: Boolean)
+
+    fun saveToken(token: String)
+
+    fun getToken(): String?
+
+    fun clearToken()
 }
 
 class UserPreferenceImpl(
@@ -28,9 +34,20 @@ class UserPreferenceImpl(
         pref[KEY_IS_USING_DARK_MODE] = isUsingDarkMode
     }
 
+    override fun saveToken(token: String) {
+        pref.edit().putString(KEY_TOKEN, token).apply()
+    }
+
+    override fun getToken(): String? = pref.getString(KEY_TOKEN, null)
+
+    override fun clearToken() {
+        pref.edit().remove(KEY_TOKEN).apply()
+    }
+
     companion object {
         const val PREF_NAME = "terbangin-pref"
         const val KEY_ON_BOARDING_STATE = "KEY_ON_BOARDING_STATE"
         const val KEY_IS_USING_DARK_MODE = "KEY_IS_USING_DARK_MODE"
+        const val KEY_TOKEN = "KEY_TOKEN"
     }
 }

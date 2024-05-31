@@ -3,8 +3,8 @@ package com.arkan.terbangin.presentation.auth.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -115,11 +115,7 @@ class LoginActivity : AppCompatActivity() {
                 doOnError = {
                     binding.pbLoading.isVisible = false
                     binding.btnLogin.isVisible = true
-                    Toast.makeText(
-                        this,
-                        "Login Failed : ${it.exception?.message.orEmpty()}",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                    showAlertDialog(it.exception?.message.orEmpty())
                 },
                 doOnLoading = {
                     binding.pbLoading.isVisible = true
@@ -127,6 +123,16 @@ class LoginActivity : AppCompatActivity() {
                 },
             )
         }
+    }
+
+    private fun showAlertDialog(it: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage(it)
+        builder.setNegativeButton("Close") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
     private fun navigateToRegister() {

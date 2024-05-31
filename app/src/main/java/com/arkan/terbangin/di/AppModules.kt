@@ -28,6 +28,7 @@ import com.arkan.terbangin.presentation.auth.login.LoginViewModel
 import com.arkan.terbangin.presentation.auth.otp.OTPViewModel
 import com.arkan.terbangin.presentation.auth.register.RegisterViewModel
 import com.arkan.terbangin.presentation.auth.reset_password.ResetPasswordViewModel
+import com.arkan.terbangin.presentation.home.HomeViewModel
 import com.arkan.terbangin.presentation.main.MainViewModel
 import com.arkan.terbangin.presentation.passengers_count.PassengersCountViewModel
 import com.arkan.terbangin.presentation.splash_screen.SplashViewModel
@@ -65,8 +66,8 @@ object AppModules {
     private val repository =
         module {
             single<UserRepository> { UserRepositoryImpl(get()) }
-            single<RegisterRepository> { RegisterRepositoryImpl(get()) }
-            single<LoginRepository> { LoginRepositoryImpl(get()) }
+            single<RegisterRepository> { RegisterRepositoryImpl(get(), get()) }
+            single<LoginRepository> { LoginRepositoryImpl(get(), get()) }
             single<ResetPasswordRepository> { ResetPasswordRepositoryImpl(get()) }
             single<OTPRepository> { OTPRepositoryImpl(get()) }
         }
@@ -80,6 +81,7 @@ object AppModules {
             viewModelOf(::LoginViewModel)
             viewModelOf(::ResetPasswordViewModel)
             viewModelOf(::OTPViewModel)
+            viewModelOf(::HomeViewModel)
         }
 
     val modules =

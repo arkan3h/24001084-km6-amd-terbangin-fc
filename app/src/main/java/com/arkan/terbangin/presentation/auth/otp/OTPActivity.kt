@@ -3,13 +3,18 @@ package com.arkan.terbangin.presentation.auth.otp
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivityOtpBinding
-import com.arkan.terbangin.presentation.auth.login.LoginActivity
+import com.arkan.terbangin.presentation.main.MainActivity
 import com.arkan.terbangin.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -23,23 +28,41 @@ class OTPActivity : AppCompatActivity() {
         ActivityOtpBinding.inflate(layoutInflater)
     }
 
+    private lateinit var countDownTimer: CountDownTimer
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         // phoneNumber = intent.getStringExtra("phoneNumber")!!
+        countDownOtp()
         addTextChangeListener()
         setClickListener()
-        Toast.makeText(
-            this,
-            "${viewModel.fullName}\n${viewModel.email}\n${viewModel.phoneNumber}\n${viewModel.password}",
-            Toast.LENGTH_SHORT,
-        ).show()
+        Log.d("isi register", "${viewModel.fullName}\\n${viewModel.email}\\n${viewModel.phoneNumber}\\n${viewModel.password}")
+    }
+
+    private fun countDownOtp() {
+        binding.btnVerifyOtp.isVisible = false
+        countDownTimer =
+            object : CountDownTimer(60000, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    val secondsRemaining = millisUntilFinished / 1000
+                    binding.tvResendOtp.text =
+                        getString(R.string.text_restart_otp, secondsRemaining)
+                }
+
+                override fun onFinish() {
+                    binding.btnVerifyOtp.isVisible = true
+                }
+            }.start()
     }
 
     private fun setClickListener() {
         binding.ibBtnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+        binding.btnVerifyOtp.setOnClickListener {
+            requestOTP()
         }
     }
 
@@ -138,23 +161,91 @@ class OTPActivity : AppCompatActivity() {
 
     private fun verifyOTP(otp: String) {
         viewModel.email?.let { email ->
-            Toast.makeText(this, "$email $otp", Toast.LENGTH_SHORT).show()
-            viewModel.verifyOTP(email, otp).observe(this) {
+            Log.d("verify otp", "$email, $otp")
+            viewModel.verifyOTP(email, otp).observe(this) { it ->
                 it.proceedWhen(
                     doOnSuccess = {
+                        binding.layoutState.pbLoading.isVisible = false
                         Toast.makeText(this, "OTP Verified", Toast.LENGTH_SHORT).show()
-                        navigateToLogin()
+                        proceedRegister(viewModel.fullName!!, viewModel.email!!, viewModel.phoneNumber!!, viewModel.password!!)
                     },
                     doOnError = {
-                        Toast.makeText(this, "OTP Failed", Toast.LENGTH_SHORT).show()
+                        binding.layoutState.pbLoading.isVisible = false
+                        showAlertDialog(it.exception?.message.orEmpty())
+                    },
+                    doOnLoading = {
+                        binding.layoutState.pbLoading.isVisible = true
+                        binding.btnVerifyOtp.isVisible = false
                     },
                 )
             }
         }
     }
 
-    private fun navigateToLogin() {
-        startActivity(Intent(this, LoginActivity::class.java))
+    private fun proceedRegister(
+        fullName: String,
+        email: String,
+        phoneNumber: String,
+        password: String,
+    ) {
+        viewModel.doRegister(fullName, email, phoneNumber, password).observe(this) { it ->
+            it.proceedWhen(
+                doOnSuccess = {
+                    binding.layoutState.pbLoading.isVisible = false
+                    navigateToMain()
+                },
+                doOnError = {
+                    binding.layoutState.pbLoading.isVisible = false
+                    showAlertDialog(it.exception?.message.orEmpty())
+                },
+                doOnLoading = {
+                    binding.layoutState.pbLoading.isVisible = true
+                    binding.btnVerifyOtp.isVisible = false
+                },
+            )
+        }
+    }
+
+    private fun requestOTP() {
+        viewModel.email?.let { email ->
+            viewModel.requestOTP(email).observe(this) { it ->
+                it.proceedWhen(
+                    doOnSuccess = {
+                        binding.layoutState.pbLoading.isVisible = false
+                        binding.btnVerifyOtp.isVisible = true
+                        Toast.makeText(this, "Kode OTP Telah Dikirimkan ke Email Anda", Toast.LENGTH_SHORT).show()
+                        countDownOtp()
+                    },
+                    doOnError = {
+                        binding.layoutState.pbLoading.isVisible = false
+                        binding.btnVerifyOtp.isVisible = true
+                        showAlertDialog(it.exception?.message.orEmpty())
+                    },
+                    doOnLoading = {
+                        binding.layoutState.pbLoading.isVisible = true
+                        binding.btnVerifyOtp.isVisible = false
+                    },
+                )
+            }
+        }
+    }
+
+    private fun navigateToMain() {
+        startActivity(
+            Intent(this, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            },
+        )
+    }
+
+    private fun showAlertDialog(it: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage(it)
+        builder.setNegativeButton("Close") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
     companion object {
