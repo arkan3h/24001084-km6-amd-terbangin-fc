@@ -24,6 +24,80 @@
         app:cv_dayViewResource="@layout/layout_calendar_day_slider"
         app:layout_constraintTop_toBottomOf="@id/layout_app_bar"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_spacer"
+        app:layout_constraintTop_toBottomOf="@id/cv_day_slider"
+        android:layout_marginTop="8dp"/>
+
+    <ImageView
+        android:id="@+id/iv_filter"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/ic_filter"
+        app:tint="@color/md_theme_onSurfaceVariant"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_filter"
+        app:layout_constraintBottom_toBottomOf="@id/tv_filter"/>
+
+    <TextView
+        android:id="@+id/tv_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/text_filter"
+        app:layout_constraintStart_toEndOf="@id/iv_filter"
+        app:layout_constraintTop_toBottomOf="@id/cv_day_slider"/>
+
+    <ImageView
+        android:id="@+id/btn_filter"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="-20dp"
+        android:layout_marginStart="8dp"
+        android:padding="8dp"
+        android:src="@drawable/bg_outline_gray"
+        app:layout_constraintTop_toTopOf="@id/tv_filter"
+        app:layout_constraintBottom_toBottomOf="@id/tv_filter"
+        app:layout_constraintEnd_toEndOf="@id/tv_filter"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_sort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="32dp"
+        tools:text="Termurah"
+        android:textColor="@color/md_theme_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cv_day_slider"/>
+
+    <ImageView
+        android:id="@+id/iv_sort"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_arrow_up_down"
+        android:rotation="90"
+        app:tint="@color/md_theme_primary"
+        app:layout_constraintEnd_toStartOf="@id/tv_sort"
+        app:layout_constraintTop_toTopOf="@id/tv_sort"
+        app:layout_constraintBottom_toBottomOf="@id/tv_sort"/>
+
+    <View
+        android:id="@+id/v_sort"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="-8dp"
+        android:background="@drawable/bg_outline_color_primary"
+        app:layout_constraintTop_toTopOf="@id/tv_sort"
+        app:layout_constraintBottom_toBottomOf="@id/tv_sort"
+        app:layout_constraintStart_toStartOf="@id/iv_sort"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_destination"
         android:layout_width="match_parent"
@@ -33,7 +107,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_margin="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_day_slider"
+        app:layout_constraintTop_toBottomOf="@id/v_sort"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
