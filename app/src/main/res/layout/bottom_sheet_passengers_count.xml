@@ -5,7 +5,7 @@
     android:id="@+id/passengers_count"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.passengers_count.PassengersCountBottomSheet">
+    tools:context=".presentation.home.passengers_count.PassengersCountBottomSheet">
 
     <TextView
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:layout_marginTop="24dp"
         android:textStyle="bold"
         android:textSize="18sp"
-        android:text="@string/text_title_passengers_count"/>
+        android:text="@string/text_title_passengers_count" />
 
     <ImageView
         android:id="@+id/iv_close"
@@ -36,25 +36,25 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/gray_spacer"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp" />
 
         <include
             android:id="@+id/l_adult"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/layout_passenger_adult"/>
+            layout="@layout/layout_passenger_adult" />
 
         <include
             android:id="@+id/l_children"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/layout_passenger_children"/>
+            layout="@layout/layout_passenger_children" />
 
         <include
             android:id="@+id/l_baby"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/layout_passenger_baby"/>
+            layout="@layout/layout_passenger_baby" />
 
         <Button
             android:id="@+id/b_save_passengers"
@@ -66,7 +66,7 @@
             android:text="@string/text_save"
             android:textSize="18sp"
             android:textStyle="bold"
-            style="@style/Widget.Material3.Button"/>
+            android:background="@drawable/bg_rounded_white" />
 
     </LinearLayout>
 

@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.historysearch
+package com.arkan.terbangin.presentation.history
 
 import android.os.Bundle
 import android.view.LayoutInflater

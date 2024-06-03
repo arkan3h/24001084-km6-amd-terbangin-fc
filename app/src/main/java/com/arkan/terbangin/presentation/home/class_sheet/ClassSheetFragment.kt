@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.class_sheet
+package com.arkan.terbangin.presentation.home.class_sheet
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arkan.terbangin.data.model.TicketClass
 import com.arkan.terbangin.databinding.FragmentClassSheetBinding
-import com.arkan.terbangin.presentation.class_sheet.adapter.ClassSheetAdapter
-import com.arkan.terbangin.presentation.class_sheet.adapter.OnClassItemClickListener
+import com.arkan.terbangin.presentation.home.class_sheet.adapter.ClassSheetAdapter
+import com.arkan.terbangin.presentation.home.class_sheet.adapter.OnClassItemClickListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
