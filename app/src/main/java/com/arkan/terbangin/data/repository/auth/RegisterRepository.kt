@@ -2,7 +2,6 @@ package com.arkan.terbangin.data.repository.auth
 
 import android.util.Log
 import com.arkan.terbangin.data.datasource.auth.register.RegisterDataSource
-import com.arkan.terbangin.data.datasource.user.UserDataSource
 import com.arkan.terbangin.data.source.network.model.register.RegisterResponse
 import com.arkan.terbangin.utils.ResultWrapper
 import com.arkan.terbangin.utils.proceedFlow
@@ -21,7 +20,6 @@ interface RegisterRepository {
 
 class RegisterRepositoryImpl(
     private val dataSource: RegisterDataSource,
-    private val userDataSource: UserDataSource,
 ) : RegisterRepository {
     override fun doRegister(
         fullName: String,
@@ -36,9 +34,6 @@ class RegisterRepositoryImpl(
             val fullNameBody = fullName.toRequestBody("text/plain".toMediaTypeOrNull())
             val phoneNumberBody = phoneNumber.toRequestBody("text/plain".toMediaTypeOrNull())
 
-            dataSource.doRegister(fullNameBody, emailBody, phoneNumberBody, passwordBody).data?.token?.let {
-                userDataSource.saveToken(it)
-            }
             dataSource.doRegister(fullNameBody, emailBody, phoneNumberBody, passwordBody)
         }
     }

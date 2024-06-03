@@ -66,7 +66,7 @@ object AppModules {
     private val repository =
         module {
             single<UserRepository> { UserRepositoryImpl(get()) }
-            single<RegisterRepository> { RegisterRepositoryImpl(get(), get()) }
+            single<RegisterRepository> { RegisterRepositoryImpl(get()) }
             single<LoginRepository> { LoginRepositoryImpl(get(), get()) }
             single<ResetPasswordRepository> { ResetPasswordRepositoryImpl(get()) }
             single<OTPRepository> { OTPRepositoryImpl(get()) }
