@@ -15,9 +15,19 @@ class DetailPenerbanganActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setAppBarTitle()
+        setClickListener()
     }
 
     private fun setAppBarTitle() {
         binding.layoutAppBar.tvAppbarTitle.text = getString(R.string.appbar_title_rincian_penerbangan)
+    }
+
+    private fun setClickListener() {
+        binding.layoutTotalPrice.btnChoose.setOnClickListener {
+            // if(tiket == habis)
+            // TicketSoldOutBottomSheet().show(supportFragmentManager, null)
+            // else
+            // TODO
+        }
     }
 }
