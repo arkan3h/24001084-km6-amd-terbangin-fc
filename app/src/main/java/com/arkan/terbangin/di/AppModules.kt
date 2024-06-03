@@ -29,8 +29,8 @@ import com.arkan.terbangin.presentation.auth.otp.OTPViewModel
 import com.arkan.terbangin.presentation.auth.register.RegisterViewModel
 import com.arkan.terbangin.presentation.auth.reset_password.ResetPasswordViewModel
 import com.arkan.terbangin.presentation.home.HomeViewModel
+import com.arkan.terbangin.presentation.home.passengers_count.PassengersCountViewModel
 import com.arkan.terbangin.presentation.main.MainViewModel
-import com.arkan.terbangin.presentation.passengers_count.PassengersCountViewModel
 import com.arkan.terbangin.presentation.splash_screen.SplashViewModel
 import com.arkan.terbangin.utils.SharedPreferenceUtils
 import org.koin.android.ext.koin.androidContext

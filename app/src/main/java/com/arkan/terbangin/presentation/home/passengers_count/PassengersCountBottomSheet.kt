@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.passengers_count
+package com.arkan.terbangin.presentation.home.passengers_count
 
 import android.os.Bundle
 import android.view.LayoutInflater

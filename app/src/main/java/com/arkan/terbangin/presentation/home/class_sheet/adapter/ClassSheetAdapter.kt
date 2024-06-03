@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.class_sheet.adapter
+package com.arkan.terbangin.presentation.home.class_sheet.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

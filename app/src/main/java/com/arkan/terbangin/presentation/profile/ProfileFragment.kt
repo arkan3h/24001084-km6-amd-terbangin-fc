@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.FragmentProfileBinding
 import com.arkan.terbangin.presentation.auth.login.LoginActivity
 
@@ -31,8 +34,29 @@ class ProfileFragment : Fragment() {
 
     private fun setClickListener() {
         binding.llMenuLogout.setOnClickListener {
+            showAlertLogoutDialog()
+        }
+    }
+
+    private fun showAlertLogoutDialog() {
+        val dialogView: View = LayoutInflater.from(context).inflate(R.layout.dialog_logout, null)
+        val cancelBtn = dialogView.findViewById<Button>(R.id.btn_cancel)
+        val logoutBtn = dialogView.findViewById<Button>(R.id.btn_logout)
+
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.setView(dialogView)
+
+        val dialog = alertDialogBuilder.create()
+
+        cancelBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        logoutBtn.setOnClickListener {
             navigateToLogin()
         }
+
+        dialog.show()
     }
 
     private fun navigateToLogin() {

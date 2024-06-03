@@ -32,7 +32,7 @@
 
     <fragment
         android:id="@+id/classSheetFragment"
-        android:name="com.arkan.terbangin.presentation.class_sheet.ClassSheetFragment"
+        android:name="com.arkan.terbangin.presentation.home.class_sheet.ClassSheetFragment"
         android:label="Class Sheet"
         tools:layout="@layout/fragment_class_sheet" />
 </navigation>

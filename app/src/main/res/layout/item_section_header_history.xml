@@ -14,7 +14,6 @@
         tools:text="Tanggal History"
         android:textSize="20sp"
         android:textStyle="bold"
-        style="@style/TextAppearance.Material3.TitleMedium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
