@@ -48,7 +48,7 @@ class OTPActivity : AppCompatActivity() {
                 override fun onTick(millisUntilFinished: Long) {
                     val secondsRemaining = millisUntilFinished / 1000
                     binding.tvResendOtp.text =
-                        getString(R.string.text_restart_otp, secondsRemaining)
+                        getString(R.string.text_restart_otp, secondsRemaining.toString())
                 }
 
                 override fun onFinish() {
@@ -192,7 +192,7 @@ class OTPActivity : AppCompatActivity() {
             it.proceedWhen(
                 doOnSuccess = {
                     binding.layoutState.pbLoading.isVisible = false
-                    navigateToMain()
+                    proceedLogin(email, password)
                 },
                 doOnError = {
                     binding.layoutState.pbLoading.isVisible = false
@@ -227,6 +227,28 @@ class OTPActivity : AppCompatActivity() {
                     },
                 )
             }
+        }
+    }
+
+    private fun proceedLogin(
+        email: String,
+        password: String,
+    ) {
+        viewModel.doLogin(email, password).observe(this) { it ->
+            it.proceedWhen(
+                doOnSuccess = {
+                    binding.layoutState.pbLoading.isVisible = false
+                    navigateToMain()
+                },
+                doOnError = {
+                    binding.layoutState.pbLoading.isVisible = false
+                    showAlertDialog(it.exception?.message.orEmpty())
+                },
+                doOnLoading = {
+                    binding.layoutState.pbLoading.isVisible = true
+                    binding.btnVerifyOtp.isVisible = false
+                },
+            )
         }
     }
 

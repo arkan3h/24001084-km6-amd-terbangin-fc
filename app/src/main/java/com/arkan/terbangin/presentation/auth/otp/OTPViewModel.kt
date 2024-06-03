@@ -3,6 +3,7 @@ package com.arkan.terbangin.presentation.auth.otp
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import com.arkan.terbangin.data.repository.auth.LoginRepository
 import com.arkan.terbangin.data.repository.auth.OTPRepository
 import com.arkan.terbangin.data.repository.auth.RegisterRepository
 import kotlinx.coroutines.Dispatchers
@@ -11,6 +12,7 @@ class OTPViewModel(
     extras: Bundle?,
     private val otpRepository: OTPRepository,
     private val registerRepository: RegisterRepository,
+    private val loginRepository: LoginRepository,
 ) : ViewModel() {
     val fullName = extras?.getString(OTPActivity.EXTRA_NAME)
     val email = extras?.getString(OTPActivity.EXTRA_EMAIL)
@@ -41,4 +43,12 @@ class OTPViewModel(
         otpRepository.requestOTP(
             email,
         ).asLiveData(Dispatchers.IO)
+
+    fun doLogin(
+        email: String,
+        password: String,
+    ) = loginRepository.doLogin(
+        email,
+        password,
+    ).asLiveData(Dispatchers.IO)
 }
