@@ -121,4 +121,6 @@
     <string name="text_send">Kirim</string>
     <string name="text_input_your_email">Masukkan Email Anda</string>
     <string name="text_restart_otp">Kirim Ulang OTP Dalam %1$s Detik</string>
+    <string name="text_ubah_pencarian">Ubah Pencarian</string>
+    <string name="text_dialog_logout">Apakah anda yakin ingin keluar?</string>
 </resources>
