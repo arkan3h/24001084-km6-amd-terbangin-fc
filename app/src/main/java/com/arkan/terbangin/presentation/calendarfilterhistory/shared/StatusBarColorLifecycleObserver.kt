@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.calenderfilterhistory.shared
+package com.arkan.terbangin.presentation.calendarfilterhistory.shared
 
 import android.app.Activity
 import android.os.Build
@@ -8,7 +8,7 @@ import androidx.core.graphics.ColorUtils
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.arkan.terbangin.R
-import com.arkan.terbangin.presentation.calenderfilterhistory.getColorCompat
+import com.arkan.terbangin.presentation.calendarfilterhistory.getColorCompat
 import java.lang.ref.WeakReference
 
 class StatusBarColorLifecycleObserver(
