@@ -53,6 +53,7 @@ class ProfileFragment : Fragment() {
         }
 
         logoutBtn.setOnClickListener {
+            dialog.dismiss()
             navigateToLogin()
         }
 
