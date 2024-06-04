@@ -92,6 +92,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
     implementation(libs.coil)
     implementation(libs.lifecycle.livedata)
     implementation(libs.lifecycle.runtime)
@@ -114,14 +115,18 @@ dependencies {
     implementation("com.kizitonwose.calendar:view:2.5.1")
     implementation(libs.paging.runtime)
     implementation(libs.shimmer)
+    implementation("com.github.mukeshsolanki.android-otpview-pinview:otpview:3.1.0")
+
     testImplementation(libs.junit)
     testImplementation(libs.mockk.agent)
     testImplementation(libs.coroutine.test)
     testImplementation(libs.turbine)
     testImplementation(libs.core.testing)
     testImplementation("junit:junit:4.12")
+
     androidTestImplementation(libs.mockk.android)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 }

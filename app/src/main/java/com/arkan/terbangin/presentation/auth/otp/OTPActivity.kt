@@ -4,10 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -34,11 +30,9 @@ class OTPActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        // phoneNumber = intent.getStringExtra("phoneNumber")!!
         countDownOtp()
-        addTextChangeListener()
         setClickListener()
-        Log.d("isi register", "${viewModel.fullName}\\n${viewModel.email}\\n${viewModel.phoneNumber}\\n${viewModel.password}")
+        setOtpListener()
     }
 
     private fun countDownOtp() {
@@ -66,102 +60,14 @@ class OTPActivity : AppCompatActivity() {
         }
     }
 
-    private fun addTextChangeListener() {
-        binding.otpEditText1.addTextChangedListener(EditTextWatcher(binding.otpEditText1))
-        binding.otpEditText2.addTextChangedListener(EditTextWatcher(binding.otpEditText2))
-        binding.otpEditText3.addTextChangedListener(EditTextWatcher(binding.otpEditText3))
-        binding.otpEditText4.addTextChangedListener(EditTextWatcher(binding.otpEditText4))
-        binding.otpEditText5.addTextChangedListener(EditTextWatcher(binding.otpEditText5))
-        binding.otpEditText6.addTextChangedListener(EditTextWatcher(binding.otpEditText6))
-    }
-
-    inner class EditTextWatcher(private val view: View) : TextWatcher {
-        override fun beforeTextChanged(
-            p0: CharSequence?,
-            p1: Int,
-            p2: Int,
-            p3: Int,
-        ) {}
-
-        override fun onTextChanged(
-            p0: CharSequence?,
-            p1: Int,
-            p2: Int,
-            p3: Int,
-        ) {}
-
-        override fun afterTextChanged(p0: Editable?) {
-            val text = p0.toString()
-            when (view) {
-                binding.otpEditText1 ->
-                    if (text.length == 1) {
-                        binding.otpEditText2.requestFocus()
-                    } else if (text.isEmpty()) {
-                        binding.otpEditText1.requestFocus()
-                    }
-
-                binding.otpEditText2 ->
-                    if (text.length == 1) {
-                        binding.otpEditText3.requestFocus()
-                    } else if (text.isEmpty()) {
-                        binding.otpEditText1.requestFocus()
-                    }
-
-                binding.otpEditText3 ->
-                    if (text.length == 1) {
-                        binding.otpEditText4.requestFocus()
-                    } else if (text.isEmpty()) {
-                        binding.otpEditText2.requestFocus()
-                    }
-
-                binding.otpEditText4 ->
-                    if (text.length == 1) {
-                        binding.otpEditText5.requestFocus()
-                    } else if (text.isEmpty()) {
-                        binding.otpEditText3.requestFocus()
-                    }
-
-                binding.otpEditText5 ->
-                    if (text.length == 1) {
-                        binding.otpEditText6.requestFocus()
-                    } else if (text.isEmpty()) {
-                        binding.otpEditText4.requestFocus()
-                    }
-
-                binding.otpEditText6 ->
-                    if (text.length == 1) {
-                        trimTypedOTP()
-                    } else if (text.isEmpty()) {
-                        binding.otpEditText5.requestFocus()
-                    }
-            }
-        }
-    }
-
-    private fun trimTypedOTP() {
-        val typedOTP = (
-            binding.otpEditText1.text.toString() +
-                binding.otpEditText2.text.toString() +
-                binding.otpEditText3.text.toString() +
-                binding.otpEditText4.text.toString() +
-                binding.otpEditText5.text.toString() +
-                binding.otpEditText6.text.toString()
-        )
-
-        if (typedOTP.isNotEmpty()) {
-            if (typedOTP.length == 6) {
-                verifyOTP(typedOTP)
-            } else {
-                Toast.makeText(this, "Please Complete OTP", Toast.LENGTH_SHORT).show()
-            }
-        } else {
-            Toast.makeText(this, "Please Enter OTP", Toast.LENGTH_SHORT).show()
+    private fun setOtpListener() {
+        binding.otpView.setOtpCompletionListener { otp ->
+            verifyOTP(otp)
         }
     }
 
     private fun verifyOTP(otp: String) {
         viewModel.email?.let { email ->
-            Log.d("verify otp", "$email, $otp")
             viewModel.verifyOTP(email, otp).observe(this) { it ->
                 it.proceedWhen(
                     doOnSuccess = {

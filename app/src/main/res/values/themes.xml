@@ -50,6 +50,7 @@
         <item name="android:fontFamily">
             @font/varelaround_font
         </item>
+        <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
     </style>
 
     <style name="Theme.Terbangin" parent="Base.Theme.Terbangin" />
