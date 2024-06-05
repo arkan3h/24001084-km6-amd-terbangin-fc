@@ -16,6 +16,12 @@ interface PreferenceDataSource {
     fun getToken(): String?
 
     fun clearToken()
+
+    fun saveIDUser(id: String)
+
+    fun getUserID(): String?
+
+    fun clearIDUser()
 }
 
 class UserPreferenceDataSource(private val userPreference: UserPreference) : PreferenceDataSource {
@@ -45,5 +51,17 @@ class UserPreferenceDataSource(private val userPreference: UserPreference) : Pre
 
     override fun clearToken() {
         userPreference.clearToken()
+    }
+
+    override fun saveIDUser(id: String) {
+        userPreference.saveIDUser(id)
+    }
+
+    override fun getUserID(): String? {
+        return userPreference.getUserID()
+    }
+
+    override fun clearIDUser() {
+        userPreference.clearIDUser()
     }
 }

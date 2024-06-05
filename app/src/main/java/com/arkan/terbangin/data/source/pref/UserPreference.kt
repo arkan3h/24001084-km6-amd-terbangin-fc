@@ -17,6 +17,12 @@ interface UserPreference {
     fun getToken(): String?
 
     fun clearToken()
+
+    fun saveIDUser(id: String)
+
+    fun getUserID(): String?
+
+    fun clearIDUser()
 }
 
 class UserPreferenceImpl(
@@ -44,10 +50,21 @@ class UserPreferenceImpl(
         pref.edit().remove(KEY_TOKEN).apply()
     }
 
+    override fun saveIDUser(id: String) {
+        pref.edit().putString(KEY_ID_USER, id).apply()
+    }
+
+    override fun getUserID(): String? = pref.getString(KEY_ID_USER, null)
+
+    override fun clearIDUser() {
+        pref.edit().remove(KEY_ID_USER).apply()
+    }
+
     companion object {
         const val PREF_NAME = "terbangin-pref"
         const val KEY_ON_BOARDING_STATE = "KEY_ON_BOARDING_STATE"
         const val KEY_IS_USING_DARK_MODE = "KEY_IS_USING_DARK_MODE"
         const val KEY_TOKEN = "KEY_TOKEN"
+        const val KEY_ID_USER = "KEY_ID_USER"
     }
 }

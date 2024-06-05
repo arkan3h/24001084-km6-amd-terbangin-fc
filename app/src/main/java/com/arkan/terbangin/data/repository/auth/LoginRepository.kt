@@ -29,10 +29,16 @@ class LoginRepositoryImpl(
         return proceedFlow {
             val emailBody = email.toRequestBody("text/plain".toMediaTypeOrNull())
             val passwordBody = password.toRequestBody("text/plain".toMediaTypeOrNull())
-            dataSource.doLogin(emailBody, passwordBody).data?.token?.let {
+            val loginResponse = dataSource.doLogin(emailBody, passwordBody)
+
+            loginResponse.data?.token?.let {
                 preferenceDataSource.saveToken(it)
             }
-            dataSource.doLogin(emailBody, passwordBody)
+            loginResponse.data?.user?.id?.let {
+                preferenceDataSource.saveIDUser(it)
+            }
+
+            loginResponse
         }
     }
 }
