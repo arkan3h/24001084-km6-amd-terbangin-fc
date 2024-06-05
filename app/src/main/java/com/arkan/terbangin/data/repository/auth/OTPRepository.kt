@@ -1,8 +1,8 @@
 package com.arkan.terbangin.data.repository.auth
 
 import com.arkan.terbangin.data.datasource.auth.otp.OTPDataSource
-import com.arkan.terbangin.data.source.network.model.otp.request_otp.RequestOTPResponse
-import com.arkan.terbangin.data.source.network.model.otp.verify_otp.VerifyOTPResponse
+import com.arkan.terbangin.data.source.network.model.auth.otp.request_otp.RequestOTPResponse
+import com.arkan.terbangin.data.source.network.model.auth.otp.verify_otp.VerifyOTPResponse
 import com.arkan.terbangin.utils.ResultWrapper
 import com.arkan.terbangin.utils.proceedFlow
 import kotlinx.coroutines.flow.Flow

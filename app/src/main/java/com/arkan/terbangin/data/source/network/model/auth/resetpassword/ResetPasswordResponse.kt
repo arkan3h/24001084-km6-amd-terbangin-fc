@@ -1,4 +1,4 @@
-package com.arkan.terbangin.data.source.network.model.resetpassword
+package com.arkan.terbangin.data.source.network.model.auth.resetpassword
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName

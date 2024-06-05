@@ -1,22 +1,24 @@
-package com.arkan.terbangin.data.source.network.model.register
+package com.arkan.terbangin.data.source.network.model.auth.otp.request_otp
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
-data class RegisterUser(
+@Keep
+data class RequestOTPData(
+    @SerializedName("code")
+    val code: String?,
     @SerializedName("createdAt")
     val createdAt: String?,
     @SerializedName("deletedAt")
     val deletedAt: Any?,
     @SerializedName("email")
     val email: String?,
-    @SerializedName("fullName")
-    val fullName: String?,
+    @SerializedName("expire")
+    val expire: String?,
     @SerializedName("id")
     val id: String?,
-    @SerializedName("phoneNumber")
-    val phoneNumber: String?,
-    @SerializedName("picture")
-    val picture: Any?,
+    @SerializedName("isUsed")
+    val isUsed: Boolean?,
     @SerializedName("updatedAt")
     val updatedAt: String?,
 )

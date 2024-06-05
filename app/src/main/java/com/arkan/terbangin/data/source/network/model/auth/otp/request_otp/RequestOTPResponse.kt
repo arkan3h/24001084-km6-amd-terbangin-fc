@@ -1,4 +1,4 @@
-package com.arkan.terbangin.data.source.network.model.otp.request_otp
+package com.arkan.terbangin.data.source.network.model.auth.otp.request_otp
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName

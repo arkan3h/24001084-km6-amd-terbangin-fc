@@ -1,6 +1,6 @@
 package com.arkan.terbangin.data.datasource.auth.register
 
-import com.arkan.terbangin.data.source.network.model.register.RegisterResponse
+import com.arkan.terbangin.data.source.network.model.auth.register.RegisterResponse
 import okhttp3.RequestBody
 
 interface RegisterDataSource {

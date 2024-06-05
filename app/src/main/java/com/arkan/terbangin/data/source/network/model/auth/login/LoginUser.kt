@@ -1,4 +1,4 @@
-package com.arkan.terbangin.data.source.network.model.login
+package com.arkan.terbangin.data.source.network.model.auth.login
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName

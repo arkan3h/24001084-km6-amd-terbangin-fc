@@ -2,7 +2,7 @@ package com.arkan.terbangin.data.repository.auth
 
 import android.util.Log
 import com.arkan.terbangin.data.datasource.auth.register.RegisterDataSource
-import com.arkan.terbangin.data.source.network.model.register.RegisterResponse
+import com.arkan.terbangin.data.source.network.model.auth.register.RegisterResponse
 import com.arkan.terbangin.utils.ResultWrapper
 import com.arkan.terbangin.utils.proceedFlow
 import kotlinx.coroutines.flow.Flow

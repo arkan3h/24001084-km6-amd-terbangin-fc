@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.arkan.terbangin.data.repository.auth.OTPRepository
-import com.arkan.terbangin.data.source.network.model.otp.request_otp.RequestOTPResponse
+import com.arkan.terbangin.data.source.network.model.auth.otp.request_otp.RequestOTPResponse
 import kotlinx.coroutines.Dispatchers
 
 class RegisterViewModel(
