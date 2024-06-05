@@ -121,6 +121,9 @@
     <string name="text_send">Kirim</string>
     <string name="text_input_your_email">Masukkan Email Anda</string>
     <string name="text_restart_otp">Kirim Ulang OTP Dalam %1$s Detik</string>
+    <string name="text_pilih_tgl_keberangkatan">Pilih Tanggal Keberangkatan</string>
+    <string name="text_tanggal_berangkat">Tanggal Berangkat</string>
+    <string name="text_pilih_tanggal_berangkat">Pilih Tanggal Berangkat</string>
     <string name="text_ubah_pencarian">Ubah Pencarian</string>
     <string name="text_dialog_logout">Apakah anda yakin ingin keluar?</string>
 </resources>

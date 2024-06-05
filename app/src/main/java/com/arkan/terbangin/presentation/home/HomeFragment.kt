@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.arkan.terbangin.databinding.FragmentHomeBinding
+import com.arkan.terbangin.presentation.calendardeparturedate.CalendarDepartureDateBottomSheet
+import com.arkan.terbangin.presentation.class_sheet.ClassSheetFragment
 import com.arkan.terbangin.presentation.flight_search.FlightSearchActivity
 import com.arkan.terbangin.presentation.home.class_sheet.ClassSheetFragment
 import com.arkan.terbangin.presentation.home.passengers_count.PassengersCountBottomSheet
@@ -56,6 +58,9 @@ class HomeFragment : Fragment() {
         }
         binding.layoutSearchHome.lUpDown.setOnClickListener {
             Toast.makeText(requireContext(), "${viewModel.getToken()}", Toast.LENGTH_LONG).show()
+        }
+        binding.layoutSearchHome.layoutDepartureSearch.tvResultDeparture.setOnClickListener {
+            CalendarDepartureDateBottomSheet().show(childFragmentManager, null)
         }
     }
 
