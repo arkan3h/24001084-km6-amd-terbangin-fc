@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.arkan.terbangin.data.repository.auth.LoginRepository
-import com.arkan.terbangin.data.source.network.model.login.LoginResponse
+import com.arkan.terbangin.data.source.network.model.auth.login.LoginResponse
 import kotlinx.coroutines.Dispatchers
 
 class LoginViewModel(

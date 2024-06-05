@@ -1,4 +1,4 @@
-package com.arkan.terbangin.data.source.network.model.otp.verify_otp
+package com.arkan.terbangin.data.source.network.model.auth.otp.verify_otp
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName

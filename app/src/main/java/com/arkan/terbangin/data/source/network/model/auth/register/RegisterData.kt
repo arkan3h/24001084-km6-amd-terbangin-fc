@@ -1,4 +1,4 @@
-package com.arkan.terbangin.data.source.network.model.register
+package com.arkan.terbangin.data.source.network.model.auth.register
 
 import com.google.gson.annotations.SerializedName
 

@@ -16,6 +16,12 @@ interface UserPreferenceRepository {
     fun getToken(): String?
 
     fun clearToken()
+
+    fun saveIDUser(id: String)
+
+    fun getUserID(): String?
+
+    fun clearIDUser()
 }
 
 class UserPreferenceRepositoryImpl(private val preferenceDataSource: PreferenceDataSource) : UserPreferenceRepository {
@@ -45,5 +51,17 @@ class UserPreferenceRepositoryImpl(private val preferenceDataSource: PreferenceD
 
     override fun clearToken() {
         preferenceDataSource.clearToken()
+    }
+
+    override fun saveIDUser(id: String) {
+        preferenceDataSource.saveIDUser(id)
+    }
+
+    override fun getUserID(): String? {
+        return preferenceDataSource.getUserID()
+    }
+
+    override fun clearIDUser() {
+        preferenceDataSource.clearIDUser()
     }
 }

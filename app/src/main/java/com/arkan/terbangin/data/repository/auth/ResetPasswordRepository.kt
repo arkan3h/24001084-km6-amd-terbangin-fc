@@ -1,7 +1,7 @@
 package com.arkan.terbangin.data.repository.auth
 
 import com.arkan.terbangin.data.datasource.auth.resetpassword.ResetPasswordDataSource
-import com.arkan.terbangin.data.source.network.model.resetpassword.ResetPasswordResponse
+import com.arkan.terbangin.data.source.network.model.auth.resetpassword.ResetPasswordResponse
 import com.arkan.terbangin.utils.ResultWrapper
 import com.arkan.terbangin.utils.proceedFlow
 import kotlinx.coroutines.flow.Flow

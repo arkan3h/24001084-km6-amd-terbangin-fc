@@ -1,20 +1,23 @@
 package com.arkan.terbangin.data.source.network.services
 
 import com.arkan.terbangin.BuildConfig
-import com.arkan.terbangin.data.source.network.model.login.LoginResponse
-import com.arkan.terbangin.data.source.network.model.otp.request_otp.RequestOTPResponse
-import com.arkan.terbangin.data.source.network.model.otp.verify_otp.VerifyOTPResponse
-import com.arkan.terbangin.data.source.network.model.register.RegisterResponse
-import com.arkan.terbangin.data.source.network.model.resetpassword.ResetPasswordResponse
+import com.arkan.terbangin.data.source.network.model.auth.login.LoginResponse
+import com.arkan.terbangin.data.source.network.model.auth.otp.request_otp.RequestOTPResponse
+import com.arkan.terbangin.data.source.network.model.auth.otp.verify_otp.VerifyOTPResponse
+import com.arkan.terbangin.data.source.network.model.auth.register.RegisterResponse
+import com.arkan.terbangin.data.source.network.model.auth.resetpassword.ResetPasswordResponse
+import com.arkan.terbangin.data.source.network.model.profile.ProfileResponse
 import com.arkan.terbangin.data.source.pref.UserPreference
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Path
 import java.util.concurrent.TimeUnit
 
 interface TerbanginApiServices {
@@ -52,6 +55,11 @@ interface TerbanginApiServices {
         @Part("email") email: RequestBody,
         @Part("otp") otp: RequestBody,
     ): VerifyOTPResponse
+
+    @GET("/api/v1/profile/id/{id}")
+    suspend fun getProfile(
+        @Path("id") id: String?,
+    ): ProfileResponse
 
     companion object {
         @JvmStatic

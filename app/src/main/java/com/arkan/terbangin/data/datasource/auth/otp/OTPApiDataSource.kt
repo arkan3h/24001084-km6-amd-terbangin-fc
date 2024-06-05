@@ -1,7 +1,7 @@
 package com.arkan.terbangin.data.datasource.auth.otp
 
-import com.arkan.terbangin.data.source.network.model.otp.request_otp.RequestOTPResponse
-import com.arkan.terbangin.data.source.network.model.otp.verify_otp.VerifyOTPResponse
+import com.arkan.terbangin.data.source.network.model.auth.otp.request_otp.RequestOTPResponse
+import com.arkan.terbangin.data.source.network.model.auth.otp.verify_otp.VerifyOTPResponse
 import com.arkan.terbangin.data.source.network.services.TerbanginApiServices
 import okhttp3.RequestBody
 

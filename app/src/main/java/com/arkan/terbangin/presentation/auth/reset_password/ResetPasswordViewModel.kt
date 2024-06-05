@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.arkan.terbangin.data.repository.auth.ResetPasswordRepository
-import com.arkan.terbangin.data.source.network.model.resetpassword.ResetPasswordResponse
+import com.arkan.terbangin.data.source.network.model.auth.resetpassword.ResetPasswordResponse
 import kotlinx.coroutines.Dispatchers
 
 class ResetPasswordViewModel(

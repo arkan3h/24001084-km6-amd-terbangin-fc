@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.FragmentProfileBinding
 import com.arkan.terbangin.presentation.auth.login.LoginActivity
+import com.arkan.terbangin.presentation.profile.edit_profile.EditProfileActivity
+import com.arkan.terbangin.presentation.profile.setting_account.SettingAccountActivity
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
@@ -33,9 +35,23 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setClickListener() {
+        binding.llMenuEditProfile.setOnClickListener {
+            navigateToEditProfile()
+        }
+        binding.llMenuAccountSettings.setOnClickListener {
+            navigateToSettingAccount()
+        }
         binding.llMenuLogout.setOnClickListener {
             showAlertLogoutDialog()
         }
+    }
+
+    private fun navigateToEditProfile() {
+        startActivity(Intent(activity, EditProfileActivity::class.java))
+    }
+
+    private fun navigateToSettingAccount() {
+        startActivity(Intent(activity, SettingAccountActivity::class.java))
     }
 
     private fun showAlertLogoutDialog() {

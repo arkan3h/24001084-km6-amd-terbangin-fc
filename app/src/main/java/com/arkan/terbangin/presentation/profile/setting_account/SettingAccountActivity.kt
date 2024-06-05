@@ -42,7 +42,7 @@ class SettingAccountActivity : AppCompatActivity() {
     private fun setSwitchListener() {
         binding.swDarkMode.setOnCheckedChangeListener { btn, isChecked ->
             settingAccountViewModel.setUsingDarkMode(isChecked)
-            applyUiMode()
+            // applyUiMode()
         }
     }
 }
