@@ -13,6 +13,17 @@
         android:layout_height="match_parent"
         android:paddingBottom="16dp">
 
+        <include
+            android:id="@+id/layout_history_non_login"
+            layout="@layout/fragment_history_non_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
         <TextView
             android:id="@+id/tv_title_history"
             android:layout_width="match_parent"

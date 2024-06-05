@@ -32,6 +32,7 @@ import com.arkan.terbangin.presentation.auth.login.LoginViewModel
 import com.arkan.terbangin.presentation.auth.otp.OTPViewModel
 import com.arkan.terbangin.presentation.auth.register.RegisterViewModel
 import com.arkan.terbangin.presentation.auth.reset_password.ResetPasswordViewModel
+import com.arkan.terbangin.presentation.history.HistoryViewModel
 import com.arkan.terbangin.presentation.home.HomeViewModel
 import com.arkan.terbangin.presentation.home.passengers_count.PassengersCountViewModel
 import com.arkan.terbangin.presentation.main.MainViewModel
@@ -85,14 +86,13 @@ object AppModules {
         module {
             viewModelOf(::SplashViewModel)
             viewModelOf(::MainViewModel)
-            viewModelOf(::HomeViewModel)
             viewModelOf(::PassengersCountViewModel)
-            // Auth
             viewModelOf(::RegisterViewModel)
             viewModelOf(::LoginViewModel)
             viewModelOf(::ResetPasswordViewModel)
             viewModelOf(::OTPViewModel)
-            // Profile
+            viewModelOf(::HomeViewModel)
+            viewModelOf(::HistoryViewModel)
             viewModelOf(::EditProfileViewModel)
             viewModelOf(::SettingAccountViewModel)
             viewModelOf(::ProfileViewModel)
