@@ -1,8 +1,8 @@
 package com.arkan.terbangin.data.repository
 
-import com.arkan.terbangin.data.datasource.user.UserDataSource
+import com.arkan.terbangin.data.datasource.preference.PreferenceDataSource
 
-interface UserRepository {
+interface UserPreferenceRepository {
     fun onBoardingState(): Boolean
 
     fun setOnBoarding(state: Boolean)
@@ -18,32 +18,32 @@ interface UserRepository {
     fun clearToken()
 }
 
-class UserRepositoryImpl(private val userDataSource: UserDataSource) : UserRepository {
+class UserPreferenceRepositoryImpl(private val preferenceDataSource: PreferenceDataSource) : UserPreferenceRepository {
     override fun onBoardingState(): Boolean {
-        return userDataSource.onBoardingState()
+        return preferenceDataSource.onBoardingState()
     }
 
     override fun setOnBoarding(state: Boolean) {
-        userDataSource.setOnBoarding(state)
+        preferenceDataSource.setOnBoarding(state)
     }
 
     override fun isUsingDarkMode(): Boolean {
-        return userDataSource.isUsingDarkMode()
+        return preferenceDataSource.isUsingDarkMode()
     }
 
     override fun setUsingDarkMode(isUsingDarkMode: Boolean) {
-        userDataSource.setUsingDarkMode(isUsingDarkMode)
+        preferenceDataSource.setUsingDarkMode(isUsingDarkMode)
     }
 
     override fun saveToken(token: String) {
-        userDataSource.saveToken(token)
+        preferenceDataSource.saveToken(token)
     }
 
     override fun getToken(): String? {
-        return userDataSource.getToken()
+        return preferenceDataSource.getToken()
     }
 
     override fun clearToken() {
-        userDataSource.clearToken()
+        preferenceDataSource.clearToken()
     }
 }

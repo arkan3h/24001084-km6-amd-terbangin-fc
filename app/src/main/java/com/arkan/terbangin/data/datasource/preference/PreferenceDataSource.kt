@@ -1,8 +1,8 @@
-package com.arkan.terbangin.data.datasource.user
+package com.arkan.terbangin.data.datasource.preference
 
 import com.arkan.terbangin.data.source.pref.UserPreference
 
-interface UserDataSource {
+interface PreferenceDataSource {
     fun onBoardingState(): Boolean
 
     fun setOnBoarding(state: Boolean)
@@ -18,7 +18,7 @@ interface UserDataSource {
     fun clearToken()
 }
 
-class UserPreferenceDataSource(private val userPreference: UserPreference) : UserDataSource {
+class UserPreferenceDataSource(private val userPreference: UserPreference) : PreferenceDataSource {
     override fun onBoardingState(): Boolean {
         return userPreference.onBoardingState()
     }

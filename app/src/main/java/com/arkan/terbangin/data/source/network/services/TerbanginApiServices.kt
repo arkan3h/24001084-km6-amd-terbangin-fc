@@ -6,6 +6,7 @@ import com.arkan.terbangin.data.source.network.model.otp.request_otp.RequestOTPR
 import com.arkan.terbangin.data.source.network.model.otp.verify_otp.VerifyOTPResponse
 import com.arkan.terbangin.data.source.network.model.register.RegisterResponse
 import com.arkan.terbangin.data.source.network.model.resetpassword.ResetPasswordResponse
+import com.arkan.terbangin.data.source.pref.UserPreference
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
@@ -54,18 +55,17 @@ interface TerbanginApiServices {
 
     companion object {
         @JvmStatic
-        operator fun invoke(): TerbanginApiServices {
+        operator fun invoke(preference: UserPreference): TerbanginApiServices {
             val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             val okHttpClient =
                 OkHttpClient.Builder()
                     .addInterceptor(loggingInterceptor)
-//                    .addInterceptor { chain ->
-//                        val request =
-//                            chain.request().newBuilder()
-//                                .addHeader("accept", "application/json")
-//                                .addHeader("x-cg-demo-api-key", BuildConfig.API_KEY)
-//                        chain.proceed(request.build())
-//                    }
+                    .addInterceptor { chain ->
+                        val request =
+                            chain.request().newBuilder()
+                                .addHeader("Authorization", "Bearer ${preference.getToken()}")
+                        chain.proceed(request.build())
+                    }
                     .connectTimeout(120, TimeUnit.SECONDS)
                     .readTimeout(120, TimeUnit.SECONDS)
                     .build()
