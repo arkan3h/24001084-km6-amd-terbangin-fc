@@ -1,10 +1,10 @@
 package com.arkan.terbangin.presentation.splash_screen
 
 import androidx.lifecycle.ViewModel
-import com.arkan.terbangin.data.repository.UserRepository
+import com.arkan.terbangin.data.repository.UserPreferenceRepository
 
 class SplashViewModel(
-    private val userRepository: UserRepository,
+    private val userPreferenceRepository: UserPreferenceRepository,
 ) : ViewModel() {
-    fun onBoardingState() = userRepository.onBoardingState()
+    fun onBoardingState() = userPreferenceRepository.onBoardingState()
 }

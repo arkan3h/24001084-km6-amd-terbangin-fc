@@ -9,10 +9,10 @@ import com.arkan.terbangin.data.datasource.auth.register.RegisterApiDataSource
 import com.arkan.terbangin.data.datasource.auth.register.RegisterDataSource
 import com.arkan.terbangin.data.datasource.auth.resetpassword.ResetPasswordApiDataSource
 import com.arkan.terbangin.data.datasource.auth.resetpassword.ResetPasswordDataSource
-import com.arkan.terbangin.data.datasource.user.UserDataSource
-import com.arkan.terbangin.data.datasource.user.UserPreferenceDataSource
-import com.arkan.terbangin.data.repository.UserRepository
-import com.arkan.terbangin.data.repository.UserRepositoryImpl
+import com.arkan.terbangin.data.datasource.preference.PreferenceDataSource
+import com.arkan.terbangin.data.datasource.preference.UserPreferenceDataSource
+import com.arkan.terbangin.data.repository.UserPreferenceRepository
+import com.arkan.terbangin.data.repository.UserPreferenceRepositoryImpl
 import com.arkan.terbangin.data.repository.auth.LoginRepository
 import com.arkan.terbangin.data.repository.auth.LoginRepositoryImpl
 import com.arkan.terbangin.data.repository.auth.OTPRepository
@@ -40,7 +40,7 @@ import org.koin.dsl.module
 object AppModules {
     private val apiModule =
         module {
-            single<TerbanginApiServices> { TerbanginApiServices.invoke() }
+            single<TerbanginApiServices> { TerbanginApiServices.invoke(get()) }
         }
 
     private val localModule =
@@ -56,7 +56,7 @@ object AppModules {
 
     private val dataSource =
         module {
-            single<UserDataSource> { UserPreferenceDataSource(get()) }
+            single<PreferenceDataSource> { UserPreferenceDataSource(get()) }
             single<RegisterDataSource> { RegisterApiDataSource(get()) }
             single<LoginDataSource> { LoginApiDataSource(get()) }
             single<ResetPasswordDataSource> { ResetPasswordApiDataSource(get()) }
@@ -65,7 +65,7 @@ object AppModules {
 
     private val repository =
         module {
-            single<UserRepository> { UserRepositoryImpl(get()) }
+            single<UserPreferenceRepository> { UserPreferenceRepositoryImpl(get()) }
             single<RegisterRepository> { RegisterRepositoryImpl(get()) }
             single<LoginRepository> { LoginRepositoryImpl(get(), get()) }
             single<ResetPasswordRepository> { ResetPasswordRepositoryImpl(get()) }

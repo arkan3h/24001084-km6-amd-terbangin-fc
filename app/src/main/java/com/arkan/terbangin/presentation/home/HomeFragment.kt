@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
             navigateToFlightSearch()
         }
         binding.layoutSearchHome.lUpDown.setOnClickListener {
-            Toast.makeText(requireContext(), "${viewModel.getToken()}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "${viewModel.getToken()}", Toast.LENGTH_LONG).show()
         }
     }
 
