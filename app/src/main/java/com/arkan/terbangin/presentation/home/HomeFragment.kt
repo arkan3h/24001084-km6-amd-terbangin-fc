@@ -59,10 +59,10 @@ class HomeFragment : Fragment() {
         binding.layoutSearchHome.lUpDown.setOnClickListener {
             Toast.makeText(requireContext(), "${viewModel.getToken()}", Toast.LENGTH_LONG).show()
         }
-        binding.layoutSearchHome.layoutDepartureSearch.tvResultDeparture.setOnClickListener {
+        binding.layoutSearchHome.layoutDepartureSearch.layoutDepartureSearch.setOnClickListener {
             CalendarDepartureDateBottomSheet().show(childFragmentManager, null)
         }
-        binding.layoutSearchHome.layoutReturnSearch.tvResultReturn.setOnClickListener {
+        binding.layoutSearchHome.layoutReturnSearch.layoutReturnSearch.setOnClickListener {
             CalendarReturnDateBottomSheet().show(childFragmentManager, null)
         }
     }

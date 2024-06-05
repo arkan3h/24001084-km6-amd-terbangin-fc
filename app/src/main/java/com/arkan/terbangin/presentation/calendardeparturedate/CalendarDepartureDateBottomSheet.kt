@@ -13,6 +13,7 @@ import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.BottomSheetCalendarDepartureDateBinding
 import com.arkan.terbangin.databinding.ItemCalendarDayBinding
 import com.arkan.terbangin.databinding.ItemCalendarHeaderBinding
+import com.arkan.terbangin.presentation.calendarfilterhistory.getDrawableCompat
 import com.arkan.terbangin.presentation.calendarfilterhistory.makeInVisible
 import com.arkan.terbangin.presentation.calendarfilterhistory.makeVisible
 import com.arkan.terbangin.presentation.calendarfilterhistory.setTextColorRes
@@ -141,6 +142,11 @@ class CalendarDepartureDateBottomSheet : BottomSheetDialogFragment() {
                                 temporarySelectedDate -> {
                                     textView.setTextColorRes(R.color.md_theme_background)
                                     textView.setBackgroundResource(R.drawable.calendar_single_selected_bg)
+                                }
+                                today -> {
+                                    textView.setTextColorRes(R.color.md_theme_onBackground)
+                                    val todayBackground = requireContext().getDrawableCompat(R.drawable.calendar_today_bg)
+                                    textView.background = todayBackground
                                 }
                                 else -> {
                                     textView.setTextColorRes(R.color.md_theme_onBackground)

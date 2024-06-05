@@ -26,9 +26,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.calendardeparturedate.CalendarDepartureDateBottomSheet"
-            android:exported="false" />
-        <activity
             android:name=".presentation.profile.setting_account.SettingAccountActivity"
             android:exported="false" />
         <activity
