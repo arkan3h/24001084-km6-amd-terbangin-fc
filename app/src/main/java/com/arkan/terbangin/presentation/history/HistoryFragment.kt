@@ -35,7 +35,8 @@ class HistoryFragment : Fragment() {
     }
 
     private fun setState() {
-        binding.layoutHistoryNonLogin.fragmentHistoryNonLogin.isVisible = viewModel.isLoggedIn == null
+        binding.layoutHistoryNonLogin.isVisible = viewModel.isLoggedIn == null
+        binding.layoutHistory.isVisible = viewModel.isLoggedIn != null
     }
 
     private fun setOnClickListener() {
