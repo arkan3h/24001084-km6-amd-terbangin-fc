@@ -4,10 +4,9 @@ import com.arkan.terbangin.data.datasource.auth.otp.OTPDataSource
 import com.arkan.terbangin.data.source.network.model.auth.otp.request_otp.RequestOTPResponse
 import com.arkan.terbangin.data.source.network.model.auth.otp.verify_otp.VerifyOTPResponse
 import com.arkan.terbangin.utils.ResultWrapper
+import com.arkan.terbangin.utils.createPartFromString
 import com.arkan.terbangin.utils.proceedFlow
 import kotlinx.coroutines.flow.Flow
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody.Companion.toRequestBody
 
 interface OTPRepository {
     fun requestOTP(email: String): Flow<ResultWrapper<RequestOTPResponse>>
@@ -23,7 +22,7 @@ class OTPRepositoryImpl(
 ) : OTPRepository {
     override fun requestOTP(email: String): Flow<ResultWrapper<RequestOTPResponse>> {
         return proceedFlow {
-            val emailBody = email.toRequestBody("text/plain".toMediaTypeOrNull())
+            val emailBody = createPartFromString(email)
 
             dataSource.requestOTP(emailBody)
         }
@@ -34,8 +33,8 @@ class OTPRepositoryImpl(
         otp: String,
     ): Flow<ResultWrapper<VerifyOTPResponse>> {
         return proceedFlow {
-            val emailBody = email.toRequestBody("text/plain".toMediaTypeOrNull())
-            val otpBody = otp.toRequestBody("text/plain".toMediaTypeOrNull())
+            val emailBody = createPartFromString(email)
+            val otpBody = createPartFromString(otp)
 
             dataSource.verifyOTP(emailBody, otpBody)
         }
