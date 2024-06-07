@@ -20,7 +20,6 @@
             android:name=".presentation.biodata.OrderBiodataActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.main.MainActivity"
             android:name=".presentation.splash_screen.SplashActivity"
             android:exported="true">
             <intent-filter>
