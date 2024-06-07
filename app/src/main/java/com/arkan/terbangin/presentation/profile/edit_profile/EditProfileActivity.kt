@@ -28,6 +28,9 @@ class EditProfileActivity : AppCompatActivity() {
         binding.ibBtnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+        binding.btnSaveProfile.setOnClickListener {
+            updateProfile()
+        }
     }
 
     private fun getProfile(id: String) {
@@ -69,12 +72,42 @@ class EditProfileActivity : AppCompatActivity() {
 
     private fun bindProfileData(profile: Profile) {
         profile.let {
-//            binding.ivProfileImage.load("https://image.tmdb.org/t/p/w500${it.picture}") {
-//                crossfade(true)
-//            }
+            // binding.ivProfileImage.load(it.picture) {
+            //    crossfade(true)
+            // }
             binding.tiEtName.setText(it.fullName)
             binding.tiEtEmail.setText(it.email)
             binding.tiEtPhoneNumber.setText(it.phoneNumber)
+        }
+    }
+
+    private fun updateProfile() {
+        val id = viewModel.getUserID().orEmpty()
+        val fullName = binding.tiEtName.text.toString()
+        val email = binding.tiEtEmail.text.toString()
+        val phoneNumber = binding.tiEtPhoneNumber.text.toString()
+
+//        showAlertDialog("$id\n$fullName\n$email\n$phoneNumber")
+        viewModel.updateProfile(id, fullName, email, phoneNumber, null).observe(this) { it ->
+            it.proceedWhen(
+                doOnLoading = {
+                    binding.layoutState.pbLoading.isVisible = true
+                    binding.layoutState.tvError.isVisible = false
+                    binding.profileContent.isVisible = true
+                },
+                doOnSuccess = {
+                    binding.profileContent.isVisible = true
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = false
+                    showAlertDialog("Profile updated successfully")
+                },
+                doOnError = {
+                    binding.profileContent.isVisible = false
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = true
+                    showAlertDialog(it.exception?.message.orEmpty())
+                },
+            )
         }
     }
 }
