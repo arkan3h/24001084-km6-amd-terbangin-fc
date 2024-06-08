@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.FragmentProfileBinding
@@ -33,7 +34,14 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
+        setState()
         setClickListener()
+    }
+
+    private fun setState() {
+        binding.fragmentProfileNonLogin.tvTitle.text = getString(R.string.title_tab_profile)
+        binding.layoutProfileNonLogin.isVisible = viewModel.isLoggedIn == null
+        binding.layoutProfile.isVisible = viewModel.isLoggedIn != null
     }
 
     private fun setClickListener() {
@@ -45,6 +53,9 @@ class ProfileFragment : Fragment() {
         }
         binding.llMenuLogout.setOnClickListener {
             showAlertLogoutDialog()
+        }
+        binding.fragmentProfileNonLogin.btnLogin.setOnClickListener {
+            navigateToLogin()
         }
     }
 

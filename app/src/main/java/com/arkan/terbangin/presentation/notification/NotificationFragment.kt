@@ -1,6 +1,5 @@
 package com.arkan.terbangin.presentation.notification
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.FragmentNotificationBinding
-import com.arkan.terbangin.presentation.auth.login.LoginActivity
+import com.arkan.terbangin.utils.navigateToLogin
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NotificationFragment : Fragment() {
@@ -45,13 +44,5 @@ class NotificationFragment : Fragment() {
         binding.fragmentNotificationNonLogin.btnLogin.setOnClickListener {
             navigateToLogin()
         }
-    }
-
-    private fun navigateToLogin() {
-        startActivity(
-            Intent(requireContext(), LoginActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            },
-        )
     }
 }

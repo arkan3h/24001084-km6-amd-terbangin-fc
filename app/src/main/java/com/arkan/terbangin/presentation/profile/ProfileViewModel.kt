@@ -6,6 +6,8 @@ import com.arkan.terbangin.data.repository.UserPreferenceRepository
 class ProfileViewModel(
     private val pref: UserPreferenceRepository,
 ) : ViewModel() {
+    val isLoggedIn = pref.getToken()
+
     fun doLogout() {
         pref.clearUserID()
         pref.clearToken()

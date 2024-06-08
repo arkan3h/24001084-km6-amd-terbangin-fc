@@ -1,6 +1,5 @@
 package com.arkan.terbangin.presentation.history
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +8,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.FragmentHistoryBinding
-import com.arkan.terbangin.presentation.auth.login.LoginActivity
 import com.arkan.terbangin.presentation.history.calendarfilterhistory.CalenderFilterHistoryBottomSheet
-import com.arkan.terbangin.presentation.calendarfilterhistory.CalenderFilterHistoryBottomSheet
+import com.arkan.terbangin.utils.navigateToLogin
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HistoryFragment : Fragment() {
@@ -57,13 +55,5 @@ class HistoryFragment : Fragment() {
 
     private fun gotoSearchFlightNumber() {
         HistorySearchBottomSheet().show(childFragmentManager, null)
-    }
-
-    private fun navigateToLogin() {
-        startActivity(
-            Intent(requireContext(), LoginActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            },
-        )
     }
 }

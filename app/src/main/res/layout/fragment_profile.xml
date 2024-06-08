@@ -5,132 +5,158 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="32dp"
     android:background="@drawable/bg_gradient"
     tools:context=".presentation.profile.ProfileFragment">
 
-    <TextView
-        android:id="@+id/tv_title_profile"
+    <FrameLayout
+        android:id="@+id/layout_profile_non_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="@string/title_tab_profile"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_gradient"
+        android:visibility="gone"
+        tools:visibility="visible">
 
-    <LinearLayout
-        android:id="@+id/ll_menu_edit_profile"
+        <include
+            android:id="@+id/fragment_profile_non_login"
+            layout="@layout/layout_content_state_non_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="1dp"/>
+
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_profile"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_marginTop="32dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_profile">
-
-        <ImageView
-            android:id="@+id/iv_menu_edit_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit" />
+        android:layout_height="match_parent"
+        android:paddingHorizontal="32dp"
+        android:visibility="visible"
+        tools:visibility="gone">
 
         <TextView
-            android:id="@+id/tv_menu_edit_profile"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_title_profile"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/menu_edit_profile"
-            android:textSize="16sp" />
+            android:layout_marginTop="80dp"
+            android:text="@string/title_tab_profile"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_menu_edit_profile"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_profile">
 
-    <View
-        android:id="@+id/divider_menu_edit_profile"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/gray_spacer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_menu_edit_profile" />
+            <ImageView
+                android:id="@+id/iv_menu_edit_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_edit" />
 
-    <LinearLayout
-        android:id="@+id/ll_menu_account_settings"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider_menu_edit_profile">
+            <TextView
+                android:id="@+id/tv_menu_edit_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/menu_edit_profile"
+                android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/iv_menu_profile_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_settings" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider_menu_edit_profile"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/gray_spacer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_menu_edit_profile" />
+
+        <LinearLayout
+            android:id="@+id/ll_menu_account_settings"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_menu_edit_profile">
+
+            <ImageView
+                android:id="@+id/iv_menu_profile_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_settings" />
+
+            <TextView
+                android:id="@+id/tv_menu_profile_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/menu_profile_settings"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider_menu_profile_settings"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/gray_spacer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_menu_account_settings" />
+
+        <LinearLayout
+            android:id="@+id/ll_menu_logout"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_menu_profile_settings">
+
+            <ImageView
+                android:id="@+id/iv_menu_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_logout" />
+
+            <TextView
+                android:id="@+id/tv_menu_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/menu_logout_profile"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider_menu_logout"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/gray_spacer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_menu_logout" />
 
         <TextView
-            android:id="@+id/tv_menu_profile_settings"
+            android:id="@+id/tv_login_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/menu_profile_settings"
-            android:textSize="16sp" />
+            android:layout_marginTop="32dp"
+            android:text="@string/app_version"
+            android:textColor="@color/bg_outline"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_menu_logout" />
 
-    </LinearLayout>
-
-    <View
-        android:id="@+id/divider_menu_profile_settings"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/gray_spacer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_menu_account_settings" />
-
-    <LinearLayout
-        android:id="@+id/ll_menu_logout"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider_menu_profile_settings">
-
-        <ImageView
-            android:id="@+id/iv_menu_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_logout" />
-
-        <TextView
-            android:id="@+id/tv_menu_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/menu_logout_profile"
-            android:textSize="16sp" />
-
-    </LinearLayout>
-
-    <View
-        android:id="@+id/divider_menu_logout"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/gray_spacer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_menu_logout" />
-
-    <TextView
-        android:id="@+id/tv_login_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/app_version"
-        android:textColor="@color/bg_outline"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider_menu_logout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
