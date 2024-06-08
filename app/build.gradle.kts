@@ -129,4 +129,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+
+    implementation("com.github.JahidHasanCO:SeatBookView:1.0.4")
 }

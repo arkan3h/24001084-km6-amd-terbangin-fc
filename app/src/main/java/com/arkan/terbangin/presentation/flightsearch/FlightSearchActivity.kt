@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.flight_search
+package com.arkan.terbangin.presentation.flightsearch
 
 import android.app.UiModeManager
 import android.content.Context

@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.calendardeparturedate
+package com.arkan.terbangin.presentation.home.calendar.calendarreturndate
 
 import android.os.Build
 import android.os.Bundle
@@ -10,14 +10,14 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.view.children
 import com.arkan.terbangin.R
-import com.arkan.terbangin.databinding.BottomSheetCalendarDepartureDateBinding
+import com.arkan.terbangin.databinding.BottomSheetCalendarReturnDateBinding
 import com.arkan.terbangin.databinding.ItemCalendarDayBinding
 import com.arkan.terbangin.databinding.ItemCalendarHeaderBinding
-import com.arkan.terbangin.presentation.calendarfilterhistory.getDrawableCompat
-import com.arkan.terbangin.presentation.calendarfilterhistory.makeInVisible
-import com.arkan.terbangin.presentation.calendarfilterhistory.makeVisible
-import com.arkan.terbangin.presentation.calendarfilterhistory.setTextColorRes
-import com.arkan.terbangin.presentation.calendarfilterhistory.shared.displayText
+import com.arkan.terbangin.presentation.history.calendarfilterhistory.getDrawableCompat
+import com.arkan.terbangin.presentation.history.calendarfilterhistory.makeInVisible
+import com.arkan.terbangin.presentation.history.calendarfilterhistory.makeVisible
+import com.arkan.terbangin.presentation.history.calendarfilterhistory.setTextColorRes
+import com.arkan.terbangin.presentation.history.calendarfilterhistory.shared.displayText
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.kizitonwose.calendar.core.CalendarDay
@@ -31,8 +31,8 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
-class CalendarDepartureDateBottomSheet : BottomSheetDialogFragment() {
-    private lateinit var binding: BottomSheetCalendarDepartureDateBinding
+class CalendarReturnDateBottomSheet : BottomSheetDialogFragment() {
+    private lateinit var binding: BottomSheetCalendarReturnDateBinding
     private var selectedDate: LocalDate? = null
     private var temporarySelectedDate: LocalDate? = null
     private val today = LocalDate.now()
@@ -45,7 +45,7 @@ class CalendarDepartureDateBottomSheet : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = BottomSheetCalendarDepartureDateBinding.inflate(layoutInflater, container, false)
+        binding = BottomSheetCalendarReturnDateBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -179,12 +179,12 @@ class CalendarDepartureDateBottomSheet : BottomSheetDialogFragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun bindSummaryViews() {
-        binding.tvDepartureDate.apply {
+        binding.tvReturnDate.apply {
             if (temporarySelectedDate != null) {
                 text = headerDateFormatter.format(temporarySelectedDate)
                 setTextColorRes(R.color.md_theme_onBackground)
             } else {
-                text = getString(R.string.text_pilih_tanggal_berangkat)
+                text = getString(R.string.text_pilih_tanggal_kepulangan)
                 setTextColorRes(R.color.md_theme_onBackground)
             }
         }
