@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.calendarfilterhistory.shared
+package com.arkan.terbangin.presentation.history.calendarfilterhistory.shared
 
 import android.app.Activity
 import android.content.Context

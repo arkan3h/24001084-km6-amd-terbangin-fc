@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.calendarfilterhistory
+package com.arkan.terbangin.presentation.history.calendarfilterhistory
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -12,7 +12,7 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.findViewTreeLifecycleOwner
-import com.arkan.terbangin.presentation.calendarfilterhistory.shared.StatusBarColorLifecycleObserver
+import com.arkan.terbangin.presentation.history.calendarfilterhistory.shared.StatusBarColorLifecycleObserver
 
 fun View.makeVisible() {
     visibility = View.VISIBLE

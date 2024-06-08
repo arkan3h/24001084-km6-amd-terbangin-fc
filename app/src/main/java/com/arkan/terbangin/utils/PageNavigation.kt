@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.arkan.terbangin.presentation.auth.login.LoginActivity
 import com.arkan.terbangin.presentation.auth.register.RegisterActivity
 import com.arkan.terbangin.presentation.auth.reset_password.ResetPasswordActivity
-import com.arkan.terbangin.presentation.flight_search.FlightSearchActivity
+import com.arkan.terbangin.presentation.flightsearch.FlightSearchActivity
 import com.arkan.terbangin.presentation.main.MainActivity
 import com.arkan.terbangin.presentation.profile.edit_profile.EditProfileActivity
 import com.arkan.terbangin.presentation.profile.setting_account.SettingAccountActivity

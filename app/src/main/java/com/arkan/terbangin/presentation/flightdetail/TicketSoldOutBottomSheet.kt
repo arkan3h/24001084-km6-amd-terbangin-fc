@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.detail_penerbangan
+package com.arkan.terbangin.presentation.flightdetail
 
 import android.os.Bundle
 import android.view.LayoutInflater

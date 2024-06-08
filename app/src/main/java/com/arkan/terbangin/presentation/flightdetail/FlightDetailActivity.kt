@@ -1,11 +1,11 @@
-package com.arkan.terbangin.presentation.detail_penerbangan
+package com.arkan.terbangin.presentation.flightdetail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivityDetailPenerbanganBinding
 
-class DetailPenerbanganActivity : AppCompatActivity() {
+class FlightDetailActivity : AppCompatActivity() {
     private val binding: ActivityDetailPenerbanganBinding by lazy {
         ActivityDetailPenerbanganBinding.inflate(layoutInflater)
     }

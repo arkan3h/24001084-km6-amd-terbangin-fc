@@ -4,8 +4,6 @@
     <string name="title_tab_history">Riwayat</string>
     <string name="title_tab_notification">Notifikasi</string>
     <string name="title_tab_profile">Akun</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txt_title_order_biodata">Biodata Pemesanan</string>
     <string name="txt_title_order_biodata_2">Data Diri Pemesanan</string>
     <string name="txt_full_name">Nama Lengkap:</string>
@@ -80,6 +78,7 @@
     <string name="menu_profile_settings">Pengaturan Akun</string>
     <string name="app_version">Version 1.1.0</string>
     <string name="menu_logout_profile">Keluar</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_recent_search">Pencarian Terkini</string>
     <string name="text_delete">Hapus</string>
     <string name="text_search_terminal_hint">Masukkan Kota atau Negara</string>
@@ -140,6 +139,7 @@
     <string name="text_dialog_logout">Apakah anda yakin ingin keluar?</string>
     <string name="text_pilih_tgl_kepulangan">Pilih Tanggal Kepulangan</string>
     <string name="text_tanggal_pulang">Tanggal Pulang</string>
+    <string name="text_pilih_tanggal_kepulangan">Pilih Tanggal Kepulangan</string>
     <string name="placeholder_hint_input_phone_number">085877778888</string>
     <string name="text_dialog_delete_account">Apakah anda yakin ingin menghapus akun ini?</string>
     <string name="text_kembali">Kembali</string>

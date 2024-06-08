@@ -8,8 +8,8 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.arkan.terbangin.databinding.FragmentHomeBinding
-import com.arkan.terbangin.presentation.calendardeparturedate.CalendarDepartureDateBottomSheet
-import com.arkan.terbangin.presentation.calendarreturndate.CalendarReturnDateBottomSheet
+import com.arkan.terbangin.presentation.home.calendar.calendardeparturedate.CalendarDepartureDateBottomSheet
+import com.arkan.terbangin.presentation.home.calendar.calendarreturndate.CalendarReturnDateBottomSheet
 import com.arkan.terbangin.presentation.home.class_sheet.ClassSheetFragment
 import com.arkan.terbangin.presentation.home.passengers_count.PassengersCountBottomSheet
 import com.arkan.terbangin.presentation.home.terminal_search.TerminalSearchBottomSheet
