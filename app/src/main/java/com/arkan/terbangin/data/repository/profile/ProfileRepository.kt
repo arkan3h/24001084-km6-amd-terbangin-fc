@@ -22,6 +22,8 @@ interface ProfileRepository {
         phoneNumber: String,
         picture: File?,
     ): Flow<ResultWrapper<Profile>>
+
+    fun deleteProfile(id: String): Flow<ResultWrapper<Profile>>
 }
 
 class ProfileRepositoryImpl(
@@ -53,6 +55,12 @@ class ProfileRepositoryImpl(
                 createPartFromString(phoneNumber),
                 picturePart,
             ).toProfile()
+        }
+    }
+
+    override fun deleteProfile(id: String): Flow<ResultWrapper<Profile>> {
+        return proceedFlow {
+            dataSource.deleteProfile(id).toProfile()
         }
     }
 }

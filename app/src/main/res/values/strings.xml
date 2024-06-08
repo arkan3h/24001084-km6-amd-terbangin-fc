@@ -141,4 +141,6 @@
     <string name="text_pilih_tgl_kepulangan">Pilih Tanggal Kepulangan</string>
     <string name="text_tanggal_pulang">Tanggal Pulang</string>
     <string name="placeholder_hint_input_phone_number">085877778888</string>
+    <string name="text_dialog_delete_account">Apakah anda yakin ingin menghapus akun ini?</string>
+    <string name="text_kembali">Kembali</string>
 </resources>

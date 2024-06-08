@@ -1,20 +1,19 @@
 package com.arkan.terbangin.presentation.auth.register
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivityRegisterBinding
-import com.arkan.terbangin.presentation.auth.login.LoginActivity
 import com.arkan.terbangin.presentation.auth.otp.OTPActivity
 import com.arkan.terbangin.utils.highLightWord
+import com.arkan.terbangin.utils.navigateToLogin
 import com.arkan.terbangin.utils.proceedWhen
+import com.arkan.terbangin.utils.showAlertDialog
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -170,23 +169,5 @@ class RegisterActivity : AppCompatActivity() {
         password: String,
     ) {
         OTPActivity.startActivity(this, fullName, email, phoneNumber, password)
-    }
-
-    private fun showAlertDialog(it: String) {
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage(it)
-        builder.setNegativeButton("Close") { dialog, _ ->
-            dialog.dismiss()
-        }
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
-
-    private fun navigateToLogin() {
-        startActivity(
-            Intent(this, LoginActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            },
-        )
     }
 }

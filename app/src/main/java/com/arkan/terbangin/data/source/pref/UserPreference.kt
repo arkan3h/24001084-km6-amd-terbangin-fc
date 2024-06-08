@@ -22,7 +22,7 @@ interface UserPreference {
 
     fun getUserID(): String?
 
-    fun clearIDUser()
+    fun clearUserID()
 }
 
 class UserPreferenceImpl(
@@ -56,7 +56,7 @@ class UserPreferenceImpl(
 
     override fun getUserID(): String? = pref.getString(KEY_ID_USER, null)
 
-    override fun clearIDUser() {
+    override fun clearUserID() {
         pref.edit().remove(KEY_ID_USER).apply()
     }
 

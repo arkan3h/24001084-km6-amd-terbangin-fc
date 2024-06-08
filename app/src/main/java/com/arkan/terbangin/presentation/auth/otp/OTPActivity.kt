@@ -5,13 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivityOtpBinding
-import com.arkan.terbangin.presentation.main.MainActivity
+import com.arkan.terbangin.utils.navigateToMain
 import com.arkan.terbangin.utils.proceedWhen
+import com.arkan.terbangin.utils.showAlertDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -156,24 +156,6 @@ class OTPActivity : AppCompatActivity() {
                 },
             )
         }
-    }
-
-    private fun navigateToMain() {
-        startActivity(
-            Intent(this, MainActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            },
-        )
-    }
-
-    private fun showAlertDialog(it: String) {
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage(it)
-        builder.setNegativeButton("Close") { dialog, _ ->
-            dialog.dismiss()
-        }
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
     }
 
     companion object {

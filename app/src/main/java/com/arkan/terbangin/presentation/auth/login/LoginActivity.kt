@@ -1,21 +1,20 @@
 package com.arkan.terbangin.presentation.auth.login
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivityLoginBinding
-import com.arkan.terbangin.presentation.auth.register.RegisterActivity
-import com.arkan.terbangin.presentation.auth.reset_password.ResetPasswordActivity
-import com.arkan.terbangin.presentation.main.MainActivity
 import com.arkan.terbangin.utils.highLightWord
+import com.arkan.terbangin.utils.navigateToMain
+import com.arkan.terbangin.utils.navigateToRegister
+import com.arkan.terbangin.utils.navigateToResetPassword
 import com.arkan.terbangin.utils.proceedWhen
+import com.arkan.terbangin.utils.showAlertDialog
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -123,39 +122,5 @@ class LoginActivity : AppCompatActivity() {
                 },
             )
         }
-    }
-
-    private fun showAlertDialog(it: String) {
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage(it)
-        builder.setNegativeButton("Close") { dialog, _ ->
-            dialog.dismiss()
-        }
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
-
-    private fun navigateToRegister() {
-        startActivity(
-            Intent(this, RegisterActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            },
-        )
-    }
-
-    private fun navigateToMain() {
-        startActivity(
-            Intent(this, MainActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            },
-        )
-    }
-
-    private fun navigateToResetPassword() {
-        startActivity(
-            Intent(this, ResetPasswordActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            },
-        )
     }
 }

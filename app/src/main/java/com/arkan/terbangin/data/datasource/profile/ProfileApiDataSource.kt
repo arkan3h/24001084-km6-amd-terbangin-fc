@@ -27,4 +27,8 @@ class ProfileApiDataSource(
             picture = picture,
         )
     }
+
+    override suspend fun deleteProfile(id: String): ProfileResponse {
+        return services.deleteProfile(id = id)
+    }
 }
