@@ -22,7 +22,8 @@
             tools:visibility="visible">
 
             <include
-                layout="@layout/fragment_history_non_login"
+                android:id="@+id/fragment_history_non_login"
+                layout="@layout/layout_content_state_non_login"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:elevation="1dp"/>

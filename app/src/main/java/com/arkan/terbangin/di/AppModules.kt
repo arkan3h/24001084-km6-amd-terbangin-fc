@@ -36,6 +36,7 @@ import com.arkan.terbangin.presentation.history.HistoryViewModel
 import com.arkan.terbangin.presentation.home.HomeViewModel
 import com.arkan.terbangin.presentation.home.passengers_count.PassengersCountViewModel
 import com.arkan.terbangin.presentation.main.MainViewModel
+import com.arkan.terbangin.presentation.notification.NotificationViewModel
 import com.arkan.terbangin.presentation.profile.ProfileViewModel
 import com.arkan.terbangin.presentation.profile.edit_profile.EditProfileViewModel
 import com.arkan.terbangin.presentation.profile.setting_account.SettingAccountViewModel
@@ -93,6 +94,7 @@ object AppModules {
             viewModelOf(::OTPViewModel)
             viewModelOf(::HomeViewModel)
             viewModelOf(::HistoryViewModel)
+            viewModelOf(::NotificationViewModel)
             viewModelOf(::EditProfileViewModel)
             viewModelOf(::SettingAccountViewModel)
             viewModelOf(::ProfileViewModel)
