@@ -1,6 +1,5 @@
 package com.arkan.terbangin.presentation.profile
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +9,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.FragmentProfileBinding
-import com.arkan.terbangin.presentation.auth.login.LoginActivity
-import com.arkan.terbangin.presentation.profile.edit_profile.EditProfileActivity
-import com.arkan.terbangin.presentation.profile.setting_account.SettingAccountActivity
+import com.arkan.terbangin.utils.navigateToEditProfile
+import com.arkan.terbangin.utils.navigateToLogin
+import com.arkan.terbangin.utils.navigateToSettingAccount
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
+
+    private val viewModel: ProfileViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,14 +48,6 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun navigateToEditProfile() {
-        startActivity(Intent(activity, EditProfileActivity::class.java))
-    }
-
-    private fun navigateToSettingAccount() {
-        startActivity(Intent(activity, SettingAccountActivity::class.java))
-    }
-
     private fun showAlertLogoutDialog() {
         val dialogView: View = LayoutInflater.from(context).inflate(R.layout.dialog_logout, null)
         val cancelBtn = dialogView.findViewById<Button>(R.id.btn_cancel)
@@ -70,17 +64,10 @@ class ProfileFragment : Fragment() {
 
         logoutBtn.setOnClickListener {
             dialog.dismiss()
+            viewModel.doLogout()
             navigateToLogin()
         }
 
         dialog.show()
-    }
-
-    private fun navigateToLogin() {
-        startActivity(
-            Intent(activity, LoginActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            },
-        )
     }
 }

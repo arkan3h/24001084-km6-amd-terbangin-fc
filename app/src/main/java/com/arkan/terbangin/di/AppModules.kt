@@ -35,7 +35,9 @@ import com.arkan.terbangin.presentation.auth.reset_password.ResetPasswordViewMod
 import com.arkan.terbangin.presentation.home.HomeViewModel
 import com.arkan.terbangin.presentation.home.passengers_count.PassengersCountViewModel
 import com.arkan.terbangin.presentation.main.MainViewModel
+import com.arkan.terbangin.presentation.profile.ProfileViewModel
 import com.arkan.terbangin.presentation.profile.edit_profile.EditProfileViewModel
+import com.arkan.terbangin.presentation.profile.setting_account.SettingAccountViewModel
 import com.arkan.terbangin.presentation.splash_screen.SplashViewModel
 import com.arkan.terbangin.utils.SharedPreferenceUtils
 import org.koin.android.ext.koin.androidContext
@@ -83,13 +85,17 @@ object AppModules {
         module {
             viewModelOf(::SplashViewModel)
             viewModelOf(::MainViewModel)
+            viewModelOf(::HomeViewModel)
             viewModelOf(::PassengersCountViewModel)
+            // Auth
             viewModelOf(::RegisterViewModel)
             viewModelOf(::LoginViewModel)
             viewModelOf(::ResetPasswordViewModel)
             viewModelOf(::OTPViewModel)
-            viewModelOf(::HomeViewModel)
+            // Profile
             viewModelOf(::EditProfileViewModel)
+            viewModelOf(::SettingAccountViewModel)
+            viewModelOf(::ProfileViewModel)
         }
 
     val modules =

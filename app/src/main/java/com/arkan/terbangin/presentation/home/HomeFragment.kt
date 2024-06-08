@@ -1,6 +1,5 @@
 package com.arkan.terbangin.presentation.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +10,10 @@ import androidx.fragment.app.Fragment
 import com.arkan.terbangin.databinding.FragmentHomeBinding
 import com.arkan.terbangin.presentation.calendardeparturedate.CalendarDepartureDateBottomSheet
 import com.arkan.terbangin.presentation.calendarreturndate.CalendarReturnDateBottomSheet
-import com.arkan.terbangin.presentation.flight_search.FlightSearchActivity
 import com.arkan.terbangin.presentation.home.class_sheet.ClassSheetFragment
 import com.arkan.terbangin.presentation.home.passengers_count.PassengersCountBottomSheet
 import com.arkan.terbangin.presentation.home.terminal_search.TerminalSearchBottomSheet
+import com.arkan.terbangin.utils.navigateToFlightSearch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -83,13 +82,5 @@ class HomeFragment : Fragment() {
 
     private fun selectSeatClass() {
         ClassSheetFragment().show(childFragmentManager, null)
-    }
-
-    private fun navigateToFlightSearch() {
-        startActivity(
-            Intent(activity, FlightSearchActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            },
-        )
     }
 }

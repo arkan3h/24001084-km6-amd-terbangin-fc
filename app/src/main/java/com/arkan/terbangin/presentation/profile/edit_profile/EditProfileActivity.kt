@@ -1,12 +1,12 @@
 package com.arkan.terbangin.presentation.profile.edit_profile
 
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.arkan.terbangin.data.model.Profile
 import com.arkan.terbangin.databinding.ActivityEditProfileBinding
 import com.arkan.terbangin.utils.proceedWhen
+import com.arkan.terbangin.utils.showAlertDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EditProfileActivity : AppCompatActivity() {
@@ -42,7 +42,6 @@ class EditProfileActivity : AppCompatActivity() {
                     binding.profileContent.isVisible = true
                 },
                 doOnSuccess = {
-                    binding.profileContent.isVisible = true
                     binding.layoutState.pbLoading.isVisible = false
                     binding.layoutState.tvError.isVisible = false
                     it.payload?.let { data ->
@@ -50,24 +49,12 @@ class EditProfileActivity : AppCompatActivity() {
                     }
                 },
                 doOnError = {
-                    binding.profileContent.isVisible = false
                     binding.layoutState.pbLoading.isVisible = false
                     binding.layoutState.tvError.isVisible = true
                     showAlertDialog(it.exception?.message.orEmpty())
                 },
             )
         }
-    }
-
-    private fun showAlertDialog(it: String) {
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage(it)
-        builder.setNegativeButton("Close") { dialog, _ ->
-            onBackPressedDispatcher.onBackPressed()
-            dialog.dismiss()
-        }
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
     }
 
     private fun bindProfileData(profile: Profile) {
@@ -86,8 +73,6 @@ class EditProfileActivity : AppCompatActivity() {
         val fullName = binding.tiEtName.text.toString()
         val email = binding.tiEtEmail.text.toString()
         val phoneNumber = binding.tiEtPhoneNumber.text.toString()
-
-//        showAlertDialog("$id\n$fullName\n$email\n$phoneNumber")
         viewModel.updateProfile(id, fullName, email, phoneNumber, null).observe(this) { it ->
             it.proceedWhen(
                 doOnLoading = {

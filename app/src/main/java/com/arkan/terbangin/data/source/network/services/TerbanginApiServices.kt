@@ -14,6 +14,7 @@ import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.PATCH
@@ -71,6 +72,11 @@ interface TerbanginApiServices {
         @Part("email") email: RequestBody,
         @Part("phoneNumber") phoneNumber: RequestBody,
         @Part picture: MultipartBody.Part?,
+    ): ProfileResponse
+
+    @DELETE("/api/v1/profile/id/{id}")
+    suspend fun deleteProfile(
+        @Path("id") id: String,
     ): ProfileResponse
 
     companion object {

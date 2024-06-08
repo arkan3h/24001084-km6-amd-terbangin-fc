@@ -1,9 +1,17 @@
 package com.arkan.terbangin.presentation.profile.setting_account
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivitySettingAccountBinding
+import com.arkan.terbangin.utils.navigateToLogin
+import com.arkan.terbangin.utils.proceedWhen
+import com.arkan.terbangin.utils.showAlertDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingAccountActivity : AppCompatActivity() {
@@ -25,6 +33,9 @@ class SettingAccountActivity : AppCompatActivity() {
         binding.ibBtnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+        binding.llDeleteAccount.setOnClickListener {
+            showAlertDeleteAccountDialog()
+        }
     }
 
     private fun applyUiMode() {
@@ -42,7 +53,47 @@ class SettingAccountActivity : AppCompatActivity() {
     private fun setSwitchListener() {
         binding.swDarkMode.setOnCheckedChangeListener { btn, isChecked ->
             settingAccountViewModel.setUsingDarkMode(isChecked)
-            // applyUiMode()
+            applyUiMode()
+        }
+    }
+
+    private fun showAlertDeleteAccountDialog() {
+        val dialogView: View =
+            LayoutInflater.from(this).inflate(R.layout.dialog_delete_account, null)
+        val cancelBtn = dialogView.findViewById<Button>(R.id.btn_cancel)
+        val deleteBtn = dialogView.findViewById<Button>(R.id.btn_delete_acc)
+
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setView(dialogView)
+
+        val dialog = alertDialogBuilder.create()
+
+        cancelBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        deleteBtn.setOnClickListener {
+            dialog.dismiss()
+            settingAccountViewModel.getUserID()?.let { uid ->
+                deleteProfile(uid)
+            }
+        }
+
+        dialog.show()
+    }
+
+    private fun deleteProfile(id: String) {
+        settingAccountViewModel.deleteProfile(id).observe(this) { it ->
+            it.proceedWhen(
+                doOnSuccess = {
+                    showAlertDialog("Profile deleted successfully")
+                    settingAccountViewModel.doLogout()
+                    navigateToLogin()
+                },
+                doOnError = {
+                    showAlertDialog(it.exception?.message.orEmpty())
+                },
+            )
         }
     }
 }

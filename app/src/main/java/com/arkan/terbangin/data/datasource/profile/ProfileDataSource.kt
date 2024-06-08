@@ -14,4 +14,6 @@ interface ProfileDataSource {
         phoneNumber: RequestBody,
         picture: MultipartBody.Part?,
     ): ProfileResponse
+
+    suspend fun deleteProfile(id: String): ProfileResponse
 }
