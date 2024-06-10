@@ -2,6 +2,7 @@ package com.arkan.terbangin.presentation.flightsearch
 
 import android.app.UiModeManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -10,13 +11,19 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import com.arkan.terbangin.R
+import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.databinding.ActivityFlightSearchBinding
 import com.arkan.terbangin.databinding.LayoutCalendarDaySliderBinding
+import com.arkan.terbangin.presentation.flightdetail.FlightDetailActivity
+import com.arkan.terbangin.presentation.flightsearch.adapter.FlightAdapter
+import com.arkan.terbangin.presentation.flightsearch.adapter.OnItemCLickedListener
+import com.arkan.terbangin.utils.proceedWhen
 import com.kizitonwose.calendar.core.WeekDay
 import com.kizitonwose.calendar.core.atStartOfMonth
 import com.kizitonwose.calendar.core.firstDayOfWeekFromLocale
 import com.kizitonwose.calendar.view.ViewContainer
 import com.kizitonwose.calendar.view.WeekDayBinder
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -26,6 +33,8 @@ class FlightSearchActivity : AppCompatActivity() {
     private val binding: ActivityFlightSearchBinding by lazy {
         ActivityFlightSearchBinding.inflate(layoutInflater)
     }
+    private val viewModel: FlightSearchViewModel by viewModel()
+    private var flightAdapter: FlightAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +51,7 @@ class FlightSearchActivity : AppCompatActivity() {
         window.statusBarColor = this.resources.getColor(R.color.md_theme_primary, theme)
         setDaySlider()
         setClickListener()
+        getFlightData()
     }
 
     private fun setDaySlider() {
@@ -103,5 +113,57 @@ class FlightSearchActivity : AppCompatActivity() {
         binding.layoutAppBar.ibBtnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+    }
+
+    private fun getFlightData() {
+        viewModel.getAllFlight().observe(this) { it ->
+            it.proceedWhen(
+                doOnLoading = {
+                    binding.layoutState.pbLoading.isVisible = true
+                    binding.layoutState.tvError.isVisible = false
+                    binding.rvDestination.isVisible = false
+                },
+                doOnError = {
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = true
+                    binding.rvDestination.isVisible = false
+                },
+                doOnSuccess = {
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = false
+                    binding.rvDestination.isVisible = true
+                    it.payload?.let { data ->
+                        bindFlightList(data)
+                    }
+                },
+                doOnEmpty = {
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = true
+                    binding.rvDestination.isVisible = false
+                },
+            )
+        }
+    }
+
+    private fun bindFlightList(data: List<Flight>) {
+        flightAdapter =
+            FlightAdapter(
+                listener =
+                    object : OnItemCLickedListener<Flight> {
+                        override fun onItemClicked(item: Flight) {
+                            navigateToFlightDetail(item)
+                        }
+                    },
+            )
+        binding.rvDestination.adapter = this.flightAdapter
+        flightAdapter?.submitData(data)
+    }
+
+    fun navigateToFlightDetail(item: Flight) {
+        startActivity(
+            Intent(this, FlightDetailActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            },
+        )
     }
 }

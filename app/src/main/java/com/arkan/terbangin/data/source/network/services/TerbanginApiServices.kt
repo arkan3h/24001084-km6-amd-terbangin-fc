@@ -6,6 +6,7 @@ import com.arkan.terbangin.data.source.network.model.auth.otp.request_otp.Reques
 import com.arkan.terbangin.data.source.network.model.auth.otp.verify_otp.VerifyOTPResponse
 import com.arkan.terbangin.data.source.network.model.auth.register.RegisterResponse
 import com.arkan.terbangin.data.source.network.model.auth.resetpassword.ResetPasswordResponse
+import com.arkan.terbangin.data.source.network.model.flight.FlightResponse
 import com.arkan.terbangin.data.source.network.model.profile.ProfileResponse
 import com.arkan.terbangin.data.source.pref.UserPreference
 import okhttp3.MultipartBody
@@ -78,6 +79,9 @@ interface TerbanginApiServices {
     suspend fun deleteProfile(
         @Path("id") id: String,
     ): ProfileResponse
+
+    @GET("/api/v1/flight")
+    suspend fun getAllFlight(): FlightResponse
 
     companion object {
         @JvmStatic
