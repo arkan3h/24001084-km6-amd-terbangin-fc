@@ -9,6 +9,8 @@ import com.arkan.terbangin.data.datasource.auth.register.RegisterApiDataSource
 import com.arkan.terbangin.data.datasource.auth.register.RegisterDataSource
 import com.arkan.terbangin.data.datasource.auth.resetpassword.ResetPasswordApiDataSource
 import com.arkan.terbangin.data.datasource.auth.resetpassword.ResetPasswordDataSource
+import com.arkan.terbangin.data.datasource.flight.FlightApiDataSource
+import com.arkan.terbangin.data.datasource.flight.FlightDataSource
 import com.arkan.terbangin.data.datasource.preference.PreferenceDataSource
 import com.arkan.terbangin.data.datasource.preference.UserPreferenceDataSource
 import com.arkan.terbangin.data.datasource.profile.ProfileApiDataSource
@@ -23,6 +25,8 @@ import com.arkan.terbangin.data.repository.auth.RegisterRepository
 import com.arkan.terbangin.data.repository.auth.RegisterRepositoryImpl
 import com.arkan.terbangin.data.repository.auth.ResetPasswordRepository
 import com.arkan.terbangin.data.repository.auth.ResetPasswordRepositoryImpl
+import com.arkan.terbangin.data.repository.flight.FlightRepository
+import com.arkan.terbangin.data.repository.flight.FlightRepositoryImpl
 import com.arkan.terbangin.data.repository.profile.ProfileRepository
 import com.arkan.terbangin.data.repository.profile.ProfileRepositoryImpl
 import com.arkan.terbangin.data.source.network.services.TerbanginApiServices
@@ -32,6 +36,7 @@ import com.arkan.terbangin.presentation.auth.login.LoginViewModel
 import com.arkan.terbangin.presentation.auth.otp.OTPViewModel
 import com.arkan.terbangin.presentation.auth.register.RegisterViewModel
 import com.arkan.terbangin.presentation.auth.reset_password.ResetPasswordViewModel
+import com.arkan.terbangin.presentation.flightsearch.FlightSearchViewModel
 import com.arkan.terbangin.presentation.history.HistoryViewModel
 import com.arkan.terbangin.presentation.home.HomeViewModel
 import com.arkan.terbangin.presentation.home.passengers_count.PassengersCountViewModel
@@ -71,6 +76,7 @@ object AppModules {
             single<ResetPasswordDataSource> { ResetPasswordApiDataSource(get()) }
             single<OTPDataSource> { OTPApiDataSource(get()) }
             single<ProfileDataSource> { ProfileApiDataSource(get()) }
+            single<FlightDataSource> { FlightApiDataSource(get()) }
         }
 
     private val repository =
@@ -81,6 +87,7 @@ object AppModules {
             single<ResetPasswordRepository> { ResetPasswordRepositoryImpl(get()) }
             single<OTPRepository> { OTPRepositoryImpl(get()) }
             single<ProfileRepository> { ProfileRepositoryImpl(get()) }
+            single<FlightRepository> { FlightRepositoryImpl(get()) }
         }
 
     private val viewModelModule =
@@ -98,6 +105,7 @@ object AppModules {
             viewModelOf(::EditProfileViewModel)
             viewModelOf(::SettingAccountViewModel)
             viewModelOf(::ProfileViewModel)
+            viewModelOf(::FlightSearchViewModel)
         }
 
     val modules =

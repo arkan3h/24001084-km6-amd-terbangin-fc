@@ -144,4 +144,6 @@
     <string name="notifikasi">Notifikasi</string>
     <string name="text_dialog_delete_account">Apakah anda yakin ingin menghapus akun ini?</string>
     <string name="text_kembali">Kembali</string>
+    <string name="text_direct">Direct</string>
+    <string name="text_cheapest">Termurah</string>
 </resources>
