@@ -146,4 +146,6 @@
     <string name="text_kembali">Kembali</string>
     <string name="text_direct">Direct</string>
     <string name="text_cheapest">Termurah</string>
+    <string name="text_binding_total_passenger">%1$s Penumpang</string>
+    <string name="text_binding_airport_city">%1$s (%2$s)</string>
 </resources>
