@@ -32,7 +32,6 @@ class TicketSoldOutBottomSheet : BottomSheetDialogFragment() {
             dialog?.cancel()
         }
         binding.btnUbahPencarian.setOnClickListener {
-            // TODO
             // navigateToFlightSearch()
         }
     }

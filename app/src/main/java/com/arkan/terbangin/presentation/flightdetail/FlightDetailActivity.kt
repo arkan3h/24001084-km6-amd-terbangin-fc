@@ -8,9 +8,11 @@ import com.arkan.terbangin.R
 import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.databinding.ActivityDetailPenerbanganBinding
+import com.arkan.terbangin.presentation.biodata.OrderBiodataActivity
 import com.arkan.terbangin.utils.formatDateHourString
 import com.arkan.terbangin.utils.formatDateString
 import com.arkan.terbangin.utils.formatMinutes
+import com.arkan.terbangin.utils.navigateToLogin
 import com.arkan.terbangin.utils.toIndonesianFormat
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -38,8 +40,16 @@ class FlightDetailActivity : AppCompatActivity() {
 
     private fun setClickListener() {
         binding.layoutTotalPrice.btnChoose.setOnClickListener {
-            // if(tiket == habis)
-            // TicketSoldOutBottomSheet().show(supportFragmentManager, null)
+            if (viewModel.isLoggedIn == null) {
+                navigateToLogin()
+            } else {
+//                TicketSoldOutBottomSheet().show(supportFragmentManager, null)
+                navigateToOrderBiodata(
+                    viewModel.flight!!,
+                    viewModel.params!!,
+                    viewModel.totalPrice!!,
+                )
+            }
             // else
             // TODO
         }
@@ -91,6 +101,19 @@ class FlightDetailActivity : AppCompatActivity() {
                 viewModel.flight?.endAirportName,
                 viewModel.flight?.endAirportTerminal,
             )
+    }
+
+    private fun navigateToOrderBiodata(
+        item: Flight,
+        extras: FlightSearchParams,
+        totalPrice: Double,
+    ) {
+        OrderBiodataActivity.startActivity(
+            this,
+            extras,
+            item,
+            totalPrice,
+        )
     }
 
     companion object {

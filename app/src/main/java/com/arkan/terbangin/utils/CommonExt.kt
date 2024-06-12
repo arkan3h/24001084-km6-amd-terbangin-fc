@@ -12,7 +12,6 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.Fragment
 import java.text.SimpleDateFormat
 import java.util.Locale
-import java.util.TimeZone
 
 val Number.toPx
     get() =
@@ -54,10 +53,9 @@ fun Context.hideKeyboard(view: View) {
 }
 
 fun formatDateHourString(dateString: String): String {
-    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-    inputFormat.timeZone = TimeZone.getTimeZone("UTC")
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale("id", "ID"))
 
-    val outputFormat = SimpleDateFormat("HH.mm", Locale.getDefault())
+    val outputFormat = SimpleDateFormat("HH.mm", Locale("id", "ID"))
 
     val date = inputFormat.parse(dateString)
 
@@ -65,10 +63,9 @@ fun formatDateHourString(dateString: String): String {
 }
 
 fun formatDateString(dateString: String): String {
-    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-    inputFormat.timeZone = TimeZone.getTimeZone("UTC")
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale("id", "ID"))
 
-    val outputFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+    val outputFormat = SimpleDateFormat("dd MMMM yyyy", Locale("id", "ID"))
 
     val date = inputFormat.parse(dateString)
 
