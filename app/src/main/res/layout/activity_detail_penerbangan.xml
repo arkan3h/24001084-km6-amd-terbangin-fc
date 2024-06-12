@@ -53,6 +53,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_flight_destination">
 
                 <include
+                    android:id="@+id/layout_checkout_detail"
                     layout="@layout/item_checkout_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

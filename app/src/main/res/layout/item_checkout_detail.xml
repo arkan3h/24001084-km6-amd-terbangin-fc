@@ -55,7 +55,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Keberangkatan" />
+            android:text="@string/text_departure" />
 
         <View
             android:id="@+id/v_spacer_1"
@@ -112,7 +112,7 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                tools:text="Informasi:" />
+                android:text="@string/text_information" />
 
             <TextView
                 android:id="@+id/tv_baggage_capacity"
@@ -193,7 +193,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/v_spacer_2"
-            tools:text="Kedatangan" />
+            android:text="@string/text_arrival" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

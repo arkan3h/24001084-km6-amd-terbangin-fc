@@ -8,15 +8,16 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.arkan.terbangin.R
 import com.arkan.terbangin.data.model.AirportCity
+import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.data.model.TicketClass
 import com.arkan.terbangin.databinding.FragmentHomeBinding
+import com.arkan.terbangin.presentation.flightsearch.FlightSearchActivity
 import com.arkan.terbangin.presentation.home.calendar.calendardeparturedate.CalendarDepartureDateBottomSheet
 import com.arkan.terbangin.presentation.home.calendar.calendarreturndate.CalendarReturnDateBottomSheet
 import com.arkan.terbangin.presentation.home.class_sheet.ClassSheetFragment
 import com.arkan.terbangin.presentation.home.common.SaveButtonClickListener
 import com.arkan.terbangin.presentation.home.passengers_count.PassengersCountBottomSheet
 import com.arkan.terbangin.presentation.home.terminal_search.TerminalSearchBottomSheet
-import com.arkan.terbangin.utils.navigateToFlightSearch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDate
 
@@ -58,7 +59,17 @@ class HomeFragment : Fragment(), SaveButtonClickListener {
             selectSeatClass()
         }
         binding.layoutSearchHome.btnSearchFlight.setOnClickListener {
-            navigateToFlightSearch()
+            navigateToFlightSearch(
+                viewModel.adultQty.value!!,
+                viewModel.childrenQty.value!!,
+                viewModel.babyQty.value!!,
+                viewModel.totalQty.value!!,
+                viewModel.ticketClass.value!!,
+                viewModel.departureDate.value.toString(),
+                viewModel.returnDate.value.toString(),
+                viewModel.departureCity.value!!,
+                viewModel.destinationCity.value!!,
+            )
         }
         binding.layoutSearchHome.layoutDepartureSearch.layoutDepartureSearch.setOnClickListener {
             openDepartureDate()
@@ -124,6 +135,35 @@ class HomeFragment : Fragment(), SaveButtonClickListener {
         viewModel.destinationCity.observe(viewLifecycleOwner) { city ->
             binding.layoutSearchHome.tvFlightTo.text = getString(R.string.text_binding_airport_city, city.name, city.code)
         }
+    }
+
+    private fun navigateToFlightSearch(
+        adultQty: Int,
+        childrenQty: Int,
+        babyQty: Int,
+        totalQty: Int,
+        ticketClass: TicketClass,
+        departureDate: String,
+        returnDate: String?,
+        departureCity: AirportCity,
+        destinationCity: AirportCity,
+    ) {
+        val params =
+            FlightSearchParams(
+                adultQty,
+                childrenQty,
+                babyQty,
+                totalQty,
+                ticketClass,
+                departureDate,
+                returnDate,
+                departureCity,
+                destinationCity,
+            )
+        FlightSearchActivity.startActivity(
+            requireContext(),
+            params,
+        )
     }
 
     override fun onPassengersCountUpdated(

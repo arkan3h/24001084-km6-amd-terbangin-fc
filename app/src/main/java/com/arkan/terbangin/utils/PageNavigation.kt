@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import com.arkan.terbangin.presentation.auth.login.LoginActivity
 import com.arkan.terbangin.presentation.auth.register.RegisterActivity
 import com.arkan.terbangin.presentation.auth.reset_password.ResetPasswordActivity
-import com.arkan.terbangin.presentation.flightsearch.FlightSearchActivity
 import com.arkan.terbangin.presentation.main.MainActivity
 import com.arkan.terbangin.presentation.profile.edit_profile.EditProfileActivity
 import com.arkan.terbangin.presentation.profile.setting_account.SettingAccountActivity
@@ -49,14 +48,6 @@ fun Fragment.navigateToLogin() {
     startActivity(
         Intent(activity, LoginActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        },
-    )
-}
-
-fun Fragment.navigateToFlightSearch() {
-    startActivity(
-        Intent(activity, FlightSearchActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
         },
     )
 }

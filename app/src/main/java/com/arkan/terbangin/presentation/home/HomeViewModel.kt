@@ -7,7 +7,7 @@ import com.arkan.terbangin.data.model.AirportCity
 import com.arkan.terbangin.data.model.TicketClass
 import java.time.LocalDate
 
-class HomeViewModel() : ViewModel() {
+class HomeViewModel : ViewModel() {
     private val _adultQty = MutableLiveData<Int>()
     val adultQty: LiveData<Int> get() = _adultQty
 

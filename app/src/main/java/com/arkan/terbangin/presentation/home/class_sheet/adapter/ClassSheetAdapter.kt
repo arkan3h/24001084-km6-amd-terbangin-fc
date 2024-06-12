@@ -19,7 +19,7 @@ class ClassSheetAdapter(
             isSelected: Boolean,
         ) {
             binding.rbItemClass.text = ticketClass.name
-            binding.tvItemClassPrice.text = ticketClass.price
+//            binding.tvItemClassPrice.text = ticketClass.price
             binding.rbItemClass.isChecked = isSelected
             binding.root.setOnClickListener {
                 listener.onItemClick(ticketClass)

@@ -1,5 +1,9 @@
 package com.arkan.terbangin.data.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Flight(
     val airlineAdditionals: String,
     val airlineBaggage: Int,
@@ -32,4 +36,4 @@ data class Flight(
     val startAirportPicture: String,
     val startAirportTerminal: String,
     val startAirportId: String,
-)
+) : Parcelable
