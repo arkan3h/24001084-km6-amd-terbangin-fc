@@ -6,6 +6,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.view.children
@@ -18,6 +19,8 @@ import com.arkan.terbangin.presentation.history.calendarfilterhistory.makeInVisi
 import com.arkan.terbangin.presentation.history.calendarfilterhistory.makeVisible
 import com.arkan.terbangin.presentation.history.calendarfilterhistory.setTextColorRes
 import com.arkan.terbangin.presentation.history.calendarfilterhistory.shared.displayText
+import com.arkan.terbangin.presentation.home.common.SaveButtonClickListener
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.kizitonwose.calendar.core.CalendarDay
@@ -30,15 +33,17 @@ import com.kizitonwose.calendar.view.ViewContainer
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class CalendarReturnDateBottomSheet : BottomSheetDialogFragment() {
     private lateinit var binding: BottomSheetCalendarReturnDateBinding
     private var selectedDate: LocalDate? = null
     private var temporarySelectedDate: LocalDate? = null
     private val today = LocalDate.now()
+    var listener: SaveButtonClickListener? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private val headerDateFormatter = DateTimeFormatter.ofPattern("EEEE, d MMMM")
+    private val headerDateFormatter = DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy", Locale("id", "ID"))
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,24 +59,50 @@ class CalendarReturnDateBottomSheet : BottomSheetDialogFragment() {
         view: View,
         savedInstanceState: Bundle?,
     ) {
+        setFullScreen()
         super.onViewCreated(view, savedInstanceState)
+        setClickListener()
         setupData()
+        bindSummaryViews()
+    }
 
+    private fun setClickListener() {
         binding.ivClose.setOnClickListener {
             dialog?.cancel()
         }
-
-        bindSummaryViews()
-
         binding.exFourSaveButton.setOnClickListener {
             if (temporarySelectedDate != null) {
                 selectedDate = temporarySelectedDate
-                val text = "Selected: ${DateTimeFormatter.ofPattern("d MMMM yyyy").format(selectedDate)}"
-                Snackbar.make(requireView(), text, Snackbar.LENGTH_SHORT).show()
+                listener?.onDateReturnSelected(selectedDate!!)
                 parentFragmentManager.popBackStack()
+                dialog?.dismiss()
             } else {
                 Snackbar.make(requireView(), "No date selected", Snackbar.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun setFullScreen() {
+        val bottomSheet: FrameLayout = dialog?.findViewById(com.google.android.material.R.id.design_bottom_sheet)!!
+        bottomSheet.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+        val behavior = BottomSheetBehavior.from(bottomSheet)
+        behavior.apply {
+            peekHeight = resources.displayMetrics.heightPixels
+            state = BottomSheetBehavior.STATE_EXPANDED
+            isDraggable = false
+            addBottomSheetCallback(
+                object : BottomSheetBehavior.BottomSheetCallback() {
+                    override fun onStateChanged(
+                        bottomSheet: View,
+                        newState: Int,
+                    ) {}
+
+                    override fun onSlide(
+                        bottomSheet: View,
+                        slideOffset: Float,
+                    ) {}
+                },
+            )
         }
     }
 
