@@ -148,4 +148,13 @@
     <string name="text_cheapest">Termurah</string>
     <string name="text_binding_total_passenger">%1$s Penumpang</string>
     <string name="text_binding_airport_city">%1$s (%2$s)</string>
+    <string name="text_binding_flight_search_title"><![CDATA[%1$s > %2$s - %3$s Penumpang - %4$s]]></string>
+    <string name="text_arrival">Kedatangan</string>
+    <string name="text_information">Informasi:</string>
+    <string name="binding_flight_destination_detail"><![CDATA[%1$s -> %2$s]]></string>
+    <string name="binding_airport_origin_detail">%1$s - %2$s</string>
+    <string name="binding_airline_name_detail">%1$s - %2$s</string>
+    <string name="binding_baggage_capacity_detail">Baggage %1$s kg</string>
+    <string name="binding_cabin_baggage_capacity_detail">Cabin Baggage %1$s kg</string>
+    <string name="binding_airport_destination_origin">%1$s - %2$s</string>
 </resources>

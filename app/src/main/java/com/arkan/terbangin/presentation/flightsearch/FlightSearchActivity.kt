@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import com.arkan.terbangin.R
 import com.arkan.terbangin.base.OnItemCLickedListener
 import com.arkan.terbangin.data.model.Flight
+import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.databinding.ActivityFlightSearchBinding
 import com.arkan.terbangin.databinding.LayoutCalendarDaySliderBinding
 import com.arkan.terbangin.presentation.flightdetail.FlightDetailActivity
@@ -24,6 +25,7 @@ import com.kizitonwose.calendar.core.firstDayOfWeekFromLocale
 import com.kizitonwose.calendar.view.ViewContainer
 import com.kizitonwose.calendar.view.WeekDayBinder
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -33,7 +35,9 @@ class FlightSearchActivity : AppCompatActivity() {
     private val binding: ActivityFlightSearchBinding by lazy {
         ActivityFlightSearchBinding.inflate(layoutInflater)
     }
-    private val viewModel: FlightSearchViewModel by viewModel()
+    private val viewModel: FlightSearchViewModel by viewModel {
+        parametersOf(intent.extras)
+    }
     private var flightAdapter: FlightAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +54,7 @@ class FlightSearchActivity : AppCompatActivity() {
         ViewCompat.getWindowInsetsController(window.decorView)?.isAppearanceLightStatusBars = isDarkTheme
         window.statusBarColor = this.resources.getColor(R.color.md_theme_primary, theme)
         setDaySlider()
+        observeViewModel()
         setClickListener()
         getFlightData()
     }
@@ -109,6 +114,17 @@ class FlightSearchActivity : AppCompatActivity() {
         binding.cvDaySlider.scrollToDate(LocalDate.now())
     }
 
+    private fun observeViewModel() {
+        binding.layoutAppBar.tvAppbarTitle.text =
+            getString(
+                R.string.text_binding_flight_search_title,
+                viewModel.extras?.departureCity?.code,
+                viewModel.extras?.destinationCity?.code,
+                viewModel.extras?.totalQty.toString(),
+                viewModel.extras?.ticketClass?.name,
+            )
+    }
+
     private fun setClickListener() {
         binding.layoutAppBar.ibBtnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -151,19 +167,40 @@ class FlightSearchActivity : AppCompatActivity() {
                 listener =
                     object : OnItemCLickedListener<Flight> {
                         override fun onItemClicked(item: Flight) {
-                            navigateToFlightDetail(item)
+                            navigateToFlightDetail(item, viewModel.extras!!, viewModel.totalPrice.value!!)
                         }
                     },
+                viewModel,
+                viewModel.extras?.totalQty!!,
+                viewModel.extras?.ticketClass!!.name,
             )
         binding.rvDestination.adapter = this.flightAdapter
         flightAdapter?.submitData(data)
     }
 
-    fun navigateToFlightDetail(item: Flight) {
-        startActivity(
-            Intent(this, FlightDetailActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            },
+    fun navigateToFlightDetail(
+        item: Flight,
+        extras: FlightSearchParams,
+        totalPrice: Double,
+    ) {
+        FlightDetailActivity.startActivity(
+            this,
+            extras,
+            item,
+            totalPrice,
         )
+    }
+
+    companion object {
+        const val EXTRA_FLIGHT_SEARCH_PARAMS = "EXTRA_FLIGHT_SEARCH_PARAMS"
+
+        fun startActivity(
+            context: Context,
+            params: FlightSearchParams,
+        ) {
+            val intent = Intent(context, FlightSearchActivity::class.java)
+            intent.putExtra(EXTRA_FLIGHT_SEARCH_PARAMS, params)
+            context.startActivity(intent)
+        }
     }
 }

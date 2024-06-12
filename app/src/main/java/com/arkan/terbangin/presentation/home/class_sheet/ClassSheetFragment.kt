@@ -42,7 +42,6 @@ class ClassSheetFragment : BottomSheetDialogFragment() {
             ClassSheetAdapter(
                 listOf(
                     TicketClass("Economy", "IDR 200.000"),
-                    TicketClass("Premium Economy", "IDR 300.000"),
                     TicketClass("Business", "IDR 500.000"),
                     TicketClass("First Class", "IDR 800.000"),
                 ),
