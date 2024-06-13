@@ -177,10 +177,9 @@ class FlightSearchActivity : AppCompatActivity(), FilterClickListener {
                 listener =
                     object : OnItemCLickedListener<Flight> {
                         override fun onItemClicked(item: Flight) {
-                            navigateToFlightDetail(item, viewModel.extras!!, viewModel.totalPrice.value!!)
+                            navigateToFlightDetail(item, viewModel.extras!!)
                         }
                     },
-                viewModel,
                 viewModel.extras?.totalQty!!,
                 viewModel.extras?.ticketClass!!.name,
             )
@@ -197,13 +196,11 @@ class FlightSearchActivity : AppCompatActivity(), FilterClickListener {
     fun navigateToFlightDetail(
         item: Flight,
         extras: FlightSearchParams,
-        totalPrice: Double,
     ) {
         FlightDetailActivity.startActivity(
             this,
             extras,
             item,
-            totalPrice,
         )
     }
 
