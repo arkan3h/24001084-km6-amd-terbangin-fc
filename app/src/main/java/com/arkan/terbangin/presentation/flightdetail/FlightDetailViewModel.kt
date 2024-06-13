@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.data.model.FlightSearchParams
-import com.arkan.terbangin.data.repository.UserPreferenceRepository
+import com.arkan.terbangin.data.repository.pref.UserPreferenceRepository
 
 class FlightDetailViewModel(
     extras: Bundle?,

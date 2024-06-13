@@ -10,7 +10,7 @@ import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.databinding.ItemFlightListBinding
 import com.arkan.terbangin.presentation.flightsearch.FlightSearchViewModel
 import com.arkan.terbangin.utils.formatDateHourString
-import com.arkan.terbangin.utils.formatMinutes
+import com.arkan.terbangin.utils.formatHours
 import com.arkan.terbangin.utils.toIndonesianFormat
 
 class FlightAdapter(
@@ -81,7 +81,7 @@ class FlightAdapter(
             var totalPrice = 0.0
             binding.tvTakeoffTime.text = formatDateHourString(item.departureAt)
             binding.tvTakeoffPlace.text = item.startAirportCity
-            binding.tvFlightDuration.text = formatMinutes(item.duration)
+            binding.tvFlightDuration.text = formatHours(item.duration)
             binding.tvLandingTime.text = formatDateHourString(item.arrivalAt)
             binding.tvLandingPlace.text = item.endAirportCity
             binding.tvAirlineName.text = item.airlineName

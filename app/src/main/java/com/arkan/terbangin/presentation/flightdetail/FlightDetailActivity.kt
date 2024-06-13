@@ -11,7 +11,7 @@ import com.arkan.terbangin.databinding.ActivityDetailPenerbanganBinding
 import com.arkan.terbangin.presentation.biodata.OrderBiodataActivity
 import com.arkan.terbangin.utils.formatDateHourString
 import com.arkan.terbangin.utils.formatDateString
-import com.arkan.terbangin.utils.formatMinutes
+import com.arkan.terbangin.utils.formatHours
 import com.arkan.terbangin.utils.toIndonesianFormat
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -62,7 +62,7 @@ class FlightDetailActivity : AppCompatActivity() {
                 viewModel.flight?.startAirportCity,
                 viewModel.flight?.endAirportCity,
             )
-        binding.tvFlightDuration.text = formatMinutes(viewModel.flight?.duration!!)
+        binding.tvFlightDuration.text = formatHours(viewModel.flight?.duration!!)
         binding.layoutTotalPrice.tvTotalPrice.text = viewModel.totalPrice.toIndonesianFormat()
         binding.layoutCheckoutDetail.tvTakeoffTime.text = formatDateHourString(viewModel.flight?.departureAt!!)
         binding.layoutCheckoutDetail.tvTakeoffDate.text = formatDateString(viewModel.flight?.departureAt!!)

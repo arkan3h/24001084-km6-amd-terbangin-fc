@@ -3,5 +3,10 @@ package com.arkan.terbangin.data.datasource.flight
 import com.arkan.terbangin.data.source.network.model.flight.FlightResponse
 
 interface FlightDataSource {
-    suspend fun getAllFlight(): FlightResponse
+    suspend fun getAllFlight(
+        start: String,
+        end: String,
+        filter: String,
+        order: String,
+    ): FlightResponse
 }

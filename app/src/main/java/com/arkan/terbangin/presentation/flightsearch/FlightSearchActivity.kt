@@ -222,5 +222,6 @@ class FlightSearchActivity : AppCompatActivity(), FilterClickListener {
 
     override fun onFilterSelected(filter: FilterList) {
         viewModel.filterList(filter)
+        getFlightData()
     }
 }

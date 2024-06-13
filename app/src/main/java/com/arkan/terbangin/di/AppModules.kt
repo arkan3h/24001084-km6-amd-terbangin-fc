@@ -17,10 +17,8 @@ import com.arkan.terbangin.data.datasource.preference.PreferenceDataSource
 import com.arkan.terbangin.data.datasource.preference.UserPreferenceDataSource
 import com.arkan.terbangin.data.datasource.profile.ProfileApiDataSource
 import com.arkan.terbangin.data.datasource.profile.ProfileDataSource
-import com.arkan.terbangin.data.repository.AirportCityRepository
-import com.arkan.terbangin.data.repository.AirportCityRepositoryImpl
-import com.arkan.terbangin.data.repository.UserPreferenceRepository
-import com.arkan.terbangin.data.repository.UserPreferenceRepositoryImpl
+import com.arkan.terbangin.data.repository.airport.AirportCityRepository
+import com.arkan.terbangin.data.repository.airport.AirportCityRepositoryImpl
 import com.arkan.terbangin.data.repository.auth.LoginRepository
 import com.arkan.terbangin.data.repository.auth.LoginRepositoryImpl
 import com.arkan.terbangin.data.repository.auth.OTPRepository
@@ -31,6 +29,8 @@ import com.arkan.terbangin.data.repository.auth.ResetPasswordRepository
 import com.arkan.terbangin.data.repository.auth.ResetPasswordRepositoryImpl
 import com.arkan.terbangin.data.repository.flight.FlightRepository
 import com.arkan.terbangin.data.repository.flight.FlightRepositoryImpl
+import com.arkan.terbangin.data.repository.pref.UserPreferenceRepository
+import com.arkan.terbangin.data.repository.pref.UserPreferenceRepositoryImpl
 import com.arkan.terbangin.data.repository.profile.ProfileRepository
 import com.arkan.terbangin.data.repository.profile.ProfileRepositoryImpl
 import com.arkan.terbangin.data.source.network.services.TerbanginApiServices
@@ -86,7 +86,7 @@ object AppModules {
             single<OTPDataSource> { OTPApiDataSource(get()) }
             single<ProfileDataSource> { ProfileApiDataSource(get()) }
             single<FlightDataSource> { FlightApiDataSource(get()) }
-            single<AirportCityDataSource> { AirportCityDataSourceImpl() }
+            single<AirportCityDataSource> { AirportCityDataSourceImpl(get()) }
         }
 
     private val repository =

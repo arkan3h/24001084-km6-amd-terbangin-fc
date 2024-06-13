@@ -8,15 +8,25 @@ import com.arkan.terbangin.utils.proceedFlow
 import kotlinx.coroutines.flow.Flow
 
 interface FlightRepository {
-    fun getAllFlight(): Flow<ResultWrapper<List<Flight>>>
+    fun getAllFlight(
+        start: String,
+        end: String,
+        filter: String,
+        order: String,
+    ): Flow<ResultWrapper<List<Flight>>>
 }
 
 class FlightRepositoryImpl(
     private val dataSource: FlightDataSource,
 ) : FlightRepository {
-    override fun getAllFlight(): Flow<ResultWrapper<List<Flight>>> {
+    override fun getAllFlight(
+        start: String,
+        end: String,
+        filter: String,
+        order: String,
+    ): Flow<ResultWrapper<List<Flight>>> {
         return proceedFlow {
-            dataSource.getAllFlight().data.toFlight()
+            dataSource.getAllFlight(start, end, filter, order).data.toFlight()
         }
     }
 }

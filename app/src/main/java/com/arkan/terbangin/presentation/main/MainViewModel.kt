@@ -1,7 +1,7 @@
 package com.arkan.terbangin.presentation.main
 
 import androidx.lifecycle.ViewModel
-import com.arkan.terbangin.data.repository.UserPreferenceRepository
+import com.arkan.terbangin.data.repository.pref.UserPreferenceRepository
 
 class MainViewModel(
     private val userPreferenceRepository: UserPreferenceRepository,

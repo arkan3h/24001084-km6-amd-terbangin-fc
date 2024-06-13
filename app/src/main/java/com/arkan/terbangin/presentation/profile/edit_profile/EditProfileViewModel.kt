@@ -2,7 +2,7 @@ package com.arkan.terbangin.presentation.profile.edit_profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.arkan.terbangin.data.repository.UserPreferenceRepository
+import com.arkan.terbangin.data.repository.pref.UserPreferenceRepository
 import com.arkan.terbangin.data.repository.profile.ProfileRepository
 import kotlinx.coroutines.Dispatchers
 import java.io.File

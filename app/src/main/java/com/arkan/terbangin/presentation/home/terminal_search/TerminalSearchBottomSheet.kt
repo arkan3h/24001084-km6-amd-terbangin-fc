@@ -8,7 +8,7 @@ import android.widget.FrameLayout
 import android.widget.SearchView
 import androidx.core.view.isVisible
 import com.arkan.terbangin.base.OnItemCLickedListener
-import com.arkan.terbangin.data.model.AirportCity
+import com.arkan.terbangin.data.model.Airport
 import com.arkan.terbangin.databinding.BottomSheetTerminalSearchBinding
 import com.arkan.terbangin.presentation.home.common.HomeSaveButtonClickListener
 import com.arkan.terbangin.presentation.home.terminal_search.adapter.TerminalAdapter
@@ -139,13 +139,13 @@ class TerminalSearchBottomSheet(
         }
     }
 
-    private fun bindAirportCityList(data: List<AirportCity>) {
+    private fun bindAirportCityList(data: List<Airport>) {
         adapter =
             TerminalAdapter(
                 context = requireContext(),
                 listener =
-                    object : OnItemCLickedListener<AirportCity> {
-                        override fun onItemClicked(item: AirportCity) {
+                    object : OnItemCLickedListener<Airport> {
+                        override fun onItemClicked(item: Airport) {
                             citySelectedListener?.onCitySelected(item, location)
                             dialog?.dismiss()
                         }

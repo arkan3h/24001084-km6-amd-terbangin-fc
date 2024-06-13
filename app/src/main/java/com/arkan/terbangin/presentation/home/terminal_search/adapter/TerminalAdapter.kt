@@ -8,34 +8,34 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.arkan.terbangin.R
 import com.arkan.terbangin.base.OnItemCLickedListener
-import com.arkan.terbangin.data.model.AirportCity
+import com.arkan.terbangin.data.model.Airport
 import com.arkan.terbangin.databinding.ItemTerminalBinding
 
 class TerminalAdapter(
     private val context: Context,
-    private val listener: OnItemCLickedListener<AirportCity>,
+    private val listener: OnItemCLickedListener<Airport>,
 ) : RecyclerView.Adapter<TerminalAdapter.AirportCityViewHolder>() {
     private val asyncDataDiffer =
         AsyncListDiffer(
             this,
-            object : DiffUtil.ItemCallback<AirportCity>() {
+            object : DiffUtil.ItemCallback<Airport>() {
                 override fun areItemsTheSame(
-                    oldItem: AirportCity,
-                    newItem: AirportCity,
+                    oldItem: Airport,
+                    newItem: Airport,
                 ): Boolean {
                     return oldItem.code == newItem.code
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: AirportCity,
-                    newItem: AirportCity,
+                    oldItem: Airport,
+                    newItem: Airport,
                 ): Boolean {
                     return oldItem.hashCode() == newItem.hashCode()
                 }
             },
         )
 
-    fun submitData(items: List<AirportCity>) {
+    fun submitData(items: List<Airport>) {
         asyncDataDiffer.submitList(items)
     }
 
@@ -66,11 +66,11 @@ class TerminalAdapter(
     class AirportCityViewHolder(
         private val context: Context,
         private val binding: ItemTerminalBinding,
-        private val listener: OnItemCLickedListener<AirportCity>,
+        private val listener: OnItemCLickedListener<Airport>,
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: AirportCity) {
-            binding.tvTerminal.text = context.getString(R.string.text_binding_airport_city, item.name, item.code)
+        fun bind(item: Airport) {
+            binding.tvTerminal.text = context.getString(R.string.text_binding_airport_city, item.city, item.code)
             itemView.setOnClickListener {
                 listener.onItemClicked(item)
             }
