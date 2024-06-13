@@ -19,7 +19,7 @@ import com.arkan.terbangin.presentation.history.calendarfilterhistory.makeInVisi
 import com.arkan.terbangin.presentation.history.calendarfilterhistory.makeVisible
 import com.arkan.terbangin.presentation.history.calendarfilterhistory.setTextColorRes
 import com.arkan.terbangin.presentation.history.calendarfilterhistory.shared.displayText
-import com.arkan.terbangin.presentation.home.common.SaveButtonClickListener
+import com.arkan.terbangin.presentation.home.common.HomeSaveButtonClickListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
@@ -40,7 +40,7 @@ class CalendarDepartureDateBottomSheet : BottomSheetDialogFragment() {
     private var selectedDate: LocalDate? = null
     private var temporarySelectedDate: LocalDate? = null
     private val today = LocalDate.now()
-    var listener: SaveButtonClickListener? = null
+    var listener: HomeSaveButtonClickListener? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     private val headerDateFormatter = DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy", Locale("id", "ID"))

@@ -16,8 +16,11 @@ import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.databinding.ActivityFlightSearchBinding
 import com.arkan.terbangin.databinding.LayoutCalendarDaySliderBinding
+import com.arkan.terbangin.model.FilterList
 import com.arkan.terbangin.presentation.flightdetail.FlightDetailActivity
 import com.arkan.terbangin.presentation.flightsearch.adapter.FlightAdapter
+import com.arkan.terbangin.presentation.flightsearch.filter_list.FilterClickListener
+import com.arkan.terbangin.presentation.flightsearch.filter_list.FilterListFragment
 import com.arkan.terbangin.utils.proceedWhen
 import com.kizitonwose.calendar.core.WeekDay
 import com.kizitonwose.calendar.core.atStartOfMonth
@@ -31,7 +34,7 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-class FlightSearchActivity : AppCompatActivity() {
+class FlightSearchActivity : AppCompatActivity(), FilterClickListener {
     private val binding: ActivityFlightSearchBinding by lazy {
         ActivityFlightSearchBinding.inflate(layoutInflater)
     }
@@ -123,11 +126,18 @@ class FlightSearchActivity : AppCompatActivity() {
                 viewModel.extras?.totalQty.toString(),
                 viewModel.extras?.ticketClass?.name,
             )
+        viewModel.filter.observe(this) { filter ->
+            binding.tvFilter.text = filter.nameFilter
+            binding.tvSort.text = filter.listFilter
+        }
     }
 
     private fun setClickListener() {
         binding.layoutAppBar.ibBtnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+        binding.btnFilter.setOnClickListener {
+            selectFilter()
         }
     }
 
@@ -178,6 +188,12 @@ class FlightSearchActivity : AppCompatActivity() {
         flightAdapter?.submitData(data)
     }
 
+    private fun selectFilter() {
+        val filterListFragment = FilterListFragment()
+        filterListFragment.listener = this
+        filterListFragment.show(supportFragmentManager, "FilterListFragment")
+    }
+
     fun navigateToFlightDetail(
         item: Flight,
         extras: FlightSearchParams,
@@ -202,5 +218,9 @@ class FlightSearchActivity : AppCompatActivity() {
             intent.putExtra(EXTRA_FLIGHT_SEARCH_PARAMS, params)
             context.startActivity(intent)
         }
+    }
+
+    override fun onFilterSelected(filter: FilterList) {
+        viewModel.filterList(filter)
     }
 }

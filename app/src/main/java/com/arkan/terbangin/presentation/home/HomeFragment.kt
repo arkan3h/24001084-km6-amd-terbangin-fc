@@ -15,13 +15,13 @@ import com.arkan.terbangin.presentation.flightsearch.FlightSearchActivity
 import com.arkan.terbangin.presentation.home.calendar.calendardeparturedate.CalendarDepartureDateBottomSheet
 import com.arkan.terbangin.presentation.home.calendar.calendarreturndate.CalendarReturnDateBottomSheet
 import com.arkan.terbangin.presentation.home.class_sheet.ClassSheetFragment
-import com.arkan.terbangin.presentation.home.common.SaveButtonClickListener
+import com.arkan.terbangin.presentation.home.common.HomeSaveButtonClickListener
 import com.arkan.terbangin.presentation.home.passengers_count.PassengersCountBottomSheet
 import com.arkan.terbangin.presentation.home.terminal_search.TerminalSearchBottomSheet
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDate
 
-class HomeFragment : Fragment(), SaveButtonClickListener {
+class HomeFragment : Fragment(), HomeSaveButtonClickListener {
     private val viewModel: HomeViewModel by viewModel()
 
     private lateinit var binding: FragmentHomeBinding

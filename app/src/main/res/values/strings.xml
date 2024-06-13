@@ -4,6 +4,17 @@
     <string name="title_tab_history">Riwayat</string>
     <string name="title_tab_notification">Notifikasi</string>
     <string name="title_tab_profile">Akun</string>
+    <string name="btn_save_filter_list">Pilih\n</string>
+    <string name="price_filter">Harga</string>
+    <string name="list_filter_1">Termurah</string>
+    <string name="list_filter_2">Paling Awal</string>
+    <string name="departure_filter">" Keberangkatan"</string>
+    <string name="departure_filter_2">Keberangkatan</string>
+    <string name="list_filer_3">Paling Akhir</string>
+    <string name="arrival_filter">Kedatangan</string>
+    <string name="arrival_filter_2">Kedatangan</string>
+    <string name="list_filter_4">Paling Awal</string>
+    <string name="list_filter_5">Paling Akhir</string>
     <string name="txt_title_order_biodata">Biodata Pemesanan</string>
     <string name="txt_title_order_biodata_2">Data Diri Pemesanan</string>
     <string name="txt_full_name">Nama Lengkap:</string>
@@ -157,4 +168,5 @@
     <string name="binding_baggage_capacity_detail">Baggage %1$s kg</string>
     <string name="binding_cabin_baggage_capacity_detail">Cabin Baggage %1$s kg</string>
     <string name="binding_airport_destination_origin">%1$s - %2$s</string>
+    <string name="list_filter">Termahal</string>
 </resources>

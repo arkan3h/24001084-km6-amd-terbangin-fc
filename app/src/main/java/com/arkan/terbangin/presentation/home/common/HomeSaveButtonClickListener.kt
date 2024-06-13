@@ -4,7 +4,7 @@ import com.arkan.terbangin.data.model.AirportCity
 import com.arkan.terbangin.data.model.TicketClass
 import java.time.LocalDate
 
-interface SaveButtonClickListener {
+interface HomeSaveButtonClickListener {
     fun onDateDepartureSelected(date: LocalDate)
 
     fun onDateReturnSelected(date: LocalDate)

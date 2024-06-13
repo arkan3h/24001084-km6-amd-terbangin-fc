@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.arkan.terbangin.databinding.BottomSheetPassengersCountBinding
-import com.arkan.terbangin.presentation.home.common.SaveButtonClickListener
+import com.arkan.terbangin.presentation.home.common.HomeSaveButtonClickListener
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PassengersCountBottomSheet : BottomSheetDialogFragment() {
     private lateinit var binding: BottomSheetPassengersCountBinding
     private val viewModel: PassengersCountViewModel by viewModel(ownerProducer = { requireParentFragment() })
-    var listener: SaveButtonClickListener? = null
+    var listener: HomeSaveButtonClickListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -9,7 +9,7 @@ import com.arkan.terbangin.data.model.TicketClass
 import com.arkan.terbangin.databinding.FragmentClassSheetBinding
 import com.arkan.terbangin.presentation.home.class_sheet.adapter.ClassSheetAdapter
 import com.arkan.terbangin.presentation.home.class_sheet.adapter.OnClassItemClickListener
-import com.arkan.terbangin.presentation.home.common.SaveButtonClickListener
+import com.arkan.terbangin.presentation.home.common.HomeSaveButtonClickListener
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -17,7 +17,7 @@ class ClassSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentClassSheetBinding
     private lateinit var classSheetAdapter: ClassSheetAdapter
     private val classSheetViewModel: ClassSheetViewModel by viewModel(ownerProducer = { requireParentFragment() })
-    var listener: SaveButtonClickListener? = null
+    var listener: HomeSaveButtonClickListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
