@@ -72,7 +72,9 @@ class FilterListFragment : BottomSheetDialogFragment() {
                 listOf(
                     FilterList(getString(R.string.price_filter), getString(R.string.list_filter_1)),
                     FilterList(getString(R.string.price_filter), getString(R.string.list_filter)),
-                    FilterList(getString(R.string.departure_filter), getString(R.string.list_filter_2)),
+                    FilterList("Durasi", "Terpendek"),
+                    FilterList("Durasi", "Terpanjang"),
+                    FilterList(getString(R.string.departure_filter_2), getString(R.string.list_filter_2)),
                     FilterList(getString(R.string.departure_filter_2), getString(R.string.list_filer_3)),
                     FilterList(getString(R.string.arrival_filter), getString(R.string.list_filter_4)),
                     FilterList(getString(R.string.arrival_filter_2), getString(R.string.list_filter_5)),

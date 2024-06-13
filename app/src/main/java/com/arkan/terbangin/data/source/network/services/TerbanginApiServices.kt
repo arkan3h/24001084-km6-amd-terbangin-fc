@@ -86,6 +86,8 @@ interface TerbanginApiServices {
     suspend fun getAllFlight(
         @Query("start") start: String,
         @Query("end") end: String,
+        @Query("filter") filter: String = "priceEconomy",
+        @Query("order") order: String = "asc",
     ): FlightResponse
 
     @GET("/api/v1/airport")

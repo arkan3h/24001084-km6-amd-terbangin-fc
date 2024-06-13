@@ -20,6 +20,8 @@ class FlightSearchViewModel(
 
     private val _filter = MutableLiveData<FilterList>()
     val filter: LiveData<FilterList> get() = _filter
+    private var filterName: String = ""
+    private var filterOrder: String = ""
 
     fun updateTotalPrice(price: Double) {
         _totalPrice.value = price
@@ -27,10 +29,49 @@ class FlightSearchViewModel(
 
     fun filterList(filter: FilterList) {
         _filter.value = filter
+        setFilterName(filter)
+        setFilterOrder(filter)
+    }
+
+    private fun setFilterName(filter: FilterList) {
+        when (filter.nameFilter) {
+            "Harga" -> {
+                when (extras?.ticketClass?.name) {
+                    "Economy" -> {
+                        filterName = "priceEconomy"
+                    }
+                    "Business" -> {
+                        filterName = "priceBussines"
+                    }
+                    "First Class" -> {
+                        filterName = "priceFirstClass"
+                    }
+                }
+            }
+            "Durasi" -> {
+                filterName = "duration"
+            }
+            "Keberangkatan" -> {
+                filterName = "departureAt"
+            }
+            "Kedatangan" -> {
+                filterName = "arrivalAt"
+            }
+        }
+    }
+
+    private fun setFilterOrder(filter: FilterList) {
+        if (filter.listFilter == "Termurah" || filter.listFilter == "Terpendek" || filter.listFilter == "Paling Awal") {
+            filterOrder = "asc"
+        } else if (filter.listFilter == "Termahal" || filter.listFilter == "Terpanjang" || filter.listFilter == "Paling Akhir") {
+            filterOrder = "desc"
+        }
     }
 
     fun getAllFlight(
         start: String = extras?.departureCity?.city.orEmpty(),
         end: String = extras?.destinationCity?.city.orEmpty(),
-    ) = flightRepository.getAllFlight(start, end).asLiveData(Dispatchers.IO)
+        filter: String = filterName,
+        order: String = filterOrder,
+    ) = flightRepository.getAllFlight(start, end, filter, order).asLiveData(Dispatchers.IO)
 }
