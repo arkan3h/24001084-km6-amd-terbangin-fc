@@ -132,11 +132,10 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="24dp"
                     android:text="@string/text_punya_nama_keluarga"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/til_name_biodata"/>
-
 
                 <com.google.android.material.materialswitch.MaterialSwitch
                     android:id="@+id/switch_ask_name_family"
