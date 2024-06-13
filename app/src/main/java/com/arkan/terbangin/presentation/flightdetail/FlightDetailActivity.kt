@@ -8,6 +8,7 @@ import com.arkan.terbangin.R
 import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.databinding.ActivityDetailPenerbanganBinding
+import com.arkan.terbangin.presentation.biodata.OrderBiodataActivity
 import com.arkan.terbangin.utils.formatDateHourString
 import com.arkan.terbangin.utils.formatDateString
 import com.arkan.terbangin.utils.formatMinutes
@@ -38,10 +39,16 @@ class FlightDetailActivity : AppCompatActivity() {
 
     private fun setClickListener() {
         binding.layoutTotalPrice.btnChoose.setOnClickListener {
-            // if(tiket == habis)
-            // TicketSoldOutBottomSheet().show(supportFragmentManager, null)
-            // else
-            // TODO
+            if (viewModel.isLoggedIn == null) {
+                NonLoginBottomSheet().show(supportFragmentManager, null)
+            } else {
+//                TicketSoldOutBottomSheet().show(supportFragmentManager, null)
+                navigateToOrderBiodata(
+                    viewModel.flight!!,
+                    viewModel.params!!,
+                    viewModel.totalPrice!!,
+                )
+            }
         }
         binding.layoutAppBar.ibBtnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -91,6 +98,19 @@ class FlightDetailActivity : AppCompatActivity() {
                 viewModel.flight?.endAirportName,
                 viewModel.flight?.endAirportTerminal,
             )
+    }
+
+    private fun navigateToOrderBiodata(
+        item: Flight,
+        extras: FlightSearchParams,
+        totalPrice: Double,
+    ) {
+        OrderBiodataActivity.startActivity(
+            this,
+            extras,
+            item,
+            totalPrice,
+        )
     }
 
     companion object {

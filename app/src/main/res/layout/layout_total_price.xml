@@ -22,7 +22,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Total" />
+            android:text="@string/text_total_price" />
 
         <TextView
             android:id="@+id/tv_total_price"

@@ -168,5 +168,6 @@
     <string name="binding_baggage_capacity_detail">Baggage %1$s kg</string>
     <string name="binding_cabin_baggage_capacity_detail">Cabin Baggage %1$s kg</string>
     <string name="binding_airport_destination_origin">%1$s - %2$s</string>
+    <string name="text_total_price">Total</string>
     <string name="list_filter">Termahal</string>
 </resources>

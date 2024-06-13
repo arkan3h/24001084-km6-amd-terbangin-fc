@@ -40,6 +40,7 @@ import com.arkan.terbangin.presentation.auth.login.LoginViewModel
 import com.arkan.terbangin.presentation.auth.otp.OTPViewModel
 import com.arkan.terbangin.presentation.auth.register.RegisterViewModel
 import com.arkan.terbangin.presentation.auth.reset_password.ResetPasswordViewModel
+import com.arkan.terbangin.presentation.biodata.OrderBiodataViewModel
 import com.arkan.terbangin.presentation.flightdetail.FlightDetailViewModel
 import com.arkan.terbangin.presentation.flightsearch.FlightSearchViewModel
 import com.arkan.terbangin.presentation.flightsearch.filter_list.FilterListViewModel
@@ -120,6 +121,7 @@ object AppModules {
             viewModelOf(::FlightSearchViewModel)
             viewModelOf(::TerminalSearchViewModel)
             viewModelOf(::FlightDetailViewModel)
+            viewModelOf(::OrderBiodataViewModel)
         }
 
     val modules =
