@@ -5,216 +5,283 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.biodata.OrderBiodataActivity">
+    tools:context=".presentation.checkout.orderbiodata.OrderBiodataActivity">
 
-    <LinearLayout
-        android:id="@+id/ll_action_bar"
+    <FrameLayout
+        android:id="@+id/fl_layout_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#2F0A3B"
-        android:elevation="8dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/ic_back" />
-
-        <TextView
-            android:id="@+id/tv_title_toolbar"
-            style="@style/TextAppearance.Material3.TitleMedium"
+        <include
+            android:id="@+id/layout_app_bar"
+            layout="@layout/layout_app_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:text="@string/txt_title_order_biodata"
-            android:textColor="@android:color/white"
-            android:textSize="16sp" />
-    </LinearLayout>
+            android:layout_height="wrap_content"/>
 
-    <LinearLayout
-        android:id="@+id/ll_action_bar_2"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/bg_shape_2"
-        android:elevation="8dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/ll_action_bar">
+    </FrameLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/txt_title_order_biodata_2"
-            android:textSize="16sp"
-            android:textColor="@color/white" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_input_action"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="-8dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/bg_shape"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/ll_action_bar_2">
+        app:cardBackgroundColor="@color/md_theme_onPrimaryContainer_highContrast"
+        app:cardElevation="32dp"
+        android:layout_margin="8dp"
+        app:layout_constraintTop_toBottomOf="@id/fl_layout_app_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cv_btn_save">
 
-        <!-- TextView Nama Lengkap -->
-        <TextView
-            android:id="@+id/tvFullNameLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/txt_full_name"
-            android:textStyle="bold"
-            android:textColor="#2F0A3B"
-            android:textSize="16sp" />
-
-        <!-- EditText Nama Lengkap -->
-        <EditText
-            android:id="@+id/etFullName"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="@string/txt_input_full_name"
-            android:padding="8dp"
-            android:background="@drawable/bg_shape_3"
-            android:textSize="12sp" />
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_outline_color_primary_thick">
 
-        <!-- LinearLayout untuk TextView dan Switch Punya Keluarga -->
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
-
-            <!-- TextView Punya Keluarga -->
             <TextView
-                android:id="@+id/tvFamilyLabel"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_title_form_order_biodata"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_family_name"
-                android:textSize="12sp" />
+                android:text="@string/txt_title_order_biodata_2"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:textColor="@color/md_theme_onPrimary"
+                android:background="@drawable/bg_rounded_top_18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- Switch Punya Keluarga -->
-            <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/switchFamily"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:scaleX="0.7"
-                android:scaleY="0.7" />
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_form_order_biodata"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-        </FrameLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="12dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="8dp">
 
-        <!-- TextView Nama Keluarga -->
-        <TextView
-            android:id="@+id/tvFamilyNameLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/txt_family_name_2"
-            android:textStyle="bold"
-            android:textColor="#2F0A3B"
-            android:textSize="16sp"
-            android:visibility="gone"
-            tools:visibility="visible"/>
+                    <TextView
+                        android:id="@+id/tv_name_order_biodata"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_nama_lengkap"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/md_theme_primary"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="12dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
-        <!-- EditText Nama Keluarga -->
-        <EditText
-            android:id="@+id/etFamilyName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="@string/txt_input_name_family"
-            android:padding="8dp"
-            android:background="@drawable/bg_shape_3"
-            android:textSize="12sp"
-            android:visibility="gone"
-            tools:visibility="visible" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_name_order_biodata"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginTop="8dp"
+                        app:boxCornerRadiusBottomEnd="16dp"
+                        app:boxCornerRadiusBottomStart="16dp"
+                        app:boxCornerRadiusTopEnd="16dp"
+                        app:boxCornerRadiusTopStart="16dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_name_order_biodata"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- TextView Nomor Telepon -->
-        <TextView
-            android:id="@+id/tvPhoneLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/txt_phone_number"
-            android:textStyle="bold"
-            android:textColor="#2F0A3B"
-            android:textSize="16sp" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/ti_et_name_order_biodata"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/text_masukkan_nama_lengkap"
+                            android:textSize="16sp"
+                            android:inputType="textPersonName"/>
 
-        <!-- EditText Nomor Telepon -->
-        <EditText
-            android:id="@+id/etPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="@string/txt_input_phone_number"
-            android:inputType="phone"
-            android:padding="8dp"
-            android:background="@drawable/bg_shape_3"
-            android:textSize="12sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- TextView Email -->
-        <TextView
-            android:id="@+id/tvEmailLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/txt_email"
-            android:textStyle="bold"
-            android:textColor="#2F0A3B"
-            android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/tv_ask_name_family"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="16dp"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/text_punya_nama_keluarga"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/til_name_order_biodata"/>
 
-        <!-- EditText Email -->
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="@string/txt_input_email"
-            android:inputType="textEmailAddress"
-            android:padding="8dp"
-            android:background="@drawable/bg_shape_3"
-            android:textSize="12sp" />
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/switch_ask_name_family"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/til_name_order_biodata"
+                        app:layout_constraintEnd_toEndOf="parent"/>
 
-    </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_name_family_order_biodata"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_nama_keluarga"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/md_theme_primary"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="24dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_ask_name_family"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
-    <LinearLayout
-        android:id="@+id/btnLayout"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_name_family_order_biodata"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginTop="8dp"
+                        app:boxCornerRadiusBottomEnd="16dp"
+                        app:boxCornerRadiusBottomStart="16dp"
+                        app:boxCornerRadiusTopEnd="16dp"
+                        app:boxCornerRadiusTopStart="16dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_name_family_order_biodata"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/ti_et_name_family_order_biodata"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/text_masukkan_nama_keluarga"
+                            android:textSize="16sp"
+                            android:inputType="textPersonName"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tv_phone_number_order_biodata"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_nomor_telepon"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/md_theme_primary"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@id/til_name_family_order_biodata"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_phone_number_order_biodata"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginTop="8dp"
+                        app:boxCornerRadiusBottomEnd="16dp"
+                        app:boxCornerRadiusBottomStart="16dp"
+                        app:boxCornerRadiusTopEnd="16dp"
+                        app:boxCornerRadiusTopStart="16dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_phone_number_order_biodata"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/ti_et_phone_number_order_biodata"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/text_masukkan_nomor_telepon"
+                            android:textSize="16sp"
+                            android:inputType="phone"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tv_email_order_biodata"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_email"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/md_theme_primary"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@id/til_phone_number_order_biodata"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_email_order_biodata"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginTop="8dp"
+                        app:boxCornerRadiusBottomEnd="16dp"
+                        app:boxCornerRadiusBottomStart="16dp"
+                        app:boxCornerRadiusTopEnd="16dp"
+                        app:boxCornerRadiusTopStart="16dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_email_order_biodata"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/ti_et_email_order_biodata"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/text_input_email"
+                            android:textSize="16sp"
+                            android:inputType="text"
+                            android:digits="0123456789@abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ._-+() "/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_btn_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:cardElevation="24dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
-
-        <Button
-            android:id="@+id/btn_save"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginTop="160dp"
-            android:text="Simpan"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:padding="8dp">
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/text_simpan"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

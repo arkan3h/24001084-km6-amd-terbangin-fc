@@ -8,7 +8,7 @@ import com.arkan.terbangin.R
 import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.databinding.ActivityDetailPenerbanganBinding
-import com.arkan.terbangin.presentation.biodata.OrderBiodataActivity
+import com.arkan.terbangin.presentation.checkout.orderbiodata.OrderBiodataActivity
 import com.arkan.terbangin.utils.formatDateHourString
 import com.arkan.terbangin.utils.formatDateString
 import com.arkan.terbangin.utils.formatHours
