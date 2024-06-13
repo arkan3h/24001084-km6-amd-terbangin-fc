@@ -8,14 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.arkan.terbangin.base.OnItemCLickedListener
 import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.databinding.ItemFlightListBinding
-import com.arkan.terbangin.presentation.flightsearch.FlightSearchViewModel
 import com.arkan.terbangin.utils.formatDateHourString
 import com.arkan.terbangin.utils.formatHours
 import com.arkan.terbangin.utils.toIndonesianFormat
 
 class FlightAdapter(
     private val listener: OnItemCLickedListener<Flight>,
-    private val flightViewModel: FlightSearchViewModel,
     private val totalQty: Int,
     private val classSeat: String,
 ) : RecyclerView.Adapter<FlightAdapter.FlightViewHolder>() {
@@ -53,7 +51,6 @@ class FlightAdapter(
                 parent,
                 false,
             ),
-            flightViewModel,
             listener,
             totalQty,
             classSeat,
@@ -71,7 +68,6 @@ class FlightAdapter(
 
     class FlightViewHolder(
         private val binding: ItemFlightListBinding,
-        private val viewModel: FlightSearchViewModel,
         private val listener: OnItemCLickedListener<Flight>,
         private val totalQty: Int,
         private val classSeat: String,
@@ -100,7 +96,6 @@ class FlightAdapter(
                 }
             }
             binding.tvFlightPrice.text = totalPrice.toIndonesianFormat()
-            viewModel.updateTotalPrice(totalPrice)
         }
     }
 }

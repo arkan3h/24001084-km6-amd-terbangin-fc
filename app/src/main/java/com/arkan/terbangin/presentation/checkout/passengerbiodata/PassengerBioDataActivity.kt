@@ -1,6 +1,8 @@
 package com.arkan.terbangin.presentation.checkout.passengerbiodata
 
 import android.app.DatePickerDialog
+import android.content.Context
+import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.widget.AdapterView
@@ -9,6 +11,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.arkan.terbangin.R
+import com.arkan.terbangin.data.model.Flight
+import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.databinding.ActivityPassengerBiodataBinding
 import com.arkan.terbangin.databinding.ItemPassengerBiodataBinding
 
@@ -120,5 +124,24 @@ class PassengerBioDataActivity : AppCompatActivity() {
                 val itemSelected = adapterView.getItemAtPosition(i)
                 Toast.makeText(this, "Item : $itemSelected", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    companion object {
+        const val EXTRA_FLIGHT_SEARCH_PARAMS = "EXTRA_FLIGHT_SEARCH_PARAMS"
+        const val EXTRA_FLIGHT = "EXTRA_FLIGHT"
+        const val EXTRA_TOTAL_PRICE = "EXTRA_TOTAL_PRICE"
+
+        fun startActivity(
+            context: Context,
+            params: FlightSearchParams,
+            flight: Flight,
+            totalPrice: Double,
+        ) {
+            val intent = Intent(context, PassengerBioDataActivity::class.java)
+            intent.putExtra(EXTRA_FLIGHT_SEARCH_PARAMS, params)
+            intent.putExtra(EXTRA_FLIGHT, flight)
+            intent.putExtra(EXTRA_TOTAL_PRICE, totalPrice)
+            context.startActivity(intent)
+        }
     }
 }

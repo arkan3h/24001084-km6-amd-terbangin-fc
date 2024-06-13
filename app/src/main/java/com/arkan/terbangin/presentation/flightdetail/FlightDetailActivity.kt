@@ -27,9 +27,9 @@ class FlightDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         setAppBarTitle()
         setClickListener()
+        viewModel.getTotalPrice()
         bindView()
     }
 
@@ -46,7 +46,7 @@ class FlightDetailActivity : AppCompatActivity() {
                 navigateToOrderBiodata(
                     viewModel.flight!!,
                     viewModel.params!!,
-                    viewModel.totalPrice!!,
+                    viewModel.totalPrice,
                 )
             }
         }
@@ -116,18 +116,15 @@ class FlightDetailActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_FLIGHT_SEARCH_PARAMS = "EXTRA_FLIGHT_SEARCH_PARAMS"
         const val EXTRA_FLIGHT = "EXTRA_FLIGHT"
-        const val EXTRA_TOTAL_PRICE = "EXTRA_TOTAL_PRICE"
 
         fun startActivity(
             context: Context,
             params: FlightSearchParams,
             flight: Flight,
-            totalPrice: Double,
         ) {
             val intent = Intent(context, FlightDetailActivity::class.java)
             intent.putExtra(EXTRA_FLIGHT_SEARCH_PARAMS, params)
             intent.putExtra(EXTRA_FLIGHT, flight)
-            intent.putExtra(EXTRA_TOTAL_PRICE, totalPrice)
             context.startActivity(intent)
         }
     }
