@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.arkan.terbangin.R
-import com.arkan.terbangin.data.model.AirportCity
+import com.arkan.terbangin.data.model.Airport
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.data.model.TicketClass
 import com.arkan.terbangin.databinding.FragmentHomeBinding
@@ -132,10 +132,10 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
             binding.layoutSearchHome.layoutReturnSearch.tvResultReturn.text = date.toString()
         }
         viewModel.departureCity.observe(viewLifecycleOwner) { city ->
-            binding.layoutSearchHome.tvFlightFrom.text = getString(R.string.text_binding_airport_city, city.name, city.code)
+            binding.layoutSearchHome.tvFlightFrom.text = getString(R.string.text_binding_airport_city, city.city, city.code)
         }
         viewModel.destinationCity.observe(viewLifecycleOwner) { city ->
-            binding.layoutSearchHome.tvFlightTo.text = getString(R.string.text_binding_airport_city, city.name, city.code)
+            binding.layoutSearchHome.tvFlightTo.text = getString(R.string.text_binding_airport_city, city.city, city.code)
         }
     }
 
@@ -147,8 +147,8 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
         ticketClass: TicketClass,
         departureDate: String,
         returnDate: String?,
-        departureCity: AirportCity,
-        destinationCity: AirportCity,
+        departureCity: Airport,
+        destinationCity: Airport,
     ) {
         val params =
             FlightSearchParams(
@@ -190,7 +190,7 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
     }
 
     override fun onCitySelected(
-        city: AirportCity,
+        city: Airport,
         location: String,
     ) {
         if (location == "Pilih Lokasi Awal") {

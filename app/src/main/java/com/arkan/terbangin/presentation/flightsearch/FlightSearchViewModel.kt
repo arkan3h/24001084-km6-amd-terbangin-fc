@@ -29,5 +29,8 @@ class FlightSearchViewModel(
         _filter.value = filter
     }
 
-    fun getAllFlight() = flightRepository.getAllFlight().asLiveData(Dispatchers.IO)
+    fun getAllFlight(
+        start: String = extras?.departureCity?.city.orEmpty(),
+        end: String = extras?.destinationCity?.city.orEmpty(),
+    ) = flightRepository.getAllFlight(start, end).asLiveData(Dispatchers.IO)
 }

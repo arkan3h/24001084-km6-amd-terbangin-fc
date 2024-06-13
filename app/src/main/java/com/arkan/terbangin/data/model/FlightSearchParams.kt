@@ -12,6 +12,6 @@ data class FlightSearchParams(
     val ticketClass: TicketClass,
     val departureDate: String,
     val returnDate: String?,
-    val departureCity: AirportCity,
-    val destinationCity: AirportCity,
+    val departureCity: Airport,
+    val destinationCity: Airport,
 ) : Parcelable

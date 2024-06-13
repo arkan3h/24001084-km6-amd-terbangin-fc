@@ -3,7 +3,7 @@ package com.arkan.terbangin.presentation.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.arkan.terbangin.data.model.AirportCity
+import com.arkan.terbangin.data.model.Airport
 import com.arkan.terbangin.data.model.TicketClass
 import java.time.LocalDate
 
@@ -29,11 +29,11 @@ class HomeViewModel : ViewModel() {
     private val _returnDate = MutableLiveData<LocalDate>()
     val returnDate: LiveData<LocalDate> get() = _returnDate
 
-    private val _departureCity = MutableLiveData<AirportCity>()
-    val departureCity: LiveData<AirportCity> get() = _departureCity
+    private val _departureCity = MutableLiveData<Airport>()
+    val departureCity: LiveData<Airport> get() = _departureCity
 
-    private val _destinationCity = MutableLiveData<AirportCity>()
-    val destinationCity: LiveData<AirportCity> get() = _destinationCity
+    private val _destinationCity = MutableLiveData<Airport>()
+    val destinationCity: LiveData<Airport> get() = _destinationCity
 
     fun updatePassengers(
         adult: Int,
@@ -59,11 +59,11 @@ class HomeViewModel : ViewModel() {
         _returnDate.value = date
     }
 
-    fun updateDepartureCity(city: AirportCity) {
+    fun updateDepartureCity(city: Airport) {
         _departureCity.value = city
     }
 
-    fun updateDestinationCity(city: AirportCity) {
+    fun updateDestinationCity(city: Airport) {
         _destinationCity.value = city
     }
 }

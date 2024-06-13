@@ -1,4 +1,4 @@
-package com.arkan.terbangin.data.repository
+package com.arkan.terbangin.data.repository.pref
 
 import com.arkan.terbangin.data.datasource.preference.PreferenceDataSource
 
@@ -24,7 +24,8 @@ interface UserPreferenceRepository {
     fun clearUserID()
 }
 
-class UserPreferenceRepositoryImpl(private val preferenceDataSource: PreferenceDataSource) : UserPreferenceRepository {
+class UserPreferenceRepositoryImpl(private val preferenceDataSource: PreferenceDataSource) :
+    UserPreferenceRepository {
     override fun onBoardingState(): Boolean {
         return preferenceDataSource.onBoardingState()
     }

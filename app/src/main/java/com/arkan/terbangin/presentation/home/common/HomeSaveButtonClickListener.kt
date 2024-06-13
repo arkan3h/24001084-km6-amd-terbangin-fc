@@ -1,6 +1,6 @@
 package com.arkan.terbangin.presentation.home.common
 
-import com.arkan.terbangin.data.model.AirportCity
+import com.arkan.terbangin.data.model.Airport
 import com.arkan.terbangin.data.model.TicketClass
 import java.time.LocalDate
 
@@ -19,7 +19,7 @@ interface HomeSaveButtonClickListener {
     fun onClassSelected(ticketClass: TicketClass)
 
     fun onCitySelected(
-        city: AirportCity,
+        city: Airport,
         location: String,
     )
 }

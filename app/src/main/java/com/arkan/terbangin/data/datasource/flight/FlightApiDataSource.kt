@@ -6,7 +6,10 @@ import com.arkan.terbangin.data.source.network.services.TerbanginApiServices
 class FlightApiDataSource(
     private val services: TerbanginApiServices,
 ) : FlightDataSource {
-    override suspend fun getAllFlight(): FlightResponse {
-        return services.getAllFlight()
+    override suspend fun getAllFlight(
+        start: String,
+        end: String,
+    ): FlightResponse {
+        return services.getAllFlight(start, end)
     }
 }

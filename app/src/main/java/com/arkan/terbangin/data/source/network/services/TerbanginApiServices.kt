@@ -1,6 +1,7 @@
 package com.arkan.terbangin.data.source.network.services
 
 import com.arkan.terbangin.BuildConfig
+import com.arkan.terbangin.data.source.network.model.airport.AirportResponse
 import com.arkan.terbangin.data.source.network.model.auth.login.LoginResponse
 import com.arkan.terbangin.data.source.network.model.auth.otp.request_otp.RequestOTPResponse
 import com.arkan.terbangin.data.source.network.model.auth.otp.verify_otp.VerifyOTPResponse
@@ -22,6 +23,7 @@ import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
+import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 interface TerbanginApiServices {
@@ -80,8 +82,14 @@ interface TerbanginApiServices {
         @Path("id") id: String,
     ): ProfileResponse
 
-    @GET("/api/v1/flight")
-    suspend fun getAllFlight(): FlightResponse
+    @GET("/api/v1/flight/flightfilter")
+    suspend fun getAllFlight(
+        @Query("start") start: String,
+        @Query("end") end: String,
+    ): FlightResponse
+
+    @GET("/api/v1/airport")
+    suspend fun getAllAirport(): AirportResponse
 
     companion object {
         @JvmStatic
