@@ -10,7 +10,7 @@ import androidx.core.view.isVisible
 import com.arkan.terbangin.base.OnItemCLickedListener
 import com.arkan.terbangin.data.model.AirportCity
 import com.arkan.terbangin.databinding.BottomSheetTerminalSearchBinding
-import com.arkan.terbangin.presentation.home.common.SaveButtonClickListener
+import com.arkan.terbangin.presentation.home.common.HomeSaveButtonClickListener
 import com.arkan.terbangin.presentation.home.terminal_search.adapter.TerminalAdapter
 import com.arkan.terbangin.utils.proceedWhen
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -23,7 +23,7 @@ class TerminalSearchBottomSheet(
     private lateinit var binding: BottomSheetTerminalSearchBinding
     private val viewModel: TerminalSearchViewModel by viewModel()
     private var adapter: TerminalAdapter? = null
-    private var citySelectedListener: SaveButtonClickListener? = null
+    private var citySelectedListener: HomeSaveButtonClickListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,7 +73,7 @@ class TerminalSearchBottomSheet(
         binding.tvSearchTerminalTitle.text = location
     }
 
-    fun setCitySelectedListener(listener: SaveButtonClickListener) {
+    fun setCitySelectedListener(listener: HomeSaveButtonClickListener) {
         citySelectedListener = listener
     }
 

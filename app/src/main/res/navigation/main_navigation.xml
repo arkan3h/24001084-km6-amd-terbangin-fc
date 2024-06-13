@@ -31,7 +31,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/fragement_filter_list"
-        android:name="com.arkan.terbangin.presentation.filter_list.FilterListFragment"
+        android:name="com.arkan.terbangin.presentation.flightsearch.filter_list.FilterListFragment"
         android:label="fragment_filter_list"
         tools:layout="@layout/layout_item_filter_list"/>
 

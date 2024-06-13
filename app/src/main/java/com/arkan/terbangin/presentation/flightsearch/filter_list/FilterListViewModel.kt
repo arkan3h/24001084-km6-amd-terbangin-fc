@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.filter_list
+package com.arkan.terbangin.presentation.flightsearch.filter_list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.data.repository.flight.FlightRepository
+import com.arkan.terbangin.model.FilterList
 import kotlinx.coroutines.Dispatchers
 
 class FlightSearchViewModel(
@@ -17,8 +18,15 @@ class FlightSearchViewModel(
     private val _totalPrice = MutableLiveData<Double>()
     val totalPrice: LiveData<Double> get() = _totalPrice
 
+    private val _filter = MutableLiveData<FilterList>()
+    val filter: LiveData<FilterList> get() = _filter
+
     fun updateTotalPrice(price: Double) {
         _totalPrice.value = price
+    }
+
+    fun filterList(filter: FilterList) {
+        _filter.value = filter
     }
 
     fun getAllFlight() = flightRepository.getAllFlight().asLiveData(Dispatchers.IO)
