@@ -13,6 +13,7 @@ import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.data.model.Profile
 import com.arkan.terbangin.databinding.ActivityOrderBiodataBinding
+import com.arkan.terbangin.presentation.checkout.passengerbiodata.PassengerBioDataActivity
 import com.arkan.terbangin.utils.proceedWhen
 import com.arkan.terbangin.utils.showAlertDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -45,7 +46,11 @@ class OrderBiodataActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
         binding.btnSave.setOnClickListener {
-            // navigateToOrderPassenger
+            navigateToPassengerBiodata(
+                viewModel.flight!!,
+                viewModel.params!!,
+                viewModel.totalPrice!!,
+            )
         }
     }
 
@@ -89,6 +94,19 @@ class OrderBiodataActivity : AppCompatActivity() {
             binding.etEmail.setText(it.email)
             binding.etPhone.setText(it.phoneNumber)
         }
+    }
+
+    private fun navigateToPassengerBiodata(
+        item: Flight,
+        extras: FlightSearchParams,
+        totalPrice: Double,
+    ) {
+        PassengerBioDataActivity.startActivity(
+            this,
+            extras,
+            item,
+            totalPrice,
+        )
     }
 
     companion object {
