@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.biodata
+package com.arkan.terbangin.presentation.checkout.orderbiodata
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModel

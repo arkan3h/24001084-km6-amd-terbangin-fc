@@ -51,7 +51,7 @@
     <string name="text_email">Email</string>
     <string name="text_format_id_phoneNumber">+62</string>
     <string name="text_nomor_telepon">Nomor Telepon</string>
-    <string name="text_masukkan_nomor_telepon">Masukkan Nomor Telepon</string>
+    <string name="text_masukkan_nomor_telepon">Masukkan Nomor Telepon Anda</string>
     <string name="text_buat_password">Buat Password</string>
     <string name="text_sudah_punya_akun_masuk_di_sini">Sudah punya akun? Masuk di sini</string>
     <string name="text_back_button_for_previous_page">Back button for previous page</string>
@@ -162,7 +162,7 @@
     <string name="text_nama_lengkap">Nama Lengkap</string>
     <string name="text_punya_nama_keluarga">Punya Nama Keluarga?</string>
     <string name="text_nama_keluarga">Nama Keluarga</string>
-    <string name="text_masukkan_nama_keluarga">Masukkan Nama Keluarga</string>
+    <string name="text_masukkan_nama_keluarga">Masukkan Nama Keluarga Anda</string>
     <string name="text_tanggal_lahir">Tanggal Lahir</string>
     <string name="text_dd_mm_yyyy">dd/mm/yyyy</string>
     <string name="text_kewarganegaraan">Kewarganegaraan</string>

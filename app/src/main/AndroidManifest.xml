@@ -23,7 +23,7 @@
             android:name=".presentation.checkout.selectpassengerseat.SelectPassengerSeatActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.biodata.OrderBiodataActivity"
+            android:name=".presentation.checkout.orderbiodata.OrderBiodataActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.splash_screen.SplashActivity"

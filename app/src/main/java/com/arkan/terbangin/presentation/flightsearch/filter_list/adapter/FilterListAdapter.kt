@@ -1,8 +1,10 @@
 package com.arkan.terbangin.presentation.flightsearch.filter_list.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.LayoutItemFilterListBinding
 import com.arkan.terbangin.model.FilterList
 
@@ -18,9 +20,19 @@ class FilterListAdapter(
             filterList: FilterList,
             isSelected: Boolean,
         ) {
-            binding.rbItemClassFilterList.text = filterList.nameFilter
-            binding.tvItemClassFilterList.text = filterList.listFilter
-            binding.rbItemClassFilterList.isChecked = isSelected
+            binding.tvItemClassFilterList.text = filterList.nameFilter
+            binding.tvItemFilterList.text = filterList.listFilter
+            if (isSelected) {
+                binding.ivCheckmark.visibility = View.VISIBLE
+                binding.tvItemClassFilterList.setTextColor(itemView.context.getColor(R.color.md_theme_onPrimary_highContrast))
+                binding.tvItemFilterList.setTextColor(itemView.context.getColor(R.color.md_theme_onPrimary_highContrast))
+                itemView.setBackgroundResource(R.drawable.bg_normal_primary)
+            } else {
+                binding.ivCheckmark.visibility = View.GONE
+                binding.tvItemClassFilterList.setTextColor(itemView.context.getColor(R.color.md_theme_onSurface_highContrast))
+                binding.tvItemFilterList.setTextColor(itemView.context.getColor(R.color.md_theme_primary))
+                itemView.setBackgroundResource(R.drawable.bg_normal_transparent)
+            }
             binding.root.setOnClickListener {
                 listener.onItemClick(filterList)
                 notifyItemChanged(selectedPosition)

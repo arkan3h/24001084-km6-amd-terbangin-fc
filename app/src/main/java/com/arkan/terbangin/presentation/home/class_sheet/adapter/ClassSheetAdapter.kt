@@ -1,8 +1,10 @@
 package com.arkan.terbangin.presentation.home.class_sheet.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.arkan.terbangin.R
 import com.arkan.terbangin.data.model.TicketClass
 import com.arkan.terbangin.databinding.ItemListClassSheetBinding
 
@@ -18,9 +20,17 @@ class ClassSheetAdapter(
             ticketClass: TicketClass,
             isSelected: Boolean,
         ) {
-            binding.rbItemClass.text = ticketClass.name
+            binding.tvItemClass.text = ticketClass.name
 //            binding.tvItemClassPrice.text = ticketClass.price
-            binding.rbItemClass.isChecked = isSelected
+            if (isSelected) {
+                binding.ivCheckmark.visibility = View.VISIBLE
+                binding.tvItemClass.setTextColor(itemView.context.getColor(R.color.md_theme_onPrimary_highContrast))
+                itemView.setBackgroundResource(R.drawable.bg_normal_primary)
+            } else {
+                binding.ivCheckmark.visibility = View.GONE
+                binding.tvItemClass.setTextColor(itemView.context.getColor(R.color.md_theme_onSurface_highContrast))
+                itemView.setBackgroundResource(R.drawable.bg_normal_transparent)
+            }
             binding.root.setOnClickListener {
                 listener.onItemClick(ticketClass)
                 notifyItemChanged(selectedPosition)

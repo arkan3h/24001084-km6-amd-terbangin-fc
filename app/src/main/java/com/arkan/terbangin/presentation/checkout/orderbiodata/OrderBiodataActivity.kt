@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.biodata
+package com.arkan.terbangin.presentation.checkout.orderbiodata
 
 import android.content.Context
 import android.content.Intent
@@ -42,7 +42,7 @@ class OrderBiodataActivity : AppCompatActivity() {
     }
 
     private fun setClickListener() {
-        binding.ivBack.setOnClickListener {
+        binding.layoutAppBar.ibBtnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
         binding.btnSave.setOnClickListener {
@@ -55,9 +55,10 @@ class OrderBiodataActivity : AppCompatActivity() {
     }
 
     private fun setFamilyName() {
-        binding.switchFamily.setOnCheckedChangeListener { _, isChecked ->
-            binding.tvFamilyNameLabel.isVisible = isChecked
-            binding.etFamilyName.isVisible = isChecked
+        binding.switchAskNameFamily.setOnCheckedChangeListener { _, isChecked ->
+            binding.tvNameFamilyOrderBiodata.isVisible = isChecked
+            binding.tilNameFamilyOrderBiodata.isVisible = isChecked
+            binding.tiEtNameFamilyOrderBiodata.isVisible = isChecked
         }
     }
 
@@ -90,9 +91,9 @@ class OrderBiodataActivity : AppCompatActivity() {
             // binding.ivProfileImage.load(it.picture) {
             //    crossfade(true)
             // }
-            binding.etFullName.setText(it.fullName)
-            binding.etEmail.setText(it.email)
-            binding.etPhone.setText(it.phoneNumber)
+            binding.tiEtNameOrderBiodata.setText(it.fullName)
+            binding.tiEtEmailOrderBiodata.setText(it.email)
+            binding.tiEtPhoneNumberOrderBiodata.setText(it.phoneNumber)
         }
     }
 
