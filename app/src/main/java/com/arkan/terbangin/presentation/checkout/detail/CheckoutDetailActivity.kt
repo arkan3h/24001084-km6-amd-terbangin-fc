@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivityCheckoutDetailBinding
+import com.arkan.terbangin.presentation.checkout.payment.PaymentActivity
 
 class CheckoutDetailActivity : AppCompatActivity() {
     private val binding: ActivityCheckoutDetailBinding by lazy {
@@ -26,5 +27,13 @@ class CheckoutDetailActivity : AppCompatActivity() {
         binding.layoutAppBar.ibBtnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+
+        binding.layoutTotalPrice.btnContinuePayment.setOnClickListener {
+            navigateToPayment()
+        }
+    }
+
+    private fun navigateToPayment() {
+        PaymentActivity.startActivity(this, "https://www.google.com")
     }
 }

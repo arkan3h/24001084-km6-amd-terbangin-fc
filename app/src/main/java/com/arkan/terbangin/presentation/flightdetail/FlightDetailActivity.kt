@@ -64,35 +64,35 @@ class FlightDetailActivity : AppCompatActivity() {
             )
         binding.tvFlightDuration.text = formatHours(viewModel.flight?.duration!!)
         binding.layoutTotalPrice.tvTotalPrice.text = viewModel.totalPrice.toIndonesianFormat()
-        binding.layoutCheckoutDetail.tvTakeoffTime.text = formatDateHourString(viewModel.flight?.departureAt!!)
-        binding.layoutCheckoutDetail.tvTakeoffDate.text = formatDateString(viewModel.flight?.departureAt!!)
-        binding.layoutCheckoutDetail.tvAirportOrigin.text =
+        binding.layoutFlightDetail.tvTakeoffTime.text = formatDateHourString(viewModel.flight?.departureAt!!)
+        binding.layoutFlightDetail.tvTakeoffDate.text = formatDateString(viewModel.flight?.departureAt!!)
+        binding.layoutFlightDetail.tvAirportOrigin.text =
             getString(
                 R.string.binding_airport_origin_detail,
                 viewModel.flight?.startAirportName,
                 viewModel.flight?.startAirportTerminal,
             )
-        binding.layoutCheckoutDetail.tvAirlineName.text =
+        binding.layoutFlightDetail.tvAirlineName.text =
             getString(
                 R.string.binding_airline_name_detail,
                 viewModel.flight?.airlineName,
                 viewModel.params?.ticketClass?.name,
             )
-        binding.layoutCheckoutDetail.tvAirlineCode.text = viewModel.flight?.airlineSerialNumber
-        binding.layoutCheckoutDetail.tvBaggageCapacity.text =
+        binding.layoutFlightDetail.tvAirlineCode.text = viewModel.flight?.airlineSerialNumber
+        binding.layoutFlightDetail.tvBaggageCapacity.text =
             getString(
                 R.string.binding_baggage_capacity_detail,
                 viewModel.flight?.airlineBaggage.toString(),
             )
-        binding.layoutCheckoutDetail.tvCabinBaggageCapacity.text =
+        binding.layoutFlightDetail.tvCabinBaggageCapacity.text =
             getString(
                 R.string.binding_cabin_baggage_capacity_detail,
                 viewModel.flight?.airlineCabinBaggage.toString(),
             )
-        binding.layoutCheckoutDetail.tvMoreService.text = viewModel.flight?.airlineAdditionals
-        binding.layoutCheckoutDetail.tvLandingTime.text = formatDateHourString(viewModel.flight?.arrivalAt!!)
-        binding.layoutCheckoutDetail.tvLandingDate.text = formatDateString(viewModel.flight?.arrivalAt!!)
-        binding.layoutCheckoutDetail.tvAirportDestination.text =
+        binding.layoutFlightDetail.tvMoreService.text = viewModel.flight?.airlineAdditionals
+        binding.layoutFlightDetail.tvLandingTime.text = formatDateHourString(viewModel.flight?.arrivalAt!!)
+        binding.layoutFlightDetail.tvLandingDate.text = formatDateString(viewModel.flight?.arrivalAt!!)
+        binding.layoutFlightDetail.tvAirportDestination.text =
             getString(
                 R.string.binding_airport_destination_origin,
                 viewModel.flight?.endAirportName,
