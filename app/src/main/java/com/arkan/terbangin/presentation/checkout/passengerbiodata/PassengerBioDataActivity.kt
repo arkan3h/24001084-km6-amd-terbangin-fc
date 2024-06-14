@@ -1,129 +1,82 @@
 package com.arkan.terbangin.presentation.checkout.passengerbiodata
 
-import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
-import android.icu.util.Calendar
 import android.os.Bundle
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.arkan.terbangin.R
 import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.data.model.FlightSearchParams
+import com.arkan.terbangin.data.model.PassengerBioData
 import com.arkan.terbangin.databinding.ActivityPassengerBiodataBinding
-import com.arkan.terbangin.databinding.ItemPassengerBiodataBinding
+import com.arkan.terbangin.presentation.checkout.passengerbiodata.adapter.PassengerBioDataAdapter
+import com.arkan.terbangin.utils.proceedWhen
+import com.arkan.terbangin.utils.showAlertDialog
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class PassengerBioDataActivity : AppCompatActivity() {
     private val binding: ActivityPassengerBiodataBinding by lazy {
         ActivityPassengerBiodataBinding.inflate(layoutInflater)
     }
 
-    private val bindingForm: ItemPassengerBiodataBinding by lazy {
-        ItemPassengerBiodataBinding.inflate(layoutInflater)
+    private val viewModel: PassengerBioDataViewModel by viewModel {
+        parametersOf(intent.extras)
     }
+
+    private var adapter: PassengerBioDataAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setSwitchBioData()
-        setupLabelTitle()
-        setClickListener()
+        setAppBarTitle()
+        setForm()
     }
 
-    private fun setClickListener() {
-        bindingForm.tilDateBirthBiodata.setOnClickListener {
-            showDateBirthPickerDialog()
+    private fun setAppBarTitle() {
+        binding.layoutAppBar.tvAppbarTitle.text = getString(R.string.text_passenger_biodata)
+    }
+
+    private fun setClickListener(adapter: PassengerBioDataAdapter) {
+        binding.layoutAppBar.ibBtnBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
-        bindingForm.tilDateValidUntil.setOnClickListener {
-            showDateValidUntilPickerDialog()
-        }
-    }
-
-    private fun showDateValidUntilPickerDialog() {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val dateValidUntilPickerDialog =
-            DatePickerDialog(
-                this,
-                { _, selectedYear, selectedMonth, selectedDay ->
-                    // Set the selected date to the input
-                    val formattedDate = String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear)
-                    bindingForm.tiEtDateValidUntil.setText(formattedDate)
-                },
-                year,
-                month,
-                day,
-            )
-
-        dateValidUntilPickerDialog.show()
-    }
-
-    private fun showDateBirthPickerDialog() {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val dateBirthPickerDialog =
-            DatePickerDialog(
-                this,
-                { _, selectedYear, selectedMonth, selectedDay ->
-                    // Set the selected date to the input
-                    val formattedDate = String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear)
-                    bindingForm.tiEtDateBirthBiodata.setText(formattedDate)
-                },
-                year,
-                month,
-                day,
-            )
-
-        dateBirthPickerDialog.show()
-    }
-
-    private fun setSwitchBioData() {
-        val switchAskNameFamily = bindingForm.switchAskNameFamily
-        val tvNameFamilyBiodata = bindingForm.tvNameFamilyBiodata
-        val tilNameFamilyBiodata = bindingForm.tilNameFamilyBiodata
-        val tiEtNameFamilyBiodata = bindingForm.tiEtNameFamilyBiodata
-
-        switchAskNameFamily.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                tvNameFamilyBiodata.isEnabled = true
-                tilNameFamilyBiodata.isEnabled = true
-                tvNameFamilyBiodata.setTextColor(ContextCompat.getColor(this, R.color.md_theme_primary))
-                tiEtNameFamilyBiodata.setTextColor(ContextCompat.getColor(this, R.color.md_theme_primary))
-                tiEtNameFamilyBiodata.isEnabled = true
-            } else {
-                tvNameFamilyBiodata.isEnabled = false
-                tilNameFamilyBiodata.isEnabled = false
-                tvNameFamilyBiodata.setTextColor(
-                    ContextCompat.getColor(this, R.color.md_theme_outline),
-                )
-                tiEtNameFamilyBiodata.setTextColor(
-                    ContextCompat.getColor(this, R.color.md_theme_outline),
-                )
-                tiEtNameFamilyBiodata.isEnabled = false
+        binding.btnChoose.setOnClickListener {
+            Log.d("PassengerBioDataActivity", "Save button clicked")
+            val passengerDataList = adapter.getAllData()
+            Log.d("PassengerBioData", passengerDataList.toString())
+            passengerDataList.forEach { passengerData ->
+                createPassenger(passengerData)
+                Log.d("PassengerData", passengerData.toString())
             }
         }
     }
 
-    private fun setupLabelTitle() {
-        val items = listOf("Mr.", "Mrs.", "Ms.", "Dr.")
-        val autoComplete = bindingForm.autoCompleteTitle
-        val adapter = ArrayAdapter(this, R.layout.item_label_title_biodata, items)
+    private fun createPassenger(passenger: PassengerBioData) {
+        viewModel.createPassenger(passenger).observe(this) { it ->
+            it.proceedWhen(
+                doOnLoading = {
+                },
+                doOnSuccess = {
+                    showAlertDialog("Biodata updated successfully")
+                },
+                doOnError = {
+                    showAlertDialog(it.exception?.message.orEmpty())
+                },
+            )
+        }
+    }
 
-        autoComplete.setAdapter(adapter)
-        autoComplete.onItemClickListener =
-            AdapterView.OnItemClickListener { adapterView, view, i, l ->
-                val itemSelected = adapterView.getItemAtPosition(i)
-                Toast.makeText(this, "Item : $itemSelected", Toast.LENGTH_SHORT).show()
-            }
+    private fun setForm() {
+        adapter =
+            PassengerBioDataAdapter(
+                viewModel.params!!,
+                viewModel.userId!!,
+                binding,
+            )
+        binding.rvItemDataPassengerBiodata.adapter = this.adapter
+        setClickListener(adapter!!)
     }
 
     companion object {

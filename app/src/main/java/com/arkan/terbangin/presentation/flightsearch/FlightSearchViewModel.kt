@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import com.arkan.terbangin.data.model.FilterList
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.data.repository.flight.FlightRepository
-import com.arkan.terbangin.model.FilterList
 import kotlinx.coroutines.Dispatchers
 
 class FlightSearchViewModel(

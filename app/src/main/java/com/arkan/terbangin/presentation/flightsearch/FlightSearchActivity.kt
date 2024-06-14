@@ -12,11 +12,11 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import com.arkan.terbangin.R
 import com.arkan.terbangin.base.OnItemCLickedListener
+import com.arkan.terbangin.data.model.FilterList
 import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.databinding.ActivityFlightSearchBinding
 import com.arkan.terbangin.databinding.LayoutCalendarDaySliderBinding
-import com.arkan.terbangin.model.FilterList
 import com.arkan.terbangin.presentation.flightdetail.FlightDetailActivity
 import com.arkan.terbangin.presentation.flightsearch.adapter.FlightAdapter
 import com.arkan.terbangin.presentation.flightsearch.filter_list.FilterClickListener

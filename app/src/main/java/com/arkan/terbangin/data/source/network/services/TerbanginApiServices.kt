@@ -8,6 +8,8 @@ import com.arkan.terbangin.data.source.network.model.auth.otp.verify_otp.VerifyO
 import com.arkan.terbangin.data.source.network.model.auth.register.RegisterResponse
 import com.arkan.terbangin.data.source.network.model.auth.resetpassword.ResetPasswordResponse
 import com.arkan.terbangin.data.source.network.model.flight.FlightResponse
+import com.arkan.terbangin.data.source.network.model.passanger.PassengerPayload
+import com.arkan.terbangin.data.source.network.model.passanger.PassengerResponse
 import com.arkan.terbangin.data.source.network.model.profile.ProfileResponse
 import com.arkan.terbangin.data.source.pref.UserPreference
 import okhttp3.MultipartBody
@@ -16,6 +18,7 @@ import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Multipart
@@ -92,6 +95,11 @@ interface TerbanginApiServices {
 
     @GET("/api/v1/airport")
     suspend fun getAllAirport(): AirportResponse
+
+    @POST("/api/v1/passanger")
+    suspend fun createPassenger(
+        @Body payload: PassengerPayload,
+    ): PassengerResponse
 
     companion object {
         @JvmStatic

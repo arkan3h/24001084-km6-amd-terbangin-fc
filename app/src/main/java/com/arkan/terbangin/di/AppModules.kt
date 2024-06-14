@@ -13,6 +13,8 @@ import com.arkan.terbangin.data.datasource.auth.resetpassword.ResetPasswordApiDa
 import com.arkan.terbangin.data.datasource.auth.resetpassword.ResetPasswordDataSource
 import com.arkan.terbangin.data.datasource.flight.FlightApiDataSource
 import com.arkan.terbangin.data.datasource.flight.FlightDataSource
+import com.arkan.terbangin.data.datasource.passenger.PassengerApiDataSource
+import com.arkan.terbangin.data.datasource.passenger.PassengerDataSource
 import com.arkan.terbangin.data.datasource.preference.PreferenceDataSource
 import com.arkan.terbangin.data.datasource.preference.UserPreferenceDataSource
 import com.arkan.terbangin.data.datasource.profile.ProfileApiDataSource
@@ -29,6 +31,8 @@ import com.arkan.terbangin.data.repository.auth.ResetPasswordRepository
 import com.arkan.terbangin.data.repository.auth.ResetPasswordRepositoryImpl
 import com.arkan.terbangin.data.repository.flight.FlightRepository
 import com.arkan.terbangin.data.repository.flight.FlightRepositoryImpl
+import com.arkan.terbangin.data.repository.passenger.PassengerRepository
+import com.arkan.terbangin.data.repository.passenger.PassengerRepositoryImpl
 import com.arkan.terbangin.data.repository.pref.UserPreferenceRepository
 import com.arkan.terbangin.data.repository.pref.UserPreferenceRepositoryImpl
 import com.arkan.terbangin.data.repository.profile.ProfileRepository
@@ -41,6 +45,7 @@ import com.arkan.terbangin.presentation.auth.otp.OTPViewModel
 import com.arkan.terbangin.presentation.auth.register.RegisterViewModel
 import com.arkan.terbangin.presentation.auth.reset_password.ResetPasswordViewModel
 import com.arkan.terbangin.presentation.checkout.orderbiodata.OrderBiodataViewModel
+import com.arkan.terbangin.presentation.checkout.passengerbiodata.PassengerBioDataViewModel
 import com.arkan.terbangin.presentation.flightdetail.FlightDetailViewModel
 import com.arkan.terbangin.presentation.flightsearch.FlightSearchViewModel
 import com.arkan.terbangin.presentation.flightsearch.filter_list.FilterListViewModel
@@ -87,6 +92,7 @@ object AppModules {
             single<ProfileDataSource> { ProfileApiDataSource(get()) }
             single<FlightDataSource> { FlightApiDataSource(get()) }
             single<AirportCityDataSource> { AirportCityDataSourceImpl(get()) }
+            single<PassengerDataSource> { PassengerApiDataSource(get()) }
         }
 
     private val repository =
@@ -99,6 +105,7 @@ object AppModules {
             single<ProfileRepository> { ProfileRepositoryImpl(get()) }
             single<FlightRepository> { FlightRepositoryImpl(get()) }
             single<AirportCityRepository> { AirportCityRepositoryImpl(get()) }
+            single<PassengerRepository> { PassengerRepositoryImpl(get()) }
         }
 
     private val viewModelModule =
@@ -122,6 +129,7 @@ object AppModules {
             viewModelOf(::TerminalSearchViewModel)
             viewModelOf(::FlightDetailViewModel)
             viewModelOf(::OrderBiodataViewModel)
+            viewModelOf(::PassengerBioDataViewModel)
         }
 
     val modules =
