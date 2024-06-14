@@ -1,38 +1,31 @@
 package com.arkan.terbangin.presentation.checkout.selectpassengerseat
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.arkan.terbangin.R
+import com.arkan.terbangin.data.model.Flight
+import com.arkan.terbangin.data.model.FlightSearchParams
+import com.arkan.terbangin.data.model.PassengerBioDataList
 import com.arkan.terbangin.databinding.ActivitySelectPassengerSeatBinding
 import com.arkan.terbangin.presentation.checkout.selectpassengerseat.seatbookview.SeatBookView
 import com.arkan.terbangin.presentation.checkout.selectpassengerseat.seatbookview.SeatClickListener
-import com.arkan.terbangin.presentation.checkout.selectpassengerseat.seatbookview.SeatLongClickListener
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class SelectPassengerSeatActivity : AppCompatActivity() {
     private val binding: ActivitySelectPassengerSeatBinding by lazy {
         ActivitySelectPassengerSeatBinding.inflate(layoutInflater)
     }
+    private val viewModel: SelectPassenegrSeatViewModel by viewModel {
+        parametersOf(intent.extras)
+    }
 
     private lateinit var seatBookView: SeatBookView
-    private var seats = (
-        "/AAA_AAA" +
-            "/UAA_ARA" +
-            "/AAA_AAA" +
-            "/RUA_AAA" +
-            "/AAA_ARA" +
-            "/AUA_AAA" +
-            "/AAA_AAA" +
-            "/AAA_AAA" +
-            "/RUA_AAA" +
-            "/AAA_ARA" +
-            "/AUA_AAA" +
-            "/AAA_AAA" +
-            "/AAA_AAA" +
-            "/AAA_AAA"
-
-    )
 
     private var title =
         listOf(
@@ -57,13 +50,35 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setTitle()
+        setSeatView()
+        setClickListener()
+    }
+
+    private fun setTitle() {
+        binding.layoutAppBar.tvAppbarTitle.text =
+            getString(
+                R.string.binding_title_select_seat,
+                viewModel.params?.totalQty.toString(),
+            )
+        binding.tvTitleInfoSeat.text =
+            getString(
+                R.string.binding_title_seat,
+                viewModel.params?.ticketClass?.name,
+                viewModel.capacity.toString(),
+            )
+    }
+
+    private fun setSeatView() {
+        val newSeats = generateSeatsString(viewModel.capacity)
+        Log.d("seat", newSeats)
         seatBookView = findViewById(R.id.layoutSeat)
-        seatBookView.setSeatsLayoutString(seats)
+        seatBookView.setSeatsLayoutString(newSeats)
             .isCustomTitle(true)
             .setCustomTitle(title)
             .setSeatLayoutPadding(2)
+            .setSelectSeatLimit(viewModel.params?.totalQty!!)
             .setSeatSizeBySeatsColumnAndLayoutWidth(7, -1)
-        // ParentLayoutWeight -1 if Your seatBookView layout_width = match_parent / wrap_content
 
         seatBookView.show()
 
@@ -82,28 +97,69 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
                 }
             },
         )
+    }
 
-        seatBookView.setSeatLongClickListener(
-            object : SeatLongClickListener {
-                override fun onAvailableSeatLongClick(view: View) {
-                    Toast.makeText(this@SelectPassengerSeatActivity, "Long Pressed", Toast.LENGTH_SHORT).show()
-                }
+    private fun generateSeatsString(capacity: Int): String {
+        val sb = StringBuilder()
+        var remainingCapacity = capacity
+        var seatCounter = 0
+        var space = 3
+        sb.append("/")
 
-                override fun onBookedSeatLongClick(view: View) {
-                }
+        while (remainingCapacity > 0) {
+            if (seatCounter % 6 == 0 && seatCounter > 0) {
+                sb.append("/")
+            }
 
-                override fun onReservedSeatLongClick(view: View) {
-                }
-            },
-        )
+            val seatsInRow = minOf(remainingCapacity, 3)
+            repeat(seatsInRow) {
+                sb.append("A")
+            }
 
-        // Add a button click listener to save and show selected seats
+            remainingCapacity -= seatsInRow
+            seatCounter += seatsInRow
+            space += seatsInRow
+
+            if (space % 6 == 0 && remainingCapacity > 0) {
+                sb.append("_")
+            }
+        }
+
+        return sb.toString()
+    }
+
+    private fun setClickListener() {
+        binding.layoutAppBar.ibBtnBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
         binding.btnChoose.setOnClickListener {
             val selectedSeats =
                 seatBookView.getSelectedIdList().joinToString(", ") { id ->
                     arrTitle[id - 1]
                 }
             Toast.makeText(this, "Selected Seats: $selectedSeats", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    companion object {
+        const val EXTRA_FLIGHT_SEARCH_PARAMS = "EXTRA_FLIGHT_SEARCH_PARAMS"
+        const val EXTRA_FLIGHT = "EXTRA_FLIGHT"
+        const val EXTRA_TOTAL_PRICE = "EXTRA_TOTAL_PRICE"
+        const val EXTRA_PASSENGER_DATA = "EXTRA_PASSENGER_DATA"
+
+        fun startActivity(
+            context: Context,
+            params: FlightSearchParams,
+            flight: Flight,
+            totalPrice: Double,
+            passengerData: PassengerBioDataList,
+        ) {
+            val intent = Intent(context, SelectPassengerSeatActivity::class.java)
+            intent.putExtra(EXTRA_FLIGHT_SEARCH_PARAMS, params)
+            intent.putExtra(EXTRA_FLIGHT, flight)
+            intent.putExtra(EXTRA_TOTAL_PRICE, totalPrice)
+            intent.putExtra(EXTRA_PASSENGER_DATA, passengerData)
+            context.startActivity(intent)
         }
     }
 }

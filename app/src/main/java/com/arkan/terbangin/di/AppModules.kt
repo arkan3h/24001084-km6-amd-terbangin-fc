@@ -46,6 +46,7 @@ import com.arkan.terbangin.presentation.auth.register.RegisterViewModel
 import com.arkan.terbangin.presentation.auth.reset_password.ResetPasswordViewModel
 import com.arkan.terbangin.presentation.checkout.orderbiodata.OrderBiodataViewModel
 import com.arkan.terbangin.presentation.checkout.passengerbiodata.PassengerBioDataViewModel
+import com.arkan.terbangin.presentation.checkout.selectpassengerseat.SelectPassenegrSeatViewModel
 import com.arkan.terbangin.presentation.flightdetail.FlightDetailViewModel
 import com.arkan.terbangin.presentation.flightsearch.FlightSearchViewModel
 import com.arkan.terbangin.presentation.flightsearch.filter_list.FilterListViewModel
@@ -130,6 +131,7 @@ object AppModules {
             viewModelOf(::FlightDetailViewModel)
             viewModelOf(::OrderBiodataViewModel)
             viewModelOf(::PassengerBioDataViewModel)
+            viewModelOf(::SelectPassenegrSeatViewModel)
         }
 
     val modules =
