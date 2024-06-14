@@ -11,6 +11,8 @@ interface FlightRepository {
     fun getAllFlight(
         start: String,
         end: String,
+        key: String,
+        value: String,
         filter: String,
         order: String,
     ): Flow<ResultWrapper<List<Flight>>>
@@ -22,11 +24,13 @@ class FlightRepositoryImpl(
     override fun getAllFlight(
         start: String,
         end: String,
+        key: String,
+        value: String,
         filter: String,
         order: String,
     ): Flow<ResultWrapper<List<Flight>>> {
         return proceedFlow {
-            dataSource.getAllFlight(start, end, filter, order).data.toFlight()
+            dataSource.getAllFlight(start, end, key, value, filter, order).data.toFlight()
         }
     }
 }
