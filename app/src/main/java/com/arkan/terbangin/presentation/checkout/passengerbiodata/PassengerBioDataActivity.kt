@@ -3,14 +3,15 @@ package com.arkan.terbangin.presentation.checkout.passengerbiodata
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.arkan.terbangin.R
 import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.data.model.PassengerBioData
+import com.arkan.terbangin.data.model.PassengerBioDataList
 import com.arkan.terbangin.databinding.ActivityPassengerBiodataBinding
 import com.arkan.terbangin.presentation.checkout.passengerbiodata.adapter.PassengerBioDataAdapter
+import com.arkan.terbangin.presentation.checkout.selectpassengerseat.SelectPassengerSeatActivity
 import com.arkan.terbangin.utils.proceedWhen
 import com.arkan.terbangin.utils.showAlertDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -43,13 +44,18 @@ class PassengerBioDataActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
         binding.btnChoose.setOnClickListener {
-            Log.d("PassengerBioDataActivity", "Save button clicked")
             val passengerDataList = adapter.getAllData()
-            Log.d("PassengerBioData", passengerDataList.toString())
-            passengerDataList.forEach { passengerData ->
-                createPassenger(passengerData)
-                Log.d("PassengerData", passengerData.toString())
-            }
+            val passengerBioDataList = PassengerBioDataList(passengerDataList)
+            navigateToSelectSeat(
+                viewModel.flight!!,
+                viewModel.params!!,
+                viewModel.totalPrice!!,
+                passengerBioDataList,
+            )
+//            passengerDataList.forEach { passengerData ->
+//                createPassenger(passengerData)
+//                Log.d("PassengerData", passengerData.toString())
+//            }
         }
     }
 
@@ -77,6 +83,21 @@ class PassengerBioDataActivity : AppCompatActivity() {
             )
         binding.rvItemDataPassengerBiodata.adapter = this.adapter
         setClickListener(adapter!!)
+    }
+
+    private fun navigateToSelectSeat(
+        item: Flight,
+        extras: FlightSearchParams,
+        totalPrice: Double,
+        passengerList: PassengerBioDataList,
+    ) {
+        SelectPassengerSeatActivity.startActivity(
+            this,
+            extras,
+            item,
+            totalPrice,
+            passengerList,
+        )
     }
 
     companion object {
