@@ -14,6 +14,7 @@ import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.FragmentProfileBinding
 import com.arkan.terbangin.utils.navigateToEditProfile
 import com.arkan.terbangin.utils.navigateToLogin
+import com.arkan.terbangin.utils.navigateToResetPassword
 import com.arkan.terbangin.utils.navigateToSettingAccount
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -47,13 +48,16 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setClickListener() {
-        binding.llMenuEditProfile.setOnClickListener {
+        binding.tvMenuEditProfile.setOnClickListener {
             navigateToEditProfile()
         }
-        binding.llMenuAccountSettings.setOnClickListener {
+        binding.tvMenuChangePassword.setOnClickListener {
+            navigateToResetPassword()
+        }
+        binding.tvMenuEditProfile.setOnClickListener {
             navigateToSettingAccount()
         }
-        binding.llMenuLogout.setOnClickListener {
+        binding.tvMenuLogout.setOnClickListener {
             showAlertLogoutDialog()
         }
         binding.fragmentProfileNonLogin.btnLogin.setOnClickListener {
