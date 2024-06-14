@@ -9,23 +9,20 @@ import com.arkan.terbangin.data.model.FilterList
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.data.repository.flight.FlightRepository
 import kotlinx.coroutines.Dispatchers
+import java.time.LocalDate
 
 class FlightSearchViewModel(
     extras: Bundle?,
     private val flightRepository: FlightRepository,
 ) : ViewModel() {
-    val extras = extras?.getParcelable<FlightSearchParams>(FlightSearchActivity.EXTRA_FLIGHT_SEARCH_PARAMS)
-    private val _totalPrice = MutableLiveData<Double>()
-    val totalPrice: LiveData<Double> get() = _totalPrice
+    val params = extras?.getParcelable<FlightSearchParams>(FlightSearchActivity.EXTRA_FLIGHT_SEARCH_PARAMS)
 
     private val _filter = MutableLiveData<FilterList>()
     val filter: LiveData<FilterList> get() = _filter
     private var filterName: String = ""
     private var filterOrder: String = ""
-
-    fun updateTotalPrice(price: Double) {
-        _totalPrice.value = price
-    }
+    private val _date = MutableLiveData(params?.departureDate.orEmpty())
+    val date: LocalDate get() = LocalDate.parse(params?.departureDate)
 
     fun filterList(filter: FilterList) {
         _filter.value = filter
@@ -36,7 +33,7 @@ class FlightSearchViewModel(
     private fun setFilterName(filter: FilterList) {
         when (filter.nameFilter) {
             "Harga" -> {
-                when (extras?.ticketClass?.name) {
+                when (params?.ticketClass?.name) {
                     "Economy" -> {
                         filterName = "priceEconomy"
                     }
@@ -69,9 +66,15 @@ class FlightSearchViewModel(
     }
 
     fun getAllFlight(
-        start: String = extras?.departureCity?.city.orEmpty(),
-        end: String = extras?.destinationCity?.city.orEmpty(),
+        start: String = params?.departureCity?.city.orEmpty(),
+        end: String = params?.destinationCity?.city.orEmpty(),
+        key: String = "departureAt",
+        value: String = _date.value.orEmpty(),
         filter: String = filterName,
         order: String = filterOrder,
-    ) = flightRepository.getAllFlight(start, end, filter, order).asLiveData(Dispatchers.IO)
+    ) = flightRepository.getAllFlight(start, end, key, value, filter, order).asLiveData(Dispatchers.IO)
+
+    fun updateDate(newDate: String) {
+        _date.value = newDate
+    }
 }

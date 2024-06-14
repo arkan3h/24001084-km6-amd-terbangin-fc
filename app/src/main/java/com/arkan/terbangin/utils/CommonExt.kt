@@ -53,7 +53,7 @@ fun Context.hideKeyboard(view: View) {
 }
 
 fun formatDateHourString(dateString: String): String {
-    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale("id", "ID"))
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale("id", "ID"))
 
     val outputFormat = SimpleDateFormat("HH.mm", Locale("id", "ID"))
 
@@ -63,7 +63,7 @@ fun formatDateHourString(dateString: String): String {
 }
 
 fun formatDateString(dateString: String): String {
-    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale("id", "ID"))
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale("id", "ID"))
 
     val outputFormat = SimpleDateFormat("dd MMMM yyyy", Locale("id", "ID"))
 

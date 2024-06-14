@@ -23,7 +23,6 @@ import com.arkan.terbangin.presentation.flightsearch.filter_list.FilterClickList
 import com.arkan.terbangin.presentation.flightsearch.filter_list.FilterListFragment
 import com.arkan.terbangin.utils.proceedWhen
 import com.kizitonwose.calendar.core.WeekDay
-import com.kizitonwose.calendar.core.atStartOfMonth
 import com.kizitonwose.calendar.core.firstDayOfWeekFromLocale
 import com.kizitonwose.calendar.view.ViewContainer
 import com.kizitonwose.calendar.view.WeekDayBinder
@@ -63,8 +62,8 @@ class FlightSearchActivity : AppCompatActivity(), FilterClickListener {
     }
 
     private fun setDaySlider() {
-        var selectedDate = LocalDate.now()
-        val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+        var selectedDate = viewModel.date
+        val dateFormatter = DateTimeFormatter.ofPattern("dd-MM-uuuu")
 
         class DayViewContainer(view: View) : ViewContainer(view) {
             val bind = LayoutCalendarDaySliderBinding.bind(view)
@@ -76,7 +75,9 @@ class FlightSearchActivity : AppCompatActivity(), FilterClickListener {
                         val oldDate = selectedDate
                         selectedDate = day.date
                         binding.cvDaySlider.notifyDateChanged(day.date)
-                        oldDate?.let { binding.cvDaySlider.notifyDateChanged(it) }
+                        oldDate.let { binding.cvDaySlider.notifyDateChanged(it) }
+                        viewModel.updateDate(day.date.toString())
+                        getFlightData()
                     }
                 }
             }
@@ -110,21 +111,21 @@ class FlightSearchActivity : AppCompatActivity(), FilterClickListener {
 
         val currentMonth = YearMonth.now()
         binding.cvDaySlider.setup(
-            currentMonth.minusMonths(5).atStartOfMonth(),
+            LocalDate.now(),
             currentMonth.plusMonths(5).atEndOfMonth(),
             firstDayOfWeekFromLocale(),
         )
-        binding.cvDaySlider.scrollToDate(LocalDate.now())
+        binding.cvDaySlider.scrollToDate(selectedDate)
     }
 
     private fun observeViewModel() {
         binding.layoutAppBar.tvAppbarTitle.text =
             getString(
                 R.string.text_binding_flight_search_title,
-                viewModel.extras?.departureCity?.code,
-                viewModel.extras?.destinationCity?.code,
-                viewModel.extras?.totalQty.toString(),
-                viewModel.extras?.ticketClass?.name,
+                viewModel.params?.departureCity?.code,
+                viewModel.params?.destinationCity?.code,
+                viewModel.params?.totalQty.toString(),
+                viewModel.params?.ticketClass?.name,
             )
         viewModel.filter.observe(this) { filter ->
             binding.tvFilter.text = filter.nameFilter
@@ -177,11 +178,11 @@ class FlightSearchActivity : AppCompatActivity(), FilterClickListener {
                 listener =
                     object : OnItemCLickedListener<Flight> {
                         override fun onItemClicked(item: Flight) {
-                            navigateToFlightDetail(item, viewModel.extras!!)
+                            navigateToFlightDetail(item, viewModel.params!!)
                         }
                     },
-                viewModel.extras?.totalQty!!,
-                viewModel.extras?.ticketClass!!.name,
+                viewModel.params?.totalQty!!,
+                viewModel.params?.ticketClass!!.name,
             )
         binding.rvDestination.adapter = this.flightAdapter
         flightAdapter?.submitData(data)

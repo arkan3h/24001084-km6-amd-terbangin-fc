@@ -9,9 +9,11 @@ class FlightApiDataSource(
     override suspend fun getAllFlight(
         start: String,
         end: String,
+        key: String,
+        value: String,
         filter: String,
         order: String,
     ): FlightResponse {
-        return services.getAllFlight(start, end, filter, order)
+        return services.getAllFlight(start, end, key, value, filter, order)
     }
 }

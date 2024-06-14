@@ -6,6 +6,8 @@ interface FlightDataSource {
     suspend fun getAllFlight(
         start: String,
         end: String,
+        key: String,
+        value: String,
         filter: String,
         order: String,
     ): FlightResponse

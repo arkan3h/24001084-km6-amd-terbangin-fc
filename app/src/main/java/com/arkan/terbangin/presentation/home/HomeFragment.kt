@@ -59,7 +59,13 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
             selectSeatClass()
         }
         binding.layoutSearchHome.btnSearchFlight.setOnClickListener {
-            if (viewModel.totalQty.value != null && viewModel.ticketClass.value != null && viewModel.departureCity.value != null && viewModel.destinationCity.value != null) {
+            if (
+                viewModel.totalQty.value != null &&
+                viewModel.ticketClass.value != null &&
+                viewModel.departureCity.value != null &&
+                viewModel.destinationCity.value != null &&
+                viewModel.departureDate.value != null
+            ) {
                 navigateToFlightSearch(
                     viewModel.adultQty.value!!,
                     viewModel.childrenQty.value!!,
