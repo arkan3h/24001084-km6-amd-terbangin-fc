@@ -3,10 +3,7 @@ package com.arkan.terbangin.presentation.checkout.orderbiodata
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import com.arkan.terbangin.R
 import com.arkan.terbangin.data.model.Flight
@@ -29,16 +26,15 @@ class OrderBiodataActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        setAppBarTitle()
         setClickListener()
         setFamilyName()
         viewModel.getUserID()?.let { uid -> getProfile(uid) }
+    }
+
+    private fun setAppBarTitle() {
+        binding.layoutAppBar.tvAppbarTitle.text = getString(R.string.binding_order_biodata)
     }
 
     private fun setClickListener() {

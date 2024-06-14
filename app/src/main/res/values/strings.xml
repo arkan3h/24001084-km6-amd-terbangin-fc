@@ -185,4 +185,7 @@
     <string name="binding_airport_destination_origin">%1$s - %2$s</string>
     <string name="text_total_price">Total</string>
     <string name="list_filter">Termahal</string>
+    <string name="text_passenger_biodata">Biodata Penumpang</string>
+    <string name="binding_text_title_passenger_form">Penumpang %1$s - %2$s</string>
+    <string name="binding_order_biodata">Biodata Pemesan</string>
 </resources>

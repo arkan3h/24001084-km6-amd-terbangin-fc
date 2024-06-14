@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arkan.terbangin.R
+import com.arkan.terbangin.data.model.FilterList
 import com.arkan.terbangin.databinding.LayoutItemFilterListBinding
-import com.arkan.terbangin.model.FilterList
 
 class FilterListAdapter(
     private val filterLists: List<FilterList>,

@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arkan.terbangin.R
+import com.arkan.terbangin.data.model.FilterList
 import com.arkan.terbangin.databinding.FragmentFilterListBinding
-import com.arkan.terbangin.model.FilterList
 import com.arkan.terbangin.presentation.flightsearch.filter_list.adapter.FilterListAdapter
 import com.arkan.terbangin.presentation.flightsearch.filter_list.adapter.OnClassItemClickListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
