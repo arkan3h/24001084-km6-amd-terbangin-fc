@@ -35,7 +35,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/md_theme_onSurfaceVariant" />
 
-        <androidx.appcompat.widget.SearchView
+        <SearchView
             android:id="@+id/sb_terminal_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -19,6 +19,8 @@ import com.arkan.terbangin.data.datasource.preference.PreferenceDataSource
 import com.arkan.terbangin.data.datasource.preference.UserPreferenceDataSource
 import com.arkan.terbangin.data.datasource.profile.ProfileApiDataSource
 import com.arkan.terbangin.data.datasource.profile.ProfileDataSource
+import com.arkan.terbangin.data.datasource.searchHistory.SearchHistoryDataSource
+import com.arkan.terbangin.data.datasource.searchHistory.SearchHistoryDatabaseDataSource
 import com.arkan.terbangin.data.repository.airport.AirportCityRepository
 import com.arkan.terbangin.data.repository.airport.AirportCityRepositoryImpl
 import com.arkan.terbangin.data.repository.auth.LoginRepository
@@ -37,6 +39,10 @@ import com.arkan.terbangin.data.repository.pref.UserPreferenceRepository
 import com.arkan.terbangin.data.repository.pref.UserPreferenceRepositoryImpl
 import com.arkan.terbangin.data.repository.profile.ProfileRepository
 import com.arkan.terbangin.data.repository.profile.ProfileRepositoryImpl
+import com.arkan.terbangin.data.repository.searchhistory.SearchHistoryRepository
+import com.arkan.terbangin.data.repository.searchhistory.SearchHistoryRepositoryImpl
+import com.arkan.terbangin.data.source.local.AppDatabase
+import com.arkan.terbangin.data.source.local.dao.SearchHistoryDao
 import com.arkan.terbangin.data.source.network.services.TerbanginApiServices
 import com.arkan.terbangin.data.source.pref.UserPreference
 import com.arkan.terbangin.data.source.pref.UserPreferenceImpl
@@ -51,6 +57,7 @@ import com.arkan.terbangin.presentation.flightdetail.FlightDetailViewModel
 import com.arkan.terbangin.presentation.flightsearch.FlightSearchViewModel
 import com.arkan.terbangin.presentation.flightsearch.filter_list.FilterListViewModel
 import com.arkan.terbangin.presentation.history.HistoryViewModel
+import com.arkan.terbangin.presentation.history.searchhistory.HistorySearchViewModel
 import com.arkan.terbangin.presentation.home.HomeViewModel
 import com.arkan.terbangin.presentation.home.class_sheet.ClassSheetViewModel
 import com.arkan.terbangin.presentation.home.passengers_count.PassengersCountViewModel
@@ -74,6 +81,8 @@ object AppModules {
 
     private val localModule =
         module {
+            single<AppDatabase> { AppDatabase.getInstance(androidContext()) }
+            single<SearchHistoryDao> { get<AppDatabase>().searchHistoryDao() }
             single<SharedPreferences> {
                 SharedPreferenceUtils.createPreference(
                     androidContext(),
@@ -94,6 +103,7 @@ object AppModules {
             single<FlightDataSource> { FlightApiDataSource(get()) }
             single<AirportCityDataSource> { AirportCityDataSourceImpl(get()) }
             single<PassengerDataSource> { PassengerApiDataSource(get()) }
+            single<SearchHistoryDataSource> { SearchHistoryDatabaseDataSource(get()) }
         }
 
     private val repository =
@@ -107,6 +117,7 @@ object AppModules {
             single<FlightRepository> { FlightRepositoryImpl(get()) }
             single<AirportCityRepository> { AirportCityRepositoryImpl(get()) }
             single<PassengerRepository> { PassengerRepositoryImpl(get()) }
+            single<SearchHistoryRepository> { SearchHistoryRepositoryImpl(get()) }
         }
 
     private val viewModelModule =
@@ -132,6 +143,7 @@ object AppModules {
             viewModelOf(::OrderBiodataViewModel)
             viewModelOf(::PassengerBioDataViewModel)
             viewModelOf(::SelectPassenegrSeatViewModel)
+            viewModelOf(::HistorySearchViewModel)
         }
 
     val modules =

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.FragmentHistoryBinding
 import com.arkan.terbangin.presentation.history.calendarfilterhistory.CalenderFilterHistoryBottomSheet
+import com.arkan.terbangin.presentation.history.searchhistory.HistorySearchBottomSheet
 import com.arkan.terbangin.utils.navigateToLogin
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
