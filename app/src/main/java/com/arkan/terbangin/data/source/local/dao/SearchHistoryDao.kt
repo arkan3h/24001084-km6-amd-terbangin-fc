@@ -13,6 +13,9 @@ interface SearchHistoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSearchHistory(searchHistoryEntity: SearchHistoryEntity): Long
 
+    @Query("SELECT * FROM search_history WHERE `query` = :query LIMIT 1")
+    suspend fun getSearchHistoryByName(query: String): SearchHistoryEntity?
+
     @Query("SELECT * FROM search_history ORDER BY timestamp DESC")
     fun getSearchHistory(): Flow<List<SearchHistoryEntity>>
 

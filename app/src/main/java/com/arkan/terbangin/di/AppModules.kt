@@ -21,6 +21,8 @@ import com.arkan.terbangin.data.datasource.profile.ProfileApiDataSource
 import com.arkan.terbangin.data.datasource.profile.ProfileDataSource
 import com.arkan.terbangin.data.datasource.searchHistory.SearchHistoryDataSource
 import com.arkan.terbangin.data.datasource.searchHistory.SearchHistoryDatabaseDataSource
+import com.arkan.terbangin.data.datasource.searchHistory.SearchTerminalDataSource
+import com.arkan.terbangin.data.datasource.searchHistory.SearchTerminalDatabaseDataSource
 import com.arkan.terbangin.data.repository.airport.AirportCityRepository
 import com.arkan.terbangin.data.repository.airport.AirportCityRepositoryImpl
 import com.arkan.terbangin.data.repository.auth.LoginRepository
@@ -41,8 +43,11 @@ import com.arkan.terbangin.data.repository.profile.ProfileRepository
 import com.arkan.terbangin.data.repository.profile.ProfileRepositoryImpl
 import com.arkan.terbangin.data.repository.searchhistory.SearchHistoryRepository
 import com.arkan.terbangin.data.repository.searchhistory.SearchHistoryRepositoryImpl
+import com.arkan.terbangin.data.repository.searchhistory.SearchTerminalRepository
+import com.arkan.terbangin.data.repository.searchhistory.SearchTerminalRepositoryImpl
 import com.arkan.terbangin.data.source.local.AppDatabase
 import com.arkan.terbangin.data.source.local.dao.SearchHistoryDao
+import com.arkan.terbangin.data.source.local.dao.SearchTerminalDao
 import com.arkan.terbangin.data.source.network.services.TerbanginApiServices
 import com.arkan.terbangin.data.source.pref.UserPreference
 import com.arkan.terbangin.data.source.pref.UserPreferenceImpl
@@ -83,6 +88,7 @@ object AppModules {
         module {
             single<AppDatabase> { AppDatabase.getInstance(androidContext()) }
             single<SearchHistoryDao> { get<AppDatabase>().searchHistoryDao() }
+            single<SearchTerminalDao> { get<AppDatabase>().searchTerminalDao() }
             single<SharedPreferences> {
                 SharedPreferenceUtils.createPreference(
                     androidContext(),
@@ -104,6 +110,7 @@ object AppModules {
             single<AirportCityDataSource> { AirportCityDataSourceImpl(get()) }
             single<PassengerDataSource> { PassengerApiDataSource(get()) }
             single<SearchHistoryDataSource> { SearchHistoryDatabaseDataSource(get()) }
+            single<SearchTerminalDataSource> { SearchTerminalDatabaseDataSource(get()) }
         }
 
     private val repository =
@@ -118,6 +125,7 @@ object AppModules {
             single<AirportCityRepository> { AirportCityRepositoryImpl(get()) }
             single<PassengerRepository> { PassengerRepositoryImpl(get()) }
             single<SearchHistoryRepository> { SearchHistoryRepositoryImpl(get()) }
+            single<SearchTerminalRepository> { SearchTerminalRepositoryImpl(get()) }
         }
 
     private val viewModelModule =
