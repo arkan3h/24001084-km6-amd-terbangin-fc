@@ -6,12 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import com.arkan.terbangin.base.OnItemCLickedListener
 import com.arkan.terbangin.data.model.Airport
+import com.arkan.terbangin.data.model.SearchHistory
 import com.arkan.terbangin.databinding.BottomSheetTerminalSearchBinding
 import com.arkan.terbangin.presentation.home.common.HomeSaveButtonClickListener
+import com.arkan.terbangin.presentation.home.terminal_search.adapter.HistoryTerminalListener
 import com.arkan.terbangin.presentation.home.terminal_search.adapter.TerminalAdapter
+import com.arkan.terbangin.presentation.home.terminal_search.adapter.TerminalHistoryAdapter
 import com.arkan.terbangin.utils.proceedWhen
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -24,6 +28,21 @@ class TerminalSearchBottomSheet(
     private val viewModel: TerminalSearchViewModel by viewModel()
     private var adapter: TerminalAdapter? = null
     private var citySelectedListener: HomeSaveButtonClickListener? = null
+    private val historyAdapter: TerminalHistoryAdapter by lazy {
+        TerminalHistoryAdapter(
+            object : OnItemCLickedListener<SearchHistory> {
+                override fun onItemClicked(item: SearchHistory) {
+                    binding.sbTerminalSearch.setQuery(item.query, true)
+                }
+            },
+            object : HistoryTerminalListener {
+                override fun deleteHistory(item: SearchHistory) {
+                    viewModel.deleteSearchHistory(item)
+                    getHistoryData()
+                }
+            },
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +62,7 @@ class TerminalSearchBottomSheet(
         onClickListener()
         bindTitle()
         setupSearch()
+        getHistoryData()
     }
 
     private fun setFullScreen() {
@@ -80,6 +100,10 @@ class TerminalSearchBottomSheet(
     private fun onClickListener() {
         binding.ivClose.setOnClickListener {
             dialog?.cancel()
+        }
+        binding.tvDeleteSearchHistory.setOnClickListener {
+            viewModel.clearSearchHistory()
+            getHistoryData()
         }
     }
 
@@ -139,6 +163,32 @@ class TerminalSearchBottomSheet(
         }
     }
 
+    private fun getHistoryData() {
+        viewModel.getSearchHistory().observe(viewLifecycleOwner) { it ->
+            it.proceedWhen(
+                doOnLoading = {
+                    binding.layoutState.pbLoading.isVisible = true
+                    binding.layoutState.tvError.isVisible = false
+                },
+                doOnError = {
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = true
+                },
+                doOnSuccess = {
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = false
+                    it.payload?.let { data ->
+                        bindAirportCityHistory(data)
+                    }
+                },
+                doOnEmpty = {
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = true
+                },
+            )
+        }
+    }
+
     private fun bindAirportCityList(data: List<Airport>) {
         adapter =
             TerminalAdapter(
@@ -146,6 +196,14 @@ class TerminalSearchBottomSheet(
                 listener =
                     object : OnItemCLickedListener<Airport> {
                         override fun onItemClicked(item: Airport) {
+                            viewModel.saveSearchHistory(item.city).observe(viewLifecycleOwner) {
+                                it.proceedWhen(
+                                    doOnSuccess = {},
+                                    doOnError = {
+                                        Toast.makeText(requireContext(), "gagal ${it.exception}", Toast.LENGTH_SHORT).show()
+                                    },
+                                )
+                            }
                             citySelectedListener?.onCitySelected(item, location)
                             dialog?.dismiss()
                         }
@@ -153,5 +211,10 @@ class TerminalSearchBottomSheet(
             )
         binding.rvTerminalSearchResult.adapter = this@TerminalSearchBottomSheet.adapter
         adapter?.submitData(data)
+    }
+
+    private fun bindAirportCityHistory(data: List<SearchHistory>) {
+        binding.rvTerminalSearchHistory.adapter = this@TerminalSearchBottomSheet.historyAdapter
+        historyAdapter.submitData(data)
     }
 }

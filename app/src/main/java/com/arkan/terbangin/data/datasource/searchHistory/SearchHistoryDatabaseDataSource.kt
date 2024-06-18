@@ -9,6 +9,8 @@ class SearchHistoryDatabaseDataSource(
 ) : SearchHistoryDataSource {
     override suspend fun insertSearchHistory(searchHistoryEntity: SearchHistoryEntity): Long = dao.insertSearchHistory(searchHistoryEntity)
 
+    override suspend fun getSearchHistoryByName(query: String): SearchHistoryEntity? = dao.getSearchHistoryByName(query)
+
     override fun getSearchHistory(): Flow<List<SearchHistoryEntity>> = dao.getSearchHistory()
 
     override suspend fun deleteSearchHistory(searchHistoryEntity: SearchHistoryEntity): Int = dao.deleteSearchHistory(searchHistoryEntity)

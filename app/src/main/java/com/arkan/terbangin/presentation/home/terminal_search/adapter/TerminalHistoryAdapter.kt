@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.history.searchhistory.adapter
+package com.arkan.terbangin.presentation.home.terminal_search.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,10 +9,10 @@ import com.arkan.terbangin.base.OnItemCLickedListener
 import com.arkan.terbangin.data.model.SearchHistory
 import com.arkan.terbangin.databinding.ItemTerminalHistoryBinding
 
-class SearchHistoryAdapter(
+class TerminalHistoryAdapter(
     private val listener: OnItemCLickedListener<SearchHistory>,
-    private val historyListener: HistoryListener? = null,
-) : RecyclerView.Adapter<SearchHistoryAdapter.HistoryViewHolder>() {
+    private val historyListener: HistoryTerminalListener? = null,
+) : RecyclerView.Adapter<TerminalHistoryAdapter.TerminalHistoryViewHolder>() {
     private val asyncDataDiffer =
         AsyncListDiffer(
             this,
@@ -40,8 +40,8 @@ class SearchHistoryAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): HistoryViewHolder {
-        return HistoryViewHolder(
+    ): TerminalHistoryViewHolder {
+        return TerminalHistoryViewHolder(
             ItemTerminalHistoryBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -55,16 +55,16 @@ class SearchHistoryAdapter(
     override fun getItemCount(): Int = asyncDataDiffer.currentList.size
 
     override fun onBindViewHolder(
-        holder: HistoryViewHolder,
+        holder: TerminalHistoryViewHolder,
         position: Int,
     ) {
         holder.bind(asyncDataDiffer.currentList[position])
     }
 
-    class HistoryViewHolder(
+    class TerminalHistoryViewHolder(
         private val binding: ItemTerminalHistoryBinding,
         private val listener: OnItemCLickedListener<SearchHistory>,
-        private val historyListener: HistoryListener?,
+        private val historyListener: HistoryTerminalListener?,
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: SearchHistory) {
@@ -79,6 +79,6 @@ class SearchHistoryAdapter(
     }
 }
 
-interface HistoryListener {
+interface HistoryTerminalListener {
     fun deleteHistory(item: SearchHistory)
 }
