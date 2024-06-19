@@ -22,6 +22,8 @@ interface PreferenceDataSource {
     fun getUserID(): String?
 
     fun clearUserID()
+
+    fun clearAll()
 }
 
 class UserPreferenceDataSource(private val userPreference: UserPreference) : PreferenceDataSource {
@@ -63,5 +65,9 @@ class UserPreferenceDataSource(private val userPreference: UserPreference) : Pre
 
     override fun clearUserID() {
         userPreference.clearUserID()
+    }
+
+    override fun clearAll() {
+        userPreference.clearAll()
     }
 }

@@ -1,10 +1,15 @@
 package com.arkan.terbangin.utils
 
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
+import retrofit2.HttpException
+import retrofit2.Response
+import java.io.IOException
 import java.lang.Exception
+import java.net.HttpURLConnection
 
 sealed class ResultWrapper<T>(
     val payload: T? = null,
@@ -91,8 +96,37 @@ fun <T> proceedFlow(block: suspend () -> T): Flow<ResultWrapper<T>> {
             },
         )
     }.catch { e ->
-        emit(ResultWrapper.Error(exception = Exception(e)))
+        emit(ResultWrapper.Error(exception = e.parseException()))
     }.onStart {
         emit(ResultWrapper.Loading())
     }
 }
+
+fun Throwable?.parseException(): Exception {
+    when (this) {
+        is IOException -> {
+            return NoInternetException()
+        }
+        is HttpException -> {
+            try {
+                if (this.code() == HttpURLConnection.HTTP_UNAUTHORIZED) {
+                    return UnauthorizedException()
+                } else {
+                    val errorResponseBody = this.response()?.errorBody()?.string()
+                    val errorBody = Gson().fromJson(errorResponseBody, Response::class.java)
+                    return ApiErrorException(errorBody)
+                }
+            } catch (e: Exception) {
+                return Exception(e)
+            }
+        }
+
+        else -> return Exception(this)
+    }
+}
+
+class UnauthorizedException() : Exception()
+
+class NoInternetException() : Exception()
+
+class ApiErrorException(val errorResponse: Response<*>) : Exception()

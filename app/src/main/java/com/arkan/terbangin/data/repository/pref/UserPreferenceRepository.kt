@@ -22,6 +22,8 @@ interface UserPreferenceRepository {
     fun getUserID(): String?
 
     fun clearUserID()
+
+    fun clearAll()
 }
 
 class UserPreferenceRepositoryImpl(private val preferenceDataSource: PreferenceDataSource) :
@@ -64,5 +66,9 @@ class UserPreferenceRepositoryImpl(private val preferenceDataSource: PreferenceD
 
     override fun clearUserID() {
         preferenceDataSource.clearUserID()
+    }
+
+    override fun clearAll() {
+        preferenceDataSource.clearAll()
     }
 }
