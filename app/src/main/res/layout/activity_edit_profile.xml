@@ -85,8 +85,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/text_email"
                     android:textSize="16sp"
-                    android:inputType="text"
-                    android:digits="0123456789@abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ._-+() "/>
+                    android:inputType="none"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -108,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/text_nomor_telepon"
                     android:textSize="16sp"
-                    android:inputType="number"/>
+                    android:inputType="none"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <FrameLayout

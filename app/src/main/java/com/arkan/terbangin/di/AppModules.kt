@@ -1,6 +1,7 @@
 package com.arkan.terbangin.di
 
 import android.content.SharedPreferences
+import com.arkan.terbangin.base.BaseViewModel
 import com.arkan.terbangin.data.datasource.airportcity.AirportCityDataSource
 import com.arkan.terbangin.data.datasource.airportcity.AirportCityDataSourceImpl
 import com.arkan.terbangin.data.datasource.auth.login.LoginApiDataSource
@@ -152,6 +153,7 @@ object AppModules {
             viewModelOf(::PassengerBioDataViewModel)
             viewModelOf(::SelectPassenegrSeatViewModel)
             viewModelOf(::HistorySearchViewModel)
+            viewModelOf(::BaseViewModel)
         }
 
     val modules =

@@ -23,6 +23,8 @@ interface UserPreference {
     fun getUserID(): String?
 
     fun clearUserID()
+
+    fun clearAll()
 }
 
 class UserPreferenceImpl(
@@ -58,6 +60,10 @@ class UserPreferenceImpl(
 
     override fun clearUserID() {
         pref.edit().remove(KEY_ID_USER).apply()
+    }
+
+    override fun clearAll() {
+        pref.edit().clear().apply()
     }
 
     companion object {

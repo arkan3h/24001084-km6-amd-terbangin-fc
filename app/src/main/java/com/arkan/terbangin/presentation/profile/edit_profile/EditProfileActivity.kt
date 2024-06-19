@@ -1,15 +1,15 @@
 package com.arkan.terbangin.presentation.profile.edit_profile
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.arkan.terbangin.base.BaseActivity
 import com.arkan.terbangin.data.model.Profile
 import com.arkan.terbangin.databinding.ActivityEditProfileBinding
 import com.arkan.terbangin.utils.proceedWhen
 import com.arkan.terbangin.utils.showAlertDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class EditProfileActivity : AppCompatActivity() {
+class EditProfileActivity : BaseActivity() {
     private val binding: ActivityEditProfileBinding by lazy {
         ActivityEditProfileBinding.inflate(layoutInflater)
     }
@@ -49,9 +49,9 @@ class EditProfileActivity : AppCompatActivity() {
                     }
                 },
                 doOnError = {
+                    it.exception?.let { e -> handleError(e) }
                     binding.layoutState.pbLoading.isVisible = false
                     binding.layoutState.tvError.isVisible = true
-                    showAlertDialog(it.exception?.message.orEmpty())
                 },
             )
         }
@@ -87,6 +87,7 @@ class EditProfileActivity : AppCompatActivity() {
                     showAlertDialog("Profile updated successfully")
                 },
                 doOnError = {
+                    it.exception?.let { e -> handleError(e) }
                     binding.profileContent.isVisible = false
                     binding.layoutState.pbLoading.isVisible = false
                     binding.layoutState.tvError.isVisible = true
