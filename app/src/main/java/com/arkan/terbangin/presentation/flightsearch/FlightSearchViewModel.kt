@@ -21,6 +21,7 @@ class FlightSearchViewModel(
     val filter: LiveData<FilterList> get() = _filter
     private var filterName: String = ""
     private var filterOrder: String = ""
+    private var filterSeat: String = ""
     private val _date = MutableLiveData(params?.departureDate.orEmpty())
     val date: LocalDate get() = LocalDate.parse(params?.departureDate)
 
@@ -36,12 +37,15 @@ class FlightSearchViewModel(
                 when (params?.ticketClass?.name) {
                     "Economy" -> {
                         filterName = "priceEconomy"
+                        filterSeat = "Economy"
                     }
                     "Business" -> {
                         filterName = "priceBussines"
+                        filterSeat = "Bussines"
                     }
                     "First Class" -> {
                         filterName = "priceFirstClass"
+                        filterSeat = "Firstclass"
                     }
                 }
             }
@@ -72,7 +76,8 @@ class FlightSearchViewModel(
         value: String = _date.value.orEmpty(),
         filter: String = filterName,
         order: String = filterOrder,
-    ) = flightRepository.getAllFlight(start, end, key, value, filter, order).asLiveData(Dispatchers.IO)
+        seatType: String = filterSeat,
+    ) = flightRepository.getAllFlight(start, end, key, value, filter, order, seatType).asLiveData(Dispatchers.IO)
 
     fun updateDate(newDate: String) {
         _date.value = newDate

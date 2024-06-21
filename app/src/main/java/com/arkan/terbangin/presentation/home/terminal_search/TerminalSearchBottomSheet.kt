@@ -143,6 +143,7 @@ class TerminalSearchBottomSheet(
                     binding.layoutState.tvError.isVisible = true
                     binding.rvTerminalSearchResult.isVisible = false
                     binding.lSearchHistory.isVisible = false
+                    binding.layoutState.tvError.text = it.exception?.message.toString()
                 },
                 doOnSuccess = {
                     binding.layoutState.pbLoading.isVisible = false
@@ -173,6 +174,7 @@ class TerminalSearchBottomSheet(
                 doOnError = {
                     binding.layoutState.pbLoading.isVisible = false
                     binding.layoutState.tvError.isVisible = true
+                    binding.layoutState.tvError.text = it.exception?.message.toString()
                 },
                 doOnSuccess = {
                     binding.layoutState.pbLoading.isVisible = false
@@ -183,7 +185,8 @@ class TerminalSearchBottomSheet(
                 },
                 doOnEmpty = {
                     binding.layoutState.pbLoading.isVisible = false
-                    binding.layoutState.tvError.isVisible = true
+                    binding.layoutState.tvError.isVisible = false
+                    historyAdapter.submitData(emptyList())
                 },
             )
         }

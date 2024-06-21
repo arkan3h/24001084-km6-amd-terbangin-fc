@@ -1,12 +1,17 @@
 package com.arkan.terbangin.presentation.profile.setting_account
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.arkan.terbangin.R
 import com.arkan.terbangin.databinding.ActivitySettingAccountBinding
 import com.arkan.terbangin.utils.navigateToLogin
@@ -23,8 +28,13 @@ class SettingAccountActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(binding.root)
-
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_setting_account)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
         setSwitchListener()
         setClickListener()
     }
@@ -67,6 +77,7 @@ class SettingAccountActivity : AppCompatActivity() {
         alertDialogBuilder.setView(dialogView)
 
         val dialog = alertDialogBuilder.create()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         cancelBtn.setOnClickListener {
             dialog.dismiss()

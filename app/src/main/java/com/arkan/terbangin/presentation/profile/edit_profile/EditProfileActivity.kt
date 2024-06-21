@@ -1,7 +1,17 @@
 package com.arkan.terbangin.presentation.profile.edit_profile
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Window
+import android.widget.Button
+import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import com.arkan.terbangin.R
 import com.arkan.terbangin.base.BaseActivity
 import com.arkan.terbangin.data.model.Profile
 import com.arkan.terbangin.databinding.ActivityEditProfileBinding
@@ -15,11 +25,17 @@ class EditProfileActivity : BaseActivity() {
     }
 
     private val viewModel: EditProfileViewModel by viewModel()
+    private lateinit var email: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(binding.root)
-
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
         setClickListener()
         viewModel.getUserID()?.let { uid -> getProfile(uid) }
     }
@@ -30,6 +46,9 @@ class EditProfileActivity : BaseActivity() {
         }
         binding.btnSaveProfile.setOnClickListener {
             updateProfile()
+        }
+        binding.tvResetPassword.setOnClickListener {
+            resetPassword()
         }
     }
 
@@ -52,6 +71,7 @@ class EditProfileActivity : BaseActivity() {
                     it.exception?.let { e -> handleError(e) }
                     binding.layoutState.pbLoading.isVisible = false
                     binding.layoutState.tvError.isVisible = true
+//                    showAlertDialog(it.exception?.message.orEmpty())
                 },
             )
         }
@@ -65,6 +85,7 @@ class EditProfileActivity : BaseActivity() {
             binding.tiEtName.setText(it.fullName)
             binding.tiEtEmail.setText(it.email)
             binding.tiEtPhoneNumber.setText(it.phoneNumber)
+            email = it.email
         }
     }
 
@@ -91,9 +112,45 @@ class EditProfileActivity : BaseActivity() {
                     binding.profileContent.isVisible = false
                     binding.layoutState.pbLoading.isVisible = false
                     binding.layoutState.tvError.isVisible = true
-                    showAlertDialog(it.exception?.message.orEmpty())
+//                    showAlertDialog(it.exception?.message.orEmpty())
                 },
             )
         }
+    }
+
+    private fun resetPassword() {
+        viewModel.doResetPassword(email).observe(this) { it ->
+            it.proceedWhen(
+                doOnSuccess = {
+                    binding.pbLoading.isVisible = false
+                    resetPasswordDialog()
+                },
+                doOnError = {
+                    binding.pbLoading.isVisible = false
+                    Toast.makeText(
+                        this,
+                        "Reset Password Failed : ${it.exception?.message.orEmpty()}",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                },
+                doOnLoading = {
+                    binding.pbLoading.isVisible = true
+                },
+            )
+        }
+    }
+
+    private fun resetPasswordDialog() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_reset_password)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val backBtn: Button = dialog.findViewById(R.id.btn_back_reset_password_dialog)
+        backBtn.setOnClickListener {
+            dialog.dismiss()
+            onBackPressedDispatcher.onBackPressed()
+        }
+        dialog.show()
     }
 }

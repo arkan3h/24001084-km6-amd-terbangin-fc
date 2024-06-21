@@ -1,5 +1,7 @@
 package com.arkan.terbangin.presentation.profile
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -68,6 +70,7 @@ class ProfileFragment : Fragment() {
         alertDialogBuilder.setView(dialogView)
 
         val dialog = alertDialogBuilder.create()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         cancelBtn.setOnClickListener {
             dialog.dismiss()

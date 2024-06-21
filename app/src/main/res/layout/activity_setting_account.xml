@@ -2,17 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/activity_setting_account"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="32dp"
-    tools:context=".presentation.profile.ProfileFragment">
+    tools:context=".presentation.profile.setting_account.SettingAccountActivity">
 
     <ImageButton
         android:id="@+id/ib_btn_back"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="32dp"
         android:background="@drawable/ic_back"
         android:backgroundTint="@color/md_theme_onBackground"
         android:contentDescription="@string/text_back_button_for_previous_page"
@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
+        android:layout_marginHorizontal="32dp"
         android:text="@string/title_tab_pengaturan_akun"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -36,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
+        android:layout_marginHorizontal="32dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,6 +63,7 @@
         android:id="@+id/sw_dark_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
         app:layout_constraintBottom_toBottomOf="@id/ll_dark_mode"
         app:layout_constraintTop_toTopOf="@id/ll_dark_mode"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -69,14 +72,17 @@
         android:id="@+id/divider_1"
         android:layout_width="0dp"
         android:layout_height="1dp"
+        android:layout_marginHorizontal="32dp"
         android:background="@color/gray_spacer"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_dark_mode" />
 
     <LinearLayout
         android:id="@+id/ll_delete_account"
         android:layout_width="match_parent"
         android:layout_height="64dp"
+        android:layout_marginHorizontal="32dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,8 +108,10 @@
         android:id="@+id/divider_menu_profile_settings"
         android:layout_width="0dp"
         android:layout_height="1dp"
+        android:layout_marginHorizontal="32dp"
         android:background="@color/gray_spacer"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_delete_account" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
