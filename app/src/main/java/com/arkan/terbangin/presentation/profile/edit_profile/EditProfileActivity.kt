@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
 import android.widget.Button
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -71,7 +70,6 @@ class EditProfileActivity : BaseActivity() {
                     it.exception?.let { e -> handleError(e) }
                     binding.layoutState.pbLoading.isVisible = false
                     binding.layoutState.tvError.isVisible = true
-//                    showAlertDialog(it.exception?.message.orEmpty())
                 },
             )
         }
@@ -112,7 +110,6 @@ class EditProfileActivity : BaseActivity() {
                     binding.profileContent.isVisible = false
                     binding.layoutState.pbLoading.isVisible = false
                     binding.layoutState.tvError.isVisible = true
-//                    showAlertDialog(it.exception?.message.orEmpty())
                 },
             )
         }
@@ -127,11 +124,7 @@ class EditProfileActivity : BaseActivity() {
                 },
                 doOnError = {
                     binding.pbLoading.isVisible = false
-                    Toast.makeText(
-                        this,
-                        "Reset Password Failed : ${it.exception?.message.orEmpty()}",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                    it.exception?.let { e -> handleError(e) }
                 },
                 doOnLoading = {
                     binding.pbLoading.isVisible = true

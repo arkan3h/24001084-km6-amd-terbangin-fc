@@ -8,18 +8,18 @@ import android.view.View
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.arkan.terbangin.R
+import com.arkan.terbangin.base.BaseActivity
 import com.arkan.terbangin.databinding.ActivitySettingAccountBinding
 import com.arkan.terbangin.utils.navigateToLogin
 import com.arkan.terbangin.utils.proceedWhen
 import com.arkan.terbangin.utils.showAlertDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SettingAccountActivity : AppCompatActivity() {
+class SettingAccountActivity : BaseActivity() {
     private val binding: ActivitySettingAccountBinding by lazy {
         ActivitySettingAccountBinding.inflate(layoutInflater)
     }
@@ -102,7 +102,7 @@ class SettingAccountActivity : AppCompatActivity() {
                     navigateToLogin()
                 },
                 doOnError = {
-                    showAlertDialog(it.exception?.message.orEmpty())
+                    it.exception?.let { e -> handleError(e) }
                 },
             )
         }

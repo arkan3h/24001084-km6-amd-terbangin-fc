@@ -13,7 +13,6 @@ import com.arkan.terbangin.data.source.network.model.passanger.PassengerPayload
 import com.arkan.terbangin.data.source.network.model.passanger.PassengerResponse
 import com.arkan.terbangin.data.source.network.model.profile.ProfileResponse
 import com.arkan.terbangin.data.source.pref.UserPreference
-import com.arkan.terbangin.utils.ErrorInterceptor
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
@@ -118,7 +117,6 @@ interface TerbanginApiServices {
             val okHttpClient =
                 OkHttpClient.Builder()
                     .addInterceptor(loggingInterceptor)
-                    .addInterceptor(ErrorInterceptor())
                     .addInterceptor { chain ->
                         val request =
                             chain.request().newBuilder()
