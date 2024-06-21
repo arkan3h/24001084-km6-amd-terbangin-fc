@@ -1,17 +1,18 @@
 package com.arkan.terbangin.data.source.network.services
 
 import com.arkan.terbangin.BuildConfig
-import com.arkan.terbangin.data.source.network.model.airport.AirportResponse
-import com.arkan.terbangin.data.source.network.model.auth.login.LoginResponse
-import com.arkan.terbangin.data.source.network.model.auth.otp.request_otp.RequestOTPResponse
-import com.arkan.terbangin.data.source.network.model.auth.otp.verify_otp.VerifyOTPResponse
-import com.arkan.terbangin.data.source.network.model.auth.register.RegisterResponse
+import com.arkan.terbangin.data.model.Response
+import com.arkan.terbangin.data.source.network.model.airport.AirportData
+import com.arkan.terbangin.data.source.network.model.auth.login.LoginData
+import com.arkan.terbangin.data.source.network.model.auth.otp.request_otp.RequestOTPData
+import com.arkan.terbangin.data.source.network.model.auth.otp.verify_otp.VerifyOTPData
+import com.arkan.terbangin.data.source.network.model.auth.register.RegisterData
 import com.arkan.terbangin.data.source.network.model.auth.resetpassword.ResetPasswordResponse
-import com.arkan.terbangin.data.source.network.model.flight.FlightResponse
-import com.arkan.terbangin.data.source.network.model.notification.NotificationResponse
+import com.arkan.terbangin.data.source.network.model.flight.FlightDataResponse
+import com.arkan.terbangin.data.source.network.model.notification.NotificationData
 import com.arkan.terbangin.data.source.network.model.passanger.PassengerPayload
-import com.arkan.terbangin.data.source.network.model.passanger.PassengerResponse
-import com.arkan.terbangin.data.source.network.model.profile.ProfileResponse
+import com.arkan.terbangin.data.source.network.model.passanger.PassengerResponseData
+import com.arkan.terbangin.data.source.network.model.profile.ProfileData
 import com.arkan.terbangin.data.source.pref.UserPreference
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -38,14 +39,14 @@ interface TerbanginApiServices {
         @Part("email") email: RequestBody,
         @Part("phoneNumber") phoneNumber: RequestBody,
         @Part("password") password: RequestBody,
-    ): RegisterResponse
+    ): Response<RegisterData?>
 
     @Multipart
     @POST("/api/v1/auth/login")
     suspend fun doLogin(
         @Part("email") email: RequestBody,
         @Part("password") password: RequestBody,
-    ): LoginResponse
+    ): Response<LoginData?>
 
     @Multipart
     @POST("/api/v1/verification/generate-link")
@@ -57,19 +58,19 @@ interface TerbanginApiServices {
     @POST("/api/v1/verification/generate-otp-email")
     suspend fun requestOTP(
         @Part("email") email: RequestBody,
-    ): RequestOTPResponse
+    ): Response<RequestOTPData?>
 
     @Multipart
     @POST("api/v1/verification/verify-otp")
     suspend fun verifyOTP(
         @Part("email") email: RequestBody,
         @Part("otp") otp: RequestBody,
-    ): VerifyOTPResponse
+    ): Response<VerifyOTPData?>
 
     @GET("/api/v1/profile/id/{id}")
     suspend fun getProfile(
         @Path("id") id: String?,
-    ): ProfileResponse
+    ): Response<ProfileData?>
 
     @Multipart
     @PATCH("/api/v1/profile/id/{id}")
@@ -79,12 +80,12 @@ interface TerbanginApiServices {
         @Part("email") email: RequestBody,
         @Part("phoneNumber") phoneNumber: RequestBody,
         @Part picture: MultipartBody.Part?,
-    ): ProfileResponse
+    ): Response<ProfileData?>
 
     @DELETE("/api/v1/profile/id/{id}")
     suspend fun deleteProfile(
         @Path("id") id: String,
-    ): ProfileResponse
+    ): Response<ProfileData?>
 
     @GET("/api/v1/flight/flightfilter")
     suspend fun getAllFlight(
@@ -95,20 +96,20 @@ interface TerbanginApiServices {
         @Query("filter") filter: String,
         @Query("order") order: String,
         @Query("seatType") seatType: String,
-    ): FlightResponse
+    ): Response<List<FlightDataResponse>?>
 
     @GET("/api/v1/airport")
-    suspend fun getAllAirport(): AirportResponse
+    suspend fun getAllAirport(): Response<List<AirportData>?>
 
     @POST("/api/v1/passanger")
     suspend fun createPassenger(
         @Body payload: PassengerPayload,
-    ): PassengerResponse
+    ): Response<PassengerResponseData?>
 
     @GET("/api/v1/notification/user/{id}")
     suspend fun getNotificationByUID(
         @Path("id") id: String?,
-    ): NotificationResponse
+    ): Response<List<NotificationData>?>
 
     companion object {
         @JvmStatic

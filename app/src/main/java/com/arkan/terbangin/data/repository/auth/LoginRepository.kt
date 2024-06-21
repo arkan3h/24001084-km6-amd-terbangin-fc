@@ -2,7 +2,8 @@ package com.arkan.terbangin.data.repository.auth
 
 import com.arkan.terbangin.data.datasource.auth.login.LoginDataSource
 import com.arkan.terbangin.data.datasource.preference.PreferenceDataSource
-import com.arkan.terbangin.data.source.network.model.auth.login.LoginResponse
+import com.arkan.terbangin.data.model.Response
+import com.arkan.terbangin.data.source.network.model.auth.login.LoginData
 import com.arkan.terbangin.utils.ResultWrapper
 import com.arkan.terbangin.utils.createPartFromString
 import com.arkan.terbangin.utils.proceedFlow
@@ -12,7 +13,7 @@ interface LoginRepository {
     fun doLogin(
         email: String,
         password: String,
-    ): Flow<ResultWrapper<LoginResponse>>
+    ): Flow<ResultWrapper<Response<LoginData?>>>
 }
 
 class LoginRepositoryImpl(
@@ -22,7 +23,7 @@ class LoginRepositoryImpl(
     override fun doLogin(
         email: String,
         password: String,
-    ): Flow<ResultWrapper<LoginResponse>> {
+    ): Flow<ResultWrapper<Response<LoginData?>>> {
         return proceedFlow {
             val emailBody = createPartFromString(email)
             val passwordBody = createPartFromString(password)

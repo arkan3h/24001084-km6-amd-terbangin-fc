@@ -1,6 +1,7 @@
 package com.arkan.terbangin.data.datasource.profile
 
-import com.arkan.terbangin.data.source.network.model.profile.ProfileResponse
+import com.arkan.terbangin.data.model.Response
+import com.arkan.terbangin.data.source.network.model.profile.ProfileData
 import com.arkan.terbangin.data.source.network.services.TerbanginApiServices
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -8,7 +9,7 @@ import okhttp3.RequestBody
 class ProfileApiDataSource(
     private val services: TerbanginApiServices,
 ) : ProfileDataSource {
-    override suspend fun getProfile(id: String): ProfileResponse {
+    override suspend fun getProfile(id: String): Response<ProfileData?> {
         return services.getProfile(id = id)
     }
 
@@ -18,7 +19,7 @@ class ProfileApiDataSource(
         email: RequestBody,
         phoneNumber: RequestBody,
         picture: MultipartBody.Part?,
-    ): ProfileResponse {
+    ): Response<ProfileData?> {
         return services.updateProfile(
             id = id,
             fullName = fullName,
@@ -28,7 +29,7 @@ class ProfileApiDataSource(
         )
     }
 
-    override suspend fun deleteProfile(id: String): ProfileResponse {
+    override suspend fun deleteProfile(id: String): Response<ProfileData?> {
         return services.deleteProfile(id = id)
     }
 }

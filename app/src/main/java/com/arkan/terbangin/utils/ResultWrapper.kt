@@ -1,12 +1,12 @@
 package com.arkan.terbangin.utils
 
+import com.arkan.terbangin.data.model.Response
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
 import retrofit2.HttpException
-import retrofit2.Response
 import java.io.IOException
 import java.lang.Exception
 import java.net.HttpURLConnection

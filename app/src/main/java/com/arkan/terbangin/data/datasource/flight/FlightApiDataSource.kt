@@ -1,6 +1,7 @@
 package com.arkan.terbangin.data.datasource.flight
 
-import com.arkan.terbangin.data.source.network.model.flight.FlightResponse
+import com.arkan.terbangin.data.model.Response
+import com.arkan.terbangin.data.source.network.model.flight.FlightDataResponse
 import com.arkan.terbangin.data.source.network.services.TerbanginApiServices
 
 class FlightApiDataSource(
@@ -14,7 +15,7 @@ class FlightApiDataSource(
         filter: String,
         order: String,
         seatType: String,
-    ): FlightResponse {
+    ): Response<List<FlightDataResponse>?> {
         return services.getAllFlight(start, end, key, value, filter, order, seatType)
     }
 }
