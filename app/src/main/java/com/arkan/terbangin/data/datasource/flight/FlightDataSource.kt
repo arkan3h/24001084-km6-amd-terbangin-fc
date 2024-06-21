@@ -1,6 +1,7 @@
 package com.arkan.terbangin.data.datasource.flight
 
-import com.arkan.terbangin.data.source.network.model.flight.FlightResponse
+import com.arkan.terbangin.data.model.Response
+import com.arkan.terbangin.data.source.network.model.flight.FlightDataResponse
 
 interface FlightDataSource {
     suspend fun getAllFlight(
@@ -11,5 +12,5 @@ interface FlightDataSource {
         filter: String,
         order: String,
         seatType: String,
-    ): FlightResponse
+    ): Response<List<FlightDataResponse>?>
 }

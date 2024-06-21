@@ -3,22 +3,21 @@ package com.arkan.terbangin.presentation.auth.login
 import android.os.Bundle
 import android.util.Patterns
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import com.arkan.terbangin.R
+import com.arkan.terbangin.base.BaseActivity
 import com.arkan.terbangin.databinding.ActivityLoginBinding
 import com.arkan.terbangin.utils.highLightWord
 import com.arkan.terbangin.utils.navigateToMain
 import com.arkan.terbangin.utils.navigateToRegister
 import com.arkan.terbangin.utils.navigateToResetPassword
 import com.arkan.terbangin.utils.proceedWhen
-import com.arkan.terbangin.utils.showAlertDialog
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
     private val binding: ActivityLoginBinding by lazy {
         ActivityLoginBinding.inflate(layoutInflater)
     }
@@ -114,7 +113,7 @@ class LoginActivity : AppCompatActivity() {
                 doOnError = {
                     binding.pbLoading.isVisible = false
                     binding.btnLogin.isVisible = true
-                    showAlertDialog(it.exception?.message.orEmpty())
+                    it.exception?.let { e -> handleError(e) }
                 },
                 doOnLoading = {
                     binding.pbLoading.isVisible = true

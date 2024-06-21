@@ -2,6 +2,8 @@ package com.arkan.terbangin.base
 
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.arkan.terbangin.utils.ApiErrorException
+import com.arkan.terbangin.utils.NoInternetException
 import com.arkan.terbangin.utils.UnauthorizedException
 import com.arkan.terbangin.utils.navigateToLogin
 import com.arkan.terbangin.utils.showAlertDialog
@@ -18,6 +20,10 @@ open class BaseActivity : AppCompatActivity() {
     fun handleError(e: Exception) {
         if (e is UnauthorizedException) {
             showAlertUnauthorized()
+        } else if (e is NoInternetException) {
+            showAlertDialog("No Internet Connection")
+        } else if (e is ApiErrorException) {
+            showAlertDialog(e.errorResponse.message)
         } else {
             showAlertDialog(e.message.orEmpty())
         }

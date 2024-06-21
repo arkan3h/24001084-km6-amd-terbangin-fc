@@ -5,17 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.arkan.terbangin.R
+import com.arkan.terbangin.base.BaseActivity
 import com.arkan.terbangin.databinding.ActivityOtpBinding
 import com.arkan.terbangin.utils.navigateToMain
 import com.arkan.terbangin.utils.proceedWhen
-import com.arkan.terbangin.utils.showAlertDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class OTPActivity : AppCompatActivity() {
+class OTPActivity : BaseActivity() {
     private val viewModel: OTPViewModel by viewModel {
         parametersOf(intent.extras)
     }
@@ -77,7 +76,7 @@ class OTPActivity : AppCompatActivity() {
                     },
                     doOnError = {
                         binding.layoutState.pbLoading.isVisible = false
-                        showAlertDialog(it.exception?.message.orEmpty())
+                        it.exception?.let { e -> handleError(e) }
                     },
                     doOnLoading = {
                         binding.layoutState.pbLoading.isVisible = true
@@ -102,7 +101,7 @@ class OTPActivity : AppCompatActivity() {
                 },
                 doOnError = {
                     binding.layoutState.pbLoading.isVisible = false
-                    showAlertDialog(it.exception?.message.orEmpty())
+                    it.exception?.let { e -> handleError(e) }
                 },
                 doOnLoading = {
                     binding.layoutState.pbLoading.isVisible = true
@@ -125,7 +124,7 @@ class OTPActivity : AppCompatActivity() {
                     doOnError = {
                         binding.layoutState.pbLoading.isVisible = false
                         binding.btnVerifyOtp.isVisible = true
-                        showAlertDialog(it.exception?.message.orEmpty())
+                        it.exception?.let { e -> handleError(e) }
                     },
                     doOnLoading = {
                         binding.layoutState.pbLoading.isVisible = true
@@ -148,7 +147,7 @@ class OTPActivity : AppCompatActivity() {
                 },
                 doOnError = {
                     binding.layoutState.pbLoading.isVisible = false
-                    showAlertDialog(it.exception?.message.orEmpty())
+                    it.exception?.let { e -> handleError(e) }
                 },
                 doOnLoading = {
                     binding.layoutState.pbLoading.isVisible = true

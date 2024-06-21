@@ -1,9 +1,10 @@
 package com.arkan.terbangin.data.mapper
 
 import com.arkan.terbangin.data.model.Profile
-import com.arkan.terbangin.data.source.network.model.profile.ProfileResponse
+import com.arkan.terbangin.data.model.Response
+import com.arkan.terbangin.data.source.network.model.profile.ProfileData
 
-fun ProfileResponse.toProfile() =
+fun Response<ProfileData?>.toProfile() =
     Profile(
         id = this.data?.id.orEmpty(),
         fullName = this.data?.fullName.orEmpty(),

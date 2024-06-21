@@ -8,8 +8,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.arkan.terbangin.R
 import com.arkan.terbangin.data.model.Notification
-import com.arkan.terbangin.data.source.network.model.notification.adapter.NotificationAdapter
 import com.arkan.terbangin.databinding.FragmentNotificationBinding
+import com.arkan.terbangin.presentation.notification.adapter.NotificationAdapter
 import com.arkan.terbangin.utils.navigateToLogin
 import com.arkan.terbangin.utils.proceedWhen
 import com.arkan.terbangin.utils.showAlertDialog

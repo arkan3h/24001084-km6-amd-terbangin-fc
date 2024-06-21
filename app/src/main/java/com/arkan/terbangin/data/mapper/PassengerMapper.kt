@@ -1,10 +1,11 @@
 package com.arkan.terbangin.data.mapper
 
 import com.arkan.terbangin.data.model.PassengerBioData
+import com.arkan.terbangin.data.model.Response
 import com.arkan.terbangin.data.source.network.model.passanger.PassengerPayload
-import com.arkan.terbangin.data.source.network.model.passanger.PassengerResponse
+import com.arkan.terbangin.data.source.network.model.passanger.PassengerResponseData
 
-fun PassengerResponse.toBioData() =
+fun Response<PassengerResponseData?>.toBioData() =
     PassengerBioData(
         id = this.data?.id,
         userId = this.data?.userId.orEmpty(),

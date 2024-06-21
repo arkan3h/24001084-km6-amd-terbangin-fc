@@ -2,8 +2,8 @@ package com.arkan.terbangin.data.repository.auth
 
 import com.arkan.terbangin.data.datasource.auth.login.LoginDataSource
 import com.arkan.terbangin.data.datasource.preference.PreferenceDataSource
-import com.arkan.terbangin.data.source.network.model.auth.login.LoginResponse
-import com.arkan.terbangin.utils.ErrorInterceptor
+import com.arkan.terbangin.data.model.Response
+import com.arkan.terbangin.data.source.network.model.auth.login.LoginData
 import com.arkan.terbangin.utils.ResultWrapper
 import com.arkan.terbangin.utils.createPartFromString
 import com.arkan.terbangin.utils.proceedFlow
@@ -13,7 +13,7 @@ interface LoginRepository {
     fun doLogin(
         email: String,
         password: String,
-    ): Flow<ResultWrapper<LoginResponse>>
+    ): Flow<ResultWrapper<Response<LoginData?>>>
 }
 
 class LoginRepositoryImpl(
@@ -23,26 +23,20 @@ class LoginRepositoryImpl(
     override fun doLogin(
         email: String,
         password: String,
-    ): Flow<ResultWrapper<LoginResponse>> {
+    ): Flow<ResultWrapper<Response<LoginData?>>> {
         return proceedFlow {
-            try {
-                val emailBody = createPartFromString(email)
-                val passwordBody = createPartFromString(password)
-                val loginResponse = dataSource.doLogin(emailBody, passwordBody)
+            val emailBody = createPartFromString(email)
+            val passwordBody = createPartFromString(password)
+            val loginResponse = dataSource.doLogin(emailBody, passwordBody)
 
-                loginResponse.data?.token?.let {
-                    preferenceDataSource.saveToken(it)
-                }
-                loginResponse.data?.user?.id?.let {
-                    preferenceDataSource.saveIDUser(it)
-                }
-
-                loginResponse
-            } catch (e: ErrorInterceptor.NoInternetException) {
-                throw Exception("No Internet Connection")
-            } catch (e: ErrorInterceptor.HttpException) {
-                throw Exception(e.message)
+            loginResponse.data?.token?.let {
+                preferenceDataSource.saveToken(it)
             }
+            loginResponse.data?.user?.id?.let {
+                preferenceDataSource.saveIDUser(it)
+            }
+
+            loginResponse
         }
     }
 }

@@ -1,7 +1,8 @@
 package com.arkan.terbangin.data.repository.auth
 
 import com.arkan.terbangin.data.datasource.auth.register.RegisterDataSource
-import com.arkan.terbangin.data.source.network.model.auth.register.RegisterResponse
+import com.arkan.terbangin.data.model.Response
+import com.arkan.terbangin.data.source.network.model.auth.register.RegisterData
 import com.arkan.terbangin.utils.ResultWrapper
 import com.arkan.terbangin.utils.createPartFromString
 import com.arkan.terbangin.utils.proceedFlow
@@ -13,7 +14,7 @@ interface RegisterRepository {
         email: String,
         phoneNumber: String,
         password: String,
-    ): Flow<ResultWrapper<RegisterResponse>>
+    ): Flow<ResultWrapper<Response<RegisterData?>>>
 }
 
 class RegisterRepositoryImpl(
@@ -24,7 +25,7 @@ class RegisterRepositoryImpl(
         email: String,
         phoneNumber: String,
         password: String,
-    ): Flow<ResultWrapper<RegisterResponse>> {
+    ): Flow<ResultWrapper<Response<RegisterData?>>> {
         return proceedFlow {
             dataSource.doRegister(
                 createPartFromString(fullName),

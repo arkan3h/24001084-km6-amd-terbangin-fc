@@ -1,4 +1,4 @@
-package com.arkan.terbangin.data.source.network.model.notification.adapter
+package com.arkan.terbangin.presentation.notification.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

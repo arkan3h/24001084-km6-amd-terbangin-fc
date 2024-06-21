@@ -3,21 +3,20 @@ package com.arkan.terbangin.presentation.auth.register
 import android.os.Bundle
 import android.util.Patterns
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import com.arkan.terbangin.R
+import com.arkan.terbangin.base.BaseActivity
 import com.arkan.terbangin.databinding.ActivityRegisterBinding
 import com.arkan.terbangin.presentation.auth.otp.OTPActivity
 import com.arkan.terbangin.utils.highLightWord
 import com.arkan.terbangin.utils.navigateToLogin
 import com.arkan.terbangin.utils.proceedWhen
-import com.arkan.terbangin.utils.showAlertDialog
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : BaseActivity() {
     private val binding: ActivityRegisterBinding by lazy {
         ActivityRegisterBinding.inflate(layoutInflater)
     }
@@ -152,7 +151,7 @@ class RegisterActivity : AppCompatActivity() {
                 doOnError = {
                     binding.pbLoading.isVisible = false
                     binding.btnRegister.isVisible = true
-                    showAlertDialog(it.exception?.message.orEmpty())
+                    it.exception?.let { e -> handleError(e) }
                 },
                 doOnLoading = {
                     binding.pbLoading.isVisible = true
