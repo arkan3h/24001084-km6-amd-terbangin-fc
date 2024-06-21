@@ -11,9 +11,12 @@ import com.arkan.terbangin.R
 import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.data.model.PassengerBioDataList
+import com.arkan.terbangin.data.model.Seat
 import com.arkan.terbangin.databinding.ActivitySelectPassengerSeatBinding
 import com.arkan.terbangin.presentation.checkout.selectpassengerseat.seatbookview.SeatBookView
 import com.arkan.terbangin.presentation.checkout.selectpassengerseat.seatbookview.SeatClickListener
+import com.arkan.terbangin.utils.proceedWhen
+import com.arkan.terbangin.utils.showAlertDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -50,9 +53,26 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        getSeat()
         setTitle()
-        setSeatView()
         setClickListener()
+        Log.d("Passenger Data List", "onCreate: ${viewModel.passengerDataList}")
+    }
+
+    private fun getSeat() {
+        viewModel.getSeat().observe(this) { it ->
+            it.proceedWhen(
+                doOnSuccess = {
+                    it.payload?.let { seat ->
+                        setSeatView(seat)
+                        viewModel.seat.value = seat
+                    }
+                },
+                doOnError = {
+                    showAlertDialog(it.exception?.message.orEmpty())
+                },
+            )
+        }
     }
 
     private fun setTitle() {
@@ -69,9 +89,8 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
             )
     }
 
-    private fun setSeatView() {
-        val newSeats = generateSeatsString(viewModel.capacity)
-        Log.d("seat", newSeats)
+    private fun setSeatView(seats: List<Seat>) {
+        val newSeats = generateSeatsString(viewModel.capacity, seats)
         seatBookView = findViewById(R.id.layoutSeat)
         seatBookView.setSeatsLayoutString(newSeats)
             .isCustomTitle(true)
@@ -99,7 +118,11 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
         )
     }
 
-    private fun generateSeatsString(capacity: Int): String {
+    private fun generateSeatsString(
+        capacity: Int,
+        seats: List<Seat>,
+    ): String {
+        Log.d("Seat", "generateSeatsString: $seats")
         val sb = StringBuilder()
         var remainingCapacity = capacity
         var seatCounter = 0
@@ -113,7 +136,13 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
 
             val seatsInRow = minOf(remainingCapacity, 3)
             repeat(seatsInRow) {
-                sb.append("A")
+                val currentSeatIndex = seatCounter + it
+                if (currentSeatIndex < seats.size) {
+                    val seat = seats[currentSeatIndex]
+                    sb.append(if (seat.isAvailable) "A" else "U") // Use API data
+                } else {
+                    sb.append("_") // Fill remaining spaces
+                }
             }
 
             remainingCapacity -= seatsInRow
@@ -133,12 +162,25 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
         binding.btnChoose.setOnClickListener {
-            val selectedSeats =
-                seatBookView.getSelectedIdList().joinToString(", ") { id ->
-                    arrTitle[id - 1]
-                }
-            Toast.makeText(this, "Selected Seats: $selectedSeats", Toast.LENGTH_SHORT).show()
+            setSelectedSeat()
         }
+    }
+
+    private fun setSelectedSeat() {
+        val selectedSeatIds = seatBookView.getSelectedIdList()
+        val selectedSeatNumbersFromApi = mutableListOf<Int>()
+
+        viewModel.seats.value?.let { seats ->
+            selectedSeatIds.forEach { id ->
+                val seat = seats.getOrNull(id - 1)
+                seat?.let {
+                    selectedSeatNumbersFromApi.add(it.seatNumber)
+                }
+            }
+        }
+
+        val selectedSeatsString = selectedSeatNumbersFromApi.joinToString(", ")
+        Toast.makeText(this, "Selected Seats: $selectedSeatsString", Toast.LENGTH_SHORT).show()
     }
 
     companion object {

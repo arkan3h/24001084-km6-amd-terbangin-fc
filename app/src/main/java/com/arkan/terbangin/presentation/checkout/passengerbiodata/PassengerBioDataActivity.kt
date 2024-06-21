@@ -3,6 +3,7 @@ package com.arkan.terbangin.presentation.checkout.passengerbiodata
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.arkan.terbangin.R
 import com.arkan.terbangin.data.model.Flight
@@ -44,18 +45,19 @@ class PassengerBioDataActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
         binding.btnChoose.setOnClickListener {
-            val passengerDataList = adapter.getAllData()
-            val passengerBioDataList = PassengerBioDataList(passengerDataList)
-            navigateToSelectSeat(
-                viewModel.flight!!,
-                viewModel.params!!,
-                viewModel.totalPrice!!,
-                passengerBioDataList,
-            )
-//            passengerDataList.forEach { passengerData ->
-//                createPassenger(passengerData)
-//                Log.d("PassengerData", passengerData.toString())
-//            }
+            adapter.getAllData().forEach {
+                createPassenger(it)
+                Log.d("PassengerData", it.toString())
+            }
+            viewModel.createdPassengers.observe(this) {
+                Log.d("Passenger", "setClickListener: $it")
+                navigateToSelectSeat(
+                    viewModel.flight!!,
+                    viewModel.params!!,
+                    viewModel.totalPrice!!,
+                    PassengerBioDataList(it),
+                )
+            }
         }
     }
 
@@ -66,6 +68,8 @@ class PassengerBioDataActivity : AppCompatActivity() {
                 },
                 doOnSuccess = {
                     showAlertDialog("Biodata updated successfully")
+                    viewModel.passengersList.add(it.payload!!)
+                    viewModel.setPassenger()
                 },
                 doOnError = {
                     showAlertDialog(it.exception?.message.orEmpty())

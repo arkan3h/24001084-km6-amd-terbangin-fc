@@ -26,6 +26,8 @@ import com.arkan.terbangin.data.datasource.searchHistory.SearchHistoryDataSource
 import com.arkan.terbangin.data.datasource.searchHistory.SearchHistoryDatabaseDataSource
 import com.arkan.terbangin.data.datasource.searchHistory.SearchTerminalDataSource
 import com.arkan.terbangin.data.datasource.searchHistory.SearchTerminalDatabaseDataSource
+import com.arkan.terbangin.data.datasource.seat.SeatApiDataSource
+import com.arkan.terbangin.data.datasource.seat.SeatDataSource
 import com.arkan.terbangin.data.repository.airport.AirportCityRepository
 import com.arkan.terbangin.data.repository.airport.AirportCityRepositoryImpl
 import com.arkan.terbangin.data.repository.auth.LoginRepository
@@ -50,6 +52,8 @@ import com.arkan.terbangin.data.repository.searchhistory.SearchHistoryRepository
 import com.arkan.terbangin.data.repository.searchhistory.SearchHistoryRepositoryImpl
 import com.arkan.terbangin.data.repository.searchhistory.SearchTerminalRepository
 import com.arkan.terbangin.data.repository.searchhistory.SearchTerminalRepositoryImpl
+import com.arkan.terbangin.data.repository.seat.SeatRepository
+import com.arkan.terbangin.data.repository.seat.SeatRepositoryImpl
 import com.arkan.terbangin.data.source.local.AppDatabase
 import com.arkan.terbangin.data.source.local.dao.SearchHistoryDao
 import com.arkan.terbangin.data.source.local.dao.SearchTerminalDao
@@ -117,6 +121,7 @@ object AppModules {
             single<SearchHistoryDataSource> { SearchHistoryDatabaseDataSource(get()) }
             single<SearchTerminalDataSource> { SearchTerminalDatabaseDataSource(get()) }
             single<NotificationDataSource> { NotificationApiDataSource(get()) }
+            single<SeatDataSource> { SeatApiDataSource(get()) }
         }
 
     private val repository =
@@ -133,6 +138,7 @@ object AppModules {
             single<SearchHistoryRepository> { SearchHistoryRepositoryImpl(get()) }
             single<SearchTerminalRepository> { SearchTerminalRepositoryImpl(get()) }
             single<NotificationRepository> { NotificationRepositoryImpl(get()) }
+            single<SeatRepository> { SeatRepositoryImpl(get()) }
         }
 
     private val viewModelModule =

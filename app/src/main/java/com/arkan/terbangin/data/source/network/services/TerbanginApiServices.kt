@@ -13,6 +13,7 @@ import com.arkan.terbangin.data.source.network.model.notification.NotificationDa
 import com.arkan.terbangin.data.source.network.model.passanger.PassengerPayload
 import com.arkan.terbangin.data.source.network.model.passanger.PassengerResponseData
 import com.arkan.terbangin.data.source.network.model.profile.ProfileData
+import com.arkan.terbangin.data.source.network.model.seat.SeatData
 import com.arkan.terbangin.data.source.pref.UserPreference
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -110,6 +111,11 @@ interface TerbanginApiServices {
     suspend fun getNotificationByUID(
         @Path("id") id: String?,
     ): Response<List<NotificationData>?>
+
+    @GET("/api/v1/seat/seat-with-flight-id/{id}")
+    suspend fun getSeat(
+        @Path("id") id: String?,
+    ): Response<List<SeatData>?>
 
     companion object {
         @JvmStatic
