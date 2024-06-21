@@ -15,6 +15,7 @@ interface FlightRepository {
         value: String,
         filter: String,
         order: String,
+        seatType: String,
     ): Flow<ResultWrapper<List<Flight>>>
 }
 
@@ -28,9 +29,10 @@ class FlightRepositoryImpl(
         value: String,
         filter: String,
         order: String,
+        seatType: String,
     ): Flow<ResultWrapper<List<Flight>>> {
         return proceedFlow {
-            dataSource.getAllFlight(start, end, key, value, filter, order).data.toFlight()
+            dataSource.getAllFlight(start, end, key, value, filter, order, seatType).data.toFlight()
         }
     }
 }

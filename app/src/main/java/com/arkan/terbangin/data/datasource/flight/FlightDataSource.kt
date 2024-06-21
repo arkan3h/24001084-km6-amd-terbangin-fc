@@ -10,5 +10,6 @@ interface FlightDataSource {
         value: String,
         filter: String,
         order: String,
+        seatType: String,
     ): FlightResponse
 }

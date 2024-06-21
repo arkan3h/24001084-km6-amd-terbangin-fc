@@ -13,7 +13,8 @@ class FlightApiDataSource(
         value: String,
         filter: String,
         order: String,
+        seatType: String,
     ): FlightResponse {
-        return services.getAllFlight(start, end, key, value, filter, order)
+        return services.getAllFlight(start, end, key, value, filter, order, seatType)
     }
 }

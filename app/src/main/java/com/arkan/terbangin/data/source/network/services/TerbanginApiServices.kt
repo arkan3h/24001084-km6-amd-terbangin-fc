@@ -95,6 +95,7 @@ interface TerbanginApiServices {
         @Query("value") date: String,
         @Query("filter") filter: String,
         @Query("order") order: String,
+        @Query("seatType") seatType: String,
     ): FlightResponse
 
     @GET("/api/v1/airport")
