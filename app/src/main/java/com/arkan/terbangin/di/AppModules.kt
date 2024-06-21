@@ -14,6 +14,8 @@ import com.arkan.terbangin.data.datasource.auth.resetpassword.ResetPasswordApiDa
 import com.arkan.terbangin.data.datasource.auth.resetpassword.ResetPasswordDataSource
 import com.arkan.terbangin.data.datasource.flight.FlightApiDataSource
 import com.arkan.terbangin.data.datasource.flight.FlightDataSource
+import com.arkan.terbangin.data.datasource.notification.NotificationApiDataSource
+import com.arkan.terbangin.data.datasource.notification.NotificationDataSource
 import com.arkan.terbangin.data.datasource.passenger.PassengerApiDataSource
 import com.arkan.terbangin.data.datasource.passenger.PassengerDataSource
 import com.arkan.terbangin.data.datasource.preference.PreferenceDataSource
@@ -36,6 +38,8 @@ import com.arkan.terbangin.data.repository.auth.ResetPasswordRepository
 import com.arkan.terbangin.data.repository.auth.ResetPasswordRepositoryImpl
 import com.arkan.terbangin.data.repository.flight.FlightRepository
 import com.arkan.terbangin.data.repository.flight.FlightRepositoryImpl
+import com.arkan.terbangin.data.repository.notification.NotificationRepository
+import com.arkan.terbangin.data.repository.notification.NotificationRepositoryImpl
 import com.arkan.terbangin.data.repository.passenger.PassengerRepository
 import com.arkan.terbangin.data.repository.passenger.PassengerRepositoryImpl
 import com.arkan.terbangin.data.repository.pref.UserPreferenceRepository
@@ -112,6 +116,7 @@ object AppModules {
             single<PassengerDataSource> { PassengerApiDataSource(get()) }
             single<SearchHistoryDataSource> { SearchHistoryDatabaseDataSource(get()) }
             single<SearchTerminalDataSource> { SearchTerminalDatabaseDataSource(get()) }
+            single<NotificationDataSource> { NotificationApiDataSource(get()) }
         }
 
     private val repository =
@@ -127,6 +132,7 @@ object AppModules {
             single<PassengerRepository> { PassengerRepositoryImpl(get()) }
             single<SearchHistoryRepository> { SearchHistoryRepositoryImpl(get()) }
             single<SearchTerminalRepository> { SearchTerminalRepositoryImpl(get()) }
+            single<NotificationRepository> { NotificationRepositoryImpl(get()) }
         }
 
     private val viewModelModule =

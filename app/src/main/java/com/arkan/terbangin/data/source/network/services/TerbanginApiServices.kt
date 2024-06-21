@@ -8,6 +8,7 @@ import com.arkan.terbangin.data.source.network.model.auth.otp.verify_otp.VerifyO
 import com.arkan.terbangin.data.source.network.model.auth.register.RegisterResponse
 import com.arkan.terbangin.data.source.network.model.auth.resetpassword.ResetPasswordResponse
 import com.arkan.terbangin.data.source.network.model.flight.FlightResponse
+import com.arkan.terbangin.data.source.network.model.notification.NotificationResponse
 import com.arkan.terbangin.data.source.network.model.passanger.PassengerPayload
 import com.arkan.terbangin.data.source.network.model.passanger.PassengerResponse
 import com.arkan.terbangin.data.source.network.model.profile.ProfileResponse
@@ -103,6 +104,11 @@ interface TerbanginApiServices {
     suspend fun createPassenger(
         @Body payload: PassengerPayload,
     ): PassengerResponse
+
+    @GET("/api/v1/notification/user/{id}")
+    suspend fun getNotificationByUID(
+        @Path("id") id: String?,
+    ): NotificationResponse
 
     companion object {
         @JvmStatic
