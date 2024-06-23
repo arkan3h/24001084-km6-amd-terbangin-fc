@@ -54,7 +54,7 @@ class ProfileFragment : Fragment() {
         binding.tvMenuChangePassword.setOnClickListener {
             navigateToResetPassword()
         }
-        binding.tvMenuEditProfile.setOnClickListener {
+        binding.tvMenuProfileSettings.setOnClickListener {
             navigateToSettingAccount()
         }
         binding.tvMenuLogout.setOnClickListener {

@@ -3,20 +3,19 @@ package com.arkan.terbangin.presentation.checkout.orderbiodata
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.arkan.terbangin.R
+import com.arkan.terbangin.base.BaseActivity
 import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.data.model.Profile
 import com.arkan.terbangin.databinding.ActivityOrderBiodataBinding
 import com.arkan.terbangin.presentation.checkout.passengerbiodata.PassengerBioDataActivity
 import com.arkan.terbangin.utils.proceedWhen
-import com.arkan.terbangin.utils.showAlertDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class OrderBiodataActivity : AppCompatActivity() {
+class OrderBiodataActivity : BaseActivity() {
     private val binding: ActivityOrderBiodataBinding by lazy {
         ActivityOrderBiodataBinding.inflate(layoutInflater)
     }
@@ -62,21 +61,19 @@ class OrderBiodataActivity : AppCompatActivity() {
         viewModel.getProfile(id).observe(this) { it ->
             it.proceedWhen(
                 doOnLoading = {
-//                    binding.layoutState.pbLoading.isVisible = true
-//                    binding.layoutState.tvError.isVisible = false
-//                    binding.profileContent.isVisible = true
+                    binding.layoutState.pbLoading.isVisible = true
+                    binding.layoutState.tvError.isVisible = false
                 },
                 doOnSuccess = {
-//                    binding.layoutState.pbLoading.isVisible = false
-//                    binding.layoutState.tvError.isVisible = false
-                    it.payload?.let { data ->
-                        bindProfileData(data)
-                    }
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = false
+                    it.payload?.let { data -> bindProfileData(data) }
                 },
                 doOnError = {
-//                    binding.layoutState.pbLoading.isVisible = false
-//                    binding.layoutState.tvError.isVisible = true
-                    showAlertDialog(it.exception?.message.orEmpty())
+                    it.exception?.let { e -> handleError(e) }
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.text = it.exception?.message
+                    binding.layoutState.tvError.isVisible = true
                 },
             )
         }
@@ -84,9 +81,6 @@ class OrderBiodataActivity : AppCompatActivity() {
 
     private fun bindProfileData(profile: Profile) {
         profile.let {
-            // binding.ivProfileImage.load(it.picture) {
-            //    crossfade(true)
-            // }
             binding.tiEtNameOrderBiodata.setText(it.fullName)
             binding.tiEtEmailOrderBiodata.setText(it.email)
             binding.tiEtPhoneNumberOrderBiodata.setText(it.phoneNumber)

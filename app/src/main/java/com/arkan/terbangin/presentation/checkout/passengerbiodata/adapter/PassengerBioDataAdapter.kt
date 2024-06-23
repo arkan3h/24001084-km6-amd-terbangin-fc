@@ -1,6 +1,5 @@
 package com.arkan.terbangin.presentation.checkout.passengerbiodata.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -68,7 +67,6 @@ class PassengerBioDataAdapter(
     }
 
     fun getAllData(): List<PassengerBioData> {
-        Log.d("TAG", "getAllData: ")
         return viewHolders.map {
             it.getData()
         }
