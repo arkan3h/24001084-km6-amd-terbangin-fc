@@ -18,6 +18,8 @@ import com.arkan.terbangin.data.datasource.notification.NotificationApiDataSourc
 import com.arkan.terbangin.data.datasource.notification.NotificationDataSource
 import com.arkan.terbangin.data.datasource.passenger.PassengerApiDataSource
 import com.arkan.terbangin.data.datasource.passenger.PassengerDataSource
+import com.arkan.terbangin.data.datasource.payment.PaymentApiDataSource
+import com.arkan.terbangin.data.datasource.payment.PaymentDataSource
 import com.arkan.terbangin.data.datasource.preference.PreferenceDataSource
 import com.arkan.terbangin.data.datasource.preference.UserPreferenceDataSource
 import com.arkan.terbangin.data.datasource.profile.ProfileApiDataSource
@@ -44,6 +46,8 @@ import com.arkan.terbangin.data.repository.notification.NotificationRepository
 import com.arkan.terbangin.data.repository.notification.NotificationRepositoryImpl
 import com.arkan.terbangin.data.repository.passenger.PassengerRepository
 import com.arkan.terbangin.data.repository.passenger.PassengerRepositoryImpl
+import com.arkan.terbangin.data.repository.payment.PaymentRepository
+import com.arkan.terbangin.data.repository.payment.PaymentRepositoryImpl
 import com.arkan.terbangin.data.repository.pref.UserPreferenceRepository
 import com.arkan.terbangin.data.repository.pref.UserPreferenceRepositoryImpl
 import com.arkan.terbangin.data.repository.profile.ProfileRepository
@@ -64,9 +68,11 @@ import com.arkan.terbangin.presentation.auth.login.LoginViewModel
 import com.arkan.terbangin.presentation.auth.otp.OTPViewModel
 import com.arkan.terbangin.presentation.auth.register.RegisterViewModel
 import com.arkan.terbangin.presentation.auth.reset_password.ResetPasswordViewModel
+import com.arkan.terbangin.presentation.checkout.detail.CheckoutDetailViewModel
 import com.arkan.terbangin.presentation.checkout.orderbiodata.OrderBiodataViewModel
 import com.arkan.terbangin.presentation.checkout.passengerbiodata.PassengerBioDataViewModel
-import com.arkan.terbangin.presentation.checkout.selectpassengerseat.SelectPassenegrSeatViewModel
+import com.arkan.terbangin.presentation.checkout.payment.PaymentViewModel
+import com.arkan.terbangin.presentation.checkout.selectpassengerseat.SelectPassengerSeatViewModel
 import com.arkan.terbangin.presentation.flightdetail.FlightDetailViewModel
 import com.arkan.terbangin.presentation.flightsearch.FlightSearchViewModel
 import com.arkan.terbangin.presentation.flightsearch.filter_list.FilterListViewModel
@@ -122,6 +128,7 @@ object AppModules {
             single<SearchTerminalDataSource> { SearchTerminalDatabaseDataSource(get()) }
             single<NotificationDataSource> { NotificationApiDataSource(get()) }
             single<SeatDataSource> { SeatApiDataSource(get()) }
+            single<PaymentDataSource> { PaymentApiDataSource(get()) }
         }
 
     private val repository =
@@ -139,6 +146,7 @@ object AppModules {
             single<SearchTerminalRepository> { SearchTerminalRepositoryImpl(get()) }
             single<NotificationRepository> { NotificationRepositoryImpl(get()) }
             single<SeatRepository> { SeatRepositoryImpl(get()) }
+            single<PaymentRepository> { PaymentRepositoryImpl(get()) }
         }
 
     private val viewModelModule =
@@ -163,9 +171,11 @@ object AppModules {
             viewModelOf(::FlightDetailViewModel)
             viewModelOf(::OrderBiodataViewModel)
             viewModelOf(::PassengerBioDataViewModel)
-            viewModelOf(::SelectPassenegrSeatViewModel)
+            viewModelOf(::SelectPassengerSeatViewModel)
             viewModelOf(::HistorySearchViewModel)
             viewModelOf(::BaseViewModel)
+            viewModelOf(::CheckoutDetailViewModel)
+            viewModelOf(::PaymentViewModel)
         }
 
     val modules =

@@ -18,14 +18,19 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun handleError(e: Exception) {
-        if (e is UnauthorizedException) {
-            showAlertUnauthorized()
-        } else if (e is NoInternetException) {
-            showAlertDialog("No Internet Connection")
-        } else if (e is ApiErrorException) {
-            showAlertDialog(e.errorResponse.message)
-        } else {
-            showAlertDialog(e.message.orEmpty())
+        when (e) {
+            is UnauthorizedException -> {
+                showAlertUnauthorized()
+            }
+            is NoInternetException -> {
+                showAlertDialog("No Internet Connection")
+            }
+            is ApiErrorException -> {
+                showAlertDialog(e.errorResponse.message)
+            }
+            else -> {
+                showAlertDialog(e.message.orEmpty())
+            }
         }
     }
 

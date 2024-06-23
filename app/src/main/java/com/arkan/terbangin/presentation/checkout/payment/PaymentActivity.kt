@@ -1,19 +1,18 @@
 package com.arkan.terbangin.presentation.checkout.payment
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.arkan.terbangin.databinding.ActivityPaymentBinding
-import com.arkan.terbangin.presentation.flightdetail.FlightDetailActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class PaymentActivity : AppCompatActivity() {
-    private lateinit var webView: WebView
-
     private val binding: ActivityPaymentBinding by lazy {
         ActivityPaymentBinding.inflate(layoutInflater)
     }
@@ -27,23 +26,19 @@ class PaymentActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         bindView()
-        setClickListener()
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun bindView() {
-        webView = binding.webViewPayment
-        webView.loadUrl(viewModel.payment_url!!)
-        webView.settings.javaScriptEnabled = true
-        webView.settings.setSupportZoom(true)
-
+        val webView: WebView = binding.webViewPayment
         webView.webViewClient = WebViewClient()
-    }
 
-    private fun setClickListener() {
-        if (webView.canGoBack()) {
-            webView.goBack()
-        } else {
-            onBackPressedDispatcher.onBackPressed()
+        webView.apply {
+            settings.setSupportZoom(true)
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+            settings.loadsImagesAutomatically = true
+            loadUrl(viewModel.paymentUrl!!)
         }
     }
 
@@ -54,7 +49,8 @@ class PaymentActivity : AppCompatActivity() {
             context: Context,
             url: String,
         ) {
-            val intent = Intent(context, FlightDetailActivity::class.java)
+            Toast.makeText(context, "Payment URL: $url", Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, PaymentActivity::class.java)
             intent.putExtra(PAYMENT_URL, url)
             context.startActivity(intent)
         }
