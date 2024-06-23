@@ -12,6 +12,7 @@ import com.arkan.terbangin.data.source.network.model.flight.FlightDataResponse
 import com.arkan.terbangin.data.source.network.model.notification.NotificationData
 import com.arkan.terbangin.data.source.network.model.passanger.PassengerPayload
 import com.arkan.terbangin.data.source.network.model.passanger.PassengerResponseData
+import com.arkan.terbangin.data.source.network.model.payment.PaymentData
 import com.arkan.terbangin.data.source.network.model.profile.ProfileData
 import com.arkan.terbangin.data.source.network.model.seat.SeatData
 import com.arkan.terbangin.data.source.pref.UserPreference
@@ -116,6 +117,22 @@ interface TerbanginApiServices {
     suspend fun getSeat(
         @Path("id") id: String?,
     ): Response<List<SeatData>?>
+
+    @GET("/api/v1/notification/{id}")
+    suspend fun getDetailNotification(
+        @Path("id") id: String?,
+    ): Response<NotificationData?>
+
+    @Multipart
+    @POST("/api/v1/payment/")
+    suspend fun createPayment(
+        @Part("totalPrice") totalPrice: Int,
+    ): Response<PaymentData?>
+
+    @PATCH("/api/v1/payment/id/{id}")
+    suspend fun updatePayment(
+        @Path("id") id: String?,
+    ): Response<PaymentData?>
 
     companion object {
         @JvmStatic

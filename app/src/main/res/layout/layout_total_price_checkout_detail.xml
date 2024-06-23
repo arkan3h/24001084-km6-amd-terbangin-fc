@@ -17,7 +17,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +37,7 @@
             tools:text="IDR 4.950.000/pax" />
 
         <Button
-            android:id="@+id/btn_choose"
+            android:id="@+id/btn_continue_payment"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginTop="16dp"

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.arkan.terbangin.R
 import com.arkan.terbangin.data.model.Flight
@@ -13,6 +12,7 @@ import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.data.model.PassengerBioDataList
 import com.arkan.terbangin.data.model.Seat
 import com.arkan.terbangin.databinding.ActivitySelectPassengerSeatBinding
+import com.arkan.terbangin.presentation.checkout.detail.CheckoutDetailActivity
 import com.arkan.terbangin.presentation.checkout.selectpassengerseat.seatbookview.SeatBookView
 import com.arkan.terbangin.presentation.checkout.selectpassengerseat.seatbookview.SeatClickListener
 import com.arkan.terbangin.utils.proceedWhen
@@ -24,7 +24,7 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
     private val binding: ActivitySelectPassengerSeatBinding by lazy {
         ActivitySelectPassengerSeatBinding.inflate(layoutInflater)
     }
-    private val viewModel: SelectPassenegrSeatViewModel by viewModel {
+    private val viewModel: SelectPassengerSeatViewModel by viewModel {
         parametersOf(intent.extras)
     }
 
@@ -161,7 +161,7 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
         binding.layoutAppBar.ibBtnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
-        binding.btnChoose.setOnClickListener {
+        binding.btnSave.setOnClickListener {
             setSelectedSeat()
         }
     }
@@ -176,11 +176,33 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
                 seat?.let {
                     selectedSeatNumbersFromApi.add(it.seatNumber)
                 }
+                // Toast.makeText(this, "Selected Seats: $selectedSeatIds", Toast.LENGTH_SHORT).show()
+                navigateToCheckout(
+                    viewModel.totalPrice!!,
+                    viewModel.flight!!,
+                    viewModel.params!!,
+                    viewModel.passengerDataList!!,
+                )
             }
         }
 
         val selectedSeatsString = selectedSeatNumbersFromApi.joinToString(", ")
-        Toast.makeText(this, "Selected Seats: $selectedSeatsString", Toast.LENGTH_SHORT).show()
+        // Toast.makeText(this, "Selected Seats: $selectedSeatsString", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun navigateToCheckout(
+        totalPrice: Double,
+        flight: Flight,
+        params: FlightSearchParams,
+        passengerList: PassengerBioDataList,
+    ) {
+        CheckoutDetailActivity.startActivity(
+            this,
+            totalPrice,
+            flight,
+            params,
+            passengerList,
+        )
     }
 
     companion object {

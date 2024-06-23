@@ -12,7 +12,7 @@ import com.arkan.terbangin.data.model.Seat
 import com.arkan.terbangin.data.repository.seat.SeatRepository
 import kotlinx.coroutines.Dispatchers
 
-class SelectPassenegrSeatViewModel(
+class SelectPassengerSeatViewModel(
     extras: Bundle?,
     private val repository: SeatRepository,
 ) : ViewModel() {

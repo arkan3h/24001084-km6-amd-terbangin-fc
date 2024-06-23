@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import com.arkan.terbangin.R
+import com.arkan.terbangin.base.BaseActivity
 import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.data.model.PassengerBioData
@@ -14,11 +14,10 @@ import com.arkan.terbangin.databinding.ActivityPassengerBiodataBinding
 import com.arkan.terbangin.presentation.checkout.passengerbiodata.adapter.PassengerBioDataAdapter
 import com.arkan.terbangin.presentation.checkout.selectpassengerseat.SelectPassengerSeatActivity
 import com.arkan.terbangin.utils.proceedWhen
-import com.arkan.terbangin.utils.showAlertDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class PassengerBioDataActivity : AppCompatActivity() {
+class PassengerBioDataActivity : BaseActivity() {
     private val binding: ActivityPassengerBiodataBinding by lazy {
         ActivityPassengerBiodataBinding.inflate(layoutInflater)
     }
@@ -44,7 +43,7 @@ class PassengerBioDataActivity : AppCompatActivity() {
         binding.layoutAppBar.ibBtnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
-        binding.btnChoose.setOnClickListener {
+        binding.btnSave.setOnClickListener {
             adapter.getAllData().forEach {
                 createPassenger(it)
                 Log.d("PassengerData", it.toString())
@@ -67,12 +66,11 @@ class PassengerBioDataActivity : AppCompatActivity() {
                 doOnLoading = {
                 },
                 doOnSuccess = {
-                    showAlertDialog("Biodata updated successfully")
                     viewModel.passengersList.add(it.payload!!)
                     viewModel.setPassenger()
                 },
                 doOnError = {
-                    showAlertDialog(it.exception?.message.orEmpty())
+                    it.exception?.let { e -> handleError(e) }
                 },
             )
         }

@@ -190,4 +190,5 @@
     <string name="binding_order_biodata">Biodata Pemesan</string>
     <string name="binding_title_select_seat">Pilih Kursi (%1$s Penumpang)</string>
     <string name="binding_title_seat">%1$s - %2$s Kursi Tersedia</string>
+    <string name="menu_change_password">Ubah Password</string>
 </resources>

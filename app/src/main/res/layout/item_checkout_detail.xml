@@ -18,7 +18,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +37,6 @@
             android:id="@+id/tv_airport_origin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/tv_takeoff_date"
             app:layout_constraintTop_toBottomOf="@id/tv_takeoff_date"
@@ -90,7 +88,6 @@
                 android:id="@+id/tv_airline_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:text="Jet Air - Economy" />
@@ -99,7 +96,6 @@
                 android:id="@+id/tv_airline_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:text="JT - 203" />
@@ -109,7 +105,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:text="@string/text_information" />
@@ -118,7 +113,6 @@
                 android:id="@+id/tv_baggage_capacity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:textSize="16sp"
                 tools:text="Baggage 20 kg" />
 
@@ -126,7 +120,6 @@
                 android:id="@+id/tv_cabin_baggage_capacity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:textSize="16sp"
                 tools:text="Cabin Baggage 7 kg" />
 
@@ -134,7 +127,6 @@
                 android:id="@+id/tv_more_service"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:textSize="16sp"
                 tools:text="In Flight Entertainment" />
 
@@ -154,7 +146,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -175,7 +166,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_landing_date"

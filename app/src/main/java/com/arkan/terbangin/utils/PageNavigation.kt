@@ -59,3 +59,11 @@ fun Fragment.navigateToSettingAccount() {
 fun Fragment.navigateToEditProfile() {
     startActivity(Intent(activity, EditProfileActivity::class.java))
 }
+
+fun Fragment.navigateToResetPassword() {
+    startActivity(
+        Intent(activity, ResetPasswordActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        },
+    )
+}

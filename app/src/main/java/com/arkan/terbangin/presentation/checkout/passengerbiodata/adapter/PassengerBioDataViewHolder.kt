@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.util.Log
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.arkan.terbangin.R
@@ -149,7 +148,6 @@ class PassengerBioDataViewHolder(
         autoComplete.onItemClickListener =
             AdapterView.OnItemClickListener { adapterView, view, i, l ->
                 val itemSelected = adapterView.getItemAtPosition(i)
-                Toast.makeText(binding.root.context, "Item : $itemSelected", Toast.LENGTH_SHORT).show()
             }
     }
 }
