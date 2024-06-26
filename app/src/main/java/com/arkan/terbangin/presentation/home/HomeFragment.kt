@@ -25,6 +25,7 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
     private val viewModel: HomeViewModel by viewModel()
 
     private lateinit var binding: FragmentHomeBinding
+    private var status = "One Way"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,6 +73,7 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
                     viewModel.babyQty.value!!,
                     viewModel.totalQty.value!!,
                     viewModel.ticketClass.value!!,
+                    status,
                     viewModel.departureDate.value.toString(),
                     viewModel.returnDate.value.toString(),
                     viewModel.departureCity.value!!,
@@ -90,6 +92,7 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
     private fun setRoundTrip() {
         binding.layoutSearchHome.switchRoundTrip.setOnCheckedChangeListener { _, isChecked ->
             binding.layoutSearchHome.layoutReturnSearch.layoutReturnSearch.isVisible = isChecked
+            status = if (isChecked) "Return" else "One Way"
         }
     }
 
@@ -151,6 +154,7 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
         babyQty: Int,
         totalQty: Int,
         ticketClass: TicketClass,
+        status: String,
         departureDate: String,
         returnDate: String?,
         departureCity: Airport,
@@ -163,6 +167,7 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
                 babyQty,
                 totalQty,
                 ticketClass,
+                status,
                 departureDate,
                 returnDate,
                 departureCity,

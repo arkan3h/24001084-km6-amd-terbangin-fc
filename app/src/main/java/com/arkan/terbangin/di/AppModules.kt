@@ -12,6 +12,10 @@ import com.arkan.terbangin.data.datasource.auth.register.RegisterApiDataSource
 import com.arkan.terbangin.data.datasource.auth.register.RegisterDataSource
 import com.arkan.terbangin.data.datasource.auth.resetpassword.ResetPasswordApiDataSource
 import com.arkan.terbangin.data.datasource.auth.resetpassword.ResetPasswordDataSource
+import com.arkan.terbangin.data.datasource.booking2.BookingApiDataSource2
+import com.arkan.terbangin.data.datasource.booking2.BookingDataSource2
+import com.arkan.terbangin.data.datasource.booking2.HelperBookingApiDataSource2
+import com.arkan.terbangin.data.datasource.booking2.HelperBookingDataSource2
 import com.arkan.terbangin.data.datasource.flight.FlightApiDataSource
 import com.arkan.terbangin.data.datasource.flight.FlightDataSource
 import com.arkan.terbangin.data.datasource.notification.NotificationApiDataSource
@@ -129,6 +133,8 @@ object AppModules {
             single<NotificationDataSource> { NotificationApiDataSource(get()) }
             single<SeatDataSource> { SeatApiDataSource(get()) }
             single<PaymentDataSource> { PaymentApiDataSource(get()) }
+            single<BookingDataSource2> { BookingApiDataSource2(get()) }
+            single<HelperBookingDataSource2> { HelperBookingApiDataSource2(get()) }
         }
 
     private val repository =
@@ -146,7 +152,7 @@ object AppModules {
             single<SearchTerminalRepository> { SearchTerminalRepositoryImpl(get()) }
             single<NotificationRepository> { NotificationRepositoryImpl(get()) }
             single<SeatRepository> { SeatRepositoryImpl(get()) }
-            single<PaymentRepository> { PaymentRepositoryImpl(get()) }
+            single<PaymentRepository> { PaymentRepositoryImpl(get(), get(), get(), get()) }
         }
 
     private val viewModelModule =

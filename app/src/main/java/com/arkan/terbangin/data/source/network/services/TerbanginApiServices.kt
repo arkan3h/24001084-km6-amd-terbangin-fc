@@ -8,6 +8,10 @@ import com.arkan.terbangin.data.source.network.model.auth.otp.request_otp.Reques
 import com.arkan.terbangin.data.source.network.model.auth.otp.verify_otp.VerifyOTPData
 import com.arkan.terbangin.data.source.network.model.auth.register.RegisterData
 import com.arkan.terbangin.data.source.network.model.auth.resetpassword.ResetPasswordResponse
+import com.arkan.terbangin.data.source.network.model.booking2.BookingDataResponse
+import com.arkan.terbangin.data.source.network.model.booking2.BookingPayload
+import com.arkan.terbangin.data.source.network.model.booking2.HelperBookingDataResponse
+import com.arkan.terbangin.data.source.network.model.booking2.HelperBookingPayload
 import com.arkan.terbangin.data.source.network.model.flight.FlightDataResponse
 import com.arkan.terbangin.data.source.network.model.notification.NotificationData
 import com.arkan.terbangin.data.source.network.model.passanger.PassengerPayload
@@ -133,6 +137,16 @@ interface TerbanginApiServices {
     suspend fun updatePayment(
         @Path("id") id: String?,
     ): Response<PaymentData?>
+
+    @POST("/api/v1/booking")
+    suspend fun createBooking(
+        @Body payload: BookingPayload,
+    ): Response<BookingDataResponse?>
+
+    @POST("/api/v1/helper-booking")
+    suspend fun createHelperBooking(
+        @Body payload: HelperBookingPayload,
+    ): Response<HelperBookingDataResponse?>
 
     companion object {
         @JvmStatic

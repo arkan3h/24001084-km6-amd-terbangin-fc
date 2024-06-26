@@ -10,6 +10,7 @@ data class FlightSearchParams(
     val babyQty: Int,
     val totalQty: Int,
     val ticketClass: TicketClass,
+    val status: String,
     val departureDate: String,
     val returnDate: String?,
     val departureCity: Airport,
