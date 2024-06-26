@@ -9,6 +9,7 @@ import com.arkan.terbangin.base.BaseActivity
 import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.data.model.PassengerBioDataList
+import com.arkan.terbangin.data.model.SeatList
 import com.arkan.terbangin.databinding.ActivityCheckoutDetailBinding
 import com.arkan.terbangin.presentation.checkout.payment.PaymentActivity
 import com.arkan.terbangin.utils.formatDateHourString
@@ -47,8 +48,8 @@ class CheckoutDetailActivity : BaseActivity() {
         }
 
         binding.layoutTotalPrice.btnContinuePayment.setOnClickListener {
-            navigateToPayment()
-//            createPayment(viewModel.totalPrice!!.toInt())
+//            navigateToPayment()
+            createPayment(viewModel.totalPrice!!.toInt())
         }
     }
 
@@ -129,6 +130,7 @@ class CheckoutDetailActivity : BaseActivity() {
         const val EXTRA_FLIGHT = "EXTRA_FLIGHT"
         const val EXTRA_FLIGHT_SEARCH_PARAMS = "EXTRA_FLIGHT_SEARCH_PARAMS"
         const val EXTRA_PASSENGER_DATA = "EXTRA_PASSENGER_DATA"
+        const val EXTRA_SEAT = "EXTRA_SEAT"
 
         fun startActivity(
             context: Context,
@@ -136,12 +138,14 @@ class CheckoutDetailActivity : BaseActivity() {
             flight: Flight,
             params: FlightSearchParams,
             passengerData: PassengerBioDataList,
+            seats: SeatList,
         ) {
             val intent = Intent(context, CheckoutDetailActivity::class.java)
             intent.putExtra(EXTRA_TOTAL_PRICE, totalPrice)
             intent.putExtra(EXTRA_FLIGHT, flight)
             intent.putExtra(EXTRA_FLIGHT_SEARCH_PARAMS, params)
             intent.putExtra(EXTRA_PASSENGER_DATA, passengerData)
+            intent.putExtra(EXTRA_SEAT, seats)
             context.startActivity(intent)
         }
     }

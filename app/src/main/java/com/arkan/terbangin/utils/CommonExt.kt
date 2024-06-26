@@ -72,6 +72,8 @@ fun formatDateString(dateString: String): String {
     return date?.let { outputFormat.format(it) } ?: ""
 }
 
-fun formatHours(hours: Int): String {
-    return "$hours jam"
+fun formatHours(minutes: Int): String {
+    val hours = minutes / 60
+    val remainingMinutes = minutes % 60
+    return "$hours jam $remainingMinutes menit"
 }

@@ -29,6 +29,8 @@ data class FlightDataResponse(
     val endAirport: EndAirport?,
     @SerializedName("endAirportId")
     val endAirportId: String?,
+    @SerializedName("flightCode")
+    val flightCode: String?,
     @SerializedName("id")
     val id: String?,
     @SerializedName("priceBussines")

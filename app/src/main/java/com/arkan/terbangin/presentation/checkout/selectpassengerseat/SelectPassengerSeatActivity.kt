@@ -11,6 +11,7 @@ import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.data.model.PassengerBioDataList
 import com.arkan.terbangin.data.model.Seat
+import com.arkan.terbangin.data.model.SeatList
 import com.arkan.terbangin.databinding.ActivitySelectPassengerSeatBinding
 import com.arkan.terbangin.presentation.checkout.detail.CheckoutDetailActivity
 import com.arkan.terbangin.presentation.checkout.selectpassengerseat.seatbookview.SeatBookView
@@ -182,6 +183,7 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
                     viewModel.flight!!,
                     viewModel.params!!,
                     viewModel.passengerDataList!!,
+                    SeatList(seats),
                 )
             }
         }
@@ -195,6 +197,7 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
         flight: Flight,
         params: FlightSearchParams,
         passengerList: PassengerBioDataList,
+        seats: SeatList,
     ) {
         CheckoutDetailActivity.startActivity(
             this,
@@ -202,6 +205,7 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
             flight,
             params,
             passengerList,
+            seats,
         )
     }
 
