@@ -65,7 +65,12 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
                 viewModel.ticketClass.value != null &&
                 viewModel.departureCity.value != null &&
                 viewModel.destinationCity.value != null &&
-                viewModel.departureDate.value != null
+                viewModel.departureDate.value != null &&
+                if (status == "Return") {
+                    viewModel.returnDate.value != null
+                } else {
+                    viewModel.returnDate.value == null
+                }
             ) {
                 navigateToFlightSearch(
                     viewModel.adultQty.value!!,
