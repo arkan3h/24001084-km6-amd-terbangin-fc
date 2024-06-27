@@ -5,11 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.arkan.terbangin.base.OnItemCLickedListener
 import com.arkan.terbangin.data.model.Notification
 import com.arkan.terbangin.databinding.CardItemNotificationBinding
+import com.arkan.terbangin.utils.formatDateNotification
 
-class NotificationAdapter(private val itemClick: (Notification) -> Unit) :
-    RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder>() {
+class NotificationAdapter(
+    private val listener: OnItemCLickedListener<Notification>,
+) : RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder>() {
     private val asyncDataDiffer =
         AsyncListDiffer(
             this,
@@ -44,7 +47,7 @@ class NotificationAdapter(private val itemClick: (Notification) -> Unit) :
                 parent,
                 false,
             ),
-            itemClick,
+            listener,
         )
     }
 
@@ -59,15 +62,14 @@ class NotificationAdapter(private val itemClick: (Notification) -> Unit) :
 
     class NotificationViewHolder(
         private val binding: CardItemNotificationBinding,
-        val itemClick: (Notification) -> Unit,
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
+        private val listener: OnItemCLickedListener<Notification>,
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Notification) {
             with(item) {
                 binding.tvTitleNotification.text = title
                 binding.tvNotification.text = message
-                binding.tvDate.text = createdAt
-                itemView.setOnClickListener { itemClick(this) }
+                binding.tvDate.text = formatDateNotification(createdAt)
+                itemView.setOnClickListener { listener.onItemClicked(item) }
             }
         }
     }

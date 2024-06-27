@@ -5,26 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import com.arkan.terbangin.R
+import com.arkan.terbangin.base.BaseFragment
+import com.arkan.terbangin.base.OnItemCLickedListener
 import com.arkan.terbangin.data.model.Notification
 import com.arkan.terbangin.databinding.FragmentNotificationBinding
 import com.arkan.terbangin.presentation.notification.adapter.NotificationAdapter
 import com.arkan.terbangin.utils.navigateToLogin
 import com.arkan.terbangin.utils.proceedWhen
-import com.arkan.terbangin.utils.showAlertDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NotificationFragment : Fragment() {
+class NotificationFragment : BaseFragment() {
     private lateinit var binding: FragmentNotificationBinding
 
     private val viewModel: NotificationViewModel by viewModel()
 
-    private val notificationAdapter: NotificationAdapter by lazy {
-        NotificationAdapter {
-            getNotificationByUID(viewModel.getUserID()!!)
-        }
-    }
+    private var notificationAdapter: NotificationAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,9 +37,10 @@ class NotificationFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
+        getNotificationByUID(viewModel.getUserID()!!)
         setState()
         setOnClickListener()
-        setupNotification()
+//        setupNotification()
     }
 
     private fun setState() {
@@ -59,7 +56,7 @@ class NotificationFragment : Fragment() {
     }
 
     private fun getNotificationByUID(id: String) {
-        viewModel.getNotificationByUID(id).observe(this) { it ->
+        viewModel.getNotificationByUID(id).observe(viewLifecycleOwner) { it ->
             it.proceedWhen(
                 doOnLoading = {
                     binding.layoutState.pbLoading.isVisible = true
@@ -75,19 +72,27 @@ class NotificationFragment : Fragment() {
                 doOnError = {
                     binding.layoutState.pbLoading.isVisible = false
                     binding.layoutState.tvError.isVisible = true
-                    showAlertDialog(it.exception?.message.orEmpty())
+                    it.exception?.let { e -> handleError(e) }
                 },
             )
         }
     }
 
-    private fun setupNotification() {
-        binding.rvNotificationList.apply {
-            adapter = notificationAdapter
-        }
-    }
+//    private fun setupNotification() {
+//        binding.rvNotificationList.apply {
+//            adapter = notificationAdapter
+//        }
+//    }
 
     private fun bindNotificationData(notification: List<Notification>) {
-        notificationAdapter.submitData(notification)
+        notificationAdapter =
+            NotificationAdapter(
+                object : OnItemCLickedListener<Notification> {
+                    override fun onItemClicked(item: Notification) {
+                    }
+                },
+            )
+        binding.rvNotificationList.adapter = this.notificationAdapter
+        notificationAdapter?.submitData(notification)
     }
 }

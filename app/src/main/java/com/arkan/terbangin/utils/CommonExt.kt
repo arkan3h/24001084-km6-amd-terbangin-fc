@@ -72,6 +72,16 @@ fun formatDateString(dateString: String): String {
     return date?.let { outputFormat.format(it) } ?: ""
 }
 
+fun formatDateNotification(dateString: String): String {
+    val originalFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale("id", "ID"))
+
+    val targetFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale("id", "ID"))
+
+    val date = originalFormat.parse(dateString)
+
+    return date?.let { targetFormat.format(it) } ?: ""
+}
+
 fun formatHours(minutes: Int): String {
     val hours = minutes / 60
     val remainingMinutes = minutes % 60
