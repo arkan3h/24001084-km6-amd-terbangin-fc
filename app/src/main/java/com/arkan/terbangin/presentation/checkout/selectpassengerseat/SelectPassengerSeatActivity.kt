@@ -32,26 +32,6 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
 
     private lateinit var seatBookView: SeatBookView
 
-    private var title =
-        listOf(
-            "/", "A1", "B1", "C1", "", "D1", "E1", "F1",
-            "/", "A2", "B2", "C2", "", "D2", "E2", "F2",
-            "/", "A3", "B3", "C3", "", "D3", "E3", "F3",
-            "/", "A4", "B4", "C4", "", "D4", "E4", "F4",
-            "/", "A5", "B5", "C5", "", "D5", "E5", "F5",
-            "/", "A6", "B6", "C6", "", "D6", "E6", "F6",
-            "/", "A7", "B7", "C7", "", "D7", "E7", "F7",
-            "/", "A8", "B8", "C8", "", "D8", "E8", "F8",
-            "/", "A9", "B9", "C9", "", "D9", "E9", "F9",
-            "/", "A10", "B10", "C10", "", "D10", "E10", "F10",
-            "/", "A11", "B11", "C11", "", "D11", "E11", "F11",
-            "/", "A12", "B12", "C12", "", "D12", "E12", "F12",
-            "/", "A13", "B13", "C13", "", "D13", "E13", "F13",
-            "/", "A14", "B14", "C14", "", "D14", "E14", "F14",
-        )
-
-    private val arrTitle = title.filter { it.isNotEmpty() && !it.contains("/") }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -95,6 +75,9 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
 
     private fun setSeatView(seats: List<Seat>) {
         val newSeats = generateSeatsString(viewModel.capacity, seats)
+        val seatNumber = seats.map { it.seatNumber }
+        Log.d("title", "setSeatView: $seatNumber")
+        val title = generateSeatTitles(seatNumber)
         seatBookView = findViewById(R.id.layoutSeat)
         seatBookView.setSeatsLayoutString(newSeats)
             .isCustomTitle(true)
@@ -161,6 +144,30 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
         return sb.toString()
     }
 
+    private fun generateSeatTitles(seatNumbers: List<Int>): List<String> {
+        val titles = mutableListOf<String>()
+        val rowCount = seatNumbers.size / 6 + if (seatNumbers.size % 6 != 0) 1 else 0
+
+        for (i in 0 until rowCount) {
+            titles.add("/") // Start of a new row
+            for (j in 0..2) {
+                val seatIndex = i * 6 + j
+                if (seatIndex < seatNumbers.size) {
+                    titles.add("${seatNumbers[seatIndex]}")
+                }
+            }
+            titles.add("") // Separator
+            for (j in 3..5) {
+                val seatIndex = i * 6 + j
+                if (seatIndex < seatNumbers.size) {
+                    titles.add("${seatNumbers[seatIndex]}")
+                }
+            }
+        }
+
+        return titles
+    }
+
     private fun setClickListener() {
         binding.layoutAppBar.ibBtnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -202,9 +209,6 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
                 }
             }
         }
-
-        val selectedSeatsString = selectedSeatNumbersFromApi.joinToString(", ")
-        // Toast.makeText(this, "Selected Seats: $selectedSeatsString", Toast.LENGTH_SHORT).show()
     }
 
     private fun navigateToSeatReturn(
