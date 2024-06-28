@@ -43,6 +43,6 @@ class CheckoutDetailViewModel(
         status: String = params?.status!!,
         passengerId: List<String> = passenger?.list?.map { it.id!! }!!,
         seatId: List<String> = seat?.list?.map { it.id }!!,
-        seatReturnId: List<String> = seatReturn?.list?.map { it.id }!!,
+        seatReturnId: List<String> = seatReturn?.list?.map { it.id } ?: listOf(""),
     ) = repository.createPayment(totalPrice, status, passengerId, seatId, seatReturnId).asLiveData(Dispatchers.IO)
 }

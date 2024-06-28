@@ -197,4 +197,5 @@
     <string name="text_children_qty">%1$s Anak-anak</string>
     <string name="text_baby_qty">%1$s Bayi</string>
     <string name="text_tax_qty">Pajak</string>
+    <string name="btn_back_to_home">Back to Home</string>
 </resources>
