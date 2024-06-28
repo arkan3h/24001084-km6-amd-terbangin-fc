@@ -48,7 +48,7 @@ class CheckoutDetailActivity : BaseActivity() {
         }
 
         binding.layoutTotalPrice.btnContinuePayment.setOnClickListener {
-//            navigateToPayment()
+//            navigateToPayment("https://google.com")
             createPayment(viewModel.totalPrice!!.toInt())
         }
     }
@@ -108,21 +108,22 @@ class CheckoutDetailActivity : BaseActivity() {
                 doOnSuccess = {
                     binding.layoutState.pbLoading.isVisible = false
                     binding.layoutState.tvError.isVisible = false
-                    navigateToPayment()
+                    it.payload?.data?.snapLink?.let { link ->
+                        navigateToPayment(link)
+                    }
                 },
                 doOnError = {
                     it.exception?.let { e -> handleError(e) }
                     binding.layoutState.pbLoading.isVisible = false
                     binding.layoutState.tvError.text = it.exception?.message
                     binding.layoutState.tvError.isVisible = true
-                    // Log.e("ERROR CheckoutDetailActivity", "createPayment: ${it.exception?.message}")
                 },
             )
         }
     }
 
-    private fun navigateToPayment() {
-        PaymentActivity.startActivity(this, "https://www.google.com/")
+    private fun navigateToPayment(snapLink: String) {
+        PaymentActivity.startActivity(this, snapLink)
     }
 
     companion object {

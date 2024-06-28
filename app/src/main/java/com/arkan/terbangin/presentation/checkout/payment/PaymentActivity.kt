@@ -9,6 +9,7 @@ import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.arkan.terbangin.databinding.ActivityPaymentBinding
+import com.arkan.terbangin.utils.navigateToMain
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -26,6 +27,7 @@ class PaymentActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         bindView()
+        setClickListener()
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -39,6 +41,12 @@ class PaymentActivity : AppCompatActivity() {
             settings.domStorageEnabled = true
             settings.loadsImagesAutomatically = true
             loadUrl(viewModel.paymentUrl!!)
+        }
+    }
+
+    private fun setClickListener() {
+        binding.backButton.setOnClickListener {
+            navigateToMain()
         }
     }
 
