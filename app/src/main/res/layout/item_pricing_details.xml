@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:id="@+id/layout_pricing_detail">
 
     <TextView
-        android:id="@+id/tv_rincian_harga_title"
+        android:id="@+id/tv_adult_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
@@ -15,12 +16,66 @@
         tools:text="2 Dewasa" />
 
     <TextView
-        android:id="@+id/tv_rincian_harga_price"
+        android:id="@+id/tv_adult_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:text="IDR 9.550.000" />
+
+    <TextView
+        android:id="@+id/tv_children_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_adult_price"
+        tools:text="2 Dewasa" />
+
+    <TextView
+        android:id="@+id/tv_children_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_adult_price"
+        tools:text="IDR 9.550.000" />
+
+    <TextView
+        android:id="@+id/tv_baby_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_children_price"
+        tools:text="2 Dewasa" />
+
+    <TextView
+        android:id="@+id/tv_baby_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_children_price"
+        tools:text="IDR 9.550.000" />
+
+    <TextView
+        android:id="@+id/tv_tax_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_baby_price"
+        tools:text="Pajak" />
+
+    <TextView
+        android:id="@+id/tv_tax_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_baby_price"
         tools:text="IDR 9.550.000" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

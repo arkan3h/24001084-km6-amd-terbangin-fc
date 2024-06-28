@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.flightsearch
+package com.arkan.terbangin.presentation.flightsearch.flightreturnsearch
 
 import android.app.UiModeManager
 import android.content.Context
@@ -21,7 +21,6 @@ import com.arkan.terbangin.presentation.flightdetail.FlightDetailActivity
 import com.arkan.terbangin.presentation.flightsearch.adapter.FlightAdapter
 import com.arkan.terbangin.presentation.flightsearch.filter_list.FilterClickListener
 import com.arkan.terbangin.presentation.flightsearch.filter_list.FilterListFragment
-import com.arkan.terbangin.presentation.flightsearch.flightreturnsearch.FlightSearchReturnActivity
 import com.arkan.terbangin.utils.proceedWhen
 import com.kizitonwose.calendar.core.WeekDay
 import com.kizitonwose.calendar.core.firstDayOfWeekFromLocale
@@ -34,11 +33,11 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-class FlightSearchActivity : AppCompatActivity(), FilterClickListener {
+class FlightSearchReturnActivity : AppCompatActivity(), FilterClickListener {
     private val binding: ActivityFlightSearchBinding by lazy {
         ActivityFlightSearchBinding.inflate(layoutInflater)
     }
-    private val viewModel: FlightSearchViewModel by viewModel {
+    private val viewModel: FlightSearchReturnViewModel by viewModel {
         parametersOf(intent.extras)
     }
     private var flightAdapter: FlightAdapter? = null
@@ -123,8 +122,8 @@ class FlightSearchActivity : AppCompatActivity(), FilterClickListener {
         binding.layoutAppBar.tvAppbarTitle.text =
             getString(
                 R.string.text_binding_flight_search_title,
-                viewModel.params?.departureCity?.code,
                 viewModel.params?.destinationCity?.code,
+                viewModel.params?.departureCity?.code,
                 viewModel.params?.totalQty.toString(),
                 viewModel.params?.ticketClass?.name,
             )
@@ -179,11 +178,7 @@ class FlightSearchActivity : AppCompatActivity(), FilterClickListener {
                 listener =
                     object : OnItemCLickedListener<Flight> {
                         override fun onItemClicked(item: Flight) {
-                            if (viewModel.params?.status == "One Way") {
-                                navigateToFlightDetail(item, viewModel.params!!)
-                            } else if (viewModel.params?.status == "Return") {
-                                navigateToFlightReturn(item, viewModel.params!!)
-                            }
+                            navigateToFlightDetail(viewModel.flight!!, item, viewModel.params!!)
                         }
                     },
                 viewModel.params?.ticketClass!!.name,
@@ -200,36 +195,29 @@ class FlightSearchActivity : AppCompatActivity(), FilterClickListener {
 
     fun navigateToFlightDetail(
         item: Flight,
+        itemReturn: Flight?,
         extras: FlightSearchParams,
     ) {
         FlightDetailActivity.startActivity(
             this,
             extras,
             item,
-            null,
-        )
-    }
-
-    fun navigateToFlightReturn(
-        item: Flight,
-        extras: FlightSearchParams,
-    ) {
-        FlightSearchReturnActivity.startActivity(
-            this,
-            extras,
-            item,
+            itemReturn,
         )
     }
 
     companion object {
         const val EXTRA_FLIGHT_SEARCH_PARAMS = "EXTRA_FLIGHT_SEARCH_PARAMS"
+        const val EXTRA_FLIGHT = "EXTRA_FLIGHT"
 
         fun startActivity(
             context: Context,
             params: FlightSearchParams,
+            flight: Flight,
         ) {
-            val intent = Intent(context, FlightSearchActivity::class.java)
+            val intent = Intent(context, FlightSearchReturnActivity::class.java)
             intent.putExtra(EXTRA_FLIGHT_SEARCH_PARAMS, params)
+            intent.putExtra(EXTRA_FLIGHT, flight)
             context.startActivity(intent)
         }
     }

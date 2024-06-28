@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.splash_screen
+package com.arkan.terbangin.presentation.splashscreen
 
 import androidx.lifecycle.ViewModel
 import com.arkan.terbangin.data.repository.pref.UserPreferenceRepository

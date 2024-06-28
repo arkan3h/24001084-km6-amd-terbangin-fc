@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import coil.load
 import com.arkan.terbangin.R
 import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.data.model.FlightSearchParams
@@ -27,14 +29,19 @@ class FlightDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setAppBarTitle()
+        setupDetail()
         setClickListener()
         viewModel.getTotalPrice()
         bindView()
     }
 
-    private fun setAppBarTitle() {
+    private fun setupDetail() {
         binding.layoutAppBar.tvAppbarTitle.text = getString(R.string.appbar_title_rincian_penerbangan)
+        if (viewModel.params?.status == "One Way") {
+            binding.tvFlightReturnDestination.isVisible = false
+            binding.tvFlightReturnDuration.isVisible = false
+            binding.itemFlightReturnDetail.isVisible = false
+        }
     }
 
     private fun setClickListener() {
@@ -45,8 +52,9 @@ class FlightDetailActivity : AppCompatActivity() {
 //                TicketSoldOutBottomSheet().show(supportFragmentManager, null)
                 navigateToOrderBiodata(
                     viewModel.flight!!,
+                    viewModel.flightReturn,
                     viewModel.params!!,
-                    viewModel.totalPrice,
+                    viewModel.price,
                 )
             }
         }
@@ -63,7 +71,11 @@ class FlightDetailActivity : AppCompatActivity() {
                 viewModel.flight?.endAirportCity,
             )
         binding.tvFlightDuration.text = formatHours(viewModel.flight?.duration!!)
-        binding.layoutTotalPrice.tvTotalPrice.text = viewModel.totalPrice.toIndonesianFormat()
+        binding.layoutTotalPrice.tvTotalPrice.text =
+            getString(
+                R.string.binding_flight_price,
+                viewModel.price.toIndonesianFormat(),
+            )
         binding.layoutFlightDetail.tvTakeoffTime.text = formatDateHourString(viewModel.flight?.departureAt!!)
         binding.layoutFlightDetail.tvTakeoffDate.text = formatDateString(viewModel.flight?.departureAt!!)
         binding.layoutFlightDetail.tvAirportOrigin.text =
@@ -98,33 +110,83 @@ class FlightDetailActivity : AppCompatActivity() {
                 viewModel.flight?.endAirportName,
                 viewModel.flight?.endAirportTerminal,
             )
+        binding.layoutFlightDetail.ivLogoAirline.load(viewModel.flight?.airlinePicture)
+        if (viewModel.params?.status == "Return") {
+            binding.tvFlightReturnDestination.text =
+                getString(
+                    R.string.binding_flight_destination_detail,
+                    viewModel.flightReturn?.startAirportCity,
+                    viewModel.flightReturn?.endAirportCity,
+                )
+            binding.tvFlightReturnDuration.text = formatHours(viewModel.flightReturn?.duration!!)
+            binding.layoutFlightReturnDetail.tvTakeoffTime.text = formatDateHourString(viewModel.flightReturn?.departureAt!!)
+            binding.layoutFlightReturnDetail.tvTakeoffDate.text = formatDateString(viewModel.flightReturn?.departureAt!!)
+            binding.layoutFlightReturnDetail.tvAirportOrigin.text =
+                getString(
+                    R.string.binding_airport_origin_detail,
+                    viewModel.flightReturn?.startAirportName,
+                    viewModel.flightReturn?.startAirportTerminal,
+                )
+            binding.layoutFlightReturnDetail.tvAirlineName.text =
+                getString(
+                    R.string.binding_airline_name_detail,
+                    viewModel.flightReturn?.airlineName,
+                    viewModel.params?.ticketClass?.name,
+                )
+            binding.layoutFlightReturnDetail.tvAirlineCode.text = viewModel.flightReturn?.airlineSerialNumber
+            binding.layoutFlightReturnDetail.tvBaggageCapacity.text =
+                getString(
+                    R.string.binding_baggage_capacity_detail,
+                    viewModel.flightReturn?.airlineBaggage.toString(),
+                )
+            binding.layoutFlightReturnDetail.tvCabinBaggageCapacity.text =
+                getString(
+                    R.string.binding_cabin_baggage_capacity_detail,
+                    viewModel.flightReturn?.airlineCabinBaggage.toString(),
+                )
+            binding.layoutFlightReturnDetail.tvMoreService.text = viewModel.flightReturn?.airlineAdditionals
+            binding.layoutFlightReturnDetail.tvLandingTime.text = formatDateHourString(viewModel.flightReturn?.arrivalAt!!)
+            binding.layoutFlightReturnDetail.tvLandingDate.text = formatDateString(viewModel.flightReturn?.arrivalAt!!)
+            binding.layoutFlightReturnDetail.tvAirportDestination.text =
+                getString(
+                    R.string.binding_airport_destination_origin,
+                    viewModel.flightReturn?.endAirportName,
+                    viewModel.flightReturn?.endAirportTerminal,
+                )
+            binding.layoutFlightReturnDetail.ivLogoAirline.load(viewModel.flightReturn?.airlinePicture)
+        }
     }
 
     private fun navigateToOrderBiodata(
-        item: Flight,
+        flight: Flight,
+        flightReturn: Flight?,
         extras: FlightSearchParams,
-        totalPrice: Double,
+        price: Double,
     ) {
         OrderBiodataActivity.startActivity(
             this,
             extras,
-            item,
-            totalPrice,
+            flight,
+            flightReturn,
+            price,
         )
     }
 
     companion object {
         const val EXTRA_FLIGHT_SEARCH_PARAMS = "EXTRA_FLIGHT_SEARCH_PARAMS"
         const val EXTRA_FLIGHT = "EXTRA_FLIGHT"
+        const val EXTRA_FLIGHT_RETURN = "EXTRA_FLIGHT_RETURN"
 
         fun startActivity(
             context: Context,
             params: FlightSearchParams,
             flight: Flight,
+            flightReturn: Flight?,
         ) {
             val intent = Intent(context, FlightDetailActivity::class.java)
             intent.putExtra(EXTRA_FLIGHT_SEARCH_PARAMS, params)
             intent.putExtra(EXTRA_FLIGHT, flight)
+            intent.putExtra(EXTRA_FLIGHT_RETURN, flightReturn)
             context.startActivity(intent)
         }
     }

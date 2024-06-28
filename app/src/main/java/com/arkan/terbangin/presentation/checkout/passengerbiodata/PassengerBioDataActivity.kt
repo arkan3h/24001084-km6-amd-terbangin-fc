@@ -52,6 +52,7 @@ class PassengerBioDataActivity : BaseActivity() {
                 Log.d("Passenger", "setClickListener: $it")
                 navigateToSelectSeat(
                     viewModel.flight!!,
+                    viewModel.flightReturn,
                     viewModel.params!!,
                     viewModel.totalPrice!!,
                     PassengerBioDataList(it),
@@ -88,7 +89,8 @@ class PassengerBioDataActivity : BaseActivity() {
     }
 
     private fun navigateToSelectSeat(
-        item: Flight,
+        flight: Flight,
+        flightReturn: Flight?,
         extras: FlightSearchParams,
         totalPrice: Double,
         passengerList: PassengerBioDataList,
@@ -96,7 +98,8 @@ class PassengerBioDataActivity : BaseActivity() {
         SelectPassengerSeatActivity.startActivity(
             this,
             extras,
-            item,
+            flight,
+            flightReturn,
             totalPrice,
             passengerList,
         )
@@ -105,17 +108,20 @@ class PassengerBioDataActivity : BaseActivity() {
     companion object {
         const val EXTRA_FLIGHT_SEARCH_PARAMS = "EXTRA_FLIGHT_SEARCH_PARAMS"
         const val EXTRA_FLIGHT = "EXTRA_FLIGHT"
+        const val EXTRA_FLIGHT_RETURN = "EXTRA_FLIGHT_RETURN"
         const val EXTRA_TOTAL_PRICE = "EXTRA_TOTAL_PRICE"
 
         fun startActivity(
             context: Context,
             params: FlightSearchParams,
             flight: Flight,
+            flightReturn: Flight?,
             totalPrice: Double,
         ) {
             val intent = Intent(context, PassengerBioDataActivity::class.java)
             intent.putExtra(EXTRA_FLIGHT_SEARCH_PARAMS, params)
             intent.putExtra(EXTRA_FLIGHT, flight)
+            intent.putExtra(EXTRA_FLIGHT_RETURN, flightReturn)
             intent.putExtra(EXTRA_TOTAL_PRICE, totalPrice)
             context.startActivity(intent)
         }

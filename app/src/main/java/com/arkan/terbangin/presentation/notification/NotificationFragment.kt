@@ -36,14 +36,15 @@ class NotificationFragment : BaseFragment() {
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
-
-        getNotificationByUID(viewModel.getUserID()!!)
         setState()
         setOnClickListener()
 //        setupNotification()
     }
 
     private fun setState() {
+        if (viewModel.isLoggedIn != null) {
+            getNotificationByUID(viewModel.getUserID()!!)
+        }
         binding.fragmentNotificationNonLogin.tvTitle.text = getString(R.string.txt_title_notification_fragment)
         binding.layoutNotificationNonLogin.isVisible = viewModel.isLoggedIn == null
         binding.layoutNotification.isVisible = viewModel.isLoggedIn != null

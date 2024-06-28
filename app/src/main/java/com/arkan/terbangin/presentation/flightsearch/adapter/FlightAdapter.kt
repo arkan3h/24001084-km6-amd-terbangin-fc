@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.arkan.terbangin.base.OnItemCLickedListener
 import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.databinding.ItemFlightListBinding
@@ -14,7 +15,6 @@ import com.arkan.terbangin.utils.toIndonesianFormat
 
 class FlightAdapter(
     private val listener: OnItemCLickedListener<Flight>,
-    private val totalQty: Int,
     private val classSeat: String,
 ) : RecyclerView.Adapter<FlightAdapter.FlightViewHolder>() {
     private val asyncDataDiffer =
@@ -52,7 +52,6 @@ class FlightAdapter(
                 false,
             ),
             listener,
-            totalQty,
             classSeat,
         )
     }
@@ -69,7 +68,6 @@ class FlightAdapter(
     class FlightViewHolder(
         private val binding: ItemFlightListBinding,
         private val listener: OnItemCLickedListener<Flight>,
-        private val totalQty: Int,
         private val classSeat: String,
     ) :
         RecyclerView.ViewHolder(binding.root) {
@@ -81,18 +79,19 @@ class FlightAdapter(
             binding.tvLandingTime.text = formatDateHourString(item.arrivalAt)
             binding.tvLandingPlace.text = item.endAirportCity
             binding.tvAirlineName.text = item.airlineName
+            binding.ivAirlineLogo.load(item.airlinePicture)
             itemView.setOnClickListener {
                 listener.onItemClicked(item)
             }
             when (classSeat) {
                 "Economy" -> {
-                    totalPrice = totalQty * item.priceEconomy.toDouble()
+                    totalPrice = item.priceEconomy.toDouble()
                 }
                 "Business" -> {
-                    totalPrice = totalQty * item.priceBussines.toDouble()
+                    totalPrice = item.priceBussines.toDouble()
                 }
                 "First Class" -> {
-                    totalPrice = totalQty * item.priceFirstClass.toDouble()
+                    totalPrice = item.priceFirstClass.toDouble()
                 }
             }
             binding.tvFlightPrice.text = totalPrice.toIndonesianFormat()

@@ -80,7 +80,7 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
         binding.layoutAppBar.tvAppbarTitle.text =
             getString(
                 R.string.binding_title_select_seat,
-                viewModel.params?.totalQty.toString(),
+                viewModel.selectableSeat.toString(),
             )
         binding.tvTitleInfoSeat.text =
             getString(
@@ -97,7 +97,7 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
             .isCustomTitle(true)
             .setCustomTitle(title)
             .setSeatLayoutPadding(2)
-            .setSelectSeatLimit(viewModel.params?.totalQty!!)
+            .setSelectSeatLimit(viewModel.selectableSeat)
             .setSeatSizeBySeatsColumnAndLayoutWidth(7, -1)
 
         seatBookView.show()
@@ -181,6 +181,7 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
                 navigateToCheckout(
                     viewModel.totalPrice!!,
                     viewModel.flight!!,
+                    viewModel.flightReturn,
                     viewModel.params!!,
                     viewModel.passengerDataList!!,
                     SeatList(seats),
@@ -195,6 +196,7 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
     private fun navigateToCheckout(
         totalPrice: Double,
         flight: Flight,
+        flightReturn: Flight?,
         params: FlightSearchParams,
         passengerList: PassengerBioDataList,
         seats: SeatList,
@@ -203,6 +205,7 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
             this,
             totalPrice,
             flight,
+            flightReturn,
             params,
             passengerList,
             seats,
@@ -212,6 +215,7 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_FLIGHT_SEARCH_PARAMS = "EXTRA_FLIGHT_SEARCH_PARAMS"
         const val EXTRA_FLIGHT = "EXTRA_FLIGHT"
+        const val EXTRA_FLIGHT_RETURN = "EXTRA_FLIGHT_RETURN"
         const val EXTRA_TOTAL_PRICE = "EXTRA_TOTAL_PRICE"
         const val EXTRA_PASSENGER_DATA = "EXTRA_PASSENGER_DATA"
 
@@ -219,12 +223,14 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
             context: Context,
             params: FlightSearchParams,
             flight: Flight,
+            flightReturn: Flight?,
             totalPrice: Double,
             passengerData: PassengerBioDataList,
         ) {
             val intent = Intent(context, SelectPassengerSeatActivity::class.java)
             intent.putExtra(EXTRA_FLIGHT_SEARCH_PARAMS, params)
             intent.putExtra(EXTRA_FLIGHT, flight)
+            intent.putExtra(EXTRA_FLIGHT_RETURN, flightReturn)
             intent.putExtra(EXTRA_TOTAL_PRICE, totalPrice)
             intent.putExtra(EXTRA_PASSENGER_DATA, passengerData)
             context.startActivity(intent)

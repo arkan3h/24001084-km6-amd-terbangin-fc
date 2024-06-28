@@ -25,7 +25,7 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
     private val viewModel: HomeViewModel by viewModel()
 
     private lateinit var binding: FragmentHomeBinding
-    private var status = "One Way"
+    private var status = "Return"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +41,7 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
-        setRoundTrip()
+        setState()
         onClickListener()
         observeViewModel()
     }
@@ -60,31 +60,18 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
             selectSeatClass()
         }
         binding.layoutSearchHome.btnSearchFlight.setOnClickListener {
-            if (
-                viewModel.totalQty.value != null &&
-                viewModel.ticketClass.value != null &&
-                viewModel.departureCity.value != null &&
-                viewModel.destinationCity.value != null &&
-                viewModel.departureDate.value != null &&
-                if (status == "Return") {
-                    viewModel.returnDate.value != null
-                } else {
-                    viewModel.returnDate.value == null
-                }
-            ) {
-                navigateToFlightSearch(
-                    viewModel.adultQty.value!!,
-                    viewModel.childrenQty.value!!,
-                    viewModel.babyQty.value!!,
-                    viewModel.totalQty.value!!,
-                    viewModel.ticketClass.value!!,
-                    status,
-                    viewModel.departureDate.value.toString(),
-                    viewModel.returnDate.value.toString(),
-                    viewModel.departureCity.value!!,
-                    viewModel.destinationCity.value!!,
-                )
-            }
+            navigateToFlightSearch(
+                viewModel.adultQty.value!!,
+                viewModel.childrenQty.value!!,
+                viewModel.babyQty.value!!,
+                viewModel.totalQty.value!!,
+                viewModel.ticketClass.value!!,
+                status,
+                viewModel.departureDate.value.toString(),
+                viewModel.returnDate.value.toString(),
+                viewModel.departureCity.value!!,
+                viewModel.destinationCity.value!!,
+            )
         }
         binding.layoutSearchHome.layoutDepartureSearch.layoutDepartureSearch.setOnClickListener {
             openDepartureDate()
@@ -94,10 +81,34 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
         }
     }
 
-    private fun setRoundTrip() {
+    private fun setState() {
         binding.layoutSearchHome.switchRoundTrip.setOnCheckedChangeListener { _, isChecked ->
             binding.layoutSearchHome.layoutReturnSearch.layoutReturnSearch.isVisible = isChecked
             status = if (isChecked) "Return" else "One Way"
+            setState()
+        }
+        binding.layoutSearchHome.btnSearchFlight.isEnabled = false
+        if (status == "One Way") {
+            if (
+                viewModel.totalQty.value != null &&
+                viewModel.ticketClass.value != null &&
+                viewModel.departureCity.value != null &&
+                viewModel.destinationCity.value != null &&
+                viewModel.departureDate.value != null
+            ) {
+                binding.layoutSearchHome.btnSearchFlight.isEnabled = true
+            }
+        } else if (status == "Return") {
+            if (
+                viewModel.totalQty.value != null &&
+                viewModel.ticketClass.value != null &&
+                viewModel.departureCity.value != null &&
+                viewModel.destinationCity.value != null &&
+                viewModel.departureDate.value != null &&
+                viewModel.returnDate.value != null
+            ) {
+                binding.layoutSearchHome.btnSearchFlight.isEnabled = true
+            }
         }
     }
 
@@ -191,18 +202,22 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
         totalQty: Int,
     ) {
         viewModel.updatePassengers(adultQty, childrenQty, babyQty, totalQty)
+        setState()
     }
 
     override fun onClassSelected(ticketClass: TicketClass) {
         viewModel.updateTicketClass(ticketClass)
+        setState()
     }
 
     override fun onDateDepartureSelected(date: LocalDate) {
         viewModel.updateDepartureDate(date)
+        setState()
     }
 
     override fun onDateReturnSelected(date: LocalDate) {
         viewModel.updateReturnDate(date)
+        setState()
     }
 
     override fun onCitySelected(
@@ -211,8 +226,10 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
     ) {
         if (location == "Pilih Lokasi Awal") {
             viewModel.updateDepartureCity(city)
+            setState()
         } else {
             viewModel.updateDestinationCity(city)
+            setState()
         }
     }
 }

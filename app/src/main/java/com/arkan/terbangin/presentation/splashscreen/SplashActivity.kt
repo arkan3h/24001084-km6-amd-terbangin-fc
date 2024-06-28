@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.splash_screen
+package com.arkan.terbangin.presentation.splashscreen
 
 import android.app.UiModeManager
 import android.content.Context

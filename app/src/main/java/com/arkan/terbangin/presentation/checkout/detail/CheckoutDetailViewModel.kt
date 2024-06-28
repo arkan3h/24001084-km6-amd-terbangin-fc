@@ -9,7 +9,6 @@ import com.arkan.terbangin.data.model.PassengerBioDataList
 import com.arkan.terbangin.data.model.SeatList
 import com.arkan.terbangin.data.repository.payment.PaymentRepository
 import com.arkan.terbangin.data.source.pref.UserPreference
-import com.arkan.terbangin.presentation.flightdetail.FlightDetailActivity
 import kotlinx.coroutines.Dispatchers
 
 class CheckoutDetailViewModel(
@@ -17,12 +16,26 @@ class CheckoutDetailViewModel(
     preference: UserPreference,
     private val repository: PaymentRepository,
 ) : ViewModel() {
-    val totalPrice = extras?.getDouble(CheckoutDetailActivity.EXTRA_TOTAL_PRICE)
+    private val price = extras?.getDouble(CheckoutDetailActivity.EXTRA_TOTAL_PRICE)
     val flight = extras?.getParcelable<Flight>(CheckoutDetailActivity.EXTRA_FLIGHT)
-    val params = extras?.getParcelable<FlightSearchParams>(FlightDetailActivity.EXTRA_FLIGHT_SEARCH_PARAMS)
+    val flightReturn = extras?.getParcelable<Flight>(CheckoutDetailActivity.EXTRA_FLIGHT_RETURN)
+    val params = extras?.getParcelable<FlightSearchParams>(CheckoutDetailActivity.EXTRA_FLIGHT_SEARCH_PARAMS)
     val passenger = extras?.getParcelable<PassengerBioDataList>(CheckoutDetailActivity.EXTRA_PASSENGER_DATA)
     val seat = extras?.getParcelable<SeatList>(CheckoutDetailActivity.EXTRA_SEAT)
     val userId = preference.getUserID()
+    var totalPrice = 0.0
+    var adultPrice: Double? = null
+    var childrenPrice: Double? = null
+    val babyPrice = 0.0
+    var taxPrice = 0.0
+
+    fun calculatePrice() {
+        val totalPriceEx = (price!! * (params?.totalQty!! - params.babyQty))
+        adultPrice = (price * params.adultQty)
+        childrenPrice = (price * params.childrenQty)
+        taxPrice = totalPriceEx * 0.01
+        totalPrice = totalPriceEx + taxPrice
+    }
 
     fun createPayment(
         totalPrice: Int,

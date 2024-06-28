@@ -18,8 +18,10 @@ class SelectPassengerSeatViewModel(
 ) : ViewModel() {
     val params = extras?.getParcelable<FlightSearchParams>(SelectPassengerSeatActivity.EXTRA_FLIGHT_SEARCH_PARAMS)
     val flight = extras?.getParcelable<Flight>(SelectPassengerSeatActivity.EXTRA_FLIGHT)
+    val flightReturn = extras?.getParcelable<Flight>(SelectPassengerSeatActivity.EXTRA_FLIGHT_RETURN)
     val totalPrice = extras?.getDouble(SelectPassengerSeatActivity.EXTRA_TOTAL_PRICE)
     val passengerDataList = extras?.getParcelable<PassengerBioDataList>(SelectPassengerSeatActivity.EXTRA_PASSENGER_DATA)
+    var selectableSeat = 0
     var capacity = 0
     private var seatClass: String = ""
 
@@ -43,6 +45,7 @@ class SelectPassengerSeatViewModel(
                 capacity = flight?.capacityFirstClass!!
             }
         }
+        selectableSeat = params?.totalQty!! - params.babyQty
     }
 
     private fun seatClass() {

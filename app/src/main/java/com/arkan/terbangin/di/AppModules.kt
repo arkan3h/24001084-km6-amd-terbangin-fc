@@ -80,6 +80,7 @@ import com.arkan.terbangin.presentation.checkout.selectpassengerseat.SelectPasse
 import com.arkan.terbangin.presentation.flightdetail.FlightDetailViewModel
 import com.arkan.terbangin.presentation.flightsearch.FlightSearchViewModel
 import com.arkan.terbangin.presentation.flightsearch.filter_list.FilterListViewModel
+import com.arkan.terbangin.presentation.flightsearch.flightreturnsearch.FlightSearchReturnViewModel
 import com.arkan.terbangin.presentation.history.HistoryViewModel
 import com.arkan.terbangin.presentation.history.searchhistory.HistorySearchViewModel
 import com.arkan.terbangin.presentation.home.HomeViewModel
@@ -91,7 +92,7 @@ import com.arkan.terbangin.presentation.notification.NotificationViewModel
 import com.arkan.terbangin.presentation.profile.ProfileViewModel
 import com.arkan.terbangin.presentation.profile.edit_profile.EditProfileViewModel
 import com.arkan.terbangin.presentation.profile.setting_account.SettingAccountViewModel
-import com.arkan.terbangin.presentation.splash_screen.SplashViewModel
+import com.arkan.terbangin.presentation.splashscreen.SplashViewModel
 import com.arkan.terbangin.utils.SharedPreferenceUtils
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -173,6 +174,7 @@ object AppModules {
             viewModelOf(::SettingAccountViewModel)
             viewModelOf(::ProfileViewModel)
             viewModelOf(::FlightSearchViewModel)
+            viewModelOf(::FlightSearchReturnViewModel)
             viewModelOf(::TerminalSearchViewModel)
             viewModelOf(::FlightDetailViewModel)
             viewModelOf(::OrderBiodataViewModel)
