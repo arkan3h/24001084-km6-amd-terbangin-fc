@@ -14,6 +14,8 @@ import com.arkan.terbangin.data.source.network.model.booking2.HelperBookingDataR
 import com.arkan.terbangin.data.source.network.model.booking2.HelperBookingPayload
 import com.arkan.terbangin.data.source.network.model.flight.FlightDataResponse
 import com.arkan.terbangin.data.source.network.model.notification.NotificationData
+import com.arkan.terbangin.data.source.network.model.flight.FlightResponse
+import com.arkan.terbangin.data.source.network.model.history.HelperBookingResponse
 import com.arkan.terbangin.data.source.network.model.passanger.PassengerPayload
 import com.arkan.terbangin.data.source.network.model.passanger.PassengerResponseData
 import com.arkan.terbangin.data.source.network.model.payment.PaymentData
@@ -153,6 +155,11 @@ interface TerbanginApiServices {
     suspend fun createHelperBooking(
         @Body payload: HelperBookingPayload,
     ): Response<HelperBookingDataResponse?>
+
+    @GET("/api/v1/helper-booking/user/{id}}")
+    suspend fun getHelperBookingById(
+        @Query("id") id: String
+    ): HelperBookingResponse
 
     companion object {
         @JvmStatic
