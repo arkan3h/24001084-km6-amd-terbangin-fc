@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.arkan.terbangin.databinding.ActivityPaymentBinding
 import com.arkan.terbangin.utils.navigateToMain
@@ -57,7 +56,6 @@ class PaymentActivity : AppCompatActivity() {
             context: Context,
             url: String,
         ) {
-            Toast.makeText(context, "Payment URL: $url", Toast.LENGTH_SHORT).show()
             val intent = Intent(context, PaymentActivity::class.java)
             intent.putExtra(PAYMENT_URL, url)
             context.startActivity(intent)

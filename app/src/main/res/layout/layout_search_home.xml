@@ -42,10 +42,10 @@
             android:background="@color/bg_outline"
             app:layout_constraintStart_toStartOf="@id/ic_flight_takeoff"
             app:layout_constraintTop_toBottomOf="@id/ic_flight_takeoff"
-            app:layout_constraintEnd_toStartOf="@id/l_up_down"/>
+            app:layout_constraintEnd_toStartOf="@id/switch_destination"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/l_up_down"
+            android:id="@+id/switch_destination"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="8dp"
@@ -102,7 +102,7 @@
             app:layout_constraintStart_toEndOf="@id/tv_title_to"
             app:layout_constraintBottom_toBottomOf="@id/ic_flight_takeoff"
             app:layout_constraintTop_toTopOf="@id/ic_flight_takeoff"
-            app:layout_constraintEnd_toStartOf="@id/l_up_down"/>
+            app:layout_constraintEnd_toStartOf="@id/switch_destination"/>
 
         <TextView
             android:id="@+id/tv_title_to"
@@ -129,7 +129,7 @@
             app:layout_constraintStart_toEndOf="@id/tv_title_to"
             app:layout_constraintBottom_toBottomOf="@id/ic_flight_landing"
             app:layout_constraintTop_toTopOf="@id/ic_flight_landing"
-            app:layout_constraintEnd_toStartOf="@id/l_up_down"/>
+            app:layout_constraintEnd_toStartOf="@id/switch_destination"/>
 
         <TextView
             android:id="@+id/tv_selector_round_trip"
