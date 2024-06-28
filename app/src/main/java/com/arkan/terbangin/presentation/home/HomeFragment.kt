@@ -79,6 +79,9 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
         binding.layoutSearchHome.layoutReturnSearch.layoutReturnSearch.setOnClickListener {
             openReturnDate()
         }
+        binding.layoutSearchHome.switchDestination.setOnClickListener {
+            switchDestinationCity()
+        }
     }
 
     private fun setState() {
@@ -217,6 +220,14 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
 
     override fun onDateReturnSelected(date: LocalDate) {
         viewModel.updateReturnDate(date)
+        setState()
+    }
+
+    private fun switchDestinationCity() {
+        val departureCity = viewModel.departureCity.value
+        val destinationCity = viewModel.destinationCity.value
+        viewModel.updateDepartureCity(destinationCity!!)
+        viewModel.updateDestinationCity(departureCity!!)
         setState()
     }
 
