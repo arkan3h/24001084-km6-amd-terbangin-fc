@@ -13,18 +13,19 @@ class FlightDetailViewModel(
     val isLoggedIn = pref.getToken()
     val params = extras?.getParcelable<FlightSearchParams>(FlightDetailActivity.EXTRA_FLIGHT_SEARCH_PARAMS)
     val flight = extras?.getParcelable<Flight>(FlightDetailActivity.EXTRA_FLIGHT)
-    var totalPrice = 0.0
+    val flightReturn = extras?.getParcelable<Flight>(FlightDetailActivity.EXTRA_FLIGHT_RETURN)
+    var price = 0.0
 
     fun getTotalPrice() {
         when (params?.ticketClass?.name) {
             "Economy" -> {
-                totalPrice = params.totalQty * flight?.priceEconomy?.toDouble()!!
+                price = flight?.priceEconomy?.toDouble()!! + (flightReturn?.priceEconomy?.toDouble() ?: 0.0)
             }
             "Business" -> {
-                totalPrice = params.totalQty * flight?.priceBussines?.toDouble()!!
+                price = flight?.priceBussines?.toDouble()!! + (flightReturn?.priceBussines?.toDouble() ?: 0.0)
             }
             "First Class" -> {
-                totalPrice = params.totalQty * flight?.priceFirstClass?.toDouble()!!
+                price = flight?.priceFirstClass?.toDouble()!! + (flightReturn?.priceFirstClass?.toDouble() ?: 0.0)
             }
         }
     }

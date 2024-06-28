@@ -19,6 +19,7 @@ class PassengerBioDataViewModel(
 ) : ViewModel() {
     val params = extras?.getParcelable<FlightSearchParams>(PassengerBioDataActivity.EXTRA_FLIGHT_SEARCH_PARAMS)
     val flight = extras?.getParcelable<Flight>(PassengerBioDataActivity.EXTRA_FLIGHT)
+    val flightReturn = extras?.getParcelable<Flight>(PassengerBioDataActivity.EXTRA_FLIGHT_RETURN)
     val totalPrice = extras?.getDouble(PassengerBioDataActivity.EXTRA_TOTAL_PRICE)
     val userId = preference.getUserID()
 

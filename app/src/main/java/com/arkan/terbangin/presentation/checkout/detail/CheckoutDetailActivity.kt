@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.view.isVisible
+import coil.load
 import com.arkan.terbangin.R
 import com.arkan.terbangin.base.BaseActivity
 import com.arkan.terbangin.data.model.Flight
@@ -32,14 +33,19 @@ class CheckoutDetailActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        setAppBarTitle()
+        viewModel.calculatePrice()
+        setupDetail()
         setClickListener()
         bindView()
     }
 
-    private fun setAppBarTitle() {
+    private fun setupDetail() {
         binding.layoutAppBar.tvAppbarTitle.text = getString(R.string.appbar_title_rincian_penerbangan)
+        if (viewModel.params?.status == "One Way") {
+            binding.tvFlightReturnDestination.isVisible = false
+            binding.tvFlightReturnDuration.isVisible = false
+            binding.itemFlightReturnDetail.isVisible = false
+        }
     }
 
     private fun setClickListener() {
@@ -49,7 +55,7 @@ class CheckoutDetailActivity : BaseActivity() {
 
         binding.layoutTotalPrice.btnContinuePayment.setOnClickListener {
 //            navigateToPayment("https://google.com")
-            createPayment(viewModel.totalPrice!!.toInt())
+            createPayment(viewModel.totalPrice.toInt())
         }
     }
 
@@ -96,6 +102,86 @@ class CheckoutDetailActivity : BaseActivity() {
                 viewModel.flight?.endAirportName,
                 viewModel.flight?.endAirportTerminal,
             )
+        binding.layoutCheckoutDetail.ivLogoAirline.load(viewModel.flight?.airlinePicture)
+        binding.layoutPricingDetailsList.tvTaxTitle.text =
+            getString(
+                R.string.text_tax_qty,
+            )
+        binding.layoutPricingDetailsList.tvTaxPrice.text = viewModel.taxPrice.toIndonesianFormat()
+        if (viewModel.params?.adultQty != 0) {
+            binding.layoutPricingDetailsList.tvAdultPrice.isVisible = true
+            binding.layoutPricingDetailsList.tvAdultTitle.isVisible = true
+            binding.layoutPricingDetailsList.tvAdultPrice.text = viewModel.adultPrice.toIndonesianFormat()
+            binding.layoutPricingDetailsList.tvAdultTitle.text =
+                getString(
+                    R.string.text_adult_qty,
+                    viewModel.params?.adultQty.toString(),
+                )
+        }
+        if (viewModel.params?.childrenQty != 0) {
+            binding.layoutPricingDetailsList.tvChildrenPrice.isVisible = true
+            binding.layoutPricingDetailsList.tvChildrenTitle.isVisible = true
+            binding.layoutPricingDetailsList.tvChildrenPrice.text = viewModel.childrenPrice.toIndonesianFormat()
+            binding.layoutPricingDetailsList.tvChildrenTitle.text =
+                getString(
+                    R.string.text_children_qty,
+                    viewModel.params?.childrenQty.toString(),
+                )
+        }
+        if (viewModel.params?.babyQty != 0) {
+            binding.layoutPricingDetailsList.tvBabyPrice.isVisible = true
+            binding.layoutPricingDetailsList.tvBabyTitle.isVisible = true
+            binding.layoutPricingDetailsList.tvBabyPrice.text = viewModel.babyPrice.toIndonesianFormat()
+            binding.layoutPricingDetailsList.tvBabyTitle.text =
+                getString(
+                    R.string.text_baby_qty,
+                    viewModel.params?.babyQty.toString(),
+                )
+        }
+        if (viewModel.params?.status == "Return") {
+            binding.tvFlightReturnDestination.text =
+                getString(
+                    R.string.binding_flight_destination_detail,
+                    viewModel.flightReturn?.startAirportCity,
+                    viewModel.flightReturn?.endAirportCity,
+                )
+            binding.tvFlightReturnDuration.text = formatHours(viewModel.flightReturn?.duration!!)
+            binding.layoutFlightReturnDetail.tvTakeoffTime.text = formatDateHourString(viewModel.flightReturn?.departureAt!!)
+            binding.layoutFlightReturnDetail.tvTakeoffDate.text = formatDateString(viewModel.flightReturn?.departureAt!!)
+            binding.layoutFlightReturnDetail.tvAirportOrigin.text =
+                getString(
+                    R.string.binding_airport_origin_detail,
+                    viewModel.flightReturn?.startAirportName,
+                    viewModel.flightReturn?.startAirportTerminal,
+                )
+            binding.layoutFlightReturnDetail.tvAirlineName.text =
+                getString(
+                    R.string.binding_airline_name_detail,
+                    viewModel.flightReturn?.airlineName,
+                    viewModel.params?.ticketClass?.name,
+                )
+            binding.layoutFlightReturnDetail.tvAirlineCode.text = viewModel.flightReturn?.airlineSerialNumber
+            binding.layoutFlightReturnDetail.tvBaggageCapacity.text =
+                getString(
+                    R.string.binding_baggage_capacity_detail,
+                    viewModel.flightReturn?.airlineBaggage.toString(),
+                )
+            binding.layoutFlightReturnDetail.tvCabinBaggageCapacity.text =
+                getString(
+                    R.string.binding_cabin_baggage_capacity_detail,
+                    viewModel.flightReturn?.airlineCabinBaggage.toString(),
+                )
+            binding.layoutFlightReturnDetail.tvMoreService.text = viewModel.flightReturn?.airlineAdditionals
+            binding.layoutFlightReturnDetail.tvLandingTime.text = formatDateHourString(viewModel.flightReturn?.arrivalAt!!)
+            binding.layoutFlightReturnDetail.tvLandingDate.text = formatDateString(viewModel.flightReturn?.arrivalAt!!)
+            binding.layoutFlightReturnDetail.tvAirportDestination.text =
+                getString(
+                    R.string.binding_airport_destination_origin,
+                    viewModel.flightReturn?.endAirportName,
+                    viewModel.flightReturn?.endAirportTerminal,
+                )
+            binding.layoutFlightReturnDetail.ivLogoAirline.load(viewModel.flightReturn?.airlinePicture)
+        }
     }
 
     private fun createPayment(totalPrice: Int) {
@@ -129,24 +215,30 @@ class CheckoutDetailActivity : BaseActivity() {
     companion object {
         const val EXTRA_TOTAL_PRICE = "EXTRA_TOTAL_PRICE"
         const val EXTRA_FLIGHT = "EXTRA_FLIGHT"
+        const val EXTRA_FLIGHT_RETURN = "EXTRA_FLIGHT_RETURN"
         const val EXTRA_FLIGHT_SEARCH_PARAMS = "EXTRA_FLIGHT_SEARCH_PARAMS"
         const val EXTRA_PASSENGER_DATA = "EXTRA_PASSENGER_DATA"
         const val EXTRA_SEAT = "EXTRA_SEAT"
+        const val EXTRA_SEAT_RETURN = "EXTRA_SEAT_RETURN"
 
         fun startActivity(
             context: Context,
             totalPrice: Double,
             flight: Flight,
+            flightReturn: Flight?,
             params: FlightSearchParams,
             passengerData: PassengerBioDataList,
             seats: SeatList,
+            seatsReturn: SeatList?,
         ) {
             val intent = Intent(context, CheckoutDetailActivity::class.java)
             intent.putExtra(EXTRA_TOTAL_PRICE, totalPrice)
             intent.putExtra(EXTRA_FLIGHT, flight)
+            intent.putExtra(EXTRA_FLIGHT_RETURN, flightReturn)
             intent.putExtra(EXTRA_FLIGHT_SEARCH_PARAMS, params)
             intent.putExtra(EXTRA_PASSENGER_DATA, passengerData)
             intent.putExtra(EXTRA_SEAT, seats)
+            intent.putExtra(EXTRA_SEAT_RETURN, seatsReturn)
             context.startActivity(intent)
         }
     }

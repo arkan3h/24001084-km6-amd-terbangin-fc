@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.checkout.selectpassengerseat
+package com.arkan.terbangin.presentation.checkout.selectpassengerseat.returnflight
 
 import android.os.Bundle
 import androidx.lifecycle.LiveData
@@ -9,18 +9,20 @@ import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.data.model.PassengerBioDataList
 import com.arkan.terbangin.data.model.Seat
+import com.arkan.terbangin.data.model.SeatList
 import com.arkan.terbangin.data.repository.seat.SeatRepository
 import kotlinx.coroutines.Dispatchers
 
-class SelectPassengerSeatViewModel(
+class SelectReturnPassengerSeatViewModel(
     extras: Bundle?,
     private val repository: SeatRepository,
 ) : ViewModel() {
-    val params = extras?.getParcelable<FlightSearchParams>(SelectPassengerSeatActivity.EXTRA_FLIGHT_SEARCH_PARAMS)
-    val flight = extras?.getParcelable<Flight>(SelectPassengerSeatActivity.EXTRA_FLIGHT)
-    val flightReturn = extras?.getParcelable<Flight>(SelectPassengerSeatActivity.EXTRA_FLIGHT_RETURN)
-    val totalPrice = extras?.getDouble(SelectPassengerSeatActivity.EXTRA_TOTAL_PRICE)
-    val passengerDataList = extras?.getParcelable<PassengerBioDataList>(SelectPassengerSeatActivity.EXTRA_PASSENGER_DATA)
+    val params = extras?.getParcelable<FlightSearchParams>(SelectReturnPassengerSeatActivity.EXTRA_FLIGHT_SEARCH_PARAMS)
+    val flight = extras?.getParcelable<Flight>(SelectReturnPassengerSeatActivity.EXTRA_FLIGHT)
+    val flightReturn = extras?.getParcelable<Flight>(SelectReturnPassengerSeatActivity.EXTRA_FLIGHT_RETURN)
+    val totalPrice = extras?.getDouble(SelectReturnPassengerSeatActivity.EXTRA_TOTAL_PRICE)
+    val passengerDataList = extras?.getParcelable<PassengerBioDataList>(SelectReturnPassengerSeatActivity.EXTRA_PASSENGER_DATA)
+    val seatDeparture = extras?.getParcelable<SeatList>(SelectReturnPassengerSeatActivity.EXTRA_SEAT)
     var selectableSeat = 0
     var capacity = 0
     private var seatClass: String = ""

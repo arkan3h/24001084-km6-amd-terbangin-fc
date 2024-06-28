@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/bg_gradient"
             android:visibility="gone"
-            tools:visibility="visible">
+            tools:visibility="gone">
 
             <include
                 android:id="@+id/fragment_history_non_login"
@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="visible"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
             <TextView
                 android:id="@+id/tv_title_history"

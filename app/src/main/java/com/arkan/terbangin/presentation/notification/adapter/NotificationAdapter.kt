@@ -34,7 +34,8 @@ class NotificationAdapter(
         )
 
     fun submitData(data: List<Notification>) {
-        asyncDataDiffer.submitList(data)
+        val sortedData = data.sortedByDescending { it.createdAt }
+        asyncDataDiffer.submitList(sortedData)
     }
 
     override fun onCreateViewHolder(

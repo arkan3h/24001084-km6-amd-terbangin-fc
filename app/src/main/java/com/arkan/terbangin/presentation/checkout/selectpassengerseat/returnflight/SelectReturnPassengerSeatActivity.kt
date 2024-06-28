@@ -1,4 +1,4 @@
-package com.arkan.terbangin.presentation.checkout.selectpassengerseat
+package com.arkan.terbangin.presentation.checkout.selectpassengerseat.returnflight
 
 import android.content.Context
 import android.content.Intent
@@ -14,7 +14,6 @@ import com.arkan.terbangin.data.model.Seat
 import com.arkan.terbangin.data.model.SeatList
 import com.arkan.terbangin.databinding.ActivitySelectPassengerSeatBinding
 import com.arkan.terbangin.presentation.checkout.detail.CheckoutDetailActivity
-import com.arkan.terbangin.presentation.checkout.selectpassengerseat.returnflight.SelectReturnPassengerSeatActivity
 import com.arkan.terbangin.presentation.checkout.selectpassengerseat.seatbookview.SeatBookView
 import com.arkan.terbangin.presentation.checkout.selectpassengerseat.seatbookview.SeatClickListener
 import com.arkan.terbangin.utils.proceedWhen
@@ -22,11 +21,11 @@ import com.arkan.terbangin.utils.showAlertDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class SelectPassengerSeatActivity : AppCompatActivity() {
+class SelectReturnPassengerSeatActivity : AppCompatActivity() {
     private val binding: ActivitySelectPassengerSeatBinding by lazy {
         ActivitySelectPassengerSeatBinding.inflate(layoutInflater)
     }
-    private val viewModel: SelectPassengerSeatViewModel by viewModel {
+    private val viewModel: SelectReturnPassengerSeatViewModel by viewModel {
         parametersOf(intent.extras)
     }
 
@@ -81,8 +80,8 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
         binding.layoutAppBar.tvAppbarTitle.text =
             getString(
                 R.string.binding_title_select_seat,
-                viewModel.params?.departureCity?.code,
                 viewModel.params?.destinationCity?.code,
+                viewModel.params?.departureCity?.code,
                 viewModel.selectableSeat.toString(),
             )
         binding.tvTitleInfoSeat.text =
@@ -181,49 +180,20 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
                     selectedSeatNumbersFromApi.add(it.seatNumber)
                 }
                 // Toast.makeText(this, "Selected Seats: $selectedSeatIds", Toast.LENGTH_SHORT).show()
-                if (viewModel.params?.status == "One Way") {
-                    navigateToCheckout(
-                        viewModel.totalPrice!!,
-                        viewModel.flight!!,
-                        viewModel.flightReturn,
-                        viewModel.params!!,
-                        viewModel.passengerDataList!!,
-                        SeatList(seats),
-                    )
-                } else if (viewModel.params?.status == "Return") {
-                    navigateToSeatReturn(
-                        viewModel.totalPrice!!,
-                        viewModel.flight!!,
-                        viewModel.flightReturn,
-                        viewModel.params!!,
-                        viewModel.passengerDataList!!,
-                        SeatList(seats),
-                    )
-                }
+                navigateToCheckout(
+                    viewModel.totalPrice!!,
+                    viewModel.flight!!,
+                    viewModel.flightReturn,
+                    viewModel.params!!,
+                    viewModel.passengerDataList!!,
+                    viewModel.seatDeparture!!,
+                    SeatList(seats),
+                )
             }
         }
 
         val selectedSeatsString = selectedSeatNumbersFromApi.joinToString(", ")
         // Toast.makeText(this, "Selected Seats: $selectedSeatsString", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun navigateToSeatReturn(
-        totalPrice: Double,
-        flight: Flight,
-        flightReturn: Flight?,
-        params: FlightSearchParams,
-        passengerList: PassengerBioDataList,
-        seats: SeatList,
-    ) {
-        SelectReturnPassengerSeatActivity.startActivity(
-            this,
-            params,
-            flight,
-            flightReturn,
-            totalPrice,
-            passengerList,
-            seats,
-        )
     }
 
     private fun navigateToCheckout(
@@ -232,6 +202,7 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
         flightReturn: Flight?,
         params: FlightSearchParams,
         passengerList: PassengerBioDataList,
+        seatDeparture: SeatList,
         seats: SeatList,
     ) {
         CheckoutDetailActivity.startActivity(
@@ -241,8 +212,8 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
             flightReturn,
             params,
             passengerList,
+            seatDeparture,
             seats,
-            null,
         )
     }
 
@@ -252,6 +223,7 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
         const val EXTRA_FLIGHT_RETURN = "EXTRA_FLIGHT_RETURN"
         const val EXTRA_TOTAL_PRICE = "EXTRA_TOTAL_PRICE"
         const val EXTRA_PASSENGER_DATA = "EXTRA_PASSENGER_DATA"
+        const val EXTRA_SEAT = "EXTRA_SEAT"
 
         fun startActivity(
             context: Context,
@@ -260,13 +232,15 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
             flightReturn: Flight?,
             totalPrice: Double,
             passengerData: PassengerBioDataList,
+            seats: SeatList,
         ) {
-            val intent = Intent(context, SelectPassengerSeatActivity::class.java)
+            val intent = Intent(context, SelectReturnPassengerSeatActivity::class.java)
             intent.putExtra(EXTRA_FLIGHT_SEARCH_PARAMS, params)
             intent.putExtra(EXTRA_FLIGHT, flight)
             intent.putExtra(EXTRA_FLIGHT_RETURN, flightReturn)
             intent.putExtra(EXTRA_TOTAL_PRICE, totalPrice)
             intent.putExtra(EXTRA_PASSENGER_DATA, passengerData)
+            intent.putExtra(EXTRA_SEAT, seats)
             context.startActivity(intent)
         }
     }

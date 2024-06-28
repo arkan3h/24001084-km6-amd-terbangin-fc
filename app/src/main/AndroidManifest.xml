@@ -26,10 +26,13 @@
             android:name=".presentation.checkout.selectpassengerseat.SelectPassengerSeatActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.checkout.selectpassengerseat.returnflight.SelectReturnPassengerSeatActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.checkout.orderbiodata.OrderBiodataActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.splash_screen.SplashActivity"
+            android:name=".presentation.splashscreen.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,6 +51,9 @@
             android:exported="false" />
         <activity
             android:name=".presentation.flightsearch.FlightSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.flightsearch.flightreturnsearch.FlightSearchReturnActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.profile.edit_profile.EditProfileActivity"
