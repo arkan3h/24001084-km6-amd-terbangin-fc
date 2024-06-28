@@ -7,4 +7,6 @@ class HistoryViewModel(
     pref: UserPreferenceRepository,
 ) : ViewModel() {
     val isLoggedIn = pref.getToken()
+    val userId = pref.getUserID()
+
 }
