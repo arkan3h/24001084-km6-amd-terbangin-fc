@@ -34,13 +34,18 @@ class CheckoutDetailActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         viewModel.calculatePrice()
-        setAppBarTitle()
+        setupDetail()
         setClickListener()
         bindView()
     }
 
-    private fun setAppBarTitle() {
+    private fun setupDetail() {
         binding.layoutAppBar.tvAppbarTitle.text = getString(R.string.appbar_title_rincian_penerbangan)
+        if (viewModel.params?.status == "One Way") {
+            binding.tvFlightReturnDestination.isVisible = false
+            binding.tvFlightReturnDuration.isVisible = false
+            binding.itemFlightReturnDetail.isVisible = false
+        }
     }
 
     private fun setClickListener() {
@@ -104,6 +109,8 @@ class CheckoutDetailActivity : BaseActivity() {
             )
         binding.layoutPricingDetailsList.tvTaxPrice.text = viewModel.taxPrice.toIndonesianFormat()
         if (viewModel.params?.adultQty != 0) {
+            binding.layoutPricingDetailsList.tvAdultPrice.isVisible = true
+            binding.layoutPricingDetailsList.tvAdultTitle.isVisible = true
             binding.layoutPricingDetailsList.tvAdultPrice.text = viewModel.adultPrice.toIndonesianFormat()
             binding.layoutPricingDetailsList.tvAdultTitle.text =
                 getString(
@@ -112,6 +119,8 @@ class CheckoutDetailActivity : BaseActivity() {
                 )
         }
         if (viewModel.params?.childrenQty != 0) {
+            binding.layoutPricingDetailsList.tvChildrenPrice.isVisible = true
+            binding.layoutPricingDetailsList.tvChildrenTitle.isVisible = true
             binding.layoutPricingDetailsList.tvChildrenPrice.text = viewModel.childrenPrice.toIndonesianFormat()
             binding.layoutPricingDetailsList.tvChildrenTitle.text =
                 getString(
@@ -120,6 +129,8 @@ class CheckoutDetailActivity : BaseActivity() {
                 )
         }
         if (viewModel.params?.babyQty != 0) {
+            binding.layoutPricingDetailsList.tvBabyPrice.isVisible = true
+            binding.layoutPricingDetailsList.tvBabyTitle.isVisible = true
             binding.layoutPricingDetailsList.tvBabyPrice.text = viewModel.babyPrice.toIndonesianFormat()
             binding.layoutPricingDetailsList.tvBabyTitle.text =
                 getString(
@@ -208,6 +219,7 @@ class CheckoutDetailActivity : BaseActivity() {
         const val EXTRA_FLIGHT_SEARCH_PARAMS = "EXTRA_FLIGHT_SEARCH_PARAMS"
         const val EXTRA_PASSENGER_DATA = "EXTRA_PASSENGER_DATA"
         const val EXTRA_SEAT = "EXTRA_SEAT"
+        const val EXTRA_SEAT_RETURN = "EXTRA_SEAT_RETURN"
 
         fun startActivity(
             context: Context,
@@ -217,6 +229,7 @@ class CheckoutDetailActivity : BaseActivity() {
             params: FlightSearchParams,
             passengerData: PassengerBioDataList,
             seats: SeatList,
+            seatsReturn: SeatList?,
         ) {
             val intent = Intent(context, CheckoutDetailActivity::class.java)
             intent.putExtra(EXTRA_TOTAL_PRICE, totalPrice)
@@ -225,6 +238,7 @@ class CheckoutDetailActivity : BaseActivity() {
             intent.putExtra(EXTRA_FLIGHT_SEARCH_PARAMS, params)
             intent.putExtra(EXTRA_PASSENGER_DATA, passengerData)
             intent.putExtra(EXTRA_SEAT, seats)
+            intent.putExtra(EXTRA_SEAT_RETURN, seatsReturn)
             context.startActivity(intent)
         }
     }

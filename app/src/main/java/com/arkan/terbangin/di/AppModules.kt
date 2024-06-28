@@ -77,6 +77,7 @@ import com.arkan.terbangin.presentation.checkout.orderbiodata.OrderBiodataViewMo
 import com.arkan.terbangin.presentation.checkout.passengerbiodata.PassengerBioDataViewModel
 import com.arkan.terbangin.presentation.checkout.payment.PaymentViewModel
 import com.arkan.terbangin.presentation.checkout.selectpassengerseat.SelectPassengerSeatViewModel
+import com.arkan.terbangin.presentation.checkout.selectpassengerseat.returnflight.SelectReturnPassengerSeatViewModel
 import com.arkan.terbangin.presentation.flightdetail.FlightDetailViewModel
 import com.arkan.terbangin.presentation.flightsearch.FlightSearchViewModel
 import com.arkan.terbangin.presentation.flightsearch.filter_list.FilterListViewModel
@@ -180,6 +181,7 @@ object AppModules {
             viewModelOf(::OrderBiodataViewModel)
             viewModelOf(::PassengerBioDataViewModel)
             viewModelOf(::SelectPassengerSeatViewModel)
+            viewModelOf(::SelectReturnPassengerSeatViewModel)
             viewModelOf(::HistorySearchViewModel)
             viewModelOf(::BaseViewModel)
             viewModelOf(::CheckoutDetailViewModel)

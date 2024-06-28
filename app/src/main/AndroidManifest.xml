@@ -26,6 +26,9 @@
             android:name=".presentation.checkout.selectpassengerseat.SelectPassengerSeatActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.checkout.selectpassengerseat.returnflight.SelectReturnPassengerSeatActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.checkout.orderbiodata.OrderBiodataActivity"
             android:exported="false" />
         <activity

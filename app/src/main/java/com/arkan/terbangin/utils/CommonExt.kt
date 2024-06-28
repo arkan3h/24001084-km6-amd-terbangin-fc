@@ -12,6 +12,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.Fragment
 import java.text.SimpleDateFormat
 import java.util.Locale
+import java.util.TimeZone
 
 val Number.toPx
     get() =
@@ -73,9 +74,11 @@ fun formatDateString(dateString: String): String {
 }
 
 fun formatDateNotification(dateString: String): String {
-    val originalFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale("id", "ID"))
+    val originalFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    originalFormat.timeZone = TimeZone.getTimeZone("UTC")
 
-    val targetFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale("id", "ID"))
+    val targetFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
+    targetFormat.timeZone = TimeZone.getDefault()
 
     val date = originalFormat.parse(dateString)
 

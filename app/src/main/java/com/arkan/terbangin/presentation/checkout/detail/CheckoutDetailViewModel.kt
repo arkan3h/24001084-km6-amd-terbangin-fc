@@ -22,6 +22,7 @@ class CheckoutDetailViewModel(
     val params = extras?.getParcelable<FlightSearchParams>(CheckoutDetailActivity.EXTRA_FLIGHT_SEARCH_PARAMS)
     val passenger = extras?.getParcelable<PassengerBioDataList>(CheckoutDetailActivity.EXTRA_PASSENGER_DATA)
     val seat = extras?.getParcelable<SeatList>(CheckoutDetailActivity.EXTRA_SEAT)
+    val seatReturn = extras?.getParcelable<SeatList>(CheckoutDetailActivity.EXTRA_SEAT_RETURN)
     val userId = preference.getUserID()
     var totalPrice = 0.0
     var adultPrice: Double? = null
@@ -39,8 +40,9 @@ class CheckoutDetailViewModel(
 
     fun createPayment(
         totalPrice: Int,
-        status: String = "One Way",
+        status: String = params?.status!!,
         passengerId: List<String> = passenger?.list?.map { it.id!! }!!,
         seatId: List<String> = seat?.list?.map { it.id }!!,
-    ) = repository.createPayment(totalPrice, status, passengerId, seatId).asLiveData(Dispatchers.IO)
+        seatReturnId: List<String> = seatReturn?.list?.map { it.id }!!,
+    ) = repository.createPayment(totalPrice, status, passengerId, seatId, seatReturnId).asLiveData(Dispatchers.IO)
 }

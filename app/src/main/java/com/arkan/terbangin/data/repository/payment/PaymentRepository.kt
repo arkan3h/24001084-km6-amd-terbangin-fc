@@ -18,6 +18,7 @@ interface PaymentRepository {
         status: String,
         passengerId: List<String>,
         seatId: List<String>,
+        seatReturnId: List<String>,
     ): Flow<ResultWrapper<Response<PaymentData?>>>
 }
 
@@ -32,6 +33,7 @@ class PaymentRepositoryImpl(
         status: String,
         passengerId: List<String>,
         seatId: List<String>,
+        seatReturnId: List<String>,
     ): Flow<ResultWrapper<Response<PaymentData?>>> {
         return proceedFlow {
             val payment = dataSource.createPayment(totalPrice)
@@ -40,6 +42,11 @@ class PaymentRepositoryImpl(
                 booking.data?.id.let {
                     passengerId.zip(seatId).forEach { (passenger, seat) ->
                         dataSourceHelperBooking.createHelperBooking(HelperBookingPayload(it, passenger, seat))
+                    }
+                    if (status == "Return") {
+                        passengerId.zip(seatReturnId).forEach { (passenger, seat) ->
+                            dataSourceHelperBooking.createHelperBooking(HelperBookingPayload(it, passenger, seat))
+                        }
                     }
                 }
                 booking
