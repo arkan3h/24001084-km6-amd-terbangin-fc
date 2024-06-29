@@ -1,5 +1,6 @@
 package com.arkan.terbangin.presentation.home.class_sheet
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -68,5 +69,16 @@ class ClassSheetFragment : BottomSheetDialogFragment() {
         binding.ivCloseTab.setOnClickListener {
             dialog?.cancel()
         }
+    }
+
+    private var dismissListener: (() -> Unit)? = null
+
+    fun setOnDismissListener(listener: () -> Unit) {
+        dismissListener = listener
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        dismissListener?.invoke()
     }
 }

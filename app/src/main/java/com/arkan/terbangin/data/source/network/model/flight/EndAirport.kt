@@ -15,6 +15,8 @@ data class EndAirport(
     val createdAt: String?,
     @SerializedName("deletedAt")
     val deletedAt: Any?,
+    @SerializedName("iataCode")
+    val iataCode: String?,
     @SerializedName("id")
     val id: String?,
     @SerializedName("name")
@@ -23,6 +25,8 @@ data class EndAirport(
     val picture: String?,
     @SerializedName("terminal")
     val terminal: String?,
+    @SerializedName("timezone")
+    val timezone: String?,
     @SerializedName("updatedAt")
     val updatedAt: String?,
 )

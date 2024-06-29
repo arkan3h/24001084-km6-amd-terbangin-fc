@@ -104,6 +104,12 @@ interface TerbanginApiServices {
         @Query("seatType") seatType: String,
     ): Response<List<FlightDataResponse>?>
 
+    @GET("/api/v1/flight/continent")
+    suspend fun getFlightContinent(
+        @Query("value") date: String,
+        @Query("continent") continent: String,
+    ): Response<List<FlightDataResponse>?>
+
     @GET("/api/v1/airport")
     suspend fun getAllAirport(): Response<List<AirportData>?>
 

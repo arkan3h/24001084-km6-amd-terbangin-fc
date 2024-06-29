@@ -34,8 +34,11 @@ class ClassSheetAdapter(
             binding.root.setOnClickListener {
                 listener.onItemClick(ticketClass)
                 notifyItemChanged(selectedPosition)
-                selectedPosition = adapterPosition
-                notifyItemChanged(selectedPosition)
+                val newPosition = bindingAdapterPosition
+                if (newPosition != RecyclerView.NO_POSITION) {
+                    selectedPosition = newPosition
+                    notifyItemChanged(selectedPosition)
+                }
             }
         }
     }

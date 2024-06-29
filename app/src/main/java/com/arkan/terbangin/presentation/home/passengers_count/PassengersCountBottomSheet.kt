@@ -1,5 +1,6 @@
 package com.arkan.terbangin.presentation.home.passengers_count
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -86,5 +87,16 @@ class PassengersCountBottomSheet : BottomSheetDialogFragment() {
             viewModel.babyQty.value ?: 0,
             viewModel.totalQty.value ?: 0,
         )
+    }
+
+    private var dismissListener: (() -> Unit)? = null
+
+    fun setOnDismissListener(listener: () -> Unit) {
+        dismissListener = listener
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        dismissListener?.invoke()
     }
 }

@@ -13,4 +13,9 @@ interface FlightDataSource {
         order: String,
         seatType: String,
     ): Response<List<FlightDataResponse>?>
+
+    suspend fun getFlightContinent(
+        date: String,
+        continent: String,
+    ): Response<List<FlightDataResponse>?>
 }

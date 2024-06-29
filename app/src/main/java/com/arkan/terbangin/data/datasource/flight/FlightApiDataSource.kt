@@ -18,4 +18,11 @@ class FlightApiDataSource(
     ): Response<List<FlightDataResponse>?> {
         return services.getAllFlight(start, end, key, value, filter, order, seatType)
     }
+
+    override suspend fun getFlightContinent(
+        date: String,
+        continent: String,
+    ): Response<List<FlightDataResponse>?> {
+        return services.getFlightContinent(date, continent)
+    }
 }

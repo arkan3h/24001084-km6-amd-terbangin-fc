@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Flight(
+data class RecommendationFlight(
     val airlineAdditionals: String,
     val airlineBaggage: Int,
     val airlineCabinBaggage: Int,
@@ -12,7 +12,6 @@ data class Flight(
     val airlinePicture: String,
     val airlineSerialNumber: String,
     val airlineId: String,
-    val airlineCode: String,
     val arrivalAt: String,
     val capacityBussines: Int,
     val capacityEconomy: Int,
@@ -22,7 +21,6 @@ data class Flight(
     val endAirportCity: String,
     val endAirportContinent: String,
     val endAirportCountry: String,
-    val endAirportCode: String,
     val endAirportName: String,
     val endAirportPicture: String,
     val endAirportTerminal: String,
@@ -34,7 +32,6 @@ data class Flight(
     val startAirportCity: String,
     val startAirportContinent: String,
     val startAirportCountry: String,
-    val startAirportCode: String,
     val startAirportName: String,
     val startAirportPicture: String,
     val startAirportTerminal: String,

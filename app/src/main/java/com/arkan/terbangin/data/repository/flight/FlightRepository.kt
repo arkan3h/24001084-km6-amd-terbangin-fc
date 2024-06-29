@@ -17,6 +17,11 @@ interface FlightRepository {
         order: String,
         seatType: String,
     ): Flow<ResultWrapper<List<Flight>>>
+
+    fun getFlightContinent(
+        date: String,
+        continent: String,
+    ): Flow<ResultWrapper<List<Flight>>>
 }
 
 class FlightRepositoryImpl(
@@ -33,6 +38,15 @@ class FlightRepositoryImpl(
     ): Flow<ResultWrapper<List<Flight>>> {
         return proceedFlow {
             dataSource.getAllFlight(start, end, key, value, filter, order, seatType).data.toFlight()
+        }
+    }
+
+    override fun getFlightContinent(
+        date: String,
+        continent: String,
+    ): Flow<ResultWrapper<List<Flight>>> {
+        return proceedFlow {
+            dataSource.getFlightContinent(date, continent).data.toFlight()
         }
     }
 }

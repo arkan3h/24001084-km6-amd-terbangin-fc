@@ -3,11 +3,16 @@ package com.arkan.terbangin.presentation.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.arkan.terbangin.data.model.Airport
 import com.arkan.terbangin.data.model.TicketClass
+import com.arkan.terbangin.data.repository.flight.FlightRepository
+import kotlinx.coroutines.Dispatchers
 import java.time.LocalDate
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(
+    private val repository: FlightRepository,
+) : ViewModel() {
     private val _adultQty = MutableLiveData<Int>()
     val adultQty: LiveData<Int> get() = _adultQty
 
@@ -35,6 +40,8 @@ class HomeViewModel : ViewModel() {
     private val _destinationCity = MutableLiveData<Airport>()
     val destinationCity: LiveData<Airport> get() = _destinationCity
 
+    private val date = LocalDate.now().plusDays(10).toString()
+
     fun updatePassengers(
         adult: Int,
         children: Int,
@@ -46,6 +53,8 @@ class HomeViewModel : ViewModel() {
         _babyQty.value = baby
         _totalQty.value = total
     }
+
+    fun getFlightRecommendation(continent: String) = repository.getFlightContinent(date, continent).asLiveData(Dispatchers.IO)
 
     fun updateTicketClass(ticketClass: TicketClass) {
         _ticketClass.value = ticketClass
