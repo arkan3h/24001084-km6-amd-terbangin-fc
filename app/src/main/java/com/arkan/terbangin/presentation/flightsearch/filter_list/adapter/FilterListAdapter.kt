@@ -36,8 +36,11 @@ class FilterListAdapter(
             binding.root.setOnClickListener {
                 listener.onItemClick(filterList)
                 notifyItemChanged(selectedPosition)
-                selectedPosition = adapterPosition
-                notifyItemChanged(selectedPosition)
+                val newPosition = bindingAdapterPosition
+                if (newPosition != RecyclerView.NO_POSITION) {
+                    selectedPosition = newPosition
+                    notifyItemChanged(selectedPosition)
+                }
             }
         }
     }

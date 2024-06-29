@@ -5,26 +5,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import com.arkan.terbangin.R
+import com.arkan.terbangin.base.BaseFragment
+import com.arkan.terbangin.base.OnItemCLickedListener
 import com.arkan.terbangin.data.model.Airport
+import com.arkan.terbangin.data.model.ContinentList
+import com.arkan.terbangin.data.model.Flight
 import com.arkan.terbangin.data.model.FlightSearchParams
 import com.arkan.terbangin.data.model.TicketClass
 import com.arkan.terbangin.databinding.FragmentHomeBinding
+import com.arkan.terbangin.presentation.flightdetail.FlightDetailActivity
 import com.arkan.terbangin.presentation.flightsearch.FlightSearchActivity
+import com.arkan.terbangin.presentation.home.adapter.ContinentAdapter
+import com.arkan.terbangin.presentation.home.adapter.FlightRecommendationAdapter
 import com.arkan.terbangin.presentation.home.calendar.calendardeparturedate.CalendarDepartureDateBottomSheet
 import com.arkan.terbangin.presentation.home.calendar.calendarreturndate.CalendarReturnDateBottomSheet
 import com.arkan.terbangin.presentation.home.class_sheet.ClassSheetFragment
 import com.arkan.terbangin.presentation.home.common.HomeSaveButtonClickListener
 import com.arkan.terbangin.presentation.home.passengers_count.PassengersCountBottomSheet
 import com.arkan.terbangin.presentation.home.terminal_search.TerminalSearchBottomSheet
+import com.arkan.terbangin.utils.proceedWhen
+import com.arkan.terbangin.utils.stringToLocalDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDate
 
-class HomeFragment : Fragment(), HomeSaveButtonClickListener {
+class HomeFragment : BaseFragment(), HomeSaveButtonClickListener {
     private val viewModel: HomeViewModel by viewModel()
 
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var continentAdapter: ContinentAdapter
+    private var flightAdapter: FlightRecommendationAdapter? = null
     private var status = "Return"
 
     override fun onCreateView(
@@ -42,8 +52,68 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
     ) {
         super.onViewCreated(view, savedInstanceState)
         setState()
+        getFlightRecommendation("Asia")
+        observeContinentData()
         onClickListener()
         observeViewModel()
+    }
+
+    private fun observeContinentData() {
+        continentAdapter =
+            ContinentAdapter(
+                listOf(
+                    ContinentList("Asia", "Asia"),
+                    ContinentList("Africa", "Afrika"),
+                    ContinentList("America", "Amerika"),
+                    ContinentList("Australia", "Australia"),
+                    ContinentList("Europe", "Eropa"),
+                ),
+                object : OnItemCLickedListener<ContinentList> {
+                    override fun onItemClicked(item: ContinentList) {
+                        getFlightRecommendation(item.nameContinent)
+                    }
+                },
+            )
+        binding.rvContinent.apply {
+            adapter = continentAdapter
+        }
+    }
+
+    private fun getFlightRecommendation(continent: String) {
+        viewModel.getFlightRecommendation(continent).observe(viewLifecycleOwner) { it ->
+            it.proceedWhen(
+                doOnLoading = {
+                    binding.layoutState.pbLoading.isVisible = true
+                    binding.layoutState.tvError.isVisible = false
+                },
+                doOnSuccess = {
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = false
+                    it.payload?.let { data ->
+                        bindFlightRecommendation(data)
+                    }
+                },
+                doOnError = {
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = true
+                    it.exception?.let { e -> handleError(e) }
+                },
+            )
+        }
+    }
+
+    private fun bindFlightRecommendation(data: List<Flight>) {
+        flightAdapter =
+            FlightRecommendationAdapter(
+                listener =
+                    object : OnItemCLickedListener<Flight> {
+                        override fun onItemClicked(item: Flight) {
+                            onFlightSelected(item)
+                        }
+                    },
+            )
+        binding.rvDestination.adapter = this.flightAdapter
+        flightAdapter?.submitData(data)
     }
 
     private fun onClickListener() {
@@ -195,6 +265,80 @@ class HomeFragment : Fragment(), HomeSaveButtonClickListener {
         FlightSearchActivity.startActivity(
             requireContext(),
             params,
+        )
+    }
+
+    private fun onFlightSelected(flight: Flight) {
+        val departureDate = stringToLocalDate(flight.departureAt)
+        viewModel.updateDepartureCity(
+            Airport(
+                flight.startAirportCity,
+                flight.startAirportContinent,
+                flight.startAirportCountry,
+                flight.startAirportCode,
+                flight.startAirportId,
+                flight.startAirportName,
+                flight.startAirportPicture,
+                flight.startAirportTerminal,
+            ),
+        )
+        viewModel.updateDestinationCity(
+            Airport(
+                flight.endAirportCity,
+                flight.endAirportContinent,
+                flight.endAirportCountry,
+                flight.endAirportCode,
+                flight.endAirportId,
+                flight.endAirportName,
+                flight.endAirportPicture,
+                flight.endAirportTerminal,
+            ),
+        )
+        viewModel.updateDepartureDate(departureDate)
+        setPassengerDetailFlight(flight)
+    }
+
+    private fun setPassengerDetailFlight(flight: Flight) {
+        val bottomSheet = PassengersCountBottomSheet()
+        bottomSheet.listener = this
+        bottomSheet.setOnDismissListener { setClassSeatDetailFlight(flight) }
+        bottomSheet.show(parentFragmentManager, "PassengersCountBottomSheet")
+    }
+
+    private fun setClassSeatDetailFlight(flight: Flight) {
+        val classSheetFragment = ClassSheetFragment()
+        classSheetFragment.listener = this
+        classSheetFragment.setOnDismissListener {
+            if (
+                viewModel.totalQty.value != null &&
+                viewModel.ticketClass.value != null &&
+                viewModel.departureCity.value != null &&
+                viewModel.destinationCity.value != null &&
+                viewModel.departureDate.value != null
+            ) {
+                navigateToFlightDetail(flight)
+            }
+        }
+        classSheetFragment.show(parentFragmentManager, "ClassSheetFragment")
+    }
+
+    private fun navigateToFlightDetail(flight: Flight) {
+        FlightDetailActivity.startActivity(
+            requireContext(),
+            FlightSearchParams(
+                viewModel.adultQty.value!!,
+                viewModel.childrenQty.value!!,
+                viewModel.babyQty.value!!,
+                viewModel.totalQty.value!!,
+                viewModel.ticketClass.value!!,
+                "One Way",
+                viewModel.departureDate.value.toString(),
+                viewModel.returnDate.value.toString(),
+                viewModel.departureCity.value!!,
+                viewModel.destinationCity.value!!,
+            ),
+            flight,
+            null,
         )
     }
 

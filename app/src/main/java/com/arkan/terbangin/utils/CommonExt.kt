@@ -11,6 +11,9 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.Fragment
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 import java.util.TimeZone
 
@@ -77,12 +80,18 @@ fun formatDateNotification(dateString: String): String {
     val originalFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
     originalFormat.timeZone = TimeZone.getTimeZone("UTC")
 
-    val targetFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
+    val targetFormat = SimpleDateFormat("dd MMMM yyyy, HH:mm", Locale("id", "ID"))
     targetFormat.timeZone = TimeZone.getDefault()
 
     val date = originalFormat.parse(dateString)
 
     return date?.let { targetFormat.format(it) } ?: ""
+}
+
+fun stringToLocalDate(dateString: String): LocalDate {
+    val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+    val localDateTime = LocalDateTime.parse(dateString, dateTimeFormatter)
+    return localDateTime.toLocalDate()
 }
 
 fun formatHours(minutes: Int): String {

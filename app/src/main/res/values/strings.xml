@@ -69,7 +69,7 @@
     <string name="placeholder_ketik_6_digit">Ketik 6 digit kode yang dikirimkan ke email anda</string>
     <string name="btn_resend_otp">Kirim Ulang OTP Dalam 60 Detik</string>
     <string name="btn_request_new_code">Minta kode baru via SMS</string>
-    <string name="text_title_home_fav">Destinasi Favorit</string>
+    <string name="text_title_home_fav">Rekomendasi Penerbangan</string>
     <string name="text_title_arrow_home_item"><![CDATA[->]]></string>
     <string name="text_price_start_item_home">Mulai dari</string>
     <string name="text_seat_class">Kelas</string>

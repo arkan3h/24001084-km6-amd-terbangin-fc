@@ -7,6 +7,8 @@ import com.google.gson.annotations.SerializedName
 data class Airline(
     @SerializedName("additionals")
     val additionals: String?,
+    @SerializedName("aircraftType")
+    val aircraftType: String?,
     @SerializedName("baggage")
     val baggage: Int?,
     @SerializedName("cabinBaggage")
@@ -15,14 +17,14 @@ data class Airline(
     val createdAt: String?,
     @SerializedName("deletedAt")
     val deletedAt: Any?,
+    @SerializedName("iataCode")
+    val iataCode: String?,
     @SerializedName("id")
     val id: String?,
     @SerializedName("name")
     val name: String?,
     @SerializedName("picture")
     val picture: String?,
-    @SerializedName("serialNumber")
-    val serialNumber: String?,
     @SerializedName("updatedAt")
     val updatedAt: String?,
 )
