@@ -1,15 +1,21 @@
 package com.arkan.terbangin.presentation.history.adapter
 
-import android.content.res.ColorStateList
-import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.arkan.terbangin.R
 import com.arkan.terbangin.data.model.History
 import com.arkan.terbangin.databinding.ItemSectionDataHistoryBinding
 import com.arkan.terbangin.databinding.ItemSectionHeaderHistoryBinding
+import com.arkan.terbangin.utils.capitalizeFirstLetter
+import com.arkan.terbangin.utils.convertCurrencyFormatString
+import com.arkan.terbangin.utils.formatClassHistory
+import com.arkan.terbangin.utils.formatDateHourStringHistory
+import com.arkan.terbangin.utils.formatDateStringHistory
+import com.arkan.terbangin.utils.formatHoursEng
 import com.xwray.groupie.viewbinding.BindableItem
 
-class MonthHeaderItem(private val month: String) : BindableItem<ItemSectionHeaderHistoryBinding>() {
+class HistoryMonthHeaderItem(private val month: String) : BindableItem<ItemSectionHeaderHistoryBinding>() {
     override fun bind(
         viewBinding: ItemSectionHeaderHistoryBinding,
         position: Int,
@@ -31,16 +37,16 @@ class HistoryDataItem(private val data: History) : BindableItem<ItemSectionDataH
     ) {
         setBackgroundStatus(data.bookingStatus, viewBinding)
         viewBinding.tvOrderStatus.text = data.bookingStatus.capitalizeFirstLetter()
-        viewBinding.tvLocationFrom.text = data.flight.departureAirport.airportCity
-        viewBinding.tvLocationDestination.text = data.flight.arrivalAirport.airportCity
-        viewBinding.tvDate.text = data.flight.departureTime.toCompleteDateFormat()
-        viewBinding.tvDateDestination.text = data.flight.arrivalTime.toCompleteDateFormat()
-        viewBinding.tvTime.text = data.flight.departureTime.toTimeFormat()
-        viewBinding.tvTimeDestination.text = data.flight.departureTime.toTimeFormat()
-        viewBinding.tvJourneyTime.text = data.duration
-        viewBinding.bookingCode.text = data.bookingCode
-        viewBinding.classSeat.text = data.classes.capitalizeFirstLetter()
-        viewBinding.tvTotalHistory.text = data.totalAmount.toCurrencyFormat()
+        viewBinding.tvFlightStartLocation.text = data.startLoc
+        viewBinding.tvDepartureDate.text = formatDateStringHistory(data.departureAt)
+        viewBinding.tvDepartureTime.text = formatDateHourStringHistory(data.departureAt)
+        viewBinding.tvFlightTime.text = formatHoursEng(data.duration)
+        viewBinding.tvFlightEndLocation.text = data.endLoc
+        viewBinding.tvLandingDate.text = formatDateStringHistory(data.arrivalAt)
+        viewBinding.tvLandingTime.text = formatDateHourStringHistory(data.arrivalAt)
+        viewBinding.tvBookingCode.text = data.bookingCode
+        viewBinding.tvClassBooking.text = formatClassHistory(data.classes)
+        viewBinding.tvOrderPrice.text = convertCurrencyFormatString(data.totalPayment)
     }
 
     override fun getLayout() = R.layout.item_section_data_history
@@ -49,14 +55,25 @@ class HistoryDataItem(private val data: History) : BindableItem<ItemSectionDataH
         return ItemSectionDataHistoryBinding.bind(view)
     }
 
+    private fun getOvalBackground(color: Int): GradientDrawable {
+        return GradientDrawable().apply {
+            shape = GradientDrawable.RECTANGLE
+            cornerRadius = 50f // Set this to a suitable value to make it oval
+            setColor(color)
+        }
+    }
+
     private fun setBackgroundStatus(
         status: String,
         viewBinding: ItemSectionDataHistoryBinding,
     ) {
-        if (status == "issued") {
-            viewBinding.tvOrderStatus.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#73CA5C"))
-        } else if (status == "unpaid") {
-            viewBinding.tvOrderStatus.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FF0000"))
-        }
+        val color =
+            when (status) {
+                "ISSUED" -> R.color.green
+                "UNPAID" -> R.color.md_theme_error
+                else -> R.color.md_theme_outline
+            }
+        val drawable = getOvalBackground(ContextCompat.getColor(viewBinding.root.context, color))
+        viewBinding.tvOrderStatus.background = drawable
     }
 }

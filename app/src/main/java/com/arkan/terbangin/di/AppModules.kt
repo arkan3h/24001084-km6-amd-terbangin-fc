@@ -18,6 +18,8 @@ import com.arkan.terbangin.data.datasource.booking2.HelperBookingApiDataSource2
 import com.arkan.terbangin.data.datasource.booking2.HelperBookingDataSource2
 import com.arkan.terbangin.data.datasource.flight.FlightApiDataSource
 import com.arkan.terbangin.data.datasource.flight.FlightDataSource
+import com.arkan.terbangin.data.datasource.history.HistoryDataSource
+import com.arkan.terbangin.data.datasource.history.HistoryDataSourceImpl
 import com.arkan.terbangin.data.datasource.notification.NotificationApiDataSource
 import com.arkan.terbangin.data.datasource.notification.NotificationDataSource
 import com.arkan.terbangin.data.datasource.passenger.PassengerApiDataSource
@@ -46,6 +48,8 @@ import com.arkan.terbangin.data.repository.auth.ResetPasswordRepository
 import com.arkan.terbangin.data.repository.auth.ResetPasswordRepositoryImpl
 import com.arkan.terbangin.data.repository.flight.FlightRepository
 import com.arkan.terbangin.data.repository.flight.FlightRepositoryImpl
+import com.arkan.terbangin.data.repository.history.HistoryRepository
+import com.arkan.terbangin.data.repository.history.HistoryRepositoryImpl
 import com.arkan.terbangin.data.repository.notification.NotificationRepository
 import com.arkan.terbangin.data.repository.notification.NotificationRepositoryImpl
 import com.arkan.terbangin.data.repository.passenger.PassengerRepository
@@ -137,6 +141,7 @@ object AppModules {
             single<PaymentDataSource> { PaymentApiDataSource(get()) }
             single<BookingDataSource2> { BookingApiDataSource2(get()) }
             single<HelperBookingDataSource2> { HelperBookingApiDataSource2(get()) }
+            single<HistoryDataSource> { HistoryDataSourceImpl(get()) }
         }
 
     private val repository =
@@ -155,6 +160,7 @@ object AppModules {
             single<NotificationRepository> { NotificationRepositoryImpl(get()) }
             single<SeatRepository> { SeatRepositoryImpl(get()) }
             single<PaymentRepository> { PaymentRepositoryImpl(get(), get(), get(), get()) }
+            single<HistoryRepository> { HistoryRepositoryImpl(get()) }
         }
 
     private val viewModelModule =

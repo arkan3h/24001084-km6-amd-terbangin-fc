@@ -1,8 +1,7 @@
 package com.arkan.terbangin.data.source.network.model.history
 
-
-import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 
 @Keep
 data class Airline(
@@ -27,5 +26,5 @@ data class Airline(
     @SerializedName("picture")
     val picture: String?,
     @SerializedName("updatedAt")
-    val updatedAt: String?
+    val updatedAt: String?,
 )

@@ -10,15 +10,16 @@ fun HelperBookingResponseData?.toHistoryModel() =
         userId = this?.booking?.userId.orEmpty(),
         flightId = this?.seat?.flightId.orEmpty(),
         paymentId = this?.booking?.paymentId.orEmpty(),
-        bookingStatus = this?.booking?.status.orEmpty(),
+        bookingStatus = this?.booking?.payment?.status.orEmpty(),
         startLoc = this?.seat?.flight?.startAirport?.city.orEmpty(),
         departureAt = this?.seat?.flight?.departureAt.orEmpty(),
-        duration = this?.seat?.flight?.duration ?:0,
+        duration = this?.seat?.flight?.duration ?: 0,
         endLoc = this?.seat?.flight?.endAirport?.city.orEmpty(),
         arrivalAt = this?.seat?.flight?.arrivalAt.orEmpty(),
         bookingCode = this?.booking?.bookingCode.orEmpty(),
         classes = this?.seat?.airlineClass.orEmpty(),
-        totalPayment = this?.booking?.payment?.totalPrice.orEmpty()
+        totalPayment = this?.booking?.payment?.totalPrice.orEmpty(),
+        monthHeader = this?.seat?.flight?.createdAt.orEmpty(),
     )
 
 fun Collection<HelperBookingResponseData>?.toHistoryList() =

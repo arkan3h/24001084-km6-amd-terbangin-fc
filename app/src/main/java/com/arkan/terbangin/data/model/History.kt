@@ -1,9 +1,7 @@
 package com.arkan.terbangin.data.model
 
-import java.util.UUID
-
 data class History(
-    var id: String = UUID.randomUUID().toString(),
+    var id: String,
     val bookingId: String,
     val userId: String,
     val flightId: String,
@@ -16,5 +14,11 @@ data class History(
     val arrivalAt: String,
     val bookingCode: String,
     val classes: String,
-    val totalPayment: String
+    val totalPayment: String,
+    val monthHeader: String,
+)
+
+data class DetailHistory(
+    var id: String,
+
 )

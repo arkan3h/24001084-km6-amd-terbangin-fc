@@ -99,3 +99,50 @@ fun formatHours(minutes: Int): String {
     val remainingMinutes = minutes % 60
     return "$hours jam $remainingMinutes menit"
 }
+
+fun formatHoursEng(minutes: Int): String {
+    val hours = minutes / 60
+    val remainingMinutes = minutes % 60
+    return "${hours}h ${remainingMinutes}m"
+}
+
+fun formatDateHourStringHistory(dateString: String): String {
+    val originalFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    originalFormat.timeZone = TimeZone.getTimeZone("UTC")
+
+    val targetFormat = SimpleDateFormat("HH.mm", Locale.getDefault())
+    targetFormat.timeZone = TimeZone.getDefault()
+
+    val date = originalFormat.parse(dateString)
+
+    return date?.let { targetFormat.format(it) } ?: ""
+}
+
+fun formatDateStringHistory(dateString: String): String {
+    val originalFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    originalFormat.timeZone = TimeZone.getTimeZone("UTC")
+
+    val targetFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+    targetFormat.timeZone = TimeZone.getDefault()
+
+    val date = originalFormat.parse(dateString)
+
+    return date?.let { targetFormat.format(it) } ?: ""
+}
+
+fun formatMonthHeaderStringHistory(dateString: String): String {
+    val originalFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    originalFormat.timeZone = TimeZone.getTimeZone("UTC")
+
+    val targetFormat = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
+    targetFormat.timeZone = TimeZone.getDefault()
+
+    val date = originalFormat.parse(dateString)
+
+    return date?.let { targetFormat.format(it) } ?: ""
+}
+
+fun formatClassHistory(input: String): String {
+    return input.split('_')
+        .joinToString(" ") { it.lowercase().replaceFirstChar { char -> char.uppercase() } }
+}

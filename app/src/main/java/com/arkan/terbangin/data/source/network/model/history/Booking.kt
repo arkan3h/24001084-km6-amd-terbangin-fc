@@ -1,8 +1,7 @@
 package com.arkan.terbangin.data.source.network.model.history
 
-
-import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 
 @Keep
 data class Booking(
@@ -25,5 +24,5 @@ data class Booking(
     @SerializedName("updatedAt")
     val updatedAt: String?,
     @SerializedName("userId")
-    val userId: String?
+    val userId: String?,
 )
