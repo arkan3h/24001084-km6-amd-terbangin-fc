@@ -1,5 +1,9 @@
 package com.arkan.terbangin.data.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class History(
     var id: String,
     val bookingId: String,
@@ -16,9 +20,27 @@ data class History(
     val classes: String,
     val totalPayment: String,
     val monthHeader: String,
-)
+): Parcelable
 
+@Parcelize
 data class DetailHistory(
     var id: String,
+    val bookingStatus: String,
+    val bookingCode: String,
+    val departureAt: String,
+    val arrivalAt: String,
+    val airportStart: String,
+    val terminalStart: String,
+    val airportEnd: String,
+    val terminalEnd: String,
+    val aircraftName: String,
+    val classes: String,
+    val aircraftType: String,
+    val totalPrice: String,
+    val passengerId: List<PassengerHistory>?,
+): Parcelable
 
-)
+@Parcelize
+data class PassengerHistory(
+    var passengerId: String
+): Parcelable
