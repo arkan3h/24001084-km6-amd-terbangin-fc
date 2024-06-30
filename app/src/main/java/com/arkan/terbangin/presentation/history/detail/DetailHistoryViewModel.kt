@@ -1,6 +1,5 @@
 package com.arkan.terbangin.presentation.history.detail
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.arkan.terbangin.data.repository.history.HistoryRepository

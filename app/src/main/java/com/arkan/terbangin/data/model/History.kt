@@ -20,7 +20,7 @@ data class History(
     val classes: String,
     val totalPayment: String,
     val monthHeader: String,
-): Parcelable
+) : Parcelable
 
 @Parcelize
 data class DetailHistory(
@@ -38,9 +38,9 @@ data class DetailHistory(
     val aircraftType: String,
     val totalPrice: String,
     val passengerId: List<PassengerHistory>?,
-): Parcelable
+) : Parcelable
 
 @Parcelize
 data class PassengerHistory(
-    var passengerId: String
-): Parcelable
+    var passengerId: String,
+) : Parcelable

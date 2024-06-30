@@ -20,7 +20,7 @@ class DetailHistoryAdapter(
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): DetailHistoryViewHolder {
         return DetailHistoryViewHolder(
             ItemPassengerDetailsBinding.inflate(
@@ -36,14 +36,14 @@ class DetailHistoryAdapter(
 
     override fun onBindViewHolder(
         holder: DetailHistoryViewHolder,
-        position: Int
+        position: Int,
     ) {
         holder.bind(itemData[position])
     }
 
     class DetailHistoryViewHolder(
         private val binding: ItemPassengerDetailsBinding,
-        private val listener: OnItemCLickedListener<DetailHistory>
+        private val listener: OnItemCLickedListener<DetailHistory>,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DetailHistory) {
 //            binding.tvPassengerName.text =item.fullname

@@ -3,19 +3,13 @@ package com.arkan.terbangin.presentation.history.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.arkan.terbangin.R
 import com.arkan.terbangin.base.OnItemCLickedListener
 import com.arkan.terbangin.data.model.DetailHistory
 import com.arkan.terbangin.data.model.History
-import com.arkan.terbangin.databinding.ActivityCheckoutDetailBinding
 import com.arkan.terbangin.databinding.ActivityDetailHistoryBinding
 import com.arkan.terbangin.presentation.history.detail.adapter.DetailHistoryAdapter
-import com.arkan.terbangin.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailHistoryActivity : AppCompatActivity() {
@@ -35,15 +29,15 @@ class DetailHistoryActivity : AppCompatActivity() {
     }
 
     private fun onItemClick(item: DetailHistory) {
-
     }
 
-    private fun setAdapter(){
-        val itemClickListener = object : OnItemCLickedListener<DetailHistory> {
-            override fun onItemClicked(item: DetailHistory) {
-                onItemClick(item)
+    private fun setAdapter() {
+        val itemClickListener =
+            object : OnItemCLickedListener<DetailHistory> {
+                override fun onItemClicked(item: DetailHistory) {
+                    onItemClick(item)
+                }
             }
-        }
         detailHistoryAdapter = DetailHistoryAdapter(itemClickListener)
         binding.itemHistoryDetail.rvPassengerDetailsList.adapter = detailHistoryAdapter
     }
@@ -54,9 +48,10 @@ class DetailHistoryActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_ITEM_HISTORY = "EXTRA_ITEM_HISTORY"
+
         fun startActivity(
             context: Context,
-            item: History
+            item: History,
         ) {
             val intent = Intent(context, DetailHistoryActivity::class.java)
             intent.putExtra(EXTRA_ITEM_HISTORY, item)

@@ -8,10 +8,12 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arkan.terbangin.R
 import com.arkan.terbangin.base.BaseFragment
+import com.arkan.terbangin.data.model.StatusPayment
 import com.arkan.terbangin.databinding.FragmentHistoryBinding
 import com.arkan.terbangin.presentation.history.adapter.HistoryDataItem
 import com.arkan.terbangin.presentation.history.adapter.HistoryMonthHeaderItem
-import com.arkan.terbangin.presentation.history.calendarfilterhistory.CalenderFilterHistoryBottomSheet
+import com.arkan.terbangin.presentation.history.filterhistory.FilterHistoryBottomSheet
+import com.arkan.terbangin.presentation.home.common.FilterStatusListener
 import com.arkan.terbangin.utils.formatMonthHeaderStringHistory
 import com.arkan.terbangin.utils.navigateToLogin
 import com.arkan.terbangin.utils.proceedWhen
@@ -20,7 +22,7 @@ import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.viewbinding.BindableItem
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HistoryFragment : BaseFragment() {
+class HistoryFragment : BaseFragment(), FilterStatusListener {
     private lateinit var binding: FragmentHistoryBinding
     private var groupAdapter = GroupAdapter<GroupieViewHolder>()
 
@@ -101,10 +103,21 @@ class HistoryFragment : BaseFragment() {
 //            gotoSearchFlightNumber()
         }
         binding.ibBtnFilter.setOnClickListener {
-            CalenderFilterHistoryBottomSheet().show(childFragmentManager, null)
+            selectFilter()
         }
         binding.fragmentHistoryNonLogin.btnLogin.setOnClickListener {
             navigateToLogin()
         }
+    }
+
+    private fun selectFilter() {
+        val filterHistoryFragment = FilterHistoryBottomSheet()
+        filterHistoryFragment.listener = this
+        filterHistoryFragment.show(childFragmentManager, filterHistoryFragment.tag)
+    }
+
+    override fun onFilterStatusSelected(status: StatusPayment) {
+        viewModel.saveSelectedStatus(status)
+        viewModel.getUserID()?.let { getHistoryByUUID(it) }
     }
 }

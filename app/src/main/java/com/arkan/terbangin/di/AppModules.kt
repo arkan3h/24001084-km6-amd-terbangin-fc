@@ -87,6 +87,7 @@ import com.arkan.terbangin.presentation.flightsearch.FlightSearchViewModel
 import com.arkan.terbangin.presentation.flightsearch.filter_list.FilterListViewModel
 import com.arkan.terbangin.presentation.flightsearch.flightreturnsearch.FlightSearchReturnViewModel
 import com.arkan.terbangin.presentation.history.HistoryViewModel
+import com.arkan.terbangin.presentation.history.filterhistory.FilterHistorySheetViewModel
 import com.arkan.terbangin.presentation.history.searchhistory.HistorySearchViewModel
 import com.arkan.terbangin.presentation.home.HomeViewModel
 import com.arkan.terbangin.presentation.home.class_sheet.ClassSheetViewModel
@@ -192,6 +193,7 @@ object AppModules {
             viewModelOf(::BaseViewModel)
             viewModelOf(::CheckoutDetailViewModel)
             viewModelOf(::PaymentViewModel)
+            viewModelOf(::FilterHistorySheetViewModel)
         }
 
     val modules =
