@@ -1,8 +1,7 @@
 package com.arkan.terbangin.data.source.network.model.history
 
-
-import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 
 @Keep
 data class EndAirport(
@@ -29,5 +28,5 @@ data class EndAirport(
     @SerializedName("timezone")
     val timezone: String?,
     @SerializedName("updatedAt")
-    val updatedAt: String?
+    val updatedAt: String?,
 )

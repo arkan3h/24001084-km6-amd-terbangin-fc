@@ -5,21 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arkan.terbangin.R
+import com.arkan.terbangin.base.BaseFragment
 import com.arkan.terbangin.databinding.FragmentHistoryBinding
+import com.arkan.terbangin.presentation.history.adapter.HistoryDataItem
+import com.arkan.terbangin.presentation.history.adapter.HistoryMonthHeaderItem
 import com.arkan.terbangin.presentation.history.calendarfilterhistory.CalenderFilterHistoryBottomSheet
-import com.arkan.terbangin.presentation.history.searchhistory.HistorySearchBottomSheet
+import com.arkan.terbangin.utils.formatMonthHeaderStringHistory
 import com.arkan.terbangin.utils.navigateToLogin
+import com.arkan.terbangin.utils.proceedWhen
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import com.xwray.groupie.viewbinding.BindableItem
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HistoryFragment : Fragment() {
+class HistoryFragment : BaseFragment() {
     private lateinit var binding: FragmentHistoryBinding
-    private val groupAdapter = GroupAdapter<GroupieViewHolder>()
-    private var listenerBookingCode: String? = null
+    private var groupAdapter = GroupAdapter<GroupieViewHolder>()
 
     private val viewModel: HistoryViewModel by viewModel()
 
@@ -38,14 +41,17 @@ class HistoryFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         setState()
-        observeHistoryData()
         setOnClickListener()
     }
 
     private fun setState() {
+        if (viewModel.isLoggedIn != null) {
+            getHistoryByUID(viewModel.getUserID()!!)
+        }
         binding.fragmentHistoryNonLogin.tvTitle.text = getString(R.string.text_riwayat_pesanan)
         binding.layoutHistoryNonLogin.isVisible = viewModel.isLoggedIn == null
         binding.layoutHistory.isVisible = viewModel.isLoggedIn != null
+
         setUpAdapter()
     }
 
@@ -54,13 +60,45 @@ class HistoryFragment : Fragment() {
         binding.rvItemDataHistory.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun observeHistoryData() {
+    private fun getHistoryByUID(id: String) {
+        viewModel.getHistoryByUID(id).observe(viewLifecycleOwner) { it ->
+            it.proceedWhen(
+                doOnLoading = {
+                    binding.layoutStateHistory.pbLoading.isVisible = true
+                    binding.layoutStateHistory.tvError1.isVisible = false
+                    binding.layoutStateHistory.tvError2.isVisible = false
+                },
+                doOnSuccess = {
+                    binding.layoutStateHistory.pbLoading.isVisible = false
+                    binding.layoutStateHistory.tvError1.isVisible = false
+                    binding.layoutStateHistory.tvError2.isVisible = false
+                    it.payload?.let { data ->
+                        val items = mutableListOf<BindableItem<*>>()
 
+                        val groupedData = data.groupBy { formatMonthHeaderStringHistory(it.monthHeader) }
+
+                        groupedData.forEach { (monthYear, dataList) ->
+                            items.add(HistoryMonthHeaderItem(monthYear))
+                            dataList.forEach { data ->
+                                items.add(HistoryDataItem(data))
+                            }
+                        }
+                        groupAdapter.update(items)
+                    }
+                },
+                doOnError = {
+                    binding.layoutStateHistory.pbLoading.isVisible = false
+                    binding.layoutStateHistory.tvError1.isVisible = true
+                    binding.layoutStateHistory.tvError2.isVisible = true
+                    it.exception?.let { e -> handleError(e) }
+                },
+            )
+        }
     }
 
     private fun setOnClickListener() {
         binding.ibBtnSearch.setOnClickListener {
-            gotoSearchFlightNumber()
+//            gotoSearchFlightNumber()
         }
         binding.ibBtnFilter.setOnClickListener {
             CalenderFilterHistoryBottomSheet().show(childFragmentManager, null)
@@ -68,21 +106,5 @@ class HistoryFragment : Fragment() {
         binding.fragmentHistoryNonLogin.btnLogin.setOnClickListener {
             navigateToLogin()
         }
-    }
-
-    private fun gotoSearchFlightNumber() {
-        val dialog = HistorySearchBottomSheet()
-        dialog.show(childFragmentManager, dialog.tag)
-        childFragmentManager.setFragmentResultListener(
-            "bookingCode",
-            this,
-        ) { _, bundle ->
-            listenerBookingCode = bundle.getString("data")
-            observeSearchData(listenerBookingCode)
-        }
-    }
-
-    private fun observeSearchData(bookingCode: String?) {
-
     }
 }
