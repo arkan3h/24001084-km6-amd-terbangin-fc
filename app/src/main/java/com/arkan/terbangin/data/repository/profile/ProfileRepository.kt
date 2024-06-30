@@ -5,11 +5,9 @@ import com.arkan.terbangin.data.mapper.toProfile
 import com.arkan.terbangin.data.model.Profile
 import com.arkan.terbangin.utils.ResultWrapper
 import com.arkan.terbangin.utils.createPartFromString
+import com.arkan.terbangin.utils.prepareFilePart
 import com.arkan.terbangin.utils.proceedFlow
 import kotlinx.coroutines.flow.Flow
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
 interface ProfileRepository {
@@ -43,11 +41,7 @@ class ProfileRepositoryImpl(
         picture: File?,
     ): Flow<ResultWrapper<Profile>> {
         return proceedFlow {
-            val picturePart =
-                picture?.let {
-                    val requestFile = it.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                    MultipartBody.Part.createFormData("picture", it.name, requestFile)
-                }
+            val picturePart = picture?.let { prepareFilePart(it) }
             dataSource.updateProfile(
                 id,
                 createPartFromString(fullName),
