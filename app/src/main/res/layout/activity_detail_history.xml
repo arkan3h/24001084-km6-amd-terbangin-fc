@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.history.detail.HistoryDetailFragment">
+    tools:context=".presentation.history.detail.DetailHistoryActivity">
 
     <include
         android:id="@+id/layout_app_bar"
@@ -44,6 +44,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_flight_destination">
 
                 <include
+                    android:id="@+id/item_history_detail"
                     layout="@layout/item_history_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -80,6 +81,7 @@
     <include
         android:id="@+id/layout_total_price"
         layout="@layout/layout_total_price_checkout_detail"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

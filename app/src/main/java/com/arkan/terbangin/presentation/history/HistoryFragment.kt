@@ -46,7 +46,7 @@ class HistoryFragment : BaseFragment() {
 
     private fun setState() {
         if (viewModel.isLoggedIn != null) {
-            getHistoryByUID(viewModel.getUserID()!!)
+            getHistoryByUUID(viewModel.getUserID()!!)
         }
         binding.fragmentHistoryNonLogin.tvTitle.text = getString(R.string.text_riwayat_pesanan)
         binding.layoutHistoryNonLogin.isVisible = viewModel.isLoggedIn == null
@@ -60,8 +60,8 @@ class HistoryFragment : BaseFragment() {
         binding.rvItemDataHistory.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun getHistoryByUID(id: String) {
-        viewModel.getHistoryByUID(id).observe(viewLifecycleOwner) { it ->
+    private fun getHistoryByUUID(id: String) {
+        viewModel.getHistoryByUUID(id).observe(viewLifecycleOwner) { it ->
             it.proceedWhen(
                 doOnLoading = {
                     binding.layoutStateHistory.pbLoading.isVisible = true
