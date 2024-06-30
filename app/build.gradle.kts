@@ -136,6 +136,8 @@ dependencies {
 
     implementation("com.github.JahidHasanCO:SeatBookView:1.0.4")
 
+    implementation("com.github.dhaval2404:imagepicker:2.1")
+
     implementation("androidx.room:room-runtime:2.4.2")
     implementation("androidx.room:room-ktx:2.4.2")
 }
