@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.Window
 import android.widget.Button
@@ -104,16 +105,21 @@ class EditProfileActivity : BaseActivity() {
 
         binding.btnEditPhoto.setOnClickListener {
             when {
-                ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.READ_MEDIA_IMAGES,
-                ) == PackageManager.PERMISSION_GRANTED -> {
-                    pickImage()
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
+                    checkPermissionAndPickImage(Manifest.permission.READ_MEDIA_IMAGES)
                 }
                 else -> {
-                    requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
+                    checkPermissionAndPickImage(Manifest.permission.READ_EXTERNAL_STORAGE)
                 }
             }
+        }
+    }
+
+    private fun checkPermissionAndPickImage(permission: String) {
+        if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
+            pickImage()
+        } else {
+            requestPermissionLauncher.launch(permission)
         }
     }
 
