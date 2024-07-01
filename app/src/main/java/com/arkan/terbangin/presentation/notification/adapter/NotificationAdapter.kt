@@ -2,6 +2,7 @@ package com.arkan.terbangin.presentation.notification.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -70,6 +71,7 @@ class NotificationAdapter(
                 binding.tvTitleNotification.text = title
                 binding.tvNotification.text = message
                 binding.tvDate.text = formatDateNotification(createdAt)
+                if (statusRead) binding.ivReadNotification.isVisible = false
                 itemView.setOnClickListener { listener.onItemClicked(item) }
             }
         }

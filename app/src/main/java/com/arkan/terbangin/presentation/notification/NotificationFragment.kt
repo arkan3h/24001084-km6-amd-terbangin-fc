@@ -38,7 +38,6 @@ class NotificationFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setState()
         setOnClickListener()
-//        setupNotification()
     }
 
     private fun setState() {
@@ -79,17 +78,33 @@ class NotificationFragment : BaseFragment() {
         }
     }
 
-//    private fun setupNotification() {
-//        binding.rvNotificationList.apply {
-//            adapter = notificationAdapter
-//        }
-//    }
+    private fun readNotification(id: String) {
+        viewModel.readNotification(id).observe(viewLifecycleOwner) { it ->
+            it.proceedWhen(
+                doOnLoading = {
+                    binding.layoutState.pbLoading.isVisible = true
+                    binding.layoutState.tvError.isVisible = false
+                },
+                doOnSuccess = {
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = false
+                    setState()
+                },
+                doOnError = {
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = true
+                    it.exception?.let { e -> handleError(e) }
+                },
+            )
+        }
+    }
 
     private fun bindNotificationData(notification: List<Notification>) {
         notificationAdapter =
             NotificationAdapter(
                 object : OnItemCLickedListener<Notification> {
                     override fun onItemClicked(item: Notification) {
+                        readNotification(item.id)
                     }
                 },
             )

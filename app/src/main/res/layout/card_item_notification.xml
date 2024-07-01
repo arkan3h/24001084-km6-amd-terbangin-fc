@@ -23,7 +23,7 @@
 
         <TextView
             android:id="@+id/tv_title_notification"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:text="@string/txt_title_notificaton"
@@ -31,8 +31,6 @@
             android:textStyle="bold"
             android:ellipsize="end"
             android:maxLines="2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tv_date"
             app:layout_constraintStart_toEndOf="@+id/iv_notification_image"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,9 +62,12 @@
             android:id="@+id/iv_read_notification"
             android:layout_width="8dp"
             android:layout_height="8dp"
+            android:layout_marginStart="8dp"
             android:src="@drawable/ic_read_notification"
-            app:layout_constraintBottom_toBottomOf="@id/iv_notification_image"
-            app:layout_constraintEnd_toEndOf="@id/iv_notification_image"/>
+            app:tint="@color/md_theme_error"
+            app:layout_constraintBottom_toBottomOf="@id/tv_title_notification"
+            app:layout_constraintStart_toEndOf="@id/tv_title_notification"
+            app:layout_constraintTop_toTopOf="@id/tv_title_notification"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

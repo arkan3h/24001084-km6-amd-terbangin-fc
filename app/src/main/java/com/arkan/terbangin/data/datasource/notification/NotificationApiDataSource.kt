@@ -10,4 +10,8 @@ class NotificationApiDataSource(
     override suspend fun getNotificationByUID(id: String): Response<List<NotificationData>?> {
         return services.getNotificationByUID(id)
     }
+
+    override suspend fun readNotification(id: String): Response<NotificationData?> {
+        return services.readNotification(id)
+    }
 }
