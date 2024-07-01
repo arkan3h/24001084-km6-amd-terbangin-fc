@@ -74,8 +74,9 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
     }
 
     private fun setSeatView(seats: List<Seat>) {
-        val newSeats = generateSeatsString(viewModel.capacity, seats)
-        val seatNumber = seats.map { it.seatNumber }
+        val sortedSeats = seats.sortedBy { it.seatNumber }
+        val newSeats = generateSeatsString(viewModel.capacity, sortedSeats)
+        val seatNumber = sortedSeats.map { it.seatNumber }
         Log.d("title", "setSeatView: $seatNumber")
         val title = generateSeatTitles(seatNumber)
         seatBookView = findViewById(R.id.layoutSeat)
@@ -147,20 +148,21 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
     private fun generateSeatTitles(seatNumbers: List<Int>): List<String> {
         val titles = mutableListOf<String>()
         val rowCount = seatNumbers.size / 6 + if (seatNumbers.size % 6 != 0) 1 else 0
+        val seatLabels = listOf("A", "B", "C", "D", "E", "F")
 
         for (i in 0 until rowCount) {
             titles.add("/") // Start of a new row
             for (j in 0..2) {
                 val seatIndex = i * 6 + j
                 if (seatIndex < seatNumbers.size) {
-                    titles.add("${seatNumbers[seatIndex]}")
+                    titles.add("${seatNumbers[seatIndex]}${seatLabels[j]}")
                 }
             }
             titles.add("") // Separator
             for (j in 3..5) {
                 val seatIndex = i * 6 + j
                 if (seatIndex < seatNumbers.size) {
-                    titles.add("${seatNumbers[seatIndex]}")
+                    titles.add("${seatNumbers[seatIndex]}${seatLabels[j]}")
                 }
             }
         }

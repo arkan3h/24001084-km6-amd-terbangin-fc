@@ -20,6 +20,7 @@ data class History(
     val classes: String,
     val totalPayment: String,
     val monthHeader: String,
+    val snapLink: String,
 ) : Parcelable
 
 @Parcelize
