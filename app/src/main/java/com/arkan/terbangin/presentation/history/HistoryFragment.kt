@@ -8,10 +8,12 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arkan.terbangin.R
 import com.arkan.terbangin.base.BaseFragment
+import com.arkan.terbangin.data.model.History
 import com.arkan.terbangin.data.model.StatusPayment
 import com.arkan.terbangin.databinding.FragmentHistoryBinding
 import com.arkan.terbangin.presentation.history.adapter.HistoryDataItem
 import com.arkan.terbangin.presentation.history.adapter.HistoryMonthHeaderItem
+import com.arkan.terbangin.presentation.history.detail.DetailHistoryActivity
 import com.arkan.terbangin.presentation.history.filterhistory.FilterHistoryBottomSheet
 import com.arkan.terbangin.presentation.history.searchhistory.HistorySearchBottomSheet
 import com.arkan.terbangin.presentation.home.common.FilterStatusListener
@@ -90,7 +92,11 @@ class HistoryFragment : BaseFragment(), FilterStatusListener {
                         groupedData.forEach { (monthYear, dataList) ->
                             items.add(HistoryMonthHeaderItem(monthYear))
                             dataList.forEach { data ->
-                                items.add(HistoryDataItem(data))
+                                items.add(
+                                    HistoryDataItem(data) {
+                                        navigateToDetailHistory(it)
+                                    },
+                                )
                             }
                         }
                         groupAdapter.update(items)
@@ -128,6 +134,13 @@ class HistoryFragment : BaseFragment(), FilterStatusListener {
         val filterHistoryFragment = FilterHistoryBottomSheet()
         filterHistoryFragment.listener = this
         filterHistoryFragment.show(childFragmentManager, filterHistoryFragment.tag)
+    }
+
+    private fun navigateToDetailHistory(history: History) {
+        DetailHistoryActivity.startActivity(
+            requireContext(),
+            history,
+        )
     }
 
     override fun onFilterStatusSelected(status: StatusPayment) {

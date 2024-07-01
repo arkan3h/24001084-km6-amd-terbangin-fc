@@ -1,22 +1,22 @@
-package com.arkan.terbangin.data.source.network.model.booking2
+package com.arkan.terbangin.data.source.network.model.booking
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class BookingDataResponse(
+data class HelperBookingDataResponse(
+    @SerializedName("bookingId")
+    val bookingId: String?,
     @SerializedName("createdAt")
     val createdAt: String?,
     @SerializedName("deletedAt")
     val deletedAt: Any?,
     @SerializedName("id")
     val id: String?,
-    @SerializedName("paymentId")
-    val paymentId: String?,
-    @SerializedName("status")
-    val status: String?,
+    @SerializedName("passangerId")
+    val passangerId: String?,
+    @SerializedName("seatId")
+    val seatId: String?,
     @SerializedName("updatedAt")
     val updatedAt: String?,
-    @SerializedName("userId")
-    val userId: String?,
 )

@@ -178,13 +178,13 @@ class SelectReturnPassengerSeatActivity : AppCompatActivity() {
 
     private fun setSelectedSeat() {
         val selectedSeatIds = seatBookView.getSelectedIdList()
-        val selectedSeatNumbersFromApi = mutableListOf<Int>()
+        val selectedSeat = mutableListOf<Seat>()
 
         viewModel.seats.value?.let { seats ->
             selectedSeatIds.forEach { id ->
                 val seat = seats.getOrNull(id - 1)
                 seat?.let {
-                    selectedSeatNumbersFromApi.add(it.seatNumber)
+                    selectedSeat.add(it)
                 }
                 // Toast.makeText(this, "Selected Seats: $selectedSeatIds", Toast.LENGTH_SHORT).show()
                 navigateToCheckout(
@@ -194,7 +194,7 @@ class SelectReturnPassengerSeatActivity : AppCompatActivity() {
                     viewModel.params!!,
                     viewModel.passengerDataList!!,
                     viewModel.seatDeparture!!,
-                    SeatList(seats),
+                    SeatList(selectedSeat),
                 )
             }
         }

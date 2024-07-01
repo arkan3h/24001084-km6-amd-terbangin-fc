@@ -1,13 +1,13 @@
-package com.arkan.terbangin.data.datasource.booking2
+package com.arkan.terbangin.data.datasource.booking
 
 import com.arkan.terbangin.data.model.Response
-import com.arkan.terbangin.data.source.network.model.booking2.HelperBookingDataResponse
-import com.arkan.terbangin.data.source.network.model.booking2.HelperBookingPayload
+import com.arkan.terbangin.data.source.network.model.booking.HelperBookingDataResponse
+import com.arkan.terbangin.data.source.network.model.booking.HelperBookingPayload
 import com.arkan.terbangin.data.source.network.services.TerbanginApiServices
 
-class HelperBookingApiDataSource2(
+class HelperBookingApiDataSource(
     private val services: TerbanginApiServices,
-) : HelperBookingDataSource2 {
+) : HelperBookingDataSource {
     override suspend fun createHelperBooking(payload: HelperBookingPayload): Response<HelperBookingDataResponse?> {
         return services.createHelperBooking(payload)
     }

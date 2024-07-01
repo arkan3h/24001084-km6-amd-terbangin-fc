@@ -21,238 +21,223 @@
 
     </FrameLayout>
 
-    <androidx.cardview.widget.CardView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="8dp"
-        app:cardBackgroundColor="@color/md_theme_onPrimaryContainer_highContrast"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="16dp"
-        app:layout_constraintBottom_toTopOf="@id/cv_btn_save"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fl_layout_app_bar">
+        app:layout_constraintTop_toBottomOf="@id/fl_layout_app_bar"
+        app:layout_constraintBottom_toTopOf="@id/cv_btn_save">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_outline_color_primary_thick">
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardBackgroundColor="@color/md_theme_onPrimaryContainer_highContrast"
+            app:cardCornerRadius="16dp">
 
-            <TextView
-                android:id="@+id/tv_title_form_order_biodata"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_rounded_top_18dp"
-                android:paddingStart="24dp"
-                android:paddingTop="12dp"
-                android:paddingEnd="24dp"
-                android:paddingBottom="12dp"
-                android:text="@string/txt_title_order_biodata_2"
-                android:textColor="@color/md_theme_onPrimary"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="match_parent"
+                android:paddingBottom="32dp"
+                android:background="@drawable/bg_outline_color_primary_thick">
 
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_title_form_order_biodata">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <TextView
+                    android:id="@+id/tv_title_form_order_biodata"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingStart="8dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_rounded_top_18dp"
+                    android:paddingStart="24dp"
                     android:paddingTop="12dp"
-                    android:paddingEnd="8dp"
-                    android:paddingBottom="8dp">
+                    android:paddingEnd="24dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/txt_title_order_biodata_2"
+                    android:textColor="@color/md_theme_onPrimary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/tv_name_order_biodata"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="12dp"
-                        android:text="@string/text_nama_lengkap"
-                        android:textColor="@color/md_theme_primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/tv_name_order_biodata"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/text_nama_lengkap"
+                    android:textColor="@color/md_theme_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_form_order_biodata" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_name_order_biodata"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_name_order_biodata"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusTopStart="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_name_order_biodata">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ti_et_name_order_biodata"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="24dp"
-                        app:boxCornerRadiusBottomEnd="16dp"
-                        app:boxCornerRadiusBottomStart="16dp"
-                        app:boxCornerRadiusTopEnd="16dp"
-                        app:boxCornerRadiusTopStart="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_name_order_biodata">
+                        android:hint="@string/text_masukkan_nama_lengkap"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/ti_et_name_order_biodata"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/text_masukkan_nama_lengkap"
-                            android:inputType="textPersonName"
-                            android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:id="@+id/tv_ask_name_family"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="16dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/text_punya_nama_keluarga"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/til_name_order_biodata" />
 
-                    <TextView
-                        android:id="@+id/tv_ask_name_family"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="16dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="12dp"
-                        android:text="@string/text_punya_nama_keluarga"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/til_name_order_biodata" />
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switch_ask_name_family"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:checked="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/til_name_order_biodata" />
 
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/switch_ask_name_family"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="24dp"
-                        android:checked="true"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/til_name_order_biodata" />
+                <TextView
+                    android:id="@+id/tv_name_family_order_biodata"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/text_nama_keluarga"
+                    android:textColor="@color/md_theme_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_ask_name_family" />
 
-                    <TextView
-                        android:id="@+id/tv_name_family_order_biodata"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="24dp"
-                        android:text="@string/text_nama_keluarga"
-                        android:textColor="@color/md_theme_primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_ask_name_family" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_name_family_order_biodata"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusTopStart="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_name_family_order_biodata">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_name_family_order_biodata"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ti_et_name_family_order_biodata"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="24dp"
-                        app:boxCornerRadiusBottomEnd="16dp"
-                        app:boxCornerRadiusBottomStart="16dp"
-                        app:boxCornerRadiusTopEnd="16dp"
-                        app:boxCornerRadiusTopStart="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_name_family_order_biodata">
+                        android:hint="@string/text_masukkan_nama_keluarga"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/ti_et_name_family_order_biodata"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/text_masukkan_nama_keluarga"
-                            android:inputType="textPersonName"
-                            android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:id="@+id/tv_phone_number_order_biodata"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/text_nomor_telepon"
+                    android:textColor="@color/md_theme_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/til_name_family_order_biodata" />
 
-                    <TextView
-                        android:id="@+id/tv_phone_number_order_biodata"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="16dp"
-                        android:text="@string/text_nomor_telepon"
-                        android:textColor="@color/md_theme_primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/til_name_family_order_biodata" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_phone_number_order_biodata"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusTopStart="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_phone_number_order_biodata">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_phone_number_order_biodata"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ti_et_phone_number_order_biodata"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="24dp"
-                        app:boxCornerRadiusBottomEnd="16dp"
-                        app:boxCornerRadiusBottomStart="16dp"
-                        app:boxCornerRadiusTopEnd="16dp"
-                        app:boxCornerRadiusTopStart="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_phone_number_order_biodata">
+                        android:hint="@string/text_masukkan_nomor_telepon"
+                        android:inputType="phone"
+                        android:textSize="16sp" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/ti_et_phone_number_order_biodata"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/text_masukkan_nomor_telepon"
-                            android:inputType="phone"
-                            android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:id="@+id/tv_email_order_biodata"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/text_email"
+                    android:textColor="@color/md_theme_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/til_phone_number_order_biodata" />
 
-                    <TextView
-                        android:id="@+id/tv_email_order_biodata"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="16dp"
-                        android:text="@string/text_email"
-                        android:textColor="@color/md_theme_primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/til_phone_number_order_biodata" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_email_order_biodata"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusTopStart="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_email_order_biodata">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_email_order_biodata"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ti_et_email_order_biodata"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="24dp"
-                        app:boxCornerRadiusBottomEnd="16dp"
-                        app:boxCornerRadiusBottomStart="16dp"
-                        app:boxCornerRadiusTopEnd="16dp"
-                        app:boxCornerRadiusTopStart="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_email_order_biodata">
+                        android:digits="0123456789@abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ._-+() "
+                        android:hint="@string/text_input_email"
+                        android:inputType="text"
+                        android:textSize="16sp" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/ti_et_email_order_biodata"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:digits="0123456789@abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ._-+() "
-                            android:hint="@string/text_input_email"
-                            android:inputType="text"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.core.widget.NestedScrollView>
+        </androidx.cardview.widget.CardView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
+    </androidx.core.widget.NestedScrollView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_btn_save"
@@ -269,7 +254,6 @@
                 android:id="@+id/btn_save"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:layout_marginTop="16dp"
                 android:text="@string/text_simpan"
                 android:textSize="16sp"
                 android:textStyle="bold"

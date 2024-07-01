@@ -33,14 +33,14 @@ data class DetailHistory(
     val terminalStart: String,
     val airportEnd: String,
     val terminalEnd: String,
+    val aircraftImg: String,
     val aircraftName: String,
+    val aircraftCode: String,
     val classes: String,
-    val aircraftType: String,
     val totalPrice: String,
-    val passengerId: List<PassengerHistory>?,
-) : Parcelable
-
-@Parcelize
-data class PassengerHistory(
-    var passengerId: String,
+    val passengerId: String,
+    val passengerTitle: String,
+    val passengerType: String,
+    val passengerName: String,
+    val passengerFamilyName: String,
 ) : Parcelable

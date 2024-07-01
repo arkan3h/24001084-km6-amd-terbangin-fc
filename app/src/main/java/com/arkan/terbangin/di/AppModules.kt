@@ -12,10 +12,10 @@ import com.arkan.terbangin.data.datasource.auth.register.RegisterApiDataSource
 import com.arkan.terbangin.data.datasource.auth.register.RegisterDataSource
 import com.arkan.terbangin.data.datasource.auth.resetpassword.ResetPasswordApiDataSource
 import com.arkan.terbangin.data.datasource.auth.resetpassword.ResetPasswordDataSource
-import com.arkan.terbangin.data.datasource.booking2.BookingApiDataSource2
-import com.arkan.terbangin.data.datasource.booking2.BookingDataSource2
-import com.arkan.terbangin.data.datasource.booking2.HelperBookingApiDataSource2
-import com.arkan.terbangin.data.datasource.booking2.HelperBookingDataSource2
+import com.arkan.terbangin.data.datasource.booking.BookingApiDataSource
+import com.arkan.terbangin.data.datasource.booking.BookingDataSource
+import com.arkan.terbangin.data.datasource.booking.HelperBookingApiDataSource
+import com.arkan.terbangin.data.datasource.booking.HelperBookingDataSource
 import com.arkan.terbangin.data.datasource.flight.FlightApiDataSource
 import com.arkan.terbangin.data.datasource.flight.FlightDataSource
 import com.arkan.terbangin.data.datasource.history.HistoryDataSource
@@ -87,6 +87,7 @@ import com.arkan.terbangin.presentation.flightsearch.FlightSearchViewModel
 import com.arkan.terbangin.presentation.flightsearch.filter_list.FilterListViewModel
 import com.arkan.terbangin.presentation.flightsearch.flightreturnsearch.FlightSearchReturnViewModel
 import com.arkan.terbangin.presentation.history.HistoryViewModel
+import com.arkan.terbangin.presentation.history.detail.DetailHistoryViewModel
 import com.arkan.terbangin.presentation.history.filterhistory.FilterHistorySheetViewModel
 import com.arkan.terbangin.presentation.history.searchhistory.HistorySearchViewModel
 import com.arkan.terbangin.presentation.home.HomeViewModel
@@ -140,8 +141,8 @@ object AppModules {
             single<NotificationDataSource> { NotificationApiDataSource(get()) }
             single<SeatDataSource> { SeatApiDataSource(get()) }
             single<PaymentDataSource> { PaymentApiDataSource(get()) }
-            single<BookingDataSource2> { BookingApiDataSource2(get()) }
-            single<HelperBookingDataSource2> { HelperBookingApiDataSource2(get()) }
+            single<BookingDataSource> { BookingApiDataSource(get()) }
+            single<HelperBookingDataSource> { HelperBookingApiDataSource(get()) }
             single<HistoryDataSource> { HistoryDataSourceImpl(get()) }
         }
 
@@ -177,6 +178,7 @@ object AppModules {
             viewModelOf(::OTPViewModel)
             viewModelOf(::HomeViewModel)
             viewModelOf(::HistoryViewModel)
+            viewModelOf(::DetailHistoryViewModel)
             viewModelOf(::NotificationViewModel)
             viewModelOf(::EditProfileViewModel)
             viewModelOf(::SettingAccountViewModel)

@@ -2,8 +2,8 @@ package com.arkan.terbangin.data.mapper
 
 import com.arkan.terbangin.data.model.Booking2
 import com.arkan.terbangin.data.model.HelperBooking2
-import com.arkan.terbangin.data.source.network.model.booking2.BookingPayload
-import com.arkan.terbangin.data.source.network.model.booking2.HelperBookingPayload
+import com.arkan.terbangin.data.source.network.model.booking.BookingPayload
+import com.arkan.terbangin.data.source.network.model.booking.HelperBookingPayload
 
 fun Booking2.toPayload() =
     BookingPayload(

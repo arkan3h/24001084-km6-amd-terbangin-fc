@@ -2,6 +2,8 @@ package com.arkan.terbangin.presentation.history.detail.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.arkan.terbangin.base.OnItemCLickedListener
 import com.arkan.terbangin.data.model.DetailHistory
@@ -12,10 +14,29 @@ class DetailHistoryAdapter(
 ) : RecyclerView.Adapter<DetailHistoryAdapter.DetailHistoryViewHolder>() {
     private val itemData = mutableListOf<DetailHistory>()
 
-    fun submitData(newData: List<DetailHistory>) {
-        itemData.clear()
-        itemData.addAll(newData)
-        notifyDataSetChanged()
+    private val asyncDataDiffer =
+        AsyncListDiffer(
+            this,
+            object : DiffUtil.ItemCallback<DetailHistory>() {
+                override fun areItemsTheSame(
+                    oldItem: DetailHistory,
+                    newItem: DetailHistory,
+                ): Boolean {
+                    return oldItem.passengerId == newItem.passengerId
+                }
+
+                override fun areContentsTheSame(
+                    oldItem: DetailHistory,
+                    newItem: DetailHistory,
+                ): Boolean {
+                    return oldItem.hashCode() == newItem.hashCode()
+                }
+            },
+        )
+
+    fun submitData(item: List<DetailHistory>) {
+        val uniqueItems = item.distinctBy { it.passengerId }
+        asyncDataDiffer.submitList(uniqueItems)
     }
 
     override fun onCreateViewHolder(
@@ -32,23 +53,25 @@ class DetailHistoryAdapter(
         )
     }
 
-    override fun getItemCount(): Int = itemData.size
+    override fun getItemCount(): Int = asyncDataDiffer.currentList.size
 
     override fun onBindViewHolder(
         holder: DetailHistoryViewHolder,
         position: Int,
     ) {
-        holder.bind(itemData[position])
+        holder.bind(asyncDataDiffer.currentList[position], position)
     }
 
     class DetailHistoryViewHolder(
         private val binding: ItemPassengerDetailsBinding,
         private val listener: OnItemCLickedListener<DetailHistory>,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: DetailHistory) {
-//            binding.tvPassengerName.text =item.fullname
-//            binding.tvPassengerId.text = item.passengerId
-
+        fun bind(
+            item: DetailHistory,
+            position: Int,
+        ) {
+            binding.tvPassengerName.text = "Penumpang ${position + 1}: ${item.passengerTitle}. ${item.passengerName} ${item.passengerFamilyName}"
+            binding.tvPassengerId.text = "ID: ${item.passengerId}"
             itemView.setOnClickListener {
                 listener.onItemClicked(item)
             }

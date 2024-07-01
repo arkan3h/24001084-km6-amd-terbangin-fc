@@ -30,7 +30,10 @@ class HistoryMonthHeaderItem(private val month: String) : BindableItem<ItemSecti
     }
 }
 
-class HistoryDataItem(private val data: History) : BindableItem<ItemSectionDataHistoryBinding>() {
+class HistoryDataItem(
+    private val data: History,
+    private val listener: (History) -> Unit,
+) : BindableItem<ItemSectionDataHistoryBinding>() {
     override fun bind(
         viewBinding: ItemSectionDataHistoryBinding,
         position: Int,
@@ -47,6 +50,9 @@ class HistoryDataItem(private val data: History) : BindableItem<ItemSectionDataH
         viewBinding.tvBookingCode.text = data.bookingCode
         viewBinding.tvClassBooking.text = formatClassHistory(data.classes)
         viewBinding.tvOrderPrice.text = convertCurrencyFormatString(data.totalPayment)
+        viewBinding.root.setOnClickListener {
+            listener(data)
+        }
     }
 
     override fun getLayout() = R.layout.item_section_data_history

@@ -199,4 +199,5 @@
     <string name="text_tax_qty">Pajak</string>
     <string name="btn_back_to_home">Back to Home</string>
     <string name="binding_filter">Filter</string>
+    <string name="text_booking_code_title">Booking Code:</string>
 </resources>

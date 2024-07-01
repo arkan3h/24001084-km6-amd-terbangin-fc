@@ -15,6 +15,8 @@ data class HelperBookingResponseData(
     val deletedAt: Any?,
     @SerializedName("id")
     val id: String?,
+    @SerializedName("Passanger")
+    val passanger: Passanger?,
     @SerializedName("passangerId")
     val passangerId: String?,
     @SerializedName("Seat")

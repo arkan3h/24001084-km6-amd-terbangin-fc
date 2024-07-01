@@ -1,10 +1,12 @@
-package com.arkan.terbangin.data.source.network.model.booking2
+package com.arkan.terbangin.data.source.network.model.detailh
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class HelperBookingDataResponse(
+data class resp(
+    @SerializedName("Booking")
+    val booking: Booking?,
     @SerializedName("bookingId")
     val bookingId: String?,
     @SerializedName("createdAt")
@@ -13,8 +15,12 @@ data class HelperBookingDataResponse(
     val deletedAt: Any?,
     @SerializedName("id")
     val id: String?,
+    @SerializedName("Passanger")
+    val passanger: Passanger?,
     @SerializedName("passangerId")
     val passangerId: String?,
+    @SerializedName("Seat")
+    val seat: Seat?,
     @SerializedName("seatId")
     val seatId: String?,
     @SerializedName("updatedAt")

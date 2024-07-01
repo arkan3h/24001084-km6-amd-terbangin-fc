@@ -1,7 +1,9 @@
 package com.arkan.terbangin.data.repository.history
 
 import com.arkan.terbangin.data.datasource.history.HistoryDataSource
+import com.arkan.terbangin.data.mapper.toDetailHistory
 import com.arkan.terbangin.data.mapper.toHistoryList
+import com.arkan.terbangin.data.model.DetailHistory
 import com.arkan.terbangin.data.model.History
 import com.arkan.terbangin.utils.ResultWrapper
 import com.arkan.terbangin.utils.proceedFlow
@@ -14,7 +16,7 @@ interface HistoryRepository {
         query: String,
     ): Flow<ResultWrapper<List<History>>>
 
-//    fun getDetailHistoryData(id: String): Flow<ResultWrapper<List<DetailHistory>>>
+    fun getDetailHistoryData(id: String): Flow<ResultWrapper<List<DetailHistory>>>
 }
 
 class HistoryRepositoryImpl(private val dataSource: HistoryDataSource) : HistoryRepository {
@@ -30,9 +32,9 @@ class HistoryRepositoryImpl(private val dataSource: HistoryDataSource) : History
         }
     }
 
-//    override fun getDetailHistoryData(id: String): Flow<ResultWrapper<List<DetailHistory>>> {
-//        return proceedFlow {
-//            dataSource.getHistoryData(id).data.toDetailHistory()
-//        }
-//    }
+    override fun getDetailHistoryData(id: String): Flow<ResultWrapper<List<DetailHistory>>> {
+        return proceedFlow {
+            dataSource.getDetailHistory(id).data.toDetailHistory()
+        }
+    }
 }

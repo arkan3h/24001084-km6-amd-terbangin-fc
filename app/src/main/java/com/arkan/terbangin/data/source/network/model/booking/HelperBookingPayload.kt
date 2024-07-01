@@ -1,4 +1,4 @@
-package com.arkan.terbangin.data.source.network.model.booking2
+package com.arkan.terbangin.data.source.network.model.booking
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName

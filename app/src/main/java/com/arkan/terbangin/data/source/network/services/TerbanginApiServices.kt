@@ -8,12 +8,12 @@ import com.arkan.terbangin.data.source.network.model.auth.otp.request_otp.Reques
 import com.arkan.terbangin.data.source.network.model.auth.otp.verify_otp.VerifyOTPData
 import com.arkan.terbangin.data.source.network.model.auth.register.RegisterData
 import com.arkan.terbangin.data.source.network.model.auth.resetpassword.ResetPasswordResponse
-import com.arkan.terbangin.data.source.network.model.booking2.BookingDataResponse
-import com.arkan.terbangin.data.source.network.model.booking2.BookingPayload
-import com.arkan.terbangin.data.source.network.model.booking2.HelperBookingDataResponse
-import com.arkan.terbangin.data.source.network.model.booking2.HelperBookingPayload
+import com.arkan.terbangin.data.source.network.model.booking.BookingDataResponse
+import com.arkan.terbangin.data.source.network.model.booking.BookingPayload
+import com.arkan.terbangin.data.source.network.model.booking.HelperBookingDataResponse
+import com.arkan.terbangin.data.source.network.model.booking.HelperBookingPayload
 import com.arkan.terbangin.data.source.network.model.flight.FlightDataResponse
-import com.arkan.terbangin.data.source.network.model.history.HelperBookingResponse
+import com.arkan.terbangin.data.source.network.model.history.HelperBookingResponseData
 import com.arkan.terbangin.data.source.network.model.notification.NotificationData
 import com.arkan.terbangin.data.source.network.model.passanger.PassengerPayload
 import com.arkan.terbangin.data.source.network.model.passanger.PassengerResponseData
@@ -159,7 +159,12 @@ interface TerbanginApiServices {
     suspend fun getHelperBookingById(
         @Path("id") id: String,
         @Query("value") status: String,
-    ): HelperBookingResponse
+    ): Response<List<HelperBookingResponseData>?>
+
+    @GET("/api/v1/helper-booking/booking/{id}")
+    suspend fun getDetailHistory(
+        @Path("id") id: String,
+    ): Response<List<HelperBookingResponseData>?>
 
     companion object {
         @JvmStatic

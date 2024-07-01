@@ -38,13 +38,13 @@ class SelectReturnPassengerSeatViewModel(
     private fun capacity() {
         when (params?.ticketClass?.name) {
             "Economy" -> {
-                capacity = flight?.capacityEconomy!!
+                capacity = flightReturn?.capacityEconomy!!
             }
             "Business" -> {
-                capacity = flight?.capacityBussines!!
+                capacity = flightReturn?.capacityBussines!!
             }
             "First Class" -> {
-                capacity = flight?.capacityFirstClass!!
+                capacity = flightReturn?.capacityFirstClass!!
             }
         }
         selectableSeat = params?.totalQty!! - params.babyQty
@@ -65,7 +65,7 @@ class SelectReturnPassengerSeatViewModel(
     }
 
     fun getSeat(
-        id: String = flight?.id.toString(),
+        id: String = flightReturn?.id.toString(),
         filter: String = seatClass,
     ) = repository.getSeat(id, filter).asLiveData(Dispatchers.IO)
 }
