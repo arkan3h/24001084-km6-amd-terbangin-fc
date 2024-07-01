@@ -98,7 +98,6 @@
                 android:id="@+id/rv_item_data_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/item_section_data_history"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_marginHorizontal="8dp"
                 android:layout_margin="8dp"

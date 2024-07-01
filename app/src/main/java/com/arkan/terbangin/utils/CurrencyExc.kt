@@ -17,3 +17,9 @@ fun Double?.doubleToCurrency(
 }
 
 fun Double?.toIndonesianFormat() = this.doubleToCurrency("in", "ID")
+
+fun convertCurrencyFormatString(amount: String): String {
+    val numberFormat = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
+    val number = amount.toDouble()
+    return numberFormat.format(number).replace("Rp", "Rp").replace(",00", ",00")
+}

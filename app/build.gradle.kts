@@ -140,4 +140,9 @@ dependencies {
 
     implementation("androidx.room:room-runtime:2.4.2")
     implementation("androidx.room:room-ktx:2.4.2")
+
+    implementation("com.github.lisawray.groupie:groupie:2.9.0")
+    implementation("com.github.lisawray.groupie:groupie-viewbinding:2.9.0")
+    implementation("com.github.lisawray.groupie:groupie:2.10.1")
+    implementation("com.github.lisawray.groupie:groupie-viewbinding:2.10.1")
 }

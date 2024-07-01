@@ -22,7 +22,7 @@
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Booking Code:" />
+            android:text="@string/text_booking_code_title" />
 
         <TextView
             android:id="@+id/tv_booking_code"
@@ -79,7 +79,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_takeoff_time"
-            tools:text="Keberangkatan" />
+            android:text="@string/text_departure" />
 
         <View
             android:id="@+id/v_spacer_1"
@@ -102,12 +102,13 @@
 
         <LinearLayout
             android:id="@+id/ll_airline_info"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:orientation="vertical"
             app:layout_constraintStart_toEndOf="@id/iv_logo_airline"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/v_spacer_1">
 
             <TextView
@@ -136,13 +137,13 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                tools:text="Informasi:" />
+                android:text="@string/text_information" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_passenger_details_list"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="true"
+                android:overScrollMode="never"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_rincian_harga"
@@ -203,8 +204,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/v_spacer_2"
-            tools:text="Kedatangan" />
-
+            android:text="@string/text_arrival" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

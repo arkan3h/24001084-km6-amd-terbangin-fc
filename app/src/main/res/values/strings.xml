@@ -131,7 +131,7 @@
     <string name="text_pilih_tanggal_mulai">Pilih Tanggal Mulai</string>
     <string name="text_pilih_tanggal_sampai">Pilih Tanggal Sampai</string>
     <string name="text_filter_riwayat_pesanan">Filter Riwayat Pesanan</string>
-    <string name="text_masukkan_nomor_penerbangan">Masukkan Nomor Penerbangan</string>
+    <string name="text_masukkan_nomor_penerbangan">Masukkan Kode Booking</string>
     <string name="text_input_email">Masukkan Email</string>
     <string name="text_error_number_invalid2">Hapus 0 diawal nomor</string>
     <string name="title_tab_pengaturan_akun">Pengaturan Akun</string>
@@ -198,4 +198,6 @@
     <string name="text_baby_qty">%1$s Bayi</string>
     <string name="text_tax_qty">Pajak</string>
     <string name="btn_back_to_home">Back to Home</string>
+    <string name="binding_filter">Filter</string>
+    <string name="text_booking_code_title">Booking Code:</string>
 </resources>

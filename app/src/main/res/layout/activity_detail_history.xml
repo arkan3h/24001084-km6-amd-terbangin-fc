@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.history.detail.HistoryDetailFragment">
+    tools:context=".presentation.history.detail.DetailHistoryActivity">
 
     <include
         android:id="@+id/layout_app_bar"
@@ -14,9 +14,10 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_app_bar">
+        app:layout_constraintTop_toBottomOf="@id/layout_app_bar"
+        app:layout_constraintBottom_toTopOf="@id/layout_total_price">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -44,34 +45,13 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_flight_destination">
 
                 <include
+                    android:id="@+id/item_history_detail"
                     layout="@layout/item_history_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp" />
 
             </FrameLayout>
-
-            <TextView
-                android:id="@+id/tv_rincian_harga"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/item_checkout_detail"
-                tools:text="Rincian Harga" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_pricing_details_list"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginHorizontal="16dp"
-                android:nestedScrollingEnabled="true"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_rincian_harga"
-                tools:listitem="@layout/item_pricing_details" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -80,6 +60,7 @@
     <include
         android:id="@+id/layout_total_price"
         layout="@layout/layout_total_price_checkout_detail"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
