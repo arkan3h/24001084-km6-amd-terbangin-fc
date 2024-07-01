@@ -158,6 +158,7 @@ interface TerbanginApiServices {
     @GET("/api/v1/helper-booking/user/{id}")
     suspend fun getHelperBookingById(
         @Path("id") id: String,
+        @Query("value") status: String,
     ): HelperBookingResponse
 
     companion object {

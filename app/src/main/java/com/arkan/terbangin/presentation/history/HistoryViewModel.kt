@@ -1,5 +1,6 @@
 package com.arkan.terbangin.presentation.history
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -14,18 +15,20 @@ class HistoryViewModel(
 ) : ViewModel() {
     private var filterStatus: String = ""
     val isLoggedIn = pref.getToken()
+    private val _filter = MutableLiveData<StatusPayment>()
+    val filter: LiveData<StatusPayment> get() = _filter
 
     fun getUserID() = pref.getUserID()
 
-    fun getHistoryByUUID(id: String) =
-        repository.getHistoryData(id).asLiveData(
-            Dispatchers.IO,
-        )
-
-    private val _selectedStatus = MutableLiveData<StatusPayment>()
+    fun getHistoryByUUID(
+        id: String,
+        query: String,
+    ) = repository.getHistoryData(id, filterStatus, query).asLiveData(
+        Dispatchers.IO,
+    )
 
     fun saveSelectedStatus(status: StatusPayment) {
-        _selectedStatus.value = status
+        _filter.value = status
         setFilterStatusPayment(status)
     }
 
@@ -38,8 +41,12 @@ class HistoryViewModel(
                 filterStatus = "Unpaid"
             }
             "Canceled" -> {
-                filterStatus = "Canceled"
+                filterStatus = "Cancelled"
             }
         }
+    }
+
+    fun resetFilterStatus() {
+        filterStatus = ""
     }
 }

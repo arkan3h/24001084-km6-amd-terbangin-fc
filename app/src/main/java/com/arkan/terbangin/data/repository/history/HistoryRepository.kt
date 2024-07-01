@@ -8,15 +8,25 @@ import com.arkan.terbangin.utils.proceedFlow
 import kotlinx.coroutines.flow.Flow
 
 interface HistoryRepository {
-    fun getHistoryData(id: String): Flow<ResultWrapper<List<History>>>
+    fun getHistoryData(
+        id: String,
+        status: String,
+        query: String,
+    ): Flow<ResultWrapper<List<History>>>
 
 //    fun getDetailHistoryData(id: String): Flow<ResultWrapper<List<DetailHistory>>>
 }
 
 class HistoryRepositoryImpl(private val dataSource: HistoryDataSource) : HistoryRepository {
-    override fun getHistoryData(id: String): Flow<ResultWrapper<List<History>>> {
+    override fun getHistoryData(
+        id: String,
+        status: String,
+        query: String,
+    ): Flow<ResultWrapper<List<History>>> {
         return proceedFlow {
-            dataSource.getHistoryData(id).data.toHistoryList()
+            dataSource.getHistoryData(id, status).data.toHistoryList().filter {
+                it.bookingCode.contains(query, ignoreCase = true)
+            }
         }
     }
 

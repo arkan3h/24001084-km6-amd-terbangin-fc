@@ -12,6 +12,7 @@ import com.arkan.terbangin.data.model.SearchHistory
 import com.arkan.terbangin.databinding.BottomSheetHistorySearchBinding
 import com.arkan.terbangin.presentation.history.searchhistory.adapter.HistoryListener
 import com.arkan.terbangin.presentation.history.searchhistory.adapter.SearchHistoryAdapter
+import com.arkan.terbangin.presentation.home.common.FilterStatusListener
 import com.arkan.terbangin.utils.proceedWhen
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -35,6 +36,7 @@ class HistorySearchBottomSheet : BottomSheetDialogFragment() {
             },
         )
     }
+    var listener: FilterStatusListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,6 +80,8 @@ class HistorySearchBottomSheet : BottomSheetDialogFragment() {
                             },
                         )
                     }
+                    listener?.onSearch(query)
+                    dialog?.dismiss()
                     return true
                 }
 

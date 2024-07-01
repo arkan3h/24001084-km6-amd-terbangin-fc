@@ -20,7 +20,7 @@ fun HelperBookingResponseData?.toHistoryModel() =
         bookingCode = this?.booking?.bookingCode.orEmpty(),
         classes = this?.seat?.airlineClass.orEmpty(),
         totalPayment = this?.booking?.payment?.totalPrice.orEmpty(),
-        monthHeader = this?.seat?.flight?.createdAt.orEmpty(),
+        monthHeader = this?.seat?.flight?.departureAt.orEmpty(),
     )
 
 // fun HelperBookingResponseData?.toDetailHistoryModel() =

@@ -13,6 +13,7 @@ import com.arkan.terbangin.databinding.FragmentHistoryBinding
 import com.arkan.terbangin.presentation.history.adapter.HistoryDataItem
 import com.arkan.terbangin.presentation.history.adapter.HistoryMonthHeaderItem
 import com.arkan.terbangin.presentation.history.filterhistory.FilterHistoryBottomSheet
+import com.arkan.terbangin.presentation.history.searchhistory.HistorySearchBottomSheet
 import com.arkan.terbangin.presentation.home.common.FilterStatusListener
 import com.arkan.terbangin.utils.formatMonthHeaderStringHistory
 import com.arkan.terbangin.utils.navigateToLogin
@@ -47,13 +48,14 @@ class HistoryFragment : BaseFragment(), FilterStatusListener {
     }
 
     private fun setState() {
+        viewModel.resetFilterStatus()
+        binding.tvFilter.text = getString(R.string.binding_filter)
         if (viewModel.isLoggedIn != null) {
-            getHistoryByUUID(viewModel.getUserID()!!)
+            getHistoryByUUID(viewModel.getUserID()!!, "")
         }
         binding.fragmentHistoryNonLogin.tvTitle.text = getString(R.string.text_riwayat_pesanan)
         binding.layoutHistoryNonLogin.isVisible = viewModel.isLoggedIn == null
         binding.layoutHistory.isVisible = viewModel.isLoggedIn != null
-
         setUpAdapter()
     }
 
@@ -62,8 +64,11 @@ class HistoryFragment : BaseFragment(), FilterStatusListener {
         binding.rvItemDataHistory.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun getHistoryByUUID(id: String) {
-        viewModel.getHistoryByUUID(id).observe(viewLifecycleOwner) { it ->
+    private fun getHistoryByUUID(
+        id: String,
+        query: String,
+    ) {
+        viewModel.getHistoryByUUID(id, query).observe(viewLifecycleOwner) { it ->
             it.proceedWhen(
                 doOnLoading = {
                     binding.layoutStateHistory.pbLoading.isVisible = true
@@ -77,7 +82,10 @@ class HistoryFragment : BaseFragment(), FilterStatusListener {
                     it.payload?.let { data ->
                         val items = mutableListOf<BindableItem<*>>()
 
-                        val groupedData = data.groupBy { formatMonthHeaderStringHistory(it.monthHeader) }
+                        val groupedData =
+                            data.reversed().groupBy { history ->
+                                formatMonthHeaderStringHistory(history.monthHeader)
+                            }
 
                         groupedData.forEach { (monthYear, dataList) ->
                             items.add(HistoryMonthHeaderItem(monthYear))
@@ -100,7 +108,7 @@ class HistoryFragment : BaseFragment(), FilterStatusListener {
 
     private fun setOnClickListener() {
         binding.ibBtnSearch.setOnClickListener {
-//            gotoSearchFlightNumber()
+            gotoSearchFlightNumber()
         }
         binding.ibBtnFilter.setOnClickListener {
             selectFilter()
@@ -108,6 +116,12 @@ class HistoryFragment : BaseFragment(), FilterStatusListener {
         binding.fragmentHistoryNonLogin.btnLogin.setOnClickListener {
             navigateToLogin()
         }
+    }
+
+    private fun gotoSearchFlightNumber() {
+        val searchHistoryFragment = HistorySearchBottomSheet()
+        searchHistoryFragment.listener = this
+        searchHistoryFragment.show(childFragmentManager, searchHistoryFragment.tag)
     }
 
     private fun selectFilter() {
@@ -118,6 +132,13 @@ class HistoryFragment : BaseFragment(), FilterStatusListener {
 
     override fun onFilterStatusSelected(status: StatusPayment) {
         viewModel.saveSelectedStatus(status)
-        viewModel.getUserID()?.let { getHistoryByUUID(it) }
+        viewModel.getUserID()?.let { getHistoryByUUID(it, "") }
+        viewModel.filter.observe(viewLifecycleOwner) {
+            binding.tvFilter.text = it.statusPayment
+        }
+    }
+
+    override fun onSearch(query: String) {
+        viewModel.getUserID()?.let { getHistoryByUUID(it, query) }
     }
 }
