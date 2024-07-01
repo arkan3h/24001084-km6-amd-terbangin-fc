@@ -5,4 +5,6 @@ import com.arkan.terbangin.data.source.network.model.notification.NotificationDa
 
 interface NotificationDataSource {
     suspend fun getNotificationByUID(id: String): Response<List<NotificationData>?>
+
+    suspend fun readNotification(id: String): Response<NotificationData?>
 }

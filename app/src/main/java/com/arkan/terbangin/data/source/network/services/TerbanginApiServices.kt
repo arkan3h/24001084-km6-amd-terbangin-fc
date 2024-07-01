@@ -35,6 +35,7 @@ import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.PATCH
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -172,6 +173,11 @@ interface TerbanginApiServices {
     suspend fun sendTicket(
         @Body payload: TicketPayload,
     ): Response<TicketDataResponse?>
+
+    @PUT("/api/v1/notification/{id}/read")
+    suspend fun readNotification(
+        @Path("id") id: String,
+    ): Response<NotificationData?>
 
     companion object {
         @JvmStatic

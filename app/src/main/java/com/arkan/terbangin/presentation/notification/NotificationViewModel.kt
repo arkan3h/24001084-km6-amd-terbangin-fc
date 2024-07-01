@@ -18,4 +18,6 @@ class NotificationViewModel(
         repository.getNotificationByUID(id).asLiveData(
             Dispatchers.IO,
         )
+
+    fun readNotification(id: String) = repository.readNotification(id).asLiveData(Dispatchers.IO)
 }
