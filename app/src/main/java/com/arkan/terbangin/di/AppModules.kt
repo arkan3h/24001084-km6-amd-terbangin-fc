@@ -36,6 +36,8 @@ import com.arkan.terbangin.data.datasource.searchHistory.SearchTerminalDataSourc
 import com.arkan.terbangin.data.datasource.searchHistory.SearchTerminalDatabaseDataSource
 import com.arkan.terbangin.data.datasource.seat.SeatApiDataSource
 import com.arkan.terbangin.data.datasource.seat.SeatDataSource
+import com.arkan.terbangin.data.datasource.ticket.TicketApiDataSource
+import com.arkan.terbangin.data.datasource.ticket.TicketDataSource
 import com.arkan.terbangin.data.repository.airport.AirportCityRepository
 import com.arkan.terbangin.data.repository.airport.AirportCityRepositoryImpl
 import com.arkan.terbangin.data.repository.auth.LoginRepository
@@ -66,6 +68,8 @@ import com.arkan.terbangin.data.repository.searchhistory.SearchTerminalRepositor
 import com.arkan.terbangin.data.repository.searchhistory.SearchTerminalRepositoryImpl
 import com.arkan.terbangin.data.repository.seat.SeatRepository
 import com.arkan.terbangin.data.repository.seat.SeatRepositoryImpl
+import com.arkan.terbangin.data.repository.ticket.TicketRepository
+import com.arkan.terbangin.data.repository.ticket.TicketRepositoryImpl
 import com.arkan.terbangin.data.source.local.AppDatabase
 import com.arkan.terbangin.data.source.local.dao.SearchHistoryDao
 import com.arkan.terbangin.data.source.local.dao.SearchTerminalDao
@@ -144,6 +148,7 @@ object AppModules {
             single<BookingDataSource> { BookingApiDataSource(get()) }
             single<HelperBookingDataSource> { HelperBookingApiDataSource(get()) }
             single<HistoryDataSource> { HistoryDataSourceImpl(get()) }
+            single<TicketDataSource> { TicketApiDataSource(get()) }
         }
 
     private val repository =
@@ -163,6 +168,7 @@ object AppModules {
             single<SeatRepository> { SeatRepositoryImpl(get()) }
             single<PaymentRepository> { PaymentRepositoryImpl(get(), get(), get(), get()) }
             single<HistoryRepository> { HistoryRepositoryImpl(get()) }
+            single<TicketRepository> { TicketRepositoryImpl(get()) }
         }
 
     private val viewModelModule =

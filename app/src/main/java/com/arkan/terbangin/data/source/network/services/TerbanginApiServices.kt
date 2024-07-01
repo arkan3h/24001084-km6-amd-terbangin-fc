@@ -20,6 +20,8 @@ import com.arkan.terbangin.data.source.network.model.passanger.PassengerResponse
 import com.arkan.terbangin.data.source.network.model.payment.PaymentData
 import com.arkan.terbangin.data.source.network.model.profile.ProfileData
 import com.arkan.terbangin.data.source.network.model.seat.SeatData
+import com.arkan.terbangin.data.source.network.model.ticket.TicketDataResponse
+import com.arkan.terbangin.data.source.network.model.ticket.TicketPayload
 import com.arkan.terbangin.data.source.pref.UserPreference
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -166,10 +168,10 @@ interface TerbanginApiServices {
         @Path("id") id: String,
     ): Response<List<HelperBookingResponseData>?>
 
-//    @POST("/api/v1/booking/send-ticket")
-//    suspend fun sendTicket(
-//        @Body payload: TicketPayload,
-//    )
+    @POST("/api/v1/booking/send-ticket")
+    suspend fun sendTicket(
+        @Body payload: TicketPayload,
+    ): Response<TicketDataResponse?>
 
     companion object {
         @JvmStatic

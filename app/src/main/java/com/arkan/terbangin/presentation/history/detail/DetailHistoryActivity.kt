@@ -4,13 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import coil.load
 import com.arkan.terbangin.R
+import com.arkan.terbangin.base.BaseActivity
 import com.arkan.terbangin.data.model.DetailHistory
 import com.arkan.terbangin.data.model.History
+import com.arkan.terbangin.data.model.Ticket
 import com.arkan.terbangin.databinding.ActivityDetailHistoryBinding
 import com.arkan.terbangin.presentation.checkout.payment.PaymentActivity
 import com.arkan.terbangin.presentation.history.detail.adapter.DetailHistoryAdapter
@@ -19,11 +20,12 @@ import com.arkan.terbangin.utils.formatClassHistory
 import com.arkan.terbangin.utils.formatDateHourStringHistory
 import com.arkan.terbangin.utils.formatDateStringHistory
 import com.arkan.terbangin.utils.proceedWhen
+import com.arkan.terbangin.utils.showAlertDialog
 import com.arkan.terbangin.utils.toIndonesianFormat
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class DetailHistoryActivity : AppCompatActivity() {
+class DetailHistoryActivity : BaseActivity() {
     private val binding: ActivityDetailHistoryBinding by lazy {
         ActivityDetailHistoryBinding.inflate(layoutInflater)
     }
@@ -51,7 +53,26 @@ class DetailHistoryActivity : AppCompatActivity() {
             if (viewModel.history?.bookingStatus == "UNPAID") {
                 navigateToPayment(viewModel.history?.snapLink!!)
             } else if (viewModel.history?.bookingStatus == "ISSUED") {
+                sendTicket()
             }
+        }
+    }
+
+    private fun sendTicket() {
+        viewModel.sendTicket(
+            Ticket(
+                viewModel.history?.bookingId!!,
+                viewModel.profile.value?.email!!,
+            ),
+        ).observe(this) { it ->
+            it.proceedWhen(
+                doOnSuccess = {
+                    showAlertDialog("Ticket telah dikirimkan ke Email kamu")
+                },
+                doOnError = {
+                    showAlertDialog("Ticket telah dikirimkan ke Email kamu")
+                },
+            )
         }
     }
 
@@ -62,6 +83,9 @@ class DetailHistoryActivity : AppCompatActivity() {
                     it.payload?.let { data ->
                         bindDetail(data)
                     }
+                },
+                doOnError = {
+                    it.exception?.let { e -> handleError(e) }
                 },
             )
         }
@@ -109,6 +133,9 @@ class DetailHistoryActivity : AppCompatActivity() {
                     it.payload?.let { data ->
                         viewModel.saveProfile(data)
                     }
+                },
+                doOnError = {
+                    it.exception?.let { e -> handleError(e) }
                 },
             )
         }
