@@ -25,6 +25,7 @@ class SelectReturnPassengerSeatViewModel(
     val seatDeparture = extras?.getParcelable<SeatList>(SelectReturnPassengerSeatActivity.EXTRA_SEAT)
     var selectableSeat = 0
     var capacity = 0
+    var seatCapacity = 0
     private var seatClass: String = ""
 
     val seat = MutableLiveData<List<Seat>>()
@@ -39,12 +40,15 @@ class SelectReturnPassengerSeatViewModel(
         when (params?.ticketClass?.name) {
             "Economy" -> {
                 capacity = flightReturn?.capacityEconomy!!
+                seatCapacity = 66
             }
             "Business" -> {
                 capacity = flightReturn?.capacityBussines!!
+                seatCapacity = 18
             }
             "First Class" -> {
                 capacity = flightReturn?.capacityFirstClass!!
+                seatCapacity = 6
             }
         }
         selectableSeat = params?.totalQty!! - params.babyQty
