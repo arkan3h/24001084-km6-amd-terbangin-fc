@@ -21,6 +21,7 @@ fun HelperBookingResponseData?.toHistoryModel() =
         classes = this?.seat?.airlineClass.orEmpty(),
         totalPayment = this?.booking?.payment?.totalPrice.orEmpty(),
         monthHeader = this?.seat?.flight?.departureAt.orEmpty(),
+        snapLink = this?.booking?.payment?.snapLink.orEmpty(),
     )
 
 fun HelperBookingResponseData?.toDetailHistoryModel() =

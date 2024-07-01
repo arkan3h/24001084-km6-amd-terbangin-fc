@@ -166,6 +166,11 @@ interface TerbanginApiServices {
         @Path("id") id: String,
     ): Response<List<HelperBookingResponseData>?>
 
+//    @POST("/api/v1/booking/send-ticket")
+//    suspend fun sendTicket(
+//        @Body payload: TicketPayload,
+//    )
+
     companion object {
         @JvmStatic
         operator fun invoke(preference: UserPreference): TerbanginApiServices {

@@ -5,15 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.arkan.terbangin.base.OnItemCLickedListener
 import com.arkan.terbangin.data.model.DetailHistory
 import com.arkan.terbangin.databinding.ItemPassengerDetailsBinding
 
-class DetailHistoryAdapter(
-    private val listener: OnItemCLickedListener<DetailHistory>,
-) : RecyclerView.Adapter<DetailHistoryAdapter.DetailHistoryViewHolder>() {
-    private val itemData = mutableListOf<DetailHistory>()
-
+class DetailHistoryAdapter : RecyclerView.Adapter<DetailHistoryAdapter.DetailHistoryViewHolder>() {
     private val asyncDataDiffer =
         AsyncListDiffer(
             this,
@@ -49,7 +44,6 @@ class DetailHistoryAdapter(
                 parent,
                 false,
             ),
-            listener,
         )
     }
 
@@ -64,7 +58,6 @@ class DetailHistoryAdapter(
 
     class DetailHistoryViewHolder(
         private val binding: ItemPassengerDetailsBinding,
-        private val listener: OnItemCLickedListener<DetailHistory>,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(
             item: DetailHistory,
@@ -72,9 +65,6 @@ class DetailHistoryAdapter(
         ) {
             binding.tvPassengerName.text = "Penumpang ${position + 1}: ${item.passengerTitle}. ${item.passengerName} ${item.passengerFamilyName}"
             binding.tvPassengerId.text = "ID: ${item.passengerId}"
-            itemView.setOnClickListener {
-                listener.onItemClicked(item)
-            }
         }
     }
 }

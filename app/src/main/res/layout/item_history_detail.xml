@@ -60,12 +60,13 @@
 
         <TextView
             android:id="@+id/tv_airport_origin"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/tv_takeoff_date"
             app:layout_constraintTop_toBottomOf="@id/tv_takeoff_date"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:text="Soekarno Hatta - Terminal 1A Domestik" />
 
         <TextView
@@ -113,7 +114,7 @@
 
             <TextView
                 android:id="@+id/tv_airline_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="18sp"
@@ -183,7 +184,7 @@
 
         <TextView
             android:id="@+id/tv_airport_destination"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:textColor="@color/black"
@@ -191,6 +192,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_landing_date"
             app:layout_constraintTop_toBottomOf="@id/tv_landing_date"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:text="Soekarno Hatta - Terminal 1A Domestik" />
 
         <TextView
