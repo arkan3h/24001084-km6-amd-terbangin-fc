@@ -73,8 +73,9 @@ class SelectReturnPassengerSeatActivity : AppCompatActivity() {
     }
 
     private fun setSeatView(seats: List<Seat>) {
-        val newSeats = generateSeatsString(viewModel.seatCapacity, seats)
-        val seatNumber = seats.map { it.seatNumber }
+        val sortedSeats = seats.sortedBy { it.seatNumber }
+        val newSeats = generateSeatsString(viewModel.seatCapacity, sortedSeats)
+        val seatNumber = sortedSeats.map { it.seatNumber }
         Log.d("title", "setSeatView: $seatNumber")
         val title = generateSeatTitles(seatNumber)
         seatBookView = findViewById(R.id.layoutSeat)
