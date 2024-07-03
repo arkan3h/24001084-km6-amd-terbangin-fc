@@ -69,6 +69,11 @@ class NotificationFragment : BaseFragment() {
                         bindNotificationData(data)
                     }
                 },
+                doOnEmpty = {
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = true
+                    it.exception?.let { e -> handleError(e) }
+                },
                 doOnError = {
                     binding.layoutState.pbLoading.isVisible = false
                     binding.layoutState.tvError.isVisible = true
