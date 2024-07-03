@@ -59,9 +59,17 @@ class CheckoutDetailViewModel(
         passengerId: List<String> = passenger?.list?.map { it.id!! }!!,
         seatId: List<String> = seat?.list?.map { it.id }!!,
         seatReturnId: List<String> = seatReturn?.list?.map { it.id } ?: listOf(""),
+        flightReturnId: String = flightReturn?.id.toString(),
     ): LiveData<ResultWrapper<Response<PaymentData?>>> {
         val adjustedSeatId = adjustSeatIdsForBabies(seatId)
         val adjustedSeatReturnId = adjustSeatIdsForBabies(seatReturnId)
-        return repository.createPayment(totalPrice, status, passengerId, adjustedSeatId, adjustedSeatReturnId).asLiveData(Dispatchers.IO)
+        return repository.createPayment(
+            totalPrice,
+            status,
+            passengerId,
+            adjustedSeatId,
+            adjustedSeatReturnId,
+            flightReturnId,
+        ).asLiveData(Dispatchers.IO)
     }
 }
