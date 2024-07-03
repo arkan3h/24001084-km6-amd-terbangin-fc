@@ -102,6 +102,7 @@ class PaymentRepositoryImplTest {
                 passengerId = listOf("passenger1", "passenger2"),
                 seatId = listOf("seat1", "seat2"),
                 seatReturnId = emptyList(),
+                flightReturnId = null,
             ).map {
                 delay(100)
                 it
@@ -143,6 +144,7 @@ class PaymentRepositoryImplTest {
                 passengerId = listOf("passenger1", "passenger2"),
                 seatId = listOf("seat1", "seat2"),
                 seatReturnId = emptyList(),
+                flightReturnId = null,
             ).map {
                 delay(100)
                 it
@@ -172,6 +174,7 @@ class PaymentRepositoryImplTest {
                 passengerId = listOf("passenger1", "passenger2"),
                 seatId = listOf("seat1", "seat2"),
                 seatReturnId = emptyList(),
+                flightReturnId = null,
             ).map {
                 delay(100)
                 it
@@ -215,6 +218,7 @@ class PaymentRepositoryImplTest {
                 passengerId = listOf("passenger1", "passenger2"),
                 seatId = listOf("seat1", "seat2"),
                 seatReturnId = listOf("seat1", "seat2"),
+                flightReturnId = "1",
             ).map {
                 delay(100)
                 it
@@ -256,6 +260,7 @@ class PaymentRepositoryImplTest {
                 passengerId = listOf("passenger1", "passenger2"),
                 seatId = listOf("seat1", "seat2"),
                 seatReturnId = listOf("seat1", "seat2"),
+                flightReturnId = "1",
             ).map {
                 delay(100)
                 it
@@ -285,6 +290,7 @@ class PaymentRepositoryImplTest {
                 passengerId = listOf("passenger1", "passenger2"),
                 seatId = listOf("seat1", "seat2"),
                 seatReturnId = listOf("seat1", "seat2"),
+                flightReturnId = "1",
             ).map {
                 delay(100)
                 it
