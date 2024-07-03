@@ -11,4 +11,6 @@ data class BookingPayload(
     val status: String?,
     @SerializedName("userId")
     val userId: String?,
+    @SerializedName("roundtripFlightId")
+    val roundtripFlightId: String?,
 )

@@ -19,6 +19,7 @@ interface PaymentRepository {
         passengerId: List<String>,
         seatId: List<String>,
         seatReturnId: List<String>,
+        flightReturnId: String?,
     ): Flow<ResultWrapper<Response<PaymentData?>>>
 }
 
@@ -34,22 +35,31 @@ class PaymentRepositoryImpl(
         passengerId: List<String>,
         seatId: List<String>,
         seatReturnId: List<String>,
+        flightReturnId: String?,
     ): Flow<ResultWrapper<Response<PaymentData?>>> {
         return proceedFlow {
             val payment = dataSource.createPayment(totalPrice)
             payment.data?.id.let { paymentId ->
-                val booking = dataSourceBooking.createBooking(BookingPayload(paymentId, status, pref.getUserID()))
-                booking.data?.id.let { bookingId ->
-                    passengerId.zip(seatId).forEach { (passenger, seat) ->
-                        dataSourceHelperBooking.createHelperBooking(HelperBookingPayload(bookingId, passenger, seat))
-                    }
-                    if (status == "Return") {
+                if (status == "Return") {
+                    val booking = dataSourceBooking.createBooking(BookingPayload(paymentId, status, pref.getUserID(), flightReturnId))
+                    booking.data?.id.let { bookingId ->
+                        passengerId.zip(seatId).forEach { (passenger, seat) ->
+                            dataSourceHelperBooking.createHelperBooking(HelperBookingPayload(bookingId, passenger, seat))
+                        }
                         passengerId.zip(seatReturnId).forEach { (passenger, seat) ->
                             dataSourceHelperBooking.createHelperBooking(HelperBookingPayload(bookingId, passenger, seat))
                         }
                     }
+                    booking
+                } else {
+                    val booking = dataSourceBooking.createBooking(BookingPayload(paymentId, status, pref.getUserID(), null))
+                    booking.data?.id.let { bookingId ->
+                        passengerId.zip(seatId).forEach { (passenger, seat) ->
+                            dataSourceHelperBooking.createHelperBooking(HelperBookingPayload(bookingId, passenger, seat))
+                        }
+                    }
+                    booking
                 }
-                booking
             }
             payment
         }
